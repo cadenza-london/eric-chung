@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Music Aptitude Test</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script>
+    const _warn = console.warn.bind(console);
+    console.warn = (...args) => {
+      if (args[0] && typeof args[0] === "string" && args[0].includes("Babel")) return;
+      _warn(...args);
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <style>
+    :root { --gold:#C9A84C; --cream:#F8F4EE; --charcoal:#1C1C1C; --soft:#8C7B6E; }
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:1.4rem 2.5rem; background:rgba(28,28,28,0.97); backdrop-filter:blur(12px); border-bottom:1px solid rgba(201,168,76,0.18); }
+    .nav-logo { font-family:'Cormorant Garamond',serif; font-size:1rem; color:var(--cream); letter-spacing:0.1em; text-decoration:none; }
+    .nav-logo span { color:var(--gold); }
+    .nav-right { display:flex; align-items:center; gap:0.8rem; }
+    .nav-book { font-size:0.58rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--cream); text-decoration:none; border:1px solid rgba(248,244,238,0.3); padding:0.5rem 1.1rem; transition:all 0.2s; font-family:'Jost',sans-serif; }
+    .nav-book:hover { border-color:var(--cream); background:rgba(248,244,238,0.07); }
+    .nav-back { font-size:0.58rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); text-decoration:none; border:1px solid rgba(201,168,76,0.4); padding:0.5rem 1.1rem; transition:all 0.2s; font-family:'Jost',sans-serif; }
+    .nav-back:hover { background:var(--gold); color:#fff; }
+    @media(max-width:600px){nav{padding:1rem 1.2rem;} .nav-logo{font-size:0.8rem;} .nav-book,.nav-back{font-size:0.5rem; padding:0.4rem 0.7rem;}}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #1C1C1C; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="https://cadenza-london.com" class="nav-logo">Cadenza <span>London</span> Music Academy</a>
+    <div class="nav-right">
+      <a href="https://www.picktime.com/CadenzaLondon" target="_blank" rel="noopener noreferrer" class="nav-book">📅 Book a Lesson</a>
+      <a href="https://cadenza-london.com" class="nav-back">← Back to Site</a>
+    </div>
+  </nav>
+  <div id="root"></div>
+  <script type="text/babel" data-presets="react">
+    const { useState, useEffect, useRef } = React;
+
+
+// ============================================================
+// SUPABASE STORAGE
+// ============================================================
+const SUPA_URL = "https://jrcrpxeoqdeonvdjgbjf.supabase.co";
+const SUPA_KEY = "sb_publishable_CKkP7y4GzJimTb4YUcL7Sw_hfNbDLhc";
+
+async function supaFetch(path, method="GET", body=null) {
+  const opts = {
+    method,
+    headers: {
+      "apikey": SUPA_KEY,
+      "Authorization": "Bearer " + SUPA_KEY,
+      "Content-Type": "application/json",
+      "Prefer": method==="POST" ? "resolution=merge-duplicates" : "",
+    },
+  };
+  if (body) opts.body = JSON.stringify(body);
+  const r = await fetch(SUPA_URL + "/rest/v1/" + path, opts);
+  if (!r.ok) { const t = await r.text(); console.error("Supabase error:", t); return null; }
+  const text = await r.text();
+  return text ? JSON.parse(text) : null;
+}
+
+async function getUsers() {
+  const rows = await supaFetch("mat_users?select=username,password,is_admin");
+  if (!rows) return {};
+  const obj = {};
+  for (const r of rows) obj[r.username] = { password: r.password, isAdmin: r.is_admin };
+  return obj;
+}
+
+async function saveUsers(usersObj) {
+  // Called after mutations - handled per-operation below, this is a no-op
+}
+
+async function addUserToDB(username, password, isAdmin=false) {
+  return supaFetch("mat_users", "POST", { username, password, is_admin: isAdmin });
+}
+
+async function deleteUserFromDB(username) {
+  await supaFetch(`mat_users?username=eq.${username}`, "DELETE");
+  await supaFetch(`mat_scores?username=eq.${username}`, "DELETE");
+}
+
+async function updatePasswordInDB(username, password) {
+  return supaFetch(`mat_users?username=eq.${username}`, "PATCH", { password });
+}
+
+async function getScores() {
+  const rows = await supaFetch("mat_scores?select=username,section,best,last");
+  if (!rows) return {};
+  const obj = {};
+  for (const r of rows) {
+    if (!obj[r.username]) obj[r.username] = {};
+    obj[r.username][r.section] = { best: r.best, last: r.last };
+  }
+  return obj;
+}
+
+async function saveScores(scoresObj) {
+  // no-op - handled per-operation
+}
+
+async function upsertScore(username, section, best, last) {
+  return supaFetch("mat_scores", "POST", { username, section, best, last, updated_at: new Date().toISOString() });
+}
+
+// ============================================================
+// SECTION CONFIG
+// ============================================================
+const SECTIONS = [
+  { id: "pitch",   label: "Pitch",   icon: "♩", color: "#c9a84c", total: 20 },
+  { id: "melody",  label: "Melody",  icon: "♫", color: "#e8c96a", total: 10 },
+  { id: "texture", label: "Texture", icon: "≋", color: "#c9a84c", total: 20 },
+  { id: "rhythm",  label: "Rhythm",  icon: "♪", color: "#e8c96a", total: 10 },
+];
+const FULL_TOTAL = SECTIONS.reduce((a, s) => a + s.total, 0);
+const LEVELS = ["Easy", "Medium", "Hard"];
+
+// ============================================================
+// PIANO AUDIO ENGINE
+// ============================================================
+function useAudioEngine() {
+  const ctxRef = useRef(null);
+  function getCtx() {
+    if (!ctxRef.current) ctxRef.current = new (window.AudioContext || window.webkitAudioContext)();
+    if (ctxRef.current.state === "suspended") ctxRef.current.resume();
+    return ctxRef.current;
+  }
+  function midiToFreq(midi) { return 440 * Math.pow(2, (midi - 69) / 12); }
+
+  function playPianoNote(freq, startTime, duration, volume = 0.55) {
+    const ctx = getCtx();
+    const master = ctx.createGain();
+    master.gain.value = 1;
+    const conv = ctx.createConvolver();
+    const rLen = ctx.sampleRate * 1.5;
+    const rBuf = ctx.createBuffer(2, rLen, ctx.sampleRate);
+    for (let ch = 0; ch < 2; ch++) {
+      const d = rBuf.getChannelData(ch);
+      for (let i = 0; i < rLen; i++) d[i] = (Math.random()*2-1) * Math.pow(1-i/rLen, 2.5);
+    }
+    conv.buffer = rBuf;
+    const rGain = ctx.createGain(); rGain.gain.value = 0.18;
+    master.connect(ctx.destination); master.connect(conv); conv.connect(rGain); rGain.connect(ctx.destination);
+    [[1,1.0],[2,0.5],[3,0.25],[4,0.12],[5,0.06],[6,0.03]].forEach(([mult,vol]) => {
+      const osc = ctx.createOscillator(); const g = ctx.createGain();
+      osc.connect(g); g.connect(master);
+      osc.type = mult===1?"triangle":"sine";
+      osc.frequency.setValueAtTime(freq*mult, startTime);
+      const pk = volume*vol*0.7;
+      g.gain.setValueAtTime(0, startTime);
+      g.gain.linearRampToValueAtTime(pk, startTime+0.008);
+      g.gain.exponentialRampToValueAtTime(pk*0.6, startTime+0.1);
+      g.gain.exponentialRampToValueAtTime(pk*0.3, startTime+0.4);
+      g.gain.exponentialRampToValueAtTime(0.0001, startTime+duration+0.5);
+      osc.start(startTime); osc.stop(startTime+duration+0.6);
+    });
+    const nLen = Math.floor(ctx.sampleRate*0.025);
+    const nBuf = ctx.createBuffer(1,nLen,ctx.sampleRate);
+    const nd = nBuf.getChannelData(0);
+    for (let i=0;i<nLen;i++) nd[i]=(Math.random()*2-1)*Math.pow(1-i/nLen,3);
+    const ns=ctx.createBufferSource(); const ng=ctx.createGain();
+    ns.buffer=nBuf; ng.gain.setValueAtTime(volume*0.08,startTime); ng.gain.linearRampToValueAtTime(0,startTime+0.025);
+    ns.connect(ng); ng.connect(master); ns.start(startTime);
+    return startTime+duration+0.05;
+  }
+
+  function playPitch(midi1, midi2, onDone) {
+    const ctx = getCtx(); const t = ctx.currentTime+0.1;
+    const t2 = playPianoNote(midiToFreq(midi1), t, 0.9);
+    playPianoNote(midiToFreq(midi2), t2+0.25, 0.9);
+    setTimeout(onDone, (t2+0.25+1.1-ctx.currentTime)*1000+300);
+  }
+  function playMelody(midis, onDone) {
+    const ctx = getCtx(); let t = ctx.currentTime+0.1;
+    for (const m of midis) { t = playPianoNote(midiToFreq(m), t, 0.5)+0.08; }
+    setTimeout(onDone, (t-ctx.currentTime)*1000+400);
+  }
+  function playTexture(midis, onDone) {
+    const ctx = getCtx(); const t = ctx.currentTime+0.1;
+    midis.forEach((m,i) => playPianoNote(midiToFreq(m), t+i*0.018, 2.4, 0.52));
+    setTimeout(onDone, 3400);
+  }
+  function playRhythm(pattern, onDone, withCountIn = false) {
+    const ctx = getCtx();
+    const WIN = 0.55; // beat window, matches genRhythmQuestion
+
+    // ── Bass drum (accent / downbeat) ──────────────────────────────────────
+    function bassDrum(when) {
+      const dur = 0.35;
+      const len = Math.floor(ctx.sampleRate * dur);
+      // Oscillator-based kick: pitch sweeps 180Hz → 50Hz
+      const osc = ctx.createOscillator();
+      const oscGain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(180, when);
+      osc.frequency.exponentialRampToValueAtTime(50, when + 0.12);
+      oscGain.gain.setValueAtTime(0, when);
+      oscGain.gain.linearRampToValueAtTime(1.0, when + 0.004);
+      oscGain.gain.exponentialRampToValueAtTime(0.001, when + dur);
+      osc.connect(oscGain); oscGain.connect(ctx.destination);
+      osc.start(when); osc.stop(when + dur + 0.01);
+      // Add click transient
+      const cLen = Math.floor(ctx.sampleRate * 0.008);
+      const cBuf = ctx.createBuffer(1, cLen, ctx.sampleRate);
+      const cd = cBuf.getChannelData(0);
+      for (let i = 0; i < cLen; i++) cd[i] = (Math.random()*2-1) * (1 - i/cLen);
+      const cs = ctx.createBufferSource(); const cg = ctx.createGain();
+      cs.buffer = cBuf; cg.gain.setValueAtTime(0.6, when);
+      cs.connect(cg); cg.connect(ctx.destination); cs.start(when);
+    }
+
+    // ── Snare / hi-hat (subdivision / off-beat) ───────────────────────────
+    function snare(when, isSubdivision = false) {
+      // Noise burst shaped like snare
+      const dur = isSubdivision ? 0.05 : 0.12;
+      const len = Math.floor(ctx.sampleRate * dur);
+      const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+      const d = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = (Math.random()*2-1) * Math.pow(1 - i/len, isSubdivision ? 6 : 3);
+      const src = ctx.createBufferSource();
+      const g = ctx.createGain();
+      const hp = ctx.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = isSubdivision ? 3000 : 1500;
+      src.buffer = buf;
+      src.connect(hp); hp.connect(g); g.connect(ctx.destination);
+      g.gain.setValueAtTime(isSubdivision ? 0.45 : 0.75, when);
+      src.start(when);
+      // Add small body tone for snare (not subdivision)
+      if (!isSubdivision) {
+        const osc = ctx.createOscillator(); const og = ctx.createGain();
+        osc.type = "triangle"; osc.frequency.value = 220;
+        og.gain.setValueAtTime(0.3, when); og.gain.exponentialRampToValueAtTime(0.001, when + 0.08);
+        osc.connect(og); og.connect(ctx.destination); osc.start(when); osc.stop(when + 0.09);
+      }
+    }
+
+    // ── Count-in metronome tick ───────────────────────────────────────────
+    function tick(when, isDownbeat = false) {
+      const osc = ctx.createOscillator(); const g = ctx.createGain();
+      osc.type = "sine"; osc.frequency.value = isDownbeat ? 1200 : 900;
+      g.gain.setValueAtTime(0, when);
+      g.gain.linearRampToValueAtTime(0.4, when + 0.003);
+      g.gain.exponentialRampToValueAtTime(0.001, when + 0.06);
+      osc.connect(g); g.connect(ctx.destination);
+      osc.start(when); osc.stop(when + 0.07);
+    }
+
+    // ── Play a hit: choose drum sound based on accent + position ─────────
+    function playHit(when, accent, isSubdivision) {
+      if (accent)          bassDrum(when);
+      else if (isSubdivision) snare(when, true);
+      else                 snare(when, false);
+    }
+
+    let startOffset = 0;
+
+    if (withCountIn) {
+      // 4-beat count-in at same tempo (WIN seconds per beat)
+      for (let i = 0; i < 4; i++) tick(ctx.currentTime + 0.1 + i * WIN, i === 0);
+      startOffset = 4 * WIN + 0.08; // small gap after count-in
+    }
+
+    const base = ctx.currentTime + 0.1 + startOffset;
+    pattern.hits.forEach(h => {
+      // Determine if this hit is a subdivision (non-accent, offset > 0)
+      const isSub = !h.accent && h.time % WIN > 0.01;
+      playHit(base + h.time, h.accent, isSub);
+    });
+
+    const totalTime = startOffset + pattern.totalDur;
+    setTimeout(onDone, totalTime * 1000 + 300);
+  }
+  return { playPitch, playMelody, playTexture, playRhythm };
+}
+
+// ============================================================
+// QUESTION GENERATORS — LEVEL-AWARE
+// ============================================================
+function randInt(min, max) { return Math.floor(Math.random()*(max-min+1))+min; }
+function randChoice(arr) { return arr[Math.floor(Math.random()*arr.length)]; }
+
+// PITCH
+// Easy:   diff >= 5 semitones (very obvious)
+// Medium: diff 2–4 semitones
+// Hard:   diff 1–2 semitones (semitone/tone only)
+function genPitchQuestion(level = "Medium") {
+  const midi1 = randInt(52, 76);
+  let diffs;
+  if (level === "Easy")        diffs = [-8,-7,-6,-5,5,6,7,8,0,0,0]; // ~27% same
+  else if (level === "Medium") diffs = [-4,-3,-2,2,3,4,0,0];
+  else                         diffs = [-2,-1,1,2,0];                // Hard: tight
+  const diff = randChoice(diffs);
+  const midi2 = Math.max(40, Math.min(84, midi1+diff));
+  return { midi1, midi2, answer: diff>0?"higher":diff<0?"lower":"same" };
+}
+
+// MELODY
+// Easy:   change is at note 1 or 5 (edge), delta ±3–4
+// Medium: any note, delta ±2
+// Hard:   any note, delta ±1 (semitone); "same" rate lowered to ~20%
+function genMelodyQuestion(level = "Medium") {
+  const root = randInt(55, 68);
+  const scale = [0,2,4,5,7,9,11,12];
+  const notes = Array.from({length:5}, () => root+randChoice(scale));
+  let changed, delta;
+  if (level === "Easy") {
+    changed = Math.random()>0.3 ? randChoice([0,4]) : null; // edge notes or same
+    delta = randChoice([-4,-3,3,4]);
+  } else if (level === "Medium") {
+    changed = Math.random()>0.3 ? randInt(0,4) : null;
+    delta = randChoice([-2,2]);
+  } else {
+    changed = Math.random()>0.2 ? randInt(0,4) : null; // only ~20% same
+    delta = randChoice([-1,1]);
+  }
+  const notes2 = [...notes];
+  if (changed !== null) notes2[changed] = Math.max(48, Math.min(84, notes[changed]+delta));
+  return { notes1: notes, notes2, answer: changed===null?"same":String(changed+1) };
+}
+
+// TEXTURE
+// Easy:   only 2 vs 4 (maximum contrast), open voicings
+// Medium: 2, 3, 4 — standard voicings
+// Hard:   2, 3, 4 — dense/close voicings, narrower range
+function genTextureQuestion(level = "Medium") {
+  let count;
+  if (level === "Easy")        count = randChoice([2,4]);
+  else                         count = randInt(2,4);
+
+  const voicings = {
+    easy: {
+      2: [[0,12],[0,14],[0,16]],                           // wide octave+ spacing
+      4: [[0,4,7,12],[0,5,9,14],[0,3,7,12]],
+    },
+    normal: {
+      2: [[0,5],[0,7],[0,4],[0,8],[0,9],[0,3]],
+      3: [[0,4,7],[0,3,7],[0,4,8],[0,5,9],[0,3,6],[0,4,9]],
+      4: [[0,4,7,11],[0,3,7,10],[0,4,7,10],[0,2,7,9]],
+    },
+    hard: {
+      2: [[0,2],[0,3],[0,1]],                              // close intervals
+      3: [[0,1,3],[0,2,4],[0,1,4],[0,2,5]],
+      4: [[0,1,3,5],[0,2,3,5],[0,1,2,4],[0,2,4,6]],
+    },
+  };
+  const set = level==="Easy" ? voicings.easy : level==="Hard" ? voicings.hard : voicings.normal;
+  const root = level==="Hard" ? randInt(55,68) : randInt(48,62); // Hard: mid-range (harder to distinguish)
+  const intervals = randChoice(set[count] || voicings.normal[count]);
+  return { midis: intervals.map(i=>root+i), count, answer: String(count) };
+}
+
+// RHYTHM beat types by level
+// Easy:   quarter vs two-eighths only (maximum rhythmic contrast)
+// Medium: adds dotted + triplet
+// Hard:   all types including syncopation + sixteenths; changed beat biased to beats 2/3
+const BEAT_POOL = {
+  Easy:   ["q","ee"],
+  Medium: ["q","ee","dot","tri"],
+  Hard:   ["q","ee","dot","tri","syn","3+1"],
+};
+const BEAT_DEFS = {
+  q:   { hits: [{ o:0, a:true }] },
+  ee:  { hits: [{ o:0,a:true},{o:0.5,a:false}] },
+  dot: { hits: [{ o:0,a:true},{o:0.67,a:false}] },
+  tri: { hits: [{ o:0,a:true},{o:0.33,a:false},{o:0.67,a:false}] },
+  syn: { hits: [{ o:0.25,a:false},{o:0.75,a:false}] },
+  "3+1": { hits: [{ o:0,a:true},{o:0.25,a:false},{o:0.5,a:false},{o:0.75,a:false}] },
+};
+
+function genRhythmQuestion(level = "Medium") {
+  const WIN = 0.55;
+  const pool = BEAT_POOL[level];
+
+  function randomBeat(exclude=[]) {
+    const avail = pool.filter(id => !exclude.includes(id));
+    const id = randChoice(avail.length ? avail : pool);
+    return { id, ...BEAT_DEFS[id] };
+  }
+
+  // Beat 0 always has clear accent, no syncopation for orientation
+  const safeFirst = pool.filter(id => id !== "syn");
+  const firstId = randChoice(safeFirst);
+  const p1 = [
+    { id: firstId, ...BEAT_DEFS[firstId] },
+    randomBeat(), randomBeat(), randomBeat(),
+  ];
+
+  // Whether to change, and which beat
+  const doChange = Math.random() > 0.3;
+  let changed = null;
+  if (doChange) {
+    // Hard: bias change to beats 2 or 3 (middle, harder to catch)
+    changed = level==="Hard" ? randChoice([1,1,2,2,0,3]) : randInt(0,3);
+  }
+
+  const p2 = [...p1];
+  if (changed !== null) p2[changed] = randomBeat([p1[changed].id]);
+
+  function toPlayable(beats) {
+    const hits = [];
+    beats.forEach((bt,i) => bt.hits.forEach(h => hits.push({ time: i*WIN+h.o*WIN, accent: h.a })));
+    return { hits, totalDur: 4*WIN+0.35 };
+  }
+
+  return {
+    beatTypes1: p1, beatTypes2: p2,
+    pattern1: toPlayable(p1), pattern2: toPlayable(p2),
+    answer: changed===null ? "same" : String(changed+1),
+  };
+}
+
+// ============================================================
+// DESIGN TOKENS & CSS
+// ============================================================
+const G = {
+  bg: "#1C1C1C", surface: "#2a2a2a", border: "rgba(201,168,76,0.35)",
+  text: "#F8F4EE", muted: "rgba(248,244,238,0.72)", accent: "#C9A84C",
+  gold2: "#e8c96a", cream: "#F8F4EE",
+};
+
+const LEVEL_COLORS = { Easy: "#7ab87a", Medium: "#c9a84c", Hard: "#c97a7a" };
+
+const css = `
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: ${G.bg}; color: ${G.text}; font-family: 'Jost', sans-serif; }
+
+  .mat-root { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; padding-top: 90px; position: relative; overflow: hidden; }
+
+  .bg-stars { position: fixed; inset: 0; pointer-events: none; }
+  .star { position: absolute; border-radius: 50%; animation: twinkle var(--d,3s) ease-in-out infinite; opacity: 0; }
+  @keyframes twinkle { 0%,100%{opacity:0} 50%{opacity:var(--o,0.35)} }
+
+  .card { background: rgba(255,255,255,0.06); border: 1px solid rgba(201,168,76,0.35); border-radius: 2px; width: 100%; max-width: 560px; position: relative; overflow: hidden; }
+  .card-inner { padding: 36px 40px 40px; }
+  .card-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; letter-spacing: 0.08em; margin-bottom: 8px; color: ${G.accent}; }
+  .card-sub { color: ${G.muted}; font-size: 0.85rem; margin-bottom: 24px; line-height: 1.8; font-weight: 300; }
+
+  .mat-input { background: rgba(0,0,0,0.3); border: 1px solid rgba(201,168,76,0.35); border-radius: 1px; padding: 14px 18px; color: ${G.text}; font-size: 0.9rem; font-family: 'Jost'; outline: none; transition: border-color 0.2s; width: 100%; display: block; margin-bottom: 12px; }
+  .mat-input:focus { border-color: ${G.accent}; }
+  .mat-input::placeholder { color: rgba(248,244,238,0.35); }
+
+  .mat-btn { padding: 12px 24px; border-radius: 1px; border: none; font-family: 'Jost'; font-size: 0.62rem; font-weight: 400; cursor: pointer; transition: all 0.2s; letter-spacing: 0.18em; text-transform: uppercase; }
+  .btn-primary { background: ${G.accent}; color: #1C1C1C; }
+  .btn-primary:hover { background: ${G.gold2}; }
+  .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; }
+  .btn-ghost { background: transparent; color: ${G.muted}; border: 1px solid rgba(201,168,76,0.4); }
+  .btn-ghost:hover { color: ${G.accent}; border-color: ${G.accent}; }
+
+  .btn-answer { background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.3); color: rgba(248,244,238,0.92); text-align: left; width: 100%; margin-bottom: 9px; font-size: 0.88rem; padding: 14px 18px; border-radius: 1px; font-family: 'Jost'; cursor: pointer; transition: all 0.15s; font-weight: 300; }
+  .btn-answer:hover:not(:disabled) { border-color: ${G.accent}; color: ${G.accent}; background: rgba(201,168,76,0.05); }
+  .btn-answer.selected { border-color: ${G.accent}; background: rgba(201,168,76,0.08); color: ${G.accent}; }
+  .btn-answer.correct { border-color: #4CAF50 !important; background: rgba(76,175,80,0.12) !important; color: #6fcf6f !important; }
+  .btn-answer.wrong   { border-color: #E57373 !important; background: rgba(229,115,115,0.12) !important; color: #ef8f8f !important; }
+  .btn-answer:disabled { cursor: not-allowed; opacity: 0.55; }
+
+  .play-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px; border-radius: 1px; border: 1px solid rgba(201,168,76,0.55); background: rgba(201,168,76,0.04); color: ${G.accent}; font-size: 0.62rem; font-family: 'Jost'; cursor: pointer; transition: all 0.2s; margin-bottom: 20px; letter-spacing: 0.18em; text-transform: uppercase; }
+  .play-btn:hover:not(:disabled) { background: rgba(201,168,76,0.1); }
+  .play-btn:disabled { opacity: 0.4; cursor: wait; }
+
+  /* Level selector */
+  .level-row { display: flex; gap: 0; margin-bottom: 20px; border: 1px solid rgba(201,168,76,0.35); }
+  .level-btn { flex: 1; padding: 9px 6px; border: none; border-right: 1px solid rgba(201,168,76,0.3); background: transparent; color: rgba(248,244,238,0.65); font-family: 'Jost'; font-size: 0.58rem; font-weight: 400; cursor: pointer; transition: all 0.2s; letter-spacing: 0.15em; text-transform: uppercase; text-align: center; }
+  .level-btn:last-child { border-right: none; }
+  .level-btn:hover { color: var(--lc); }
+  .level-btn.active { background: var(--lc); color: #1C1C1C; font-weight: 500; }
+  .level-tag { display: inline-block; padding: 2px 10px; border-radius: 1px; font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; border: 1px solid; margin-left: 8px; vertical-align: middle; }
+
+  .section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+  .section-tile { background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.28); border-radius: 1px; padding: 24px; cursor: pointer; transition: all 0.2s; text-align: center; }
+  .section-tile:hover { border-color: ${G.accent}; background: rgba(201,168,76,0.07); transform: translateY(-2px); }
+  .section-tile.full-test { grid-column: 1 / -1; }
+  .section-icon { font-size: 24px; margin-bottom: 8px; }
+  .section-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 400; letter-spacing: 0.12em; margin-bottom: 5px; }
+  .section-score { font-size: 0.7rem; color: ${G.muted}; letter-spacing: 0.08em; }
+
+  .progress-bar { height: 2px; background: rgba(201,168,76,0.15); margin: 10px 0 18px; overflow: hidden; }
+  .progress-fill { height: 100%; transition: width 0.4s ease; background: ${G.accent}; }
+
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+  .home-btn { background: transparent; border: 1px solid rgba(201,168,76,0.4); color: ${G.muted}; border-radius: 1px; padding: 6px 14px; font-size: 0.58rem; font-family: 'Jost'; cursor: pointer; transition: all 0.2s; letter-spacing: 0.15em; text-transform: uppercase; }
+  .home-btn:hover { color: ${G.accent}; border-color: ${G.accent}; }
+
+  /* Stats bar */
+  .stats-bar { display: grid; grid-template-columns: repeat(4,1fr); background: rgba(0,0,0,0.25); border-bottom: 1px solid rgba(201,168,76,0.3); padding: 16px 0 14px; width: 100%; }
+  .stat-cell { text-align: center; position: relative; }
+  .stat-cell:not(:last-child)::after { content:''; position:absolute; right:0; top:20%; height:60%; width:1px; background: rgba(201,168,76,0.25); }
+  .stat-val { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; line-height: 1; color: ${G.accent}; }
+  .stat-lbl { font-size: 0.5rem; letter-spacing: 0.2em; color: rgba(248,244,238,0.6); text-transform: uppercase; margin-top: 4px; }
+  .stat-accuracy { color: ${G.gold2} !important; }
+  .stat-reset { background: transparent; border: none; color: rgba(248,244,238,0.45); font-size: 0.5rem; font-family: 'Jost'; cursor: pointer; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: underline; margin-top: 3px; padding: 0; display: block; width: 100%; }
+  .stat-reset:hover { color: #E57373; }
+
+  .dash-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 14px; width: 100%; max-width: 900px; }
+  .dash-tile { background: rgba(255,255,255,0.05); border: 1px solid rgba(201,168,76,0.28); border-radius: 2px; padding: 20px; }
+  .student-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 5px; color: ${G.accent}; }
+  .score-row { display: flex; justify-content: space-between; font-size: 0.75rem; color: ${G.muted}; padding: 3px 0; }
+  .score-val { color: ${G.text}; font-weight: 400; }
+
+  .tab-row { display: flex; gap: 0; border: 1px solid rgba(201,168,76,0.35); border-radius: 1px; margin-bottom: 22px; }
+  .tab { flex: 1; padding: 9px; border: none; border-right: 1px solid rgba(201,168,76,0.3); background: transparent; color: rgba(248,244,238,0.6); font-size: 0.55rem; cursor: pointer; font-family: 'Jost'; transition: all 0.2s; letter-spacing: 0.15em; text-transform: uppercase; }
+  .tab:last-child { border-right: none; }
+  .tab.active { background: rgba(201,168,76,0.1); color: ${G.accent}; }
+
+  .error-msg { color: #E57373; font-size: 0.78rem; margin-top: 6px; font-weight: 300; }
+  .tag-admin { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 0.6rem; background: rgba(201,168,76,0.12); color: ${G.accent}; border: 1px solid rgba(201,168,76,0.35); margin-left: 6px; }
+
+  .listening-indicator { display: flex; gap: 4px; align-items: center; height: 24px; }
+  .bar { width: 2px; border-radius: 1px; animation: bounce var(--d) ease-in-out infinite alternate; }
+  @keyframes bounce { from { height: 4px } to { height: 20px } }
+
+  .rhythm-visual { display: flex; gap: 8px; justify-content: center; margin: 8px 0 18px; }
+  .beat-dot { width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.35); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: rgba(248,244,238,0.65); transition: all 0.3s; }
+  .beat-dot.highlight { border-color: ${G.accent}; color: ${G.accent}; background: rgba(201,168,76,0.1); }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+  .fade-in { animation: fadeIn 0.3s ease forwards; }
+  @keyframes shimmerBtn { 0%{left:-120%} 100%{left:160%} }
+
+  .full-result-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(201,168,76,0.18); }
+  .full-result-row:last-child { border-bottom: none; }
+
+  .ft-banner { background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.28); border-radius: 1px; padding: 10px 16px; margin-bottom: 18px; font-size: 0.58rem; color: rgba(248,244,238,0.65); display: flex; align-items: center; gap: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .ft-pip { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  .ornament { display: flex; align-items: center; gap: 10px; margin: 4px 0 20px; }
+  .ornament-line { flex: 1; height: 1px; background: rgba(201,168,76,0.35); }
+  .ornament-diamond { width: 5px; height: 5px; background: ${G.accent}; transform: rotate(45deg); flex-shrink: 0; }
+
+  /* Answer feedback toast */
+  .feedback-wrap { position: relative; height: 0; overflow: visible; }
+  .feedback-toast { position: absolute; left: 50%; transform: translateX(-50%); top: -8px; z-index: 50;
+    display: flex; flex-direction: column; align-items: center; pointer-events: none; }
+  .feedback-emoji { font-size: 38px; animation: feedPop 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+  .feedback-label { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 400; letter-spacing: 0.15em;
+    text-transform: uppercase; margin-top: 2px; animation: feedFade 0.3s ease 0.1s both; }
+  .feedback-streak { font-size: 0.7rem; letter-spacing: 0.1em; margin-top: 2px;
+    animation: feedFade 0.3s ease 0.2s both; }
+  @keyframes feedPop  { from{opacity:0;transform:translateX(-50%) scale(0.4) translateY(10px)} to{opacity:1;transform:translateX(-50%) scale(1) translateY(0)} }
+  @keyframes feedFade { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
+  @keyframes feedOut  { from{opacity:1;transform:translateX(-50%) translateY(0)} to{opacity:0;transform:translateX(-50%) translateY(-12px)} }
+`;
+
+// ============================================================
+// FEEDBACK TOAST
+// ============================================================
+const CORRECT_MSGS = ["Excellent!", "Perfect!", "Spot on!", "Well done!", "Brilliant!", "Correct!"];
+const WRONG_MSGS   = ["Not quite", "Try again", "Close!", "Keep going", "Almost!"];
+
+function FeedbackToast({ correct, streak, visible }) {
+  if (!visible) return null;
+  const isCorrect = correct;
+  const emoji  = isCorrect
+    ? (streak >= 5 ? "🔥" : streak >= 3 ? "⭐" : "✓")
+    : (streak === 0 ? "✗" : "○");
+  const label  = isCorrect
+    ? CORRECT_MSGS[Math.floor(Math.random() * CORRECT_MSGS.length)]
+    : WRONG_MSGS[Math.floor(Math.random() * WRONG_MSGS.length)];
+  const color  = isCorrect ? "#7ab87a" : "#c97a7a";
+  const streakMsg = isCorrect && streak >= 2 ? `${streak} in a row!` : null;
+
+  return (
+    <div className="feedback-wrap">
+      <div className="feedback-toast">
+        <div className="feedback-emoji">{emoji}</div>
+        <div className="feedback-label" style={{color}}>{label}</div>
+        {streakMsg && <div className="feedback-streak" style={{color:"#c9a84c"}}>{streakMsg}</div>}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// STARS
+// ============================================================
+function Stars() {
+  const stars = Array.from({length:50},(_,i)=>({
+    id:i, top:Math.random()*100, left:Math.random()*100,
+    size:Math.random()*1.8+0.8, dur:(Math.random()*4+2).toFixed(1),
+    op:(Math.random()*0.3+0.1).toFixed(2), delay:(Math.random()*5).toFixed(1),
+    gold: Math.random()>0.5,
+  }));
+  return <div className="bg-stars">{stars.map(s=>(
+    <div key={s.id} className="star" style={{top:`${s.top}%`,left:`${s.left}%`,width:s.size,height:s.size,"--d":`${s.dur}s`,"--o":s.op,animationDelay:`${s.delay}s`,background:s.gold?"#c9a84c":"#f0e6d0"}}/>
+  ))}</div>;
+}
+
+function ListeningBars({ color }) {
+  return <div className="listening-indicator">{[0.7,1.1,0.5,1.3,0.8].map((d,i)=>(
+    <div key={i} className="bar" style={{"--d":`${d}s`,background:color,animationDelay:`${i*0.08}s`}}/>
+  ))}</div>;
+}
+
+// ============================================================
+// LEVEL SELECTOR
+// ============================================================
+function LevelSelector({ level, onChange }) {
+  return (
+    <div className="level-row">
+      {LEVELS.map(l => (
+        <button key={l} className={`level-btn ${level===l?"active":""}`}
+          style={{"--lc": LEVEL_COLORS[l]}} onClick={()=>onChange(l)}>
+          {l}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+// ============================================================
+// STATS BAR
+// ============================================================
+function StatsBar({ correct, attempted, streak, onReset }) {
+  const accuracy = attempted > 0 ? Math.round((correct/attempted)*100) : 0;
+  return (
+    <div className="stats-bar">
+      <div className="stat-cell">
+        <div className="stat-val">{correct}</div>
+        <div className="stat-lbl">Correct</div>
+      </div>
+      <div className="stat-cell">
+        <div className="stat-val" style={{color:"#c8b89a"}}>{attempted}</div>
+        <div className="stat-lbl">Attempted</div>
+      </div>
+      <div className="stat-cell">
+        <div className="stat-val">{streak}</div>
+        <div className="stat-lbl">Streak</div>
+      </div>
+      <div className="stat-cell">
+        <div className="stat-val stat-accuracy">{accuracy}%</div>
+        <div className="stat-lbl">Accuracy</div>
+        {attempted > 0 && <button className="stat-reset" onClick={onReset}>Reset</button>}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// AUTH
+// ============================================================
+function AuthScreen({ onLogin }) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function submit() {
+    if (!username.trim() || !password.trim()) { setError("Please fill in all fields."); return; }
+    setLoading(true); setError("");
+    const users = await getUsers();
+    const u = users[username.toLowerCase()];
+    if (!u || u.password !== password) { setError("Incorrect username or password."); setLoading(false); return; }
+    onLogin({ username: username.toLowerCase(), isAdmin: !!u.isAdmin });
+    setLoading(false);
+  }
+
+  return (
+    <div className="fade-in" style={{width:"100%",maxWidth:480,display:"flex",flexDirection:"column",gap:0}}>
+
+      {/* ── UNLOCK FULL ACCESS BOX — Parchment style ── */}
+      <div style={{
+        background:"linear-gradient(135deg, #f5f0e6 0%, #ede8d8 100%)",
+        border:"1px solid rgba(180,150,80,0.5)",
+        borderBottom:"none",
+        padding:"22px 28px",
+        position:"relative",
+        overflow:"hidden"
+      }}>
+        {/* top gold rule */}
+        <div style={{position:"absolute",top:0,left:0,right:0,height:"2px",background:"linear-gradient(90deg,#C9A84C,#e8c96a,#C9A84C)"}}/>
+        {/* ghost watermark */}
+        <div style={{position:"absolute",right:-8,bottom:-18,fontFamily:"Cormorant Garamond",fontSize:"7rem",fontWeight:300,color:"rgba(180,150,80,0.08)",lineHeight:1,pointerEvents:"none",userSelect:"none"}}>♩</div>
+
+        <div style={{fontSize:"0.5rem",letterSpacing:"0.3em",textTransform:"uppercase",color:"#a07828",marginBottom:10,fontFamily:"Jost"}}>✦ Unlock Full Access</div>
+        <div style={{fontFamily:"Cormorant Garamond",fontSize:"1.35rem",fontWeight:400,color:"#1C1C1C",lineHeight:1.4,marginBottom:5}}>
+          Join an Unlimited Music Aptitude Test Package
+        </div>
+        <div style={{fontSize:"0.72rem",color:"#7a6840",lineHeight:1.75,marginBottom:5,fontWeight:300}}>
+          Unlimited practice · Full test mode · Score tracking
+        </div>
+        <div style={{fontSize:"0.65rem",color:"#a07828",letterSpacing:"0.06em",marginBottom:18,fontWeight:400}}>✓ Lifetime access included</div>
+        <a href="https://buy.stripe.com/test_8x27sLekVbaj14d3YsfUQ03" target="_blank" rel="noopener noreferrer"
+          style={{display:"block",textAlign:"center",background:"linear-gradient(90deg,#c85a30,#b83050)",color:"#fff",padding:"13px 0",fontSize:"0.58rem",fontWeight:500,letterSpacing:"0.22em",textTransform:"uppercase",textDecoration:"none",fontFamily:"Jost",position:"relative",overflow:"hidden",boxShadow:"0 4px 20px rgba(200,60,50,0.4)"}}>
+          <span style={{position:"relative",zIndex:1}}>🎵 Music Aptitude Test Package — Buy Now →</span>
+          <span style={{position:"absolute",top:0,left:"-120%",width:"70%",height:"100%",background:"linear-gradient(90deg,transparent,rgba(255,255,255,0.22),transparent)",transform:"skewX(-15deg)",animation:"shimmerBtn 2.2s ease-in-out infinite"}}/>
+        </a>
+      </div>
+
+      {/* ── LOGIN PANEL ── */}
+      <div style={{
+        background:"rgba(255,255,255,0.025)",
+        border:"1px solid rgba(201,168,76,0.18)",
+        padding:"28px 28px 24px",
+        position:"relative",
+        overflow:"hidden"
+      }}>
+        {/* subtle gold top accent */}
+        <div style={{position:"absolute",top:0,left:"30%",right:"30%",height:"1px",background:"linear-gradient(90deg,transparent,rgba(201,168,76,0.5),transparent)"}}/>
+
+        {/* header row */}
+        <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginBottom:20}}>
+          <div>
+            <div style={{fontFamily:"Cormorant Garamond",fontSize:"1.5rem",fontWeight:300,color:"#F8F4EE",letterSpacing:"0.05em",lineHeight:1.2}}>
+              Student Login
+            </div>
+            <div style={{fontSize:"0.58rem",letterSpacing:"0.2em",textTransform:"uppercase",color:"rgba(201,168,76,0.75)",marginTop:5,fontWeight:300}}>
+              Music Aptitude Test
+            </div>
+          </div>
+          <div style={{fontFamily:"Cormorant Garamond",fontSize:"2.2rem",color:"rgba(201,168,76,0.12)",lineHeight:1,marginTop:-4,userSelect:"none"}}>♩</div>
+        </div>
+
+        {/* divider */}
+        <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:20}}>
+          <div style={{height:"1px",flex:1,background:"rgba(201,168,76,0.15)"}}/>
+          <div style={{width:4,height:4,background:"rgba(201,168,76,0.4)",transform:"rotate(45deg)",flexShrink:0}}/>
+          <div style={{height:"1px",flex:1,background:"rgba(201,168,76,0.15)"}}/>
+        </div>
+
+        {/* inputs */}
+        <div style={{marginBottom:8}}>
+          <div style={{fontSize:"0.52rem",letterSpacing:"0.22em",textTransform:"uppercase",color:G.muted,marginBottom:6}}>Username</div>
+          <input className="mat-input" style={{marginBottom:0}} placeholder="Enter your username" value={username} onChange={e=>setUsername(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submit()} />
+        </div>
+        <div style={{marginBottom:16}}>
+          <div style={{fontSize:"0.52rem",letterSpacing:"0.22em",textTransform:"uppercase",color:G.muted,marginBottom:6,marginTop:12}}>Password</div>
+          <input className="mat-input" style={{marginBottom:0}} placeholder="Enter your password" type="password" value={password} onChange={e=>setPassword(e.target.value)} onKeyDown={e=>e.key==="Enter"&&submit()} />
+        </div>
+
+        {error && <div className="error-msg" style={{marginBottom:12}}>{error}</div>}
+
+        <button className="mat-btn btn-primary" style={{width:"100%",padding:"13px 0",fontSize:"0.62rem",letterSpacing:"0.22em"}} onClick={submit} disabled={loading}>
+          {loading ? "Signing in…" : "Sign In"}
+        </button>
+
+        {/* contact note */}
+        <div style={{marginTop:18,padding:"12px 14px",background:"rgba(201,168,76,0.04)",border:"1px solid rgba(201,168,76,0.12)"}}>
+          <div style={{fontSize:"0.65rem",color:"rgba(248,244,238,0.35)",lineHeight:1.75,fontWeight:300,textAlign:"center"}}>
+            Need help with your account or password?<br/>
+            <a href="https://cadenza-london.com/#contact" target="_blank" rel="noopener noreferrer" style={{color:"rgba(201,168,76,0.7)",textDecoration:"none",letterSpacing:"0.04em",fontWeight:400,borderBottom:"1px solid rgba(201,168,76,0.3)",paddingBottom:"1px"}}>Contact Us</a>
+            <span style={{color:"rgba(248,244,238,0.3)"}}> on the Cadenza London website.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
+// ============================================================
+// SECTION SELECT
+// ============================================================
+function SectionSelect({ user, scores, onSelect, onFullTest, onDashboard, onLogout }) {
+  const my = scores[user.username] || {};
+  const fullBest = SECTIONS.reduce((a,s)=>a+(my[s.id]?.best||0),0);
+  const anyDone = SECTIONS.some(s=>my[s.id]);
+
+  return (
+    <div className="fade-in" style={{width:"100%",maxWidth:540}}>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
+        <div>
+          <div style={{fontFamily:"Cormorant Garamond",fontSize:20,fontWeight:700,color:G.accent}}>Music Aptitude Test</div>
+          <div style={{fontSize:12,color:G.muted,marginTop:2}}>
+            {user.username}{user.isAdmin&&<span className="tag-admin">Admin</span>}
+            {anyDone && <span style={{marginLeft:8,color:G.text}}>Best: <strong>{fullBest}</strong>/{FULL_TOTAL}</span>}
+          </div>
+        </div>
+        <div style={{display:"flex",gap:8}}>
+          {user.isAdmin && <button className="mat-btn btn-ghost" style={{padding:"7px 12px",fontSize:11}} onClick={onDashboard}>Dashboard</button>}
+          <button className="mat-btn btn-ghost" style={{padding:"7px 12px",fontSize:11}} onClick={onLogout}>Sign Out</button>
+        </div>
+      </div>
+      <div className="section-grid">
+        <div className="section-tile full-test" style={{"--c":G.accent}} onClick={onFullTest}>
+          <div className="section-icon" style={{color:G.accent}}>🎵</div>
+          <div className="section-name" style={{color:G.accent}}>Full Test</div>
+          <div className="section-score">All 4 sections · {FULL_TOTAL} questions</div>
+        </div>
+        {SECTIONS.map(s=>{
+          const sc = my[s.id];
+          return (
+            <div key={s.id} className="section-tile" style={{"--c":s.color}} onClick={()=>onSelect(s.id)}>
+              <div className="section-icon" style={{color:s.color}}>{s.icon}</div>
+              <div className="section-name" style={{color:s.color}}>{s.label}</div>
+              <div className="section-score">{sc ? `Best: ${sc.best}/${s.total}` : `${s.total} questions`}</div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// QUESTION CARD WRAPPER
+// ============================================================
+function QuestionCard({ section, qIdx, total, level, onHome, isFullTest, ftSectionIdx, stat, onReset, children }) {
+  const s = SECTIONS.find(x=>x.id===section) || { color: G.accent, label: section };
+  const st = stat || { correct:0, attempted:0, streak:0 };
+  const lc = LEVEL_COLORS[level] || G.accent;
+  return (
+    <div className="card fade-in">
+      <StatsBar correct={st.correct} attempted={st.attempted} streak={st.streak} onReset={onReset}/>
+      <div className="card-inner">
+        {isFullTest && (
+          <div className="ft-banner">
+            {SECTIONS.map((sec,i)=>(
+              <div key={sec.id} style={{display:"flex",alignItems:"center",gap:4}}>
+                <div className="ft-pip" style={{background: i<ftSectionIdx?"#7ab87a":i===ftSectionIdx?sec.color:G.border}}/>
+                <span style={{color:i===ftSectionIdx?sec.color:i<ftSectionIdx?"#7ab87a":G.muted,fontSize:10}}>{sec.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
+        <div className="section-header">
+          <div style={{display:"flex",alignItems:"center",gap:8}}>
+            <div style={{fontFamily:"Cormorant Garamond",fontSize:18,color:s.color}}>{s.label}</div>
+            <span className="level-tag" style={{color:lc,borderColor:lc,background:`${lc}18`}}>{level}</span>
+          </div>
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <span style={{fontSize:12,color:G.muted}}>Q {qIdx+1} / {total}</span>
+            <button className="home-btn" onClick={onHome}>⌂ Home</button>
+          </div>
+        </div>
+        <div className="progress-bar">
+          <div className="progress-fill" style={{width:`${(qIdx/total)*100}%`,background:s.color}}/>
+        </div>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// PITCH SECTION
+// ============================================================
+function PitchSection({ onDone, onHome, isFullTest, ftSectionIdx, stat, onAnswer, onReset, initialLevel }) {
+  const audio = useAudioEngine();
+  const TOTAL = SECTIONS.find(x=>x.id==="pitch").total;
+  const [level, setLevel] = useState(initialLevel||"Medium");
+  const [questions, setQuestions] = useState(()=>Array.from({length:TOTAL},()=>genPitchQuestion(initialLevel||"Medium")));
+  const [qIdx,setQIdx] = useState(0);
+  const [playing,setPlaying] = useState(false);
+  const [played,setPlayed] = useState(false);
+  const [selected,setSelected] = useState(null);
+  const [revealed,setRevealed] = useState(false);
+  const [correct,setCorrect] = useState(0);
+  const [feedback,setFeedback] = useState(null); // {ok, streak}
+  const q = questions[qIdx];
+  const sc = SECTIONS[0].color;
+
+  function changeLevel(l) {
+    setLevel(l);
+    setQuestions(Array.from({length:TOTAL},()=>genPitchQuestion(l)));
+    setQIdx(0); setSelected(null); setRevealed(false); setPlayed(false); setCorrect(0); setFeedback(null);
+  }
+  function play() { setPlaying(true); audio.playPitch(q.midi1,q.midi2,()=>{ setPlaying(false); setPlayed(true); }); }
+  function choose(c) {
+    if(revealed)return;
+    const ok=c===q.answer;
+    setSelected(c); setRevealed(true);
+    const newCorrect = ok ? correct+1 : correct;
+    if(ok) setCorrect(newCorrect);
+    const newStreak = ok ? (stat?.streak||0)+1 : 0;
+    setFeedback({ok, streak: newStreak});
+    onAnswer&&onAnswer(ok);
+  }
+  function next() {
+    setFeedback(null);
+    if(qIdx<TOTAL-1){ setQIdx(x=>x+1); setSelected(null); setRevealed(false); setPlayed(false); } else onDone(correct);
+  }
+
+  return (
+    <QuestionCard section="pitch" qIdx={qIdx} total={TOTAL} level={level} onHome={onHome} isFullTest={isFullTest} ftSectionIdx={ftSectionIdx} stat={stat} onReset={onReset}>
+      {!isFullTest && <LevelSelector level={level} onChange={changeLevel}/>}
+      <div className="ornament"><div className="ornament-line"/><div className="ornament-diamond"/><div className="ornament-line"/></div>
+      <div className="card-sub">Two notes played one after the other — is the second note higher, lower, or the same?</div>
+      <button className="play-btn" style={{"--sc":sc}} onClick={play} disabled={playing}>
+        {playing?<><ListeningBars color={sc}/>&nbsp;Listening...</>:<><span>▶</span> Play Notes</>}
+      </button>
+      <FeedbackToast correct={feedback?.ok} streak={feedback?.streak} visible={!!feedback}/>
+      {["higher","same","lower"].map(c=>(
+        <button key={c} className={`mat-btn btn-answer ${selected===c?"selected":""} ${revealed&&c===q.answer?"correct":""} ${revealed&&selected===c&&c!==q.answer?"wrong":""}`}
+          onClick={()=>choose(c)} disabled={!played}>
+          {c.charAt(0).toUpperCase()+c.slice(1)}
+        </button>
+      ))}
+      {revealed&&<div style={{display:"flex",justifyContent:"flex-end",marginTop:14}}>
+        <button className="mat-btn btn-primary" onClick={next}>{qIdx<TOTAL-1?"Next Question":isFullTest?"Next Section →":"See Results"}</button>
+      </div>}
+    </QuestionCard>
+  );
+}
+
+// ============================================================
+// MELODY SECTION
+// ============================================================
+function MelodySection({ onDone, onHome, isFullTest, ftSectionIdx, stat, onAnswer, onReset, initialLevel }) {
+  const audio = useAudioEngine();
+  const TOTAL = SECTIONS.find(x=>x.id==="melody").total;
+  const [level, setLevel] = useState(initialLevel||"Medium");
+  const [questions, setQuestions] = useState(()=>Array.from({length:TOTAL},()=>genMelodyQuestion(initialLevel||"Medium")));
+  const [qIdx,setQIdx] = useState(0);
+  const [phase,setPhase] = useState(0);
+  const [playing,setPlaying] = useState(false);
+  const [selected,setSelected] = useState(null);
+  const [revealed,setRevealed] = useState(false);
+  const [correct,setCorrect] = useState(0);
+  const [feedback,setFeedback] = useState(null);
+  const q = questions[qIdx];
+  const sc = SECTIONS[1].color;
+
+  function changeLevel(l) {
+    setLevel(l);
+    setQuestions(Array.from({length:TOTAL},()=>genMelodyQuestion(l)));
+    setQIdx(0); setPhase(0); setSelected(null); setRevealed(false); setCorrect(0); setFeedback(null);
+  }
+  function play1(){ setPlaying(true); audio.playMelody(q.notes1,()=>{ setPlaying(false); setPhase(1); }); }
+  function play2(){ setPlaying(true); audio.playMelody(q.notes2,()=>{ setPlaying(false); setPhase(2); }); }
+  function choose(v){
+    if(revealed)return;
+    const ok=v===q.answer;
+    setSelected(v); setRevealed(true);
+    if(ok) setCorrect(x=>x+1);
+    setFeedback({ok, streak: ok?(stat?.streak||0)+1:0});
+    onAnswer&&onAnswer(ok);
+  }
+  function next(){
+    setFeedback(null);
+    if(qIdx<TOTAL-1){ setQIdx(x=>x+1); setPhase(0); setSelected(null); setRevealed(false); } else onDone(correct);
+  }
+
+  return (
+    <QuestionCard section="melody" qIdx={qIdx} total={TOTAL} level={level} onHome={onHome} isFullTest={isFullTest} ftSectionIdx={ftSectionIdx} stat={stat} onReset={onReset}>
+      {!isFullTest && <LevelSelector level={level} onChange={changeLevel}/>}
+      <div className="ornament"><div className="ornament-line"/><div className="ornament-diamond"/><div className="ornament-line"/></div>
+      <div className="card-sub">A 5-note melody played twice — same both times, or which note changed?</div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:18}}>
+        <button className="play-btn" style={{"--sc":sc,marginBottom:0}} onClick={play1} disabled={playing}>
+          {playing&&phase===0?<ListeningBars color={sc}/>:<><span>▶</span> Play 1st</>}
+        </button>
+        <button className="play-btn" style={{"--sc":sc,marginBottom:0,opacity:phase<1?0.4:1}} onClick={play2} disabled={playing||phase<1}>
+          {playing&&phase>=1?<ListeningBars color={sc}/>:<><span>▶</span> Play 2nd</>}
+        </button>
+      </div>
+      <FeedbackToast correct={feedback?.ok} streak={feedback?.streak} visible={!!feedback}/>
+      {["same","1","2","3","4","5"].map(v=>(
+        <button key={v} className={`mat-btn btn-answer ${selected===v?"selected":""} ${revealed&&v===q.answer?"correct":""} ${revealed&&selected===v&&v!==q.answer?"wrong":""}`}
+          onClick={()=>choose(v)} disabled={phase<2}>
+          {v==="same"?"Same":`Note ${v}`}
+        </button>
+      ))}
+      {revealed&&<div style={{display:"flex",justifyContent:"flex-end",marginTop:14}}>
+        <button className="mat-btn btn-primary" onClick={next}>{qIdx<TOTAL-1?"Next Question":isFullTest?"Next Section →":"See Results"}</button>
+      </div>}
+    </QuestionCard>
+  );
+}
+
+// ============================================================
+// TEXTURE SECTION
+// ============================================================
+function TextureSection({ onDone, onHome, isFullTest, ftSectionIdx, stat, onAnswer, onReset, initialLevel }) {
+  const audio = useAudioEngine();
+  const TOTAL = SECTIONS.find(x=>x.id==="texture").total;
+  const [level, setLevel] = useState(initialLevel||"Medium");
+  const [questions, setQuestions] = useState(()=>Array.from({length:TOTAL},()=>genTextureQuestion(initialLevel||"Medium")));
+  const [qIdx,setQIdx] = useState(0);
+  const [playing,setPlaying] = useState(false);
+  const [played,setPlayed] = useState(false);
+  const [selected,setSelected] = useState(null);
+  const [revealed,setRevealed] = useState(false);
+  const [correct,setCorrect] = useState(0);
+  const [feedback,setFeedback] = useState(null);
+  const q = questions[qIdx];
+  const sc = SECTIONS[2].color;
+
+  function changeLevel(l) {
+    setLevel(l);
+    setQuestions(Array.from({length:TOTAL},()=>genTextureQuestion(l)));
+    setQIdx(0); setPlayed(false); setSelected(null); setRevealed(false); setCorrect(0); setFeedback(null);
+  }
+  function play(){ setPlaying(true); audio.playTexture(q.midis,()=>{ setPlaying(false); setPlayed(true); }); }
+  function choose(c){
+    if(revealed)return;
+    const ok=c===String(q.count);
+    setSelected(c); setRevealed(true);
+    if(ok) setCorrect(x=>x+1);
+    setFeedback({ok, streak: ok?(stat?.streak||0)+1:0});
+    onAnswer&&onAnswer(ok);
+  }
+  function next(){
+    setFeedback(null);
+    if(qIdx<TOTAL-1){ setQIdx(x=>x+1); setPlayed(false); setSelected(null); setRevealed(false); } else onDone(correct);
+  }
+
+  return (
+    <QuestionCard section="texture" qIdx={qIdx} total={TOTAL} level={level} onHome={onHome} isFullTest={isFullTest} ftSectionIdx={ftSectionIdx} stat={stat} onReset={onReset}>
+      {!isFullTest && <LevelSelector level={level} onChange={changeLevel}/>}
+      <div className="ornament"><div className="ornament-line"/><div className="ornament-diamond"/><div className="ornament-line"/></div>
+      <div className="card-sub">A chord will be played — how many notes are sounding simultaneously? (2, 3 or 4)</div>
+      <button className="play-btn" style={{"--sc":sc}} onClick={play} disabled={playing}>
+        {playing?<><ListeningBars color={sc}/>&nbsp;Listening...</>:<><span>▶</span> Play Chord</>}
+      </button>
+      <FeedbackToast correct={feedback?.ok} streak={feedback?.streak} visible={!!feedback}/>
+      {["2","3","4"].map(c=>(
+        <button key={c} className={`mat-btn btn-answer ${selected===c?"selected":""} ${revealed&&c===String(q.count)?"correct":""} ${revealed&&selected===c&&c!==String(q.count)?"wrong":""}`}
+          onClick={()=>choose(c)} disabled={!played}>
+          {c} notes
+        </button>
+      ))}
+      {revealed&&<div style={{display:"flex",justifyContent:"flex-end",marginTop:14}}>
+        <button className="mat-btn btn-primary" onClick={next}>{qIdx<TOTAL-1?"Next Question":isFullTest?"Next Section →":"See Results"}</button>
+      </div>}
+    </QuestionCard>
+  );
+}
+
+// ============================================================
+// RHYTHM SECTION
+// ============================================================
+function RhythmSection({ onDone, onHome, isFullTest, ftSectionIdx, stat, onAnswer, onReset, initialLevel }) {
+  const audio = useAudioEngine();
+  const TOTAL = SECTIONS.find(x=>x.id==="rhythm").total;
+  const [level, setLevel] = useState(initialLevel||"Medium");
+  const [questions, setQuestions] = useState(()=>Array.from({length:TOTAL},()=>genRhythmQuestion(initialLevel||"Medium")));
+  const [qIdx,setQIdx] = useState(0);
+  const [phase,setPhase] = useState(0);
+  const [playing,setPlaying] = useState(false);
+  const [countIn,setCountIn] = useState(false);
+  const [selected,setSelected] = useState(null);
+  const [revealed,setRevealed] = useState(false);
+  const [correct,setCorrect] = useState(0);
+  const [feedback,setFeedback] = useState(null);
+  const q = questions[qIdx];
+  const sc = SECTIONS[3].color;
+  const WIN = 0.55;
+
+  function changeLevel(l) {
+    setLevel(l);
+    setQuestions(Array.from({length:TOTAL},()=>genRhythmQuestion(l)));
+    setQIdx(0); setPhase(0); setSelected(null); setRevealed(false); setCorrect(0);
+  }
+  function play1(){
+    setPlaying(true); setCountIn(true);
+    setTimeout(()=>setCountIn(false), WIN*4*1000+100);
+    audio.playRhythm(q.pattern1,()=>{ setPlaying(false); setPhase(1); }, true);
+  }
+  function play2(){
+    setPlaying(true); setCountIn(true);
+    setTimeout(()=>setCountIn(false), WIN*4*1000+100);
+    audio.playRhythm(q.pattern2,()=>{ setPlaying(false); setPhase(2); }, true);
+  }
+  function choose(v){
+    if(revealed)return;
+    const ok=v===q.answer;
+    setSelected(v); setRevealed(true);
+    if(ok) setCorrect(x=>x+1);
+    setFeedback({ok, streak: ok?(stat?.streak||0)+1:0});
+    onAnswer&&onAnswer(ok);
+  }
+  function next(){
+    setFeedback(null);
+    if(qIdx<TOTAL-1){ setQIdx(x=>x+1); setPhase(0); setSelected(null); setRevealed(false); } else onDone(correct);
+  }
+
+  return (
+    <QuestionCard section="rhythm" qIdx={qIdx} total={TOTAL} level={level} onHome={onHome} isFullTest={isFullTest} ftSectionIdx={ftSectionIdx} stat={stat} onReset={onReset}>
+      {!isFullTest && <LevelSelector level={level} onChange={changeLevel}/>}
+      <div className="ornament"><div className="ornament-line"/><div className="ornament-diamond"/><div className="ornament-line"/></div>
+      <div className="card-sub">A 4-beat rhythm played twice — same both times, or which beat was different?</div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:10}}>
+        <button className="play-btn" style={{"--sc":sc,marginBottom:0}} onClick={play1} disabled={playing}>
+          {playing&&phase===0?<><ListeningBars color={sc}/>&nbsp;{countIn?"1·2·3·4·▶":"Playing..."}</>:<><span>▶</span> Play 1st</>}
+        </button>
+        <button className="play-btn" style={{"--sc":sc,marginBottom:0,opacity:phase<1?0.4:1}} onClick={play2} disabled={playing||phase<1}>
+          {playing&&phase>=1?<><ListeningBars color={sc}/>&nbsp;{countIn?"1·2·3·4·▶":"Playing..."}</>:<><span>▶</span> Play 2nd</>}
+        </button>
+      </div>
+      <FeedbackToast correct={feedback?.ok} streak={feedback?.streak} visible={!!feedback}/>
+      <div className="rhythm-visual">
+        {[1,2,3,4].map(b=>(
+          <div key={b} className={`beat-dot ${revealed&&String(b)===q.answer?"highlight":""}`}>{b}</div>
+        ))}
+      </div>
+      {["same","1","2","3","4"].map(v=>(
+        <button key={v} className={`mat-btn btn-answer ${selected===v?"selected":""} ${revealed&&v===q.answer?"correct":""} ${revealed&&selected===v&&v!==q.answer?"wrong":""}`}
+          onClick={()=>choose(v)} disabled={phase<2}>
+          {v==="same"?"Same":`Beat ${v}`}
+        </button>
+      ))}
+      {revealed&&<div style={{display:"flex",justifyContent:"flex-end",marginTop:14}}>
+        <button className="mat-btn btn-primary" onClick={next}>{qIdx<TOTAL-1?"Next Question":"See Results"}</button>
+      </div>}
+    </QuestionCard>
+  );
+}
+
+// ============================================================
+// RESULTS SCREEN
+// ============================================================
+function ResultsScreen({ sectionId, score, level, onBack, onRetry }) {
+  const s = SECTIONS.find(x=>x.id===sectionId);
+  const pct = Math.round((score/s.total)*100);
+  const grade = pct>=90?"Excellent!":pct>=70?"Well Done!":pct>=50?"Good Effort":"Keep Practising";
+  const lc = LEVEL_COLORS[level] || G.accent;
+  return (
+    <div className="card fade-in">
+      <div className="card-inner" style={{textAlign:"center"}}>
+        <div className="ornament" style={{justifyContent:"center",marginBottom:16}}><div className="ornament-line"/><div className="ornament-diamond"/><div className="ornament-line"/></div>
+        <div style={{fontFamily:"Cormorant Garamond",fontSize:20,fontWeight:700,color:s.color,marginBottom:6,letterSpacing:"0.1em"}}>{s.label} Complete</div>
+        <span className="level-tag" style={{color:lc,borderColor:lc,background:`${lc}18`}}>{level}</span>
+        <div style={{fontSize:52,fontFamily:"Cormorant Garamond",fontWeight:700,color:G.text,margin:"20px 0 4px"}}>
+          {score}<span style={{fontSize:22,color:G.muted}}>/{s.total}</span>
+        </div>
+        <div style={{fontSize:15,color:G.muted,marginBottom:16}}>{grade} · {pct}%</div>
+        <div className="progress-bar" style={{height:5}}>
+          <div className="progress-fill" style={{width:`${pct}%`,background:s.color}}/>
+        </div>
+        <div style={{display:"flex",gap:10,marginTop:22}}>
+          <button className="mat-btn btn-ghost" style={{flex:1}} onClick={onBack}>Back to Menu</button>
+          <button className="mat-btn btn-primary" style={{flex:1}} onClick={onRetry}>Try Again</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// FULL TEST — level selector before starting
+// ============================================================
+function FullTestLevelSelect({ onStart }) {
+  const [level, setLevel] = useState("Medium");
+  return (
+    <div className="card fade-in" style={{maxWidth:420}}>
+      <div className="card-inner" style={{textAlign:"center"}}>
+        <div className="ornament" style={{justifyContent:"center",marginBottom:12}}><div className="ornament-line"/><div className="ornament-diamond"/><div className="ornament-line"/></div>
+        <div style={{fontFamily:"Cormorant Garamond",fontSize:20,color:G.accent,marginBottom:6,letterSpacing:"0.1em"}}>Full Test</div>
+        <div style={{fontSize:13,color:G.muted,marginBottom:24,lineHeight:1.7}}>All 4 sections in sequence — {FULL_TOTAL} questions total. Choose your difficulty level.</div>
+        <LevelSelector level={level} onChange={setLevel}/>
+        <div style={{fontSize:12,color:G.muted,marginBottom:20,textAlign:"left",lineHeight:1.8}}>
+          {level==="Easy" && "Pitch: wide intervals · Melody: edge notes change, large steps · Texture: 2 or 4 notes only · Rhythm: quarter vs eighth notes"}
+          {level==="Medium" && "Pitch: moderate intervals · Melody: any note, medium steps · Texture: 2, 3 or 4 notes · Rhythm: includes dotted & triplet patterns"}
+          {level==="Hard" && "Pitch: semitone/tone only · Melody: semitone changes · Texture: close voicings · Rhythm: syncopation & sixteenths, middle beats"}
+        </div>
+        <button className="mat-btn btn-primary" style={{width:"100%"}} onClick={()=>onStart(level)}>
+          Begin Full Test
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// FULL TEST RESULTS
+// ============================================================
+function FullTestResults({ sectionScores, level, onBack, onRetry }) {
+  const total = SECTIONS.reduce((a,s)=>a+(sectionScores[s.id]||0),0);
+  const pct = Math.round((total/FULL_TOTAL)*100);
+  const grade = pct>=90?"Excellent!":pct>=75?"Well Done!":pct>=55?"Good Effort":"Keep Practising";
+  const lc = LEVEL_COLORS[level] || G.accent;
+  return (
+    <div className="card fade-in">
+      <div className="card-inner" style={{textAlign:"center"}}>
+        <div className="ornament" style={{justifyContent:"center",marginBottom:16}}><div className="ornament-line"/><div className="ornament-diamond"/><div className="ornament-line"/></div>
+        <div style={{fontFamily:"Cormorant Garamond",fontSize:20,fontWeight:700,color:G.accent,marginBottom:6,letterSpacing:"0.1em"}}>Full Test Complete</div>
+        <span className="level-tag" style={{color:lc,borderColor:lc,background:`${lc}18`}}>{level}</span>
+        <div style={{fontSize:52,fontFamily:"Cormorant Garamond",fontWeight:700,color:G.text,margin:"20px 0 4px"}}>
+          {total}<span style={{fontSize:22,color:G.muted}}>/{FULL_TOTAL}</span>
+        </div>
+        <div style={{fontSize:15,color:G.muted,marginBottom:16}}>{grade} · {pct}%</div>
+        <div className="progress-bar" style={{height:5}}>
+          <div className="progress-fill" style={{width:`${pct}%`,background:G.accent}}/>
+        </div>
+        <div style={{margin:"20px 0",textAlign:"left"}}>
+          {SECTIONS.map(s=>{
+            const sc = sectionScores[s.id]||0;
+            const sp = Math.round((sc/s.total)*100);
+            return (
+              <div key={s.id} className="full-result-row">
+                <span style={{color:s.color,fontFamily:"Cormorant Garamond",fontSize:12}}>{s.icon} {s.label}</span>
+                <span style={{fontSize:13,color:G.text}}>{sc}/{s.total} <span style={{color:G.muted}}>({sp}%)</span></span>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{display:"flex",gap:10}}>
+          <button className="mat-btn btn-ghost" style={{flex:1}} onClick={onBack}>Back to Menu</button>
+          <button className="mat-btn btn-primary" style={{flex:1}} onClick={onRetry}>Try Again</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// ADMIN DASHBOARD
+// ============================================================
+function AdminDashboard({ onBack }) {
+  const [users, setUsers] = useState({});
+  const [scores, setScores] = useState({});
+  const [newUser, setNewUser] = useState("");
+  const [newPass, setNewPass] = useState("");
+  const [addError, setAddError] = useState("");
+  const [addSuccess, setAddSuccess] = useState("");
+  const [delConfirm, setDelConfirm] = useState(null); // username pending delete
+
+  async function refresh() {
+    setUsers(await getUsers()); setScores(await getScores());
+  }
+  useEffect(()=>{ refresh(); },[]);
+
+  const students = Object.keys(users).filter(u=>!users[u].isAdmin);
+
+  async function addStudent() {
+    setAddError(""); setAddSuccess("");
+    const u = newUser.trim().toLowerCase();
+    const p = newPass.trim();
+    if (!u || !p) { setAddError("Please fill in both fields."); return; }
+    if (u.length < 2) { setAddError("Username must be at least 2 characters."); return; }
+    if (p.length < 4) { setAddError("Password must be at least 4 characters."); return; }
+    const all = await getUsers();
+    if (all[u]) { setAddError(`Username "${u}" already exists.`); return; }
+    await addUserToDB(u, p, false);
+    setNewUser(""); setNewPass("");
+    setAddSuccess(`Account "${u}" created!`);
+    await refresh();
+    setTimeout(()=>setAddSuccess(""), 3000);
+  }
+
+  async function deleteStudent(username) {
+    await deleteUserFromDB(username);
+    setDelConfirm(null);
+    await refresh();
+  }
+
+  async function resetPassword(username, newPassword) {
+    await updatePasswordInDB(username, newPassword);
+    await refresh();
+  }
+
+  return (
+    <div className="fade-in" style={{width:"100%",maxWidth:900}}>
+      {/* Header */}
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:22,width:"100%"}}>
+        <div>
+          <div style={{fontFamily:"Cormorant Garamond",fontSize:22,fontWeight:700,color:G.accent}}>Teacher Dashboard</div>
+          <div style={{fontSize:12,color:G.muted,marginTop:2}}>{students.length} student{students.length!==1?"s":""} registered</div>
+        </div>
+        <button className="mat-btn btn-ghost" onClick={onBack}>← Back</button>
+      </div>
+
+      {/* Add Student Panel */}
+      <div style={{background:G.surface,border:`1px solid ${G.border}`,borderRadius:4,padding:"20px 24px",marginBottom:24}}>
+        <div style={{fontFamily:"Cormorant Garamond",fontSize:13,letterSpacing:"0.1em",color:G.accent,marginBottom:14}}>Add New Student</div>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr auto",gap:10,alignItems:"start"}}>
+          <div>
+            <input className="mat-input" style={{marginBottom:0}} placeholder="Username"
+              value={newUser} onChange={e=>setNewUser(e.target.value)}
+              onKeyDown={e=>e.key==="Enter"&&addStudent()}/>
+          </div>
+          <div>
+            <input className="mat-input" style={{marginBottom:0}} placeholder="Password (min 4 chars)"
+              value={newPass} onChange={e=>setNewPass(e.target.value)}
+              onKeyDown={e=>e.key==="Enter"&&addStudent()}/>
+          </div>
+          <button className="mat-btn btn-primary" style={{whiteSpace:"nowrap",height:46}} onClick={addStudent}>
+            + Add
+          </button>
+        </div>
+        {addError   && <div style={{fontSize:12,color:"#E57373",marginTop:8}}>{addError}</div>}
+        {addSuccess && <div style={{fontSize:12,color:"#7ab87a",marginTop:8}}>✓ {addSuccess}</div>}
+      </div>
+
+      {/* Delete confirm modal */}
+      {delConfirm && (
+        <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.7)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:100}}>
+          <div style={{background:G.surface,border:`1px solid ${G.border}`,borderRadius:4,padding:32,maxWidth:360,width:"90%",textAlign:"center"}}>
+            <div style={{fontFamily:"Cormorant Garamond",fontSize:16,color:"#E57373",marginBottom:12}}>Delete Account</div>
+            <div style={{fontSize:14,color:G.text,marginBottom:8}}>Remove <strong style={{color:G.accent}}>{delConfirm}</strong>?</div>
+            <div style={{fontSize:12,color:G.muted,marginBottom:24}}>This will also delete all their scores. This cannot be undone.</div>
+            <div style={{display:"flex",gap:10}}>
+              <button className="mat-btn btn-ghost" style={{flex:1}} onClick={()=>setDelConfirm(null)}>Cancel</button>
+              <button className="mat-btn" style={{flex:1,background:"#c97a7a",color:"#0e0c09"}} onClick={()=>deleteStudent(delConfirm)}>Delete</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Student list */}
+      {students.length===0
+        ? <div style={{color:G.muted,textAlign:"center",padding:40,border:`1px dashed ${G.border}`,borderRadius:4}}>
+            No students yet — add one above.
+          </div>
+        : <div className="dash-grid">
+            {students.map(u=>{
+              const sc = scores[u]||{};
+              const total = SECTIONS.reduce((a,s)=>a+(sc[s.id]?.best||0),0);
+              return (
+                <div key={u} className="dash-tile" style={{position:"relative"}}>
+                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:5}}>
+                    <div className="student-name">{u}</div>
+                    <button onClick={()=>setDelConfirm(u)}
+                      style={{background:"transparent",border:"none",color:G.muted,cursor:"pointer",fontSize:14,lineHeight:1,padding:"2px 4px"}}
+                      title="Delete student">✕</button>
+                  </div>
+                  <div style={{fontSize:11,color:G.muted,marginBottom:10}}>Best total: {total}/{FULL_TOTAL}</div>
+                  {SECTIONS.map(s=>(
+                    <div key={s.id} className="score-row">
+                      <span style={{color:s.color}}>{s.label}</span>
+                      <span className="score-val">{sc[s.id]?.best!=null?`${sc[s.id].best}/${s.total}`:"—"}</span>
+                    </div>
+                  ))}
+                  <div style={{marginTop:10,height:2,background:G.border}}>
+                    <div style={{width:`${(total/FULL_TOTAL)*100}%`,height:"100%",background:G.accent}}/>
+                  </div>
+                  <ResetPassword username={u} onReset={resetPassword}/>
+                </div>
+              );
+            })}
+          </div>
+      }
+    </div>
+  );
+}
+
+function ResetPassword({ username, onReset }) {
+  const [open, setOpen] = useState(false);
+  const [pw, setPw] = useState("");
+  const [msg, setMsg] = useState("");
+  function submit() {
+    if (pw.length < 4) { setMsg("Min 4 chars"); return; }
+    onReset(username, pw); setPw(""); setMsg("✓ Updated"); setOpen(false);
+    setTimeout(()=>setMsg(""),2000);
+  }
+  return (
+    <div style={{marginTop:10}}>
+      {!open
+        ? <button onClick={()=>setOpen(true)}
+            style={{background:"transparent",border:`1px solid ${G.border}`,color:G.muted,borderRadius:3,padding:"4px 10px",fontSize:10,cursor:"pointer",letterSpacing:"0.08em",textTransform:"uppercase",width:"100%"}}>
+            Reset Password
+          </button>
+        : <div style={{display:"flex",gap:6,marginTop:4}}>
+            <input className="mat-input" style={{marginBottom:0,padding:"6px 10px",fontSize:12,flex:1}}
+              placeholder="New password" value={pw} onChange={e=>setPw(e.target.value)}
+              onKeyDown={e=>e.key==="Enter"&&submit()}/>
+            <button className="mat-btn btn-primary" style={{padding:"6px 12px",fontSize:11}} onClick={submit}>Save</button>
+            <button className="mat-btn btn-ghost" style={{padding:"6px 10px",fontSize:11}} onClick={()=>{setOpen(false);setPw("");}}>✕</button>
+          </div>
+      }
+      {msg && <div style={{fontSize:11,color:"#7ab87a",marginTop:4}}>{msg}</div>}
+    </div>
+  );
+}
+
+// ============================================================
+// APP ROOT
+// ============================================================
+function App() {
+  const [user, setUser] = useState(null);
+  const [view, setView] = useState("auth");
+  const [activeSection, setActiveSection] = useState(null);
+  const [activeLevel, setActiveLevel] = useState("Medium");
+  const [lastScore, setLastScore] = useState(null);
+  const [scores, setScores] = useState({});
+  const [ftLevel, setFtLevel] = useState("Medium");
+  const [ftSectionIdx, setFtSectionIdx] = useState(0);
+  const [ftScores, setFtScores] = useState({});
+  const [sessionStats, setSessionStats] = useState({});
+
+  function getStat(sid) { return sessionStats[sid] || { correct:0, attempted:0, streak:0 }; }
+  function updateStat(sid, wasCorrect) {
+    setSessionStats(prev => {
+      const s = prev[sid] || { correct:0, attempted:0, streak:0 };
+      return { ...prev, [sid]: {
+        correct:   s.correct   + (wasCorrect?1:0),
+        attempted: s.attempted + 1,
+        streak:    wasCorrect  ? s.streak+1 : 0,
+      }};
+    });
+  }
+  function resetStat(sid) {
+    setSessionStats(prev => ({ ...prev, [sid]: { correct:0, attempted:0, streak:0 } }));
+  }
+
+  async function loadScores() { setScores(await getScores()); }
+  async function handleLogin(u) { setUser(u); await loadScores(); setView("menu"); }
+  function handleSelectSection(id) { setActiveSection(id); setView("section"); }
+  function handleStartFullTest(level) { setFtLevel(level); setFtSectionIdx(0); setFtScores({}); setView("fulltest"); }
+
+  async function saveSectionScore(sectionId, score) {
+    const all = await getScores();
+    const prev = all[user.username]?.[sectionId];
+    const best = Math.max(score, prev?.best||0);
+    await upsertScore(user.username, sectionId, best, score);
+    await loadScores();
+  }
+
+  async function handleSectionDone(score) {
+    setLastScore(score);
+    await saveSectionScore(activeSection, score);
+    setView("result");
+  }
+
+  async function handleFullTestSectionDone(score) {
+    const sid = SECTIONS[ftSectionIdx].id;
+    setFtScores(prev => ({ ...prev, [sid]: score }));
+    await saveSectionScore(sid, score);
+    if (ftSectionIdx < SECTIONS.length-1) { setFtSectionIdx(i=>i+1); }
+    else { setView("fullresult"); }
+  }
+
+  const curFt = SECTIONS[ftSectionIdx]?.id;
+
+  const sectionProps = (sid) => ({
+    onHome: ()=>setView("menu"),
+    stat: getStat(sid),
+    onAnswer: w=>updateStat(sid,w),
+    onReset: ()=>resetStat(sid),
+  });
+
+  return (
+    <>
+      <style>{css}</style>
+      <div className="mat-root">
+        <Stars/>
+        {view==="auth"   && <AuthScreen onLogin={handleLogin}/>}
+        {view==="menu"   && <SectionSelect user={user} scores={scores} onSelect={handleSelectSection}
+            onFullTest={()=>setView("ftlevel")} onDashboard={()=>setView("admin")} onLogout={()=>{setUser(null);setView("auth");}}/>}
+        {view==="ftlevel" && <FullTestLevelSelect onStart={lv=>{handleStartFullTest(lv);}}/>}
+
+        {view==="section" && activeSection==="pitch"   && <PitchSection   {...sectionProps("pitch")}   onDone={handleSectionDone} initialLevel={activeLevel}/>}
+        {view==="section" && activeSection==="melody"  && <MelodySection  {...sectionProps("melody")}  onDone={handleSectionDone} initialLevel={activeLevel}/>}
+        {view==="section" && activeSection==="texture" && <TextureSection {...sectionProps("texture")} onDone={handleSectionDone} initialLevel={activeLevel}/>}
+        {view==="section" && activeSection==="rhythm"  && <RhythmSection  {...sectionProps("rhythm")}  onDone={handleSectionDone} initialLevel={activeLevel}/>}
+        {view==="result"  && <ResultsScreen sectionId={activeSection} score={lastScore} level={activeLevel}
+            onBack={()=>setView("menu")} onRetry={()=>setView("section")}/>}
+
+        {view==="fulltest" && curFt==="pitch"   && <PitchSection   key="ft-p" {...sectionProps("pitch")}   onDone={handleFullTestSectionDone} isFullTest ftSectionIdx={ftSectionIdx} initialLevel={ftLevel}/>}
+        {view==="fulltest" && curFt==="melody"  && <MelodySection  key="ft-m" {...sectionProps("melody")}  onDone={handleFullTestSectionDone} isFullTest ftSectionIdx={ftSectionIdx} initialLevel={ftLevel}/>}
+        {view==="fulltest" && curFt==="texture" && <TextureSection key="ft-t" {...sectionProps("texture")} onDone={handleFullTestSectionDone} isFullTest ftSectionIdx={ftSectionIdx} initialLevel={ftLevel}/>}
+        {view==="fulltest" && curFt==="rhythm"  && <RhythmSection  key="ft-r" {...sectionProps("rhythm")}  onDone={handleFullTestSectionDone} isFullTest ftSectionIdx={ftSectionIdx} initialLevel={ftLevel}/>}
+        {view==="fullresult" && <FullTestResults sectionScores={ftScores} level={ftLevel}
+            onBack={()=>setView("menu")} onRetry={()=>setView("ftlevel")}/>}
+
+        {view==="admin"  && <AdminDashboard onBack={()=>setView("menu")}/>}
+      </div>
+    </>
+  );
+}
+
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App/>);
+  </script>
+</body>
+</html>
