@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Upload your pieces | Cadenza Digital Exam Ready Course</title>
+<meta name="description" content="Send Eric the videos and score photos of your four exam pieces for the Cadenza Digital Exam Ready Course.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#eca945">
+<link rel="icon" type="image/png" href="logo-circle.png">
+<link rel="apple-touch-icon" href="logo-circle.png">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=DM+Serif+Display:ital@0;1&display=swap">
+<style>
+/* Layout: follows Jess's mock — cream header, marigold hero with step pill, piano-key strip, one white form card (prefilled details, four piece blocks, consent, store accordion, upload), "Before you upload" card, dark "Private by design" card, dark footer. Single light brand look, matching the Exam-Ready course page. */
+:root{
+  --marigold:#eca945; --marigold-soft:#f9e4b8; --tint:#f5ecd6; --butter:#fff1c2;
+  --ink:#1c1712; --cream:#faf5e9; --card:#fffdf8; --field:#f7f1e3; --line:#eadfc6;
+  --muted:#5e554a; --gold-deep:#9a6416; --on-ink:#faf5e9; --on-ink-muted:#d6ccb8;
+  --ok:#2f6b3a; --ok-soft:#e3f0dc; --warn:#a3321f; --warn-soft:#fbe3dc;
+  --sans:"DM Sans","Helvetica Neue",Arial,sans-serif;
+  --serif:"DM Serif Display",Georgia,"Times New Roman",serif;
+  --radius:22px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;overflow-x:hidden}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.col{max-width:560px;margin-inline:auto}
+:focus-visible{outline:3px solid var(--gold-deep);outline-offset:3px}
+h1,h2,h3{margin:0}
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1.06;text-wrap:balance}
+h1{font-size:clamp(2.4rem,10vw,3.2rem)}
+h2{font-size:1.75rem}
+p{margin:0}
+
+/* header */
+header{background:var(--cream);border-bottom:1px solid var(--line)}
+header .col{display:flex;align-items:center;gap:12px;padding-block:12px}
+header img{width:54px;height:54px;border-radius:50%;display:block;flex:none}
+header .nm{display:grid;line-height:1.25;min-width:0}
+header .nm b{font-size:.82rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+header .nm span{font-size:.9rem;color:var(--muted)}
+
+/* hero */
+.hero{background:var(--marigold);padding-block:28px 30px}
+.hero .col{display:grid;gap:16px}
+.pill{justify-self:start;display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--marigold);border-radius:999px;padding:9px 16px;font-size:.74rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--butter)}
+.hero h1 em{font-style:italic;display:inline-block;padding:0 .12em .1em 0;color:var(--butter);-webkit-text-stroke:1.4px var(--ink);paint-order:stroke fill;text-shadow:3px 3px 0 rgba(28,23,18,.85)}
+.hero .lead{font-size:1.04rem;color:#33281a;max-width:44ch}
+.points{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 20px;font-weight:800;font-size:.9rem}
+.points li{display:inline-flex;gap:8px}
+.points li::before{content:"✦"}
+/* deadline + what to send */
+.deadline{background:var(--ink);color:var(--on-ink);border-radius:20px;padding:18px 18px 16px;display:grid;gap:4px;box-shadow:6px 6px 0 rgba(28,23,18,.25)}
+.dtop{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:4px}
+.dk{font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--marigold)}
+.left{background:var(--marigold);color:var(--ink);border-radius:999px;padding:4px 12px;font-size:.8rem;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.left.urgent{background:#e8604a;color:#fff}
+.dday{font-family:var(--serif);font-weight:400;font-size:1.9rem;line-height:1.1;color:var(--butter)}
+.dtime{font-weight:800;font-size:1.05rem;font-variant-numeric:tabular-nums}
+.deadline p{color:var(--on-ink-muted);font-size:.9rem;margin-top:8px;padding-top:10px;border-top:1px solid rgba(236,169,69,.25)}
+.need{background:var(--card);border:2px solid var(--ink);border-radius:20px;padding:18px;display:grid;gap:12px}
+.need h3{font-size:1.1rem;font-weight:800}
+.need ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.need li{display:grid;grid-template-columns:78px 1fr;gap:10px;align-items:start;font-size:.97rem}
+.need .small{font-size:.84rem;color:var(--muted);font-weight:700}
+.tag{display:inline-flex;justify-content:center;border-radius:999px;padding:3px 8px;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.tag.req{background:var(--ink);color:var(--marigold)}
+.tag.opt{background:var(--tint);color:var(--muted);border:1px solid var(--line)}
+.btn-go{background:var(--marigold);color:var(--ink);border:2.5px solid var(--ink);box-shadow:4px 4px 0 var(--ink);font-size:1.08rem;min-height:60px}
+.btn-go:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--ink)}
+.btn-go:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn-go:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:4px 4px 0 var(--ink)}
+.hero .btn-go{background:var(--card)}
+
+/* form step headers */
+.sh{display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:start;padding-top:18px;border-top:2px solid var(--ink)}
+.sn{width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--marigold);display:grid;place-items:center;font-weight:800}
+.sh h3{font-size:1.15rem;font-weight:800;line-height:1.3}
+.sh p{font-size:.9rem;color:var(--muted);margin-top:2px}
+.count{justify-self:start;background:var(--tint);border-radius:999px;padding:6px 14px;font-size:.9rem;font-variant-numeric:tabular-nums}
+.count.all{background:var(--ok-soft);color:var(--ok)}
+.rq{display:flex;justify-content:space-between;align-items:center;gap:8px}
+
+/* sticky action bar */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--ink);color:var(--on-ink);border-top:3px solid var(--marigold);padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));transform:translateY(110%);transition:transform .25s ease}
+.sticky.show{transform:none}
+.sticky .col{display:flex;align-items:center;gap:12px}
+.sticky span{font-size:.9rem;line-height:1.25;color:var(--on-ink-muted)}
+.sticky span b{display:block;color:var(--on-ink);font-size:1rem;font-variant-numeric:tabular-nums}
+.sticky .btn{width:auto;margin-left:auto;min-height:48px;padding:0 20px;font-size:.95rem;box-shadow:none;border-color:var(--marigold)}
+.keys{height:26px;background:
+  linear-gradient(to bottom,var(--ink) 0 3px,transparent 3px),
+  repeating-linear-gradient(90deg,transparent 0 14px,var(--ink) 14px 28px,transparent 28px 40px,var(--ink) 40px 54px,transparent 54px 80px,var(--ink) 80px 94px,transparent 94px 106px,var(--ink) 106px 120px,transparent 120px 132px,var(--ink) 132px 146px,transparent 146px 164px),
+  var(--card);background-size:100% 100%,auto 72%,auto;background-repeat:no-repeat,repeat-x,no-repeat;border-bottom:1px solid var(--line)}
+
+/* main */
+main{padding-block:28px 40px}
+main .col{display:grid;gap:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px 20px;display:grid;gap:18px;min-width:0}
+.card>p.sub{color:var(--muted);margin-top:-8px}
+
+/* fields */
+.field{display:grid;gap:8px;min-width:0}
+.field label,.lbl{font-size:.92rem;font-weight:800}
+.lbl small,.field label small{font-weight:500;color:var(--muted);font-size:.8rem}
+.field input,.field select{width:100%;min-height:54px;border:1px solid var(--line);border-radius:14px;background:var(--field);padding:0 16px;font:500 1rem var(--sans);color:var(--ink);appearance:none;-webkit-appearance:none}
+.field select{background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(-45deg,transparent 50%,var(--ink) 50%);background-position:calc(100% - 22px) 50%,calc(100% - 16px) 50%;background-size:6px 6px;background-repeat:no-repeat;padding-right:44px}
+.field input:focus,.field select:focus{border-color:var(--ink);outline:none;box-shadow:0 0 0 3px var(--marigold-soft)}
+.prefill{display:flex;gap:8px;align-items:center;font-size:.85rem;color:var(--ok);font-weight:700;margin-top:-6px}
+.prefill::before{content:"✓";flex:none;width:20px;height:20px;border-radius:50%;background:var(--ok-soft);display:grid;place-items:center;font-size:.72rem}
+.dhead{display:flex;align-items:center;gap:12px;margin-top:-6px}
+.dhead .prefill{margin:0}
+.edit{margin-left:auto;background:none;border:0;font:800 .9rem var(--sans);color:var(--gold-deep);text-decoration:underline;text-underline-offset:3px;cursor:pointer;min-height:44px;padding:0 2px}
+.fieldset{display:grid;gap:18px}
+dl.sum{margin:0;border-top:1px solid var(--line)}
+dl.sum div{display:grid;grid-template-columns:110px 1fr;gap:12px;padding-block:12px;border-bottom:1px solid var(--line);min-width:0}
+dl.sum dt{font-size:.85rem;font-weight:700;color:var(--muted);padding-top:2px}
+dl.sum dd{margin:0;font-weight:800;overflow-wrap:anywhere}
+.example{font-size:.8rem;color:var(--muted);background:var(--marigold-soft);border-radius:10px;padding:8px 12px}
+
+/* pieces */
+.pieces{display:grid;gap:14px}
+.piece{border:1px solid var(--line);border-radius:18px;padding:16px;display:grid;gap:12px;background:var(--card);min-width:0}
+.piece.ready{border-color:#b9d3ad}
+.piece .ph{display:flex;align-items:center;gap:10px}
+.piece .n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--marigold);display:grid;place-items:center;font-weight:800;font-size:.85rem}
+.piece .ph b{font-size:1rem}
+.piece .state{margin-left:auto;font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:4px 10px;background:var(--tint);color:var(--muted);white-space:nowrap}
+.piece.ready .state{background:var(--ok-soft);color:var(--ok)}
+.pick{position:relative;display:flex;align-items:center;gap:12px;border:2px solid var(--ink);border-radius:16px;padding:14px;cursor:pointer;min-width:0;background:var(--marigold-soft)}
+.pick.sc{border:1.5px dashed #d9c08a;background:var(--card)}
+.pick .go{margin-left:auto;flex:none;font-size:.8rem;font-weight:800;background:var(--ink);color:var(--marigold);border-radius:999px;padding:6px 12px}
+.pick.sc .go{background:transparent;color:var(--gold-deep);border:1.5px solid var(--gold-deep)}
+.pick.has .go{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.pick:hover{background:var(--cream)}
+.pick input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}
+.pick .ic{flex:none;width:46px;height:46px;border-radius:12px;background:var(--ink);display:grid;place-items:center}
+.pick.sc .ic{background:var(--marigold-soft)}
+.pick .tx{display:grid;min-width:0}
+.pick .tx b{font-size:.98rem;line-height:1.3;overflow-wrap:anywhere}
+.pick .tx span{font-size:.84rem;line-height:1.35;color:var(--muted);font-variant-numeric:tabular-nums}
+.pick.has{border-style:solid;border-color:var(--line);background:var(--cream)}
+.thumbs{display:flex;gap:8px;flex-wrap:wrap}
+.thumbs span{width:46px;height:58px;border-radius:8px;border:1px solid var(--line);background:var(--field) center/cover no-repeat;display:grid;place-items:center;font-size:.66rem;font-weight:800;color:var(--muted)}
+.bar{height:6px;border-radius:999px;background:var(--tint);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--ink);transition:width .25s ease}
+
+/* note, consent, accordion */
+.note{display:grid;grid-template-columns:20px 1fr;gap:10px;background:var(--tint);border-radius:16px;padding:16px;font-size:.95rem;color:var(--muted)}
+.note::before{content:"✦";color:var(--gold-deep)}
+.consent{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;font-size:.95rem;background:var(--card)}
+.consent input{width:24px;height:24px;margin:1px 0 0;accent-color:var(--ink);cursor:pointer}
+details.acc{border-block:1px solid var(--line)}
+details.acc summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:58px;font-weight:800;font-size:.98rem;cursor:pointer}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;font-weight:500;font-size:1.1rem;line-height:1}
+details.acc[open] summary::after{content:"–"}
+details.acc .body{display:grid;gap:10px;padding-bottom:16px;font-size:.93rem;color:var(--muted)}
+.err{background:var(--warn-soft);color:var(--warn);border-radius:12px;padding:10px 14px;font-size:.9rem;font-weight:700}
+
+/* overall progress */
+.prog{display:grid;gap:8px}
+.prog .row{display:flex;justify-content:space-between;gap:12px;font-weight:800;font-variant-numeric:tabular-nums}
+.prog .row span{font-weight:500;color:var(--muted);font-size:.88rem}
+.prog .bar{height:12px}
+.prog p{font-size:.88rem;color:var(--muted)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 26px;border-radius:999px;border:2px solid var(--ink);font:800 1.02rem/1 var(--sans);text-decoration:none;cursor:pointer;width:100%;transition:transform .15s}
+.btn-dark{background:var(--ink);color:var(--on-ink);box-shadow:0 10px 22px -14px rgba(28,23,18,.9)}
+.btn-dark:hover{transform:translateY(-2px)}
+.btn-dark:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-light{background:transparent;border-color:var(--on-ink);color:var(--on-ink)}
+.fine{font-size:.8rem;color:var(--muted);text-align:center}
+
+/* before you upload */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.steps li{display:grid;grid-template-columns:30px 1fr;gap:12px;color:var(--muted)}
+.steps li i{font-style:normal;width:28px;height:28px;border-radius:50%;background:var(--marigold);color:var(--ink);display:grid;place-items:center;font-weight:800;font-size:.85rem}
+.steps b{color:var(--ink)}
+
+/* private */
+.dark{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.dark h2{color:var(--marigold)}
+.checks{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.checks li{display:grid;grid-template-columns:28px 1fr;gap:12px;color:var(--on-ink-muted)}
+.checks li::before{content:"✓";width:26px;height:26px;border-radius:50%;background:var(--marigold);color:var(--ink);display:grid;place-items:center;font-weight:800;font-size:.85rem}
+.checks b{color:var(--on-ink)}
+
+/* end states */
+.done .tick{width:56px;height:56px;border-radius:50%;background:var(--marigold);display:grid;place-items:center}
+.done h2{color:var(--on-ink);font-size:2rem}
+.done p{color:var(--on-ink-muted)}
+.done ol{margin:0;padding-left:20px;display:grid;gap:8px;color:var(--on-ink-muted)}
+.done ol li::marker{color:var(--marigold);font-weight:800}
+.done ol b{color:var(--on-ink)}
+.gone{border:2px solid var(--warn)}
+.gone .tag{justify-self:start;background:var(--warn-soft);color:var(--warn);font-weight:800;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;border-radius:999px;padding:5px 12px}
+.gone p{color:var(--muted)}
+.demo{font-size:.8rem;color:var(--muted);text-align:center}
+.demo a{font-weight:700;color:var(--gold-deep)}
+
+/* footer */
+footer{background:var(--ink);color:var(--on-ink-muted);border-top:3px solid var(--marigold);padding-block:28px calc(32px + env(safe-area-inset-bottom,0px))}
+footer .col{display:grid;gap:18px}
+footer .who{display:flex;align-items:center;gap:14px;font-size:.95rem;line-height:1.45}
+footer img{width:54px;height:54px;border-radius:50%;flex:none}
+footer a{color:var(--marigold);font-weight:800;text-decoration:none}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="gut">
+  <div class="col">
+    <a href="https://cadenza-london.com" target="_blank" rel="noopener" aria-label="Cadenza London official website"><img src="logo-circle.png" alt=""></a>
+    <div class="nm"><b>Exam-Ready Course</b><span>Cadenza London Music Academy</span></div>
+  </div>
+</header>
+
+<section class="hero gut" id="hero">
+  <div class="col">
+    <span class="pill">Step 2 of 4 · Screening videos</span>
+    <h1>Send Eric your <em>four pieces.</em></h1>
+    <p class="lead">Eric listens to every recording before he confirms a place on the course. Send them on this page before the deadline.</p>
+
+    <div class="deadline" id="dueBox">
+      <div class="dtop">
+        <span class="dk">Deadline</span>
+        <span class="left" id="dueLeft"></span>
+      </div>
+      <b class="dday" id="dueDay"></b>
+      <span class="dtime" id="dueTime"></span>
+      <p>If we haven't received your videos by then, your place is released to the next family.</p>
+    </div>
+
+    <div class="need">
+      <h3>What you need to send</h3>
+      <ul>
+        <li><span class="tag req">Required</span><p id="needVid"><b>4 videos</b>, one for each exam piece</p></li>
+        <li><span class="tag req">Required</span><p><b>The name of each piece</b> (title and composer)</p></li>
+        <li><span class="tag opt">Optional</span><p><b>Photos of the score</b>, so Eric can follow along</p></li>
+      </ul>
+      <p class="small" id="needSmall">A phone video is fine · One take per piece · Up to 4 GB per video</p>
+    </div>
+
+    <a class="btn btn-go" href="#up">Start uploading <span aria-hidden="true">↓</span></a>
+  </div>
+</section>
+<div class="keys" aria-hidden="true"></div>
+
+<main class="gut">
+  <div class="col">
+
+    <form class="card" id="up" novalidate>
+      <h2>Upload your pieces</h2>
+      <p class="sub">Three short steps. Everything stays on this page.</p>
+
+      <div class="sh"><span class="sn">1</span><div><h3>Check your details</h3><p>Already filled in from your registration. Tap Edit only if something is wrong.</p></div></div>
+      <div class="dhead"><p class="prefill" id="prefillNote">Filled in from your registration</p><button type="button" class="edit" id="editBtn" aria-expanded="false" aria-controls="fields">Edit</button></div>
+      <dl class="sum" id="summary">
+        <div><dt>Parent</dt><dd id="s-name"></dd></div>
+        <div><dt>Email</dt><dd id="s-email"></dd></div>
+        <div><dt>Student</dt><dd id="s-student"></dd></div>
+        <div><dt>Grade</dt><dd id="s-grade"></dd></div>
+        <div><dt>Exam board</dt><dd id="s-board"></dd></div>
+      </dl>
+      <div class="fieldset" id="fields">
+      <div class="field"><label for="name">Parent or guardian's name</label><input id="name" name="name" autocomplete="name" required></div>
+      <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="student">Student's name</label><input id="student" name="student" required></div>
+      <div class="field"><label for="grade">Exam grade</label>
+        <select id="grade" name="grade" required><option value="">Choose a grade</option><option>Grade 1</option><option>Grade 2</option><option>Grade 3</option><option>Grade 4</option><option>Grade 5</option><option>Grade 6</option><option>Grade 7</option><option>Grade 8</option></select></div>
+      <div class="field"><label for="board">Exam board</label>
+        <select id="board" name="board" required><option value="">Choose an exam board</option><option>ABRSM Performance Grade</option><option>Trinity Digital Grade (Repertoire-only)</option><option>Trinity Digital Grade (Technical Work)</option><option>Not sure yet</option></select></div>
+      </div>
+      <p class="example" id="exampleNote" hidden>Preview: example details. On the live page they come from the family's registration link.</p>
+
+      <div class="sh"><span class="sn">2</span><div><h3>Add your four pieces</h3><p id="step2p">For each piece: type its name and choose its video. Score photos are optional.</p></div></div>
+      <div class="count" id="count"><b id="countN">0 of 4</b> pieces ready</div>
+      <div class="pieces" id="pieces"></div>
+
+      <p class="note" id="wifiNote">On a phone, use Wi-Fi if you can. Four videos can take 20–40 minutes, and you'll need to keep this page open.</p>
+
+      <div class="sh"><span class="sn">3</span><div><h3 id="step3h">Agree and upload</h3><p>Tick the box, then tap the yellow button to send everything.</p></div></div>
+
+      <label class="consent" for="consentBox">
+        <input type="checkbox" id="consentBox" name="consent" required>
+        <span id="consentText">I'm the student's parent or guardian (or the student, aged 18 or over). I agree to these videos and score photos being used <b>only</b> for Eric Chung to assess the student for the Cadenza Digital Exam Ready Course. They won't be shared or published, and they are <b>deleted automatically after 90 days</b>.</span>
+      </label>
+
+      <details class="acc">
+        <summary id="accSum">How we use and store your videos</summary>
+        <div class="body" id="accBody">
+          <p>Your videos and score photos go to private Cadenza storage. Only Eric opens them, on a password-protected review page.</p>
+          <p>We never post them on social media or YouTube, and we never share them with anyone else.</p>
+          <p>Everything is deleted automatically 90 days after upload. Email music@cadenza-london.com to have it deleted sooner.</p>
+        </div>
+      </details>
+
+      <p class="err" id="err" role="alert" hidden></p>
+
+      <div class="prog" id="prog" hidden aria-live="polite">
+        <div class="row"><b id="pct">0%</b><span id="pbytes"></span></div>
+        <div class="bar" role="progressbar" aria-labelledby="pct" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="pbar"><i id="pfill"></i></div>
+        <p id="pmsg">Uploading. Keep this page open.</p>
+      </div>
+
+      <button class="btn btn-go" type="submit" id="send">Upload all 4 pieces <span aria-hidden="true">→</span></button>
+      <p class="fine" id="sendHint">You'll see a progress bar, then a confirmation screen and email.</p>
+      <p class="fine" id="previewFine" hidden>Preview: the upload is simulated and nothing is sent.</p>
+    </form>
+
+    <div class="card dark done" id="done" hidden tabindex="-1">
+      <span class="tick" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1c1712" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>
+      <h2>Pieces received</h2>
+      <p>Thank you. <span id="doneStudent"></span><span id="doneWhat">'s four videos are safely with Eric</span>. We'll email <span id="doneEmail"></span> once he has listened.</p>
+      <ol>
+        <li><b>Eric listens</b> to all four pieces, usually within a week.</li>
+        <li><b>We email you</b> to confirm the place and the group dates.</li>
+        <li><b>No more reminders.</b> Your place is held while Eric reviews.</li>
+      </ol>
+      <a class="btn btn-light" href="https://cadenza-london.com" target="_blank" rel="noopener">Back to the official website</a>
+    </div>
+
+    <div class="card gone" id="gone" hidden>
+      <span class="tag" id="goneTag">Place released</span>
+      <h2 id="goneTitle">This place has been released</h2>
+      <p id="goneText"></p>
+      <a class="btn btn-dark" href="https://cadenza-london.com" target="_blank" rel="noopener" id="regAgain">Register for a later intake <span aria-hidden="true">→</span></a>
+    </div>
+
+    <section class="card" id="before">
+      <h2>Before you upload</h2>
+      <ol class="steps">
+        <li><i>1</i><p><b>Camera from the side.</b> Landscape, so we can see your hands, face and feet on the pedals.</p></li>
+        <li><i>2</i><p><b>Quiet room, light in front.</b> Don't stand the phone on the piano itself.</p></li>
+        <li><i>3</i><p><b>Introduce yourself.</b> At the start of piece 1, say your name, grade and exam board.</p></li>
+        <li><i>4</i><p><b>One take per piece, unedited.</b> Play each piece straight through, like the real exam.</p></li>
+      </ol>
+    </section>
+
+    <section class="card dark" id="private">
+      <h2>Private by design</h2>
+      <ul class="checks" id="privList">
+        <li><p><b>Only Eric watches them.</b> Your videos are never published or shared.</p></li>
+        <li><p><b>Stored securely.</b> Kept in private storage, not on social media or YouTube.</p></li>
+        <li><p><b>Deleted after 90 days.</b> Automatically, or sooner if you ask.</p></li>
+      </ul>
+    </section>
+
+    <p class="demo" id="demo" hidden>Preview other screens: <a href="#released">Place released</a> · <a href="#withdrawn">Withdrawn</a> · <a href="#form">Upload form</a></p>
+  </div>
+</main>
+
+<form name="exam-course-pieces" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden aria-hidden="true">
+  <input type="hidden" name="form-name" value="exam-course-pieces"><input name="bot-field">
+  <input name="name"><input name="email"><input name="student"><input name="grade"><input name="board"><input name="upload_deadline"><input name="consent"><input name="piece1_title"><input name="piece1_video"><input name="piece1_score"><input name="piece2_title"><input name="piece2_video"><input name="piece2_score"><input name="piece3_title"><input name="piece3_video"><input name="piece3_score"><input name="piece4_title"><input name="piece4_video"><input name="piece4_score">
+</form>
+
+<div class="sticky" id="sticky" aria-hidden="true">
+  <div class="col">
+    <span><b id="stickyN">0 of 4 pieces ready</b><i id="stickyHint" style="font-style:normal">Add a name and video for each</i></span>
+    <button class="btn btn-go" type="button" id="stickyGo" tabindex="-1">Continue <span aria-hidden="true">↓</span></button>
+  </div>
+</div>
+
+<footer class="gut">
+  <div class="col">
+    <div class="who"><img src="logo-circle.png" alt=""><span>Cadenza London Music Academy<br>Colindale, North London</span></div>
+    <p>Questions? <a href="mailto:music@cadenza-london.com">music@cadenza-london.com</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* ===== LIVE CONFIG: set this to the upload address Cloudflare gives you ===== */
+  var UPLOAD_API = 'https://YOUR-UPLOAD-WORKER.workers.dev';
+  var MAX_VIDEO = 4 * 1024 * 1024 * 1024;  // 4 GB per video
+  var MAX_SCORE = 20 * 1024 * 1024;        // 20 MB per score photo/PDF
+  var MAX_SCORE_FILES = 10;                // per piece
+  var CHUNK = 25 * 1024 * 1024;            // 25 MB upload parts
+  var REGISTER_URL = 'https://cadenza-london.com';
+
+  var SANDBOX = false; // true = preview with example details and a simulated upload; false = real page
+  var isLive = UPLOAD_API.indexOf('YOUR-') === -1;
+  var sandbox = SANDBOX && !isLive;
+  var LINK = false; // all videos and score photos upload to Cloudflare
+  function okUrl(v){ return /^https?:\/\/[^\s.]+\.\S+/i.test((v||'').trim()); }
+  function hasVideo(p){ return LINK ? okUrl($('link'+p.n).value) : !!p.video; }
+  var $ = function(id){ return document.getElementById(id); };
+  var form=$('up'), err=$('err'), send=$('send');
+
+  /* ---------- prefill from the email link: ?rid=&t=&name=&email=&student=&grade=&board=&due= ---------- */
+  var q=new URLSearchParams(location.search);
+  var reg={rid:q.get('rid')||'',token:q.get('t')||'',name:q.get('name')||'',email:q.get('email')||'',student:q.get('student')||'',grade:q.get('grade')||'',board:q.get('board')||'',due:q.get('due')||''};
+  if(!(reg.email&&reg.student) && sandbox){
+    reg.name='Jane Smith'; reg.email='jane@example.com'; reg.student='Amy Smith'; reg.grade='Grade 5'; reg.board='ABRSM Performance Grade';
+    reg.due=new Date(Date.now()+72*3600e3).toISOString();
+    $('exampleNote').hidden=false; $('previewFine').hidden=false; $('demo').hidden=false;
+  }
+  ['name','email','student','grade','board'].forEach(function(k){ if(reg[k]) $(k).value=reg[k]; });
+  function syncSummary(){ ['name','email','student','grade','board'].forEach(function(k){ $('s-'+k).textContent=$(k).value||'—'; }); }
+  function openFields(open){
+    if(!open) syncSummary();
+    $('fields').hidden=!open; $('summary').hidden=open;
+    $('editBtn').textContent=open?'Done':'Edit'; $('editBtn').setAttribute('aria-expanded',String(open));
+  }
+  syncSummary();
+  if(reg.email&&reg.student){ openFields(false); }
+  else { $('prefillNote').hidden=true; $('editBtn').hidden=true; $('summary').hidden=true; }
+  $('editBtn').addEventListener('click',function(){ var o=$('fields').hidden; openFields(o); if(o) $('name').focus(); });
+
+  function fmtDue(iso){
+    var d=new Date(iso); if(isNaN(d)) return '';
+    try{ return d.toLocaleString('en-GB',{timeZone:'Europe/London',weekday:'long',day:'numeric',month:'long',hour:'numeric',minute:'2-digit',hour12:true}).replace(' at ',', ').replace(/\s?([ap])m/,'$1m'); }catch(e){ return d.toDateString(); }
+  }
+  var dueAt=null;
+  function setDue(iso){
+    var d=new Date(iso); if(isNaN(d)){ $('dueBox').hidden=true; return; }
+    dueAt=d; $('dueBox').hidden=false;
+    try{
+      $('dueDay').textContent=d.toLocaleDateString('en-GB',{timeZone:'Europe/London',weekday:'long',day:'numeric',month:'long'});
+      $('dueTime').textContent='Before '+d.toLocaleTimeString('en-GB',{timeZone:'Europe/London',hour:'numeric',minute:'2-digit',hour12:true}).replace(/\s?([ap])m/i,function(m,a){return a.toLowerCase()+'m';})+' (UK time)';
+    }catch(e){ $('dueDay').textContent=d.toDateString(); $('dueTime').textContent=''; }
+    countdown();
+  }
+  function countdown(){
+    if(!dueAt) return;
+    var ms=dueAt-Date.now(), el=$('dueLeft');
+    if(ms<=0){ el.textContent='Deadline passed'; el.classList.add('urgent'); return; }
+    var h=Math.floor(ms/3600e3), dd=Math.floor(h/24), hh=h%24, mm=Math.floor(ms%3600e3/60e3);
+    el.textContent=dd>0?dd+(dd>1?' days ':' day ')+hh+'h left':(hh>0?hh+'h '+mm+'m left':mm+' min left');
+    el.classList.toggle('urgent',ms<24*3600e3);
+  }
+  setInterval(countdown,60e3);
+  if(reg.due) setDue(reg.due); else $('dueBox').hidden=true;
+
+  if(LINK){
+    $('needVid').innerHTML='<b>4 video links</b>, one for each exam piece';
+    $('needSmall').textContent='A phone video is fine · One take per piece · Unlisted YouTube or Google Drive';
+    $('step2p').textContent='For each piece: type its name and paste its video link. A score photos link is optional.';
+    $('wifiNote').innerHTML='<span><b>How to get a link.</b> <b>YouTube:</b> upload the video, set it to <b>Unlisted</b>, then tap Share → Copy link. <b>Google Drive:</b> upload, tap Share, set access to <b>Anyone with the link</b>, then Copy link. Use Drive for score photos too.</span>';
+    $('step3h').textContent='Agree and send';
+    send.innerHTML='Send all 4 pieces <span aria-hidden="true">→</span>';
+    $('sendHint').textContent='You\'ll see a confirmation screen straight away.';
+    $('consentText').innerHTML='I\'m the student\'s parent or guardian (or the student, aged 18 or over). I agree to these videos and score photos being used <b>only</b> for Eric Chung to assess the student for the Cadenza Digital Exam Ready Course. We won\'t share or publish them, and we <b>delete the links from our records after 90 days</b>.';
+    $('accSum').textContent='How we use your links';
+    $('accBody').innerHTML='<p>Only Eric opens your links. We never share them or post your videos anywhere.</p><p>Your videos stay in your own YouTube or Google Drive, so you control them. Once Eric has reviewed them, you can delete them or switch off sharing.</p><p>We delete the links from our records 90 days after you send them. Email music@cadenza-london.com to have them removed sooner.</p>';
+    $('privList').innerHTML='<li><p><b>Only Eric watches them.</b> Your links are never published or shared.</p></li><li><p><b>You stay in control.</b> Unlisted videos only play for people with the link, and you can delete them any time.</p></li><li><p><b>Removed after 90 days.</b> We delete the links from our records, or sooner if you ask.</p></li>';
+    $('doneWhat').textContent='\'s four pieces are with Eric';
+    $('doneWhat').parentNode.innerHTML='Thank you. <span id="doneStudent"></span>\'s four pieces are with Eric. We\'ll email <span id="doneEmail"></span> once he has listened.';
+  }
+  /* ---------- four piece blocks ---------- */
+  var VID='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#eca945" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="13" height="14" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>';
+  var SCORE='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1c1712" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/><circle cx="9" cy="12" r="1.8" fill="#1c1712"/><path d="M10.8 12V5"/></svg>';
+  var pieces=[0,1,2,3].map(function(i){
+    var n=i+1, el=document.createElement('div'); el.className='piece'; el.id='piece'+n;
+    el.innerHTML=
+      '<div class="ph"><span class="n">'+n+'</span><b>Piece '+n+'</b><span class="state" id="st'+n+'">To do</span></div>'+
+      '<div class="field"><div class="rq"><label for="title'+n+'">Name of the piece <small>(title and composer)</small></label><span class="tag req">Required</span></div><input id="title'+n+'" name="title'+n+'" placeholder="'+['e.g. Minuet in G, J. S. Bach','e.g. Für Elise, Beethoven','e.g. The Entertainer, Joplin','e.g. Arabesque No. 1, Debussy'][i]+'" required></div>'+
+      (LINK ?
+      '<div class="field"><div class="rq"><label for="link'+n+'">Video link of piece '+n+'</label><span class="tag req">Required</span></div><input id="link'+n+'" type="url" inputmode="url" autocomplete="off" placeholder="Paste a YouTube or Google Drive link"></div>'+
+      '<div class="field"><div class="rq"><label for="slink'+n+'">Score photos link</label></div><input id="slink'+n+'" type="url" inputmode="url" autocomplete="off" placeholder="Google Drive or Google Photos link"></div>'
+      :
+      '<div class="rq"><span class="lbl">Video of piece '+n+'</span><span class="tag req">Required</span></div>'+
+      '<label class="pick" id="vp'+n+'" for="video'+n+'"><input id="video'+n+'" type="file" accept="video/*,.mov,.mp4,.m4v"><span class="ic" aria-hidden="true">'+VID+'</span><span class="tx"><b id="vt'+n+'">No video yet</b><span id="vs'+n+'">MP4 or MOV, up to 4 GB</span></span><span class="go" id="vg'+n+'">Choose</span></label>'+
+      '<div class="rq"><span class="lbl">Score photos</span></div>'+
+      '<label class="pick sc" id="sp'+n+'" for="score'+n+'"><input id="score'+n+'" type="file" accept="image/*,.pdf" multiple><span class="ic" aria-hidden="true">'+SCORE+'</span><span class="tx"><b id="ct'+n+'">No score added</b><span id="cs'+n+'">Photos or PDF, up to 10</span></span><span class="go" id="sg'+n+'">Add</span></label>')+
+      '<div class="thumbs" id="th'+n+'" hidden></div>'+
+      '<div class="bar" id="pb'+n+'" hidden><i></i></div>';
+    $('pieces').appendChild(el);
+    var p={n:n,el:el,video:null,scores:[]};
+    function refresh(){
+      var t=$('title'+n).value.trim(), v=hasVideo(p), ok=v&&t;
+      el.classList.toggle('ready',!!ok);
+      $('st'+n).textContent=ok?'Ready':(v?'Add the name':(t?(LINK?'Add the link':'Add the video'):'To do'));
+      updateCount();
+    }
+    p.refresh=refresh;
+    $('title'+n).addEventListener('input',refresh);
+    if(LINK) $('link'+n).addEventListener('input',refresh);
+    if(!LINK) $('video'+n).addEventListener('change',function(){
+      var f=this.files[0]; if(!f) return;
+      if(f.type && f.type.indexOf('video/')!==0){ this.value=''; return showErr('Piece '+n+': that file isn\'t a video. Choose the recording from Photos or Files.'); }
+      if(f.size>MAX_VIDEO){ this.value=''; return showErr('Piece '+n+': that video is '+size(f.size)+', over the 4 GB limit. Record at 1080p HD, 30 fps, or trim the start and end.'); }
+      showErr(''); p.video=f; $('vt'+n).textContent=f.name; $('vs'+n).textContent=size(f.size)+' · added'; $('vg'+n).textContent='Change'; $('vp'+n).classList.add('has'); refresh();
+    });
+    if(!LINK) $('score'+n).addEventListener('change',function(){
+      var fs=[].slice.call(this.files).filter(function(f){ return /^image\/|pdf$/.test(f.type)||/\.pdf$/i.test(f.name); });
+      var big=fs.filter(function(f){ return f.size>MAX_SCORE; });
+      if(big.length){ showErr('Piece '+n+': each score photo must be under 20 MB.'); fs=fs.filter(function(f){ return f.size<=MAX_SCORE; }); } else showErr('');
+      if(fs.length>MAX_SCORE_FILES){ showErr('Piece '+n+': up to 10 score files. We kept the first 10.'); fs=fs.slice(0,MAX_SCORE_FILES); }
+      p.scores=fs;
+      var th=$('th'+n); th.innerHTML='';
+      fs.forEach(function(f){ var s=document.createElement('span'); if(/^image\//.test(f.type)){ try{ s.style.backgroundImage='url('+URL.createObjectURL(f)+')'; }catch(e){} } else s.textContent='PDF'; th.appendChild(s); });
+      th.hidden=!fs.length;
+      $('ct'+n).textContent=fs.length?fs.length+' score '+(fs.length>1?'files':'file')+' added':'No score added';
+      $('cs'+n).textContent=fs.length?'Photos or PDF':'Photos or PDF, up to 10';
+      $('sg'+n).textContent=fs.length?'Change':'Add';
+      $('sp'+n).classList.toggle('has',!!fs.length);
+    });
+    return p;
+  });
+
+  /* sticky bar: visible while the form is on screen but the main button isn't */
+  var formOn=false, sendOn=false, busy=false;
+  function stickyShow(){ var s=formOn&&!sendOn&&!busy&&!form.hidden; $('sticky').classList.toggle('show',s); $('sticky').setAttribute('aria-hidden',String(!s)); }
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(e){ formOn=e[0].isIntersecting; stickyShow(); }).observe(form);
+    new IntersectionObserver(function(e){ sendOn=e[0].isIntersecting; stickyShow(); }).observe(send);
+  }
+  $('stickyGo').addEventListener('click',function(){
+    var next=pieces.filter(function(p){ return !(hasVideo(p)&&$('title'+p.n).value.trim()); })[0];
+    var target=next?(!$('title'+next.n).value.trim()?$('title'+next.n):$((LINK?'link':'video')+next.n)):$('consentBox');
+    (next?next.el:$('consentBox').closest('label')).scrollIntoView({behavior:'smooth',block:'center'});
+    setTimeout(function(){ try{ target.focus({preventScroll:true}); }catch(e){} },400);
+  });
+  function readyCount(){ return pieces.filter(function(p){ return hasVideo(p)&&$('title'+p.n).value.trim(); }).length; }
+  function updateCount(){
+    if(typeof pieces==='undefined') return;
+    var c=readyCount();
+    $('countN').textContent=c+' of 4'; $('count').classList.toggle('all',c===4);
+    $('stickyN').textContent=c+' of 4 pieces ready';
+    $('stickyGo').firstChild.textContent=c===4?'Go to upload ':'Continue ';
+    $('stickyHint').textContent=c===4?'Tick the consent box, then upload':(LINK?'Add a name and video link for each':'Add a name and video for each');
+  }
+  updateCount();
+  function size(n){ return n>=1073741824?(n/1073741824).toFixed(2)+' GB':n>=1048576?Math.round(n/1048576)+' MB':Math.max(1,Math.round(n/1024))+' KB'; }
+  function showErr(m){ err.textContent=m||''; err.hidden=!m; }
+
+  /* ---------- progress across every file ---------- */
+  var total=0, sent=0;
+  function tick(p,bytes,pieceSent,pieceTotal){
+    sent+=bytes; var pc=Math.min(100,Math.floor(sent/total*100));
+    $('pct').textContent=pc+'%'; $('pfill').style.width=pc+'%'; $('pbar').setAttribute('aria-valuenow',pc);
+    $('pbytes').textContent=size(sent)+' of '+size(total);
+    var b=$('pb'+p.n); b.hidden=false; b.firstChild.style.width=Math.min(100,pieceSent/pieceTotal*100)+'%';
+    $('st'+p.n).textContent=pieceSent>=pieceTotal?'Uploaded':'Uploading';
+  }
+
+  /* ---------- live: one submission, each file sent to R2 in parts, each part retried 3 times ---------- */
+  function api(path,body){ return fetch(UPLOAD_API+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){ return r.json().catch(function(){return {};}).then(function(j){ if(!r.ok){ var e=new Error(j.error||'upload_failed'); e.code=j.error; throw e; } return j; }); }); }
+  function sendFile(sub,p,f,kind,acc){
+    return api('/api/uploads/file/start',{id:sub.id,piece:p.n,kind:kind,filename:f.name,size:f.size,type:f.type||'application/octet-stream'}).then(function(s){
+      var parts=[], count=Math.max(1,Math.ceil(f.size/CHUNK)), i=0;
+      function next(){
+        if(i>=count) return api('/api/uploads/file/complete',{id:sub.id,key:s.key,uploadId:s.uploadId,parts:parts});
+        var n=i+1, blob=f.slice(i*CHUNK,Math.min(f.size,n*CHUNK)), tries=0;
+        function put(){
+          return fetch(UPLOAD_API+'/api/uploads/file/part?id='+encodeURIComponent(sub.id)+'&key='+encodeURIComponent(s.key)+'&uploadId='+encodeURIComponent(s.uploadId)+'&part='+n,{method:'PUT',body:blob})
+            .then(function(r){ if(!r.ok) throw new Error(); return r.json(); })
+            .catch(function(){ if(++tries<3){ $('pmsg').textContent='Connection dropped. Retrying…'; return new Promise(function(r){ setTimeout(r,1500*tries); }).then(put); } throw new Error('network'); });
+        }
+        return put().then(function(res){ parts.push({partNumber:n,etag:res.etag}); acc.done+=blob.size; tick(p,blob.size,acc.done,acc.total); $('pmsg').textContent='Uploading piece '+p.n+'. Keep this page open.'; i++; return next(); });
+      }
+      return next();
+    });
+  }
+  function liveUpload(meta){
+    return api('/api/uploads/start',meta).then(function(sub){
+      var chain=Promise.resolve();
+      pieces.forEach(function(p){
+        var acc={done:0,total:p.video.size+p.scores.reduce(function(a,f){return a+f.size;},0)};
+        chain=chain.then(function(){ return sendFile(sub,p,p.video,'video',acc); });
+        p.scores.forEach(function(f){ chain=chain.then(function(){ return sendFile(sub,p,f,'score',acc); }); });
+      });
+      return chain.then(function(){ return api('/api/uploads/finish',{id:sub.id}); });
+    });
+  }
+  /* ---------- preview: simulated ---------- */
+  function fakeUpload(){
+    var chain=Promise.resolve();
+    pieces.forEach(function(p){
+      var t=p.video.size+p.scores.reduce(function(a,f){return a+f.size;},0), done=0;
+      chain=chain.then(function(){ return new Promise(function(res){
+        $('pmsg').textContent='Uploading piece '+p.n+'. Keep this page open.';
+        var iv=setInterval(function(){ var s=Math.min(t-done,t/10); done+=s; tick(p,s,done,t); if(done>=t){ clearInterval(iv); res(); } },90);
+      }); });
+    });
+    return chain.then(function(){ return new Promise(function(r){ setTimeout(r,300); }); });
+  }
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault(); showErr('');
+    var miss=['name','email','student','grade','board'].filter(function(k){ return !$(k).value.trim(); });
+    if(miss.length){ openFields(true); showErr('Please fill in your details first.'); return $(miss[0]).focus(); }
+    if(!/^\S+@\S+\.\S+$/.test($('email').value)){ openFields(true); showErr('Check the email address.'); return $('email').focus(); }
+    if(!$('editBtn').hidden) openFields(false);
+    for(var i=0;i<4;i++){
+      var p=pieces[i];
+      if(!$('title'+p.n).value.trim()){ showErr('Type the name of piece '+p.n+'.'); return $('title'+p.n).focus(); }
+      if(!hasVideo(p)){
+        if(LINK){ showErr($('link'+p.n).value.trim()?'Piece '+p.n+': that doesn\'t look like a web link. Copy the full link starting with https://':'Piece '+p.n+' still needs its video link.'); p.el.scrollIntoView({block:'center'}); return $('link'+p.n).focus(); }
+        showErr('Piece '+p.n+' still needs its video. Tap Choose to add it.'); p.el.scrollIntoView({block:'center'}); return $('video'+p.n).focus();
+      }
+      if(LINK && $('slink'+p.n).value.trim() && !okUrl($('slink'+p.n).value)){ showErr('Piece '+p.n+': the score photos link doesn\'t look right. Copy the full link starting with https://, or leave it empty.'); p.el.scrollIntoView({block:'center'}); return $('slink'+p.n).focus(); }
+    }
+    if(!$('consentBox').checked){ showErr('Please tick the consent box.'); return $('consentBox').focus(); }
+
+    if(LINK) return sendLinks();
+    if(!isLive && !sandbox){ showErr('Online upload isn\'t switched on yet. Please email music@cadenza-london.com and we\'ll help you send your pieces.'); return; }
+    total=pieces.reduce(function(a,p){ return a+p.video.size+p.scores.reduce(function(b,f){return b+f.size;},0); },0)||1; sent=0;
+    busy=true; stickyShow(); send.disabled=true; send.textContent='Uploading…'; $('prog').hidden=false;
+    form.querySelectorAll('input,select').forEach(function(x){ x.disabled=true; });
+    var meta={rid:reg.rid,token:reg.token,due:reg.due,name:$('name').value,email:$('email').value,student:$('student').value,grade:$('grade').value,board:$('board').value,consent:true,
+      pieces:pieces.map(function(p){ return {piece:p.n,title:$('title'+p.n).value.trim(),video:{filename:p.video.name,size:p.video.size},scores:p.scores.map(function(f){ return {filename:f.name,size:f.size}; })}; })};
+    (isLive?liveUpload(meta):fakeUpload()).then(finish).catch(function(x){
+      if(x&&(x.code==='released'||x.code==='withdrawn')) return showGone(x.code);
+      form.querySelectorAll('input,select').forEach(function(y){ y.disabled=false; });
+      busy=false; stickyShow(); $('prog').hidden=true; send.disabled=false; send.innerHTML='Try again <span aria-hidden="true">→</span>';
+      showErr(x&&x.message==='network'?'The connection dropped and the upload stopped. Check Wi-Fi and tap Try again.':'Something went wrong on our side. Tap Try again, or email music@cadenza-london.com if it keeps happening.');
+    });
+  });
+
+  function sendLinks(){
+    busy=true; stickyShow(); send.disabled=true; send.textContent='Sending…';
+    var fd=new URLSearchParams();
+    fd.append('form-name','exam-course-pieces'); fd.append('bot-field','');
+    ['name','email','student','grade','board'].forEach(function(k){ fd.append(k,$(k).value.trim()); });
+    fd.append('upload_deadline',reg.due||''); fd.append('consent','yes');
+    pieces.forEach(function(p){
+      fd.append('piece'+p.n+'_title',$('title'+p.n).value.trim());
+      fd.append('piece'+p.n+'_video',$('link'+p.n).value.trim());
+      fd.append('piece'+p.n+'_score',$('slink'+p.n).value.trim());
+    });
+    var onSite=/netlify\.app$|cadenza-london\.com$/.test(location.hostname);
+    var go=onSite
+      ? fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:fd.toString()}).then(function(r){ if(!r.ok) throw new Error('send'); })
+      : (sandbox ? new Promise(function(r){ setTimeout(r,700); }) : Promise.reject(new Error('preview')));
+    go.then(finish).catch(function(x){
+      busy=false; stickyShow(); send.disabled=false; send.innerHTML='Send all 4 pieces <span aria-hidden="true">→</span>';
+      showErr(x&&x.message==='preview'?'Preview only: this sends once the page is live on your Netlify site.':'That didn\'t send. Please try again, or email the links to music@cadenza-london.com.');
+    });
+  }
+  function netlifyBackup(){
+    if(LINK || !/netlify\.app$|cadenza-london\.com$/.test(location.hostname)) return;
+    var fd=new URLSearchParams();
+    fd.append('form-name','exam-course-pieces'); fd.append('bot-field','');
+    ['name','email','student','grade','board'].forEach(function(k){ fd.append(k,$(k).value.trim()); });
+    fd.append('upload_deadline',reg.due||''); fd.append('consent','yes');
+    pieces.forEach(function(p){
+      fd.append('piece'+p.n+'_title',$('title'+p.n).value.trim());
+      fd.append('piece'+p.n+'_video',p.video?p.video.name+' ('+size(p.video.size)+')':'');
+      fd.append('piece'+p.n+'_score',p.scores.map(function(f){ return f.name; }).join(', '));
+    });
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:fd.toString()}).catch(function(){});
+  }
+  function finish(){
+    if(isLive) netlifyBackup();
+    $('doneStudent').textContent=$('student').value; $('doneEmail').textContent=$('email').value;
+    form.hidden=true; stickyShow(); $('before').hidden=true; $('done').hidden=false; $('demo').hidden=true;
+    $('done').scrollIntoView({block:'start',behavior:'smooth'}); $('done').focus({preventScroll:true});
+  }
+  function showGone(kind){
+    form.hidden=true; stickyShow(); $('done').hidden=true; $('before').hidden=true; $('hero').hidden=true; $('gone').hidden=false;
+    $('regAgain').href=REGISTER_URL;
+    if(kind==='withdrawn'){ $('goneTag').textContent='Withdrawn'; $('goneTitle').textContent='You withdrew from this intake'; $('goneText').textContent='Your registration is closed and we won\'t send any more reminders. If plans change, you can register again for a later intake.'; }
+    else { $('goneTag').textContent='Place released'; $('goneTitle').textContent='This place has been released'; $('goneText').textContent='We didn\'t receive the videos within 3 days of registering, so this place was offered to the next family. You\'re very welcome to register again for a later intake.'; }
+  }
+  function route(){
+    var h=location.hash.slice(1);
+    if(h==='released'||h==='withdrawn') return showGone(h);
+    if(sandbox){ form.hidden=false; $('gone').hidden=true; $('hero').hidden=false; $('before').hidden=false; }
+  }
+  window.addEventListener('hashchange',route); route();
+
+  if(isLive&&reg.rid){
+    fetch(UPLOAD_API+'/api/registrations/status?rid='+encodeURIComponent(reg.rid)+'&t='+encodeURIComponent(reg.token)).then(function(r){ return r.json(); }).then(function(j){
+      if(j.status==='released'||j.status==='withdrawn') showGone(j.status);
+      else if(j.status==='video_received'){ $('doneStudent').textContent=reg.student; $('doneEmail').textContent=reg.email; form.hidden=true; $('done').hidden=false; }
+      if(j.due) setDue(j.due);
+    }).catch(function(){});
+  }
+})();
+</script>
+
+</body>
+</html>
