@@ -242,10 +242,29 @@ legend{padding:0;margin-bottom:8px}
 .status{font-size:.95rem}
 .status.err{color:var(--err);font-weight:700}
 .hp{position:absolute;left:-9999px}
-.done{background:var(--card);color:var(--ink);border-radius:22px;padding:28px;display:grid;gap:16px;border:2px solid var(--marigold)}
-.done .ok{font-weight:800;color:var(--gold-deep)}
-.done h3{font-family:var(--serif);font-weight:400;font-size:1.7rem;line-height:1.1}
-.done ul{margin:0;padding-left:20px;display:grid;gap:4px}
+.done{background:var(--card);color:var(--ink);border-radius:24px;border:1px solid var(--line);overflow:hidden;box-shadow:0 18px 40px -30px rgba(134,102,31,.7)}
+.done:focus{outline:none}
+#done{scroll-margin-top:96px}
+.yay{text-align:center;padding:30px 22px 26px;background:linear-gradient(135deg,var(--blush) 0%,#fdf3d6 50%,var(--butter) 100%)}
+.yemoji{font-size:2.8rem;line-height:1;animation:yaypop .6s cubic-bezier(.2,.8,.3,1.4) both}
+@keyframes yaypop{from{transform:scale(.4) rotate(-8deg);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.yemoji{animation:none}}
+.done .ok{font-size:.78rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);margin-top:12px}
+.done h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,5vw,2.3rem);line-height:1.1;margin-top:6px}
+.ykeys{height:8px;background:repeating-linear-gradient(90deg,var(--card) 0 14px,var(--ink) 14px 22px)}
+.dinner{padding:24px;display:grid;gap:16px}
+.dinner>p{max-width:none}
+.dlabel{font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:8px}
+.tickets{display:grid;gap:8px}
+.ticket{display:grid;grid-template-columns:66px 1fr auto;align-items:center;border:1.5px dashed var(--marigold);border-radius:14px;background:var(--card);overflow:hidden}
+.ticket .tdate{align-self:stretch;display:grid;place-content:center;text-align:center;border-right:1.5px dashed var(--marigold);padding:10px 0}
+.ticket .tdate small{font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
+.ticket .tdate b{font-family:var(--serif);font-weight:400;font-size:1.8rem;line-height:1}
+.ticket .tmain{padding:10px 14px;min-width:0}
+.ticket .tmain b{display:block;font-size:1rem}
+.ticket .tmain span{display:block;font-size:.86rem;color:var(--muted)}
+.ticket .tlvl{margin-right:12px;font-size:.74rem;font-weight:800;border-radius:999px;padding:4px 10px;border:1px solid var(--marigold)}
+.tA .tdate,.tA .tlvl{background:var(--butter)}.tB .tdate,.tB .tlvl{background:var(--blush)}.tC .tdate,.tC .tlvl{background:var(--sky)}
 .done .next{background:var(--ink);color:var(--on-ink);border-radius:16px;padding:16px;display:grid;gap:10px}
 .done .next p{color:var(--on-ink-muted);font-size:.95rem}
 
@@ -883,9 +902,15 @@ header.site .btn-sm .sm{display:none}
           </form>
 
           <div class="done" id="done" hidden tabindex="-1">
-            <p class="ok">✓ Request received</p>
-            <h3 id="doneTitle">See you at the session</h3>
-            <div><p class="muted">You asked for:</p><ul id="doneList"></ul></div>
+            <div class="yay">
+              <div class="yemoji" aria-hidden="true">🎹✨</div>
+              <p class="ok">Booking received</p>
+              <h3 id="doneTitle">Yay, you're on the list!</h3>
+            </div>
+            <div class="ykeys" aria-hidden="true"></div>
+            <div class="dinner">
+            <p id="doneHi"></p>
+            <div><p class="dlabel" id="doneLabel">Your sessions</p><div class="tickets" id="doneList"></div></div>
             <p class="muted" id="doneMail"></p>
             <div class="paystep" id="payStep" hidden>
               <span class="pstep">Next step · payment</span>
@@ -904,6 +929,7 @@ header.site .btn-sm .sm{display:none}
               <a class="btn btn-gold btn-block" href="#setup">Open the setup guide <span class="arr">→</span></a>
             </div>
             <button class="btn btn-outline btn-sm" type="button" id="againBtn">Book for another student</button>
+            </div>
           </div>
         </div>
       </div>
@@ -1240,10 +1266,26 @@ var CLUB = {
     document.getElementById('sessionSummary').value=ticked.map(function(t){return t.value;}).join(' | ');
 
     function showDone(){
-      var ul=document.getElementById('doneList'); ul.innerHTML='';
-      ticked.forEach(function(t){var li=document.createElement('li');li.textContent=t.value;ul.appendChild(li);});
-      document.getElementById('doneTitle').textContent='See you at the session, '+st.value.trim().split(' ')[0];
-      document.getElementById('doneMail').textContent='We\'ll email '+em.value.trim()+' to confirm your place and send the Zoom link before each session. Check your spam folder if nothing arrives within 2 days.';
+      var box=document.getElementById('doneList'); box.innerHTML='';
+      ticked.forEach(function(t){
+        var d=new Date(+t.getAttribute('data-start')), lv=t.getAttribute('data-level');
+        var m=/, ([^(]+?) \((\w+)\)$/.exec(t.value)||[];
+        var tk=document.createElement('div'); tk.className='ticket t'+lv;
+        tk.innerHTML='<div class="tdate"><small></small><b></b></div><div class="tmain"><b></b><span></span></div><span class="tlvl"></span>';
+        tk.querySelector('.tdate small').textContent=d.toLocaleDateString('en-GB',{month:'short',timeZone:'UTC'});
+        tk.querySelector('.tdate b').textContent=d.getUTCDate();
+        tk.querySelector('.tmain b').textContent=d.toLocaleDateString('en-GB',{weekday:'long',timeZone:'UTC'});
+        tk.querySelector('.tmain span').textContent=(m[1]||'')+' · Live on Zoom';
+        tk.querySelector('.tlvl').textContent=m[2]||'';
+        box.appendChild(tk);
+      });
+      document.getElementById('doneLabel').textContent=ticked.length>1?'Your sessions':'Your session';
+      var who=(child&&g.value.trim()?g.value:st.value).trim().split(/\s+/)[0];
+      var hi=document.getElementById('doneHi'); hi.textContent='';
+      hi.appendChild(document.createTextNode('Hi '+who+', thank you for booking '));
+      var sb=document.createElement('b'); sb.textContent=st.value.trim(); hi.appendChild(sb);
+      hi.appendChild(document.createTextNode(' into the Sight-Reading Club! We can\'t wait to read some new music together.'));
+      document.getElementById('doneMail').textContent='We\'ve emailed '+em.value.trim()+' with your booking. We\'ll confirm your place within 2 days, with the Zoom link. Can\'t see it? Check your spam folder.';
       showPayment(ticked);
       form.hidden=true; done.hidden=false;
       done.scrollIntoView({behavior:'smooth',block:'start'}); done.focus({preventScroll:true});
