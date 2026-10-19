@@ -1,0 +1,1355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cadenza Sight-Reading Club</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Practice makes perfect. A friendly weekly online sight-reading club for piano students, Grades 1–8, led by Eric Chung of Cadenza London. Practise together, ask anything, pick up great tips. Live on Zoom.">
+<meta property="og:title" content="Cadenza Sight-Reading Club">
+<meta property="og:description" content="Practice makes perfect. Read new music with a friendly community every Tuesday, ask Eric anything, and become a better pianist.">
+<meta name="theme-color" content="#f5e7c3">
+<link rel="icon" type="image/png" href="logo-circle.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=DM+Serif+Display:ital@0;1&display=swap">
+<style>
+/* Layout: Cadenza pastel gold look (ivory, champagne, butter and blush from the logo's stars, cocoa text, no black), set apart from the marigold course pages. Champagne hero with an "unseen piece" card, then cream / white / ink bands: how a session runs, schedule by grade band, booking form, setup guide, FAQ. Single light theme by design, matching the brand site. */
+:root{
+  --marigold:#d9b762; --marigold-soft:#f6ebcd; --butter:#fbefc0; --blush:#f7e0da; --sky:#dce9f6; --sky-deep:#3f6690;
+  --gold-hi:#e9cf8a; --gold-lo:#b38c3c; --gold-btn:#e7c97c; --gold-pale:#efdcaa;
+  --ink:#4a3e2f; --ink-2:#5b4d3a; --cream:#fcf8ef; --cream-2:#f6eedc; --card:#fffdf8;
+  --line:#ece1c8; --muted:#6e6252; --gold-deep:#86661f; --on-ink:#4a3e2f; --on-ink-muted:#6e6252;
+  --err:#a3322a;
+  --sans:"DM Sans","Helvetica Neue",Arial,sans-serif;
+  --serif:"DM Serif Display",Georgia,"Times New Roman",serif;
+  --radius:22px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:0;overflow-x:hidden}
+img{max-width:100%}
+[hidden]{display:none!important}
+.wrap{max-width:1100px;margin-inline:auto}
+.full{margin-left:calc(-1 * max(20px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(20px,env(safe-area-inset-right,0px)));padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold-deep);outline-offset:3px}
+h1,h2{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spacing:-.01em;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.6rem,6.2vw,4.3rem)}
+h2{font-size:clamp(2rem,4.6vw,3rem)}
+h3{font-size:1.15rem;font-weight:800;line-height:1.3;margin:0}
+p{margin:0;max-width:62ch}
+section{padding-block:80px;scroll-margin-top:84px}
+.muted{color:var(--muted)}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-size:.78rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep)}
+.kicker::before{content:"";width:26px;height:2px;background:currentColor}
+.shead{display:grid;gap:14px;margin-bottom:40px;max-width:720px}
+.shead.c{text-align:center;justify-items:center;margin-inline:auto}
+.shead p{color:var(--muted);font-size:1.06rem}
+
+
+/* why join: soft pink marker highlight */
+.mark{background:linear-gradient(transparent 58%,rgba(247,224,218,.95) 58%,rgba(247,224,218,.95) 92%,transparent 92%);padding-inline:.12em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+#learn .kicker .mark{background:linear-gradient(transparent 45%,rgba(247,224,218,.95) 45%)}
+#learn .skills h3 span{background:linear-gradient(transparent 55%,rgba(247,224,218,.9) 55%,rgba(247,224,218,.9) 90%,transparent 90%);padding-inline:.1em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+#learn .skills li{border-color:#f0dcd5}
+#learn .skills li:hover{border-color:#e6b9ae}
+#learn .skills h3{display:block;padding-left:22px;text-indent:-22px}
+#learn .skills h3::before{color:#d99a8a;display:inline-block;width:22px;text-indent:0}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 28px;border-radius:999px;border:2px solid transparent;font:700 1rem/1 var(--sans);text-decoration:none;text-align:center;cursor:pointer;white-space:nowrap;transition:transform .15s ease,background-color .15s ease,color .15s ease}
+.btn .arr{display:inline-block;transition:transform .15s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn:hover .arr{transform:translateX(3px)}
+.btn:disabled{opacity:.6;cursor:default;transform:none}
+.btn-dark{background:var(--ink);border-color:var(--ink);color:var(--on-ink)}
+.btn-gold{background:var(--marigold);border-color:var(--marigold);color:var(--ink)}
+.btn-outline{background:transparent;border-color:var(--ink);color:var(--ink)}
+.btn-outline:hover{background:var(--ink);color:var(--on-ink)}
+.btn-sm{min-height:42px;padding:0 18px;font-size:.9rem}
+.btn-block{width:100%}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px}
+
+/* header */
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(248,244,234,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.site .wrap{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding-block:10px}
+.btn3d{justify-self:center;display:inline-flex;align-items:center;justify-content:center;text-align:center;min-height:46px;padding:6px 22px;border-radius:999px;background:linear-gradient(180deg,var(--gold-hi) 0%,var(--marigold) 55%,var(--gold-lo) 100%);color:var(--ink);border:2px solid var(--ink);box-shadow:0 4px 0 var(--ink);font:800 .95rem/1.15 var(--sans);text-decoration:none;white-space:nowrap;transform:translateY(-2px);transition:transform .1s ease,box-shadow .1s ease}
+.btn3d:hover{transform:translateY(-3px);box-shadow:0 5px 0 var(--ink)}
+.btn3d:active{transform:translateY(2px);box-shadow:0 0 0 var(--ink)}
+.btn3d .sm{display:none}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0}
+.logoimg{display:block;width:64px;height:64px;box-shadow:0 2px 8px rgba(134,102,31,.18);border-radius:50%;flex:none}
+.logofb{width:64px;height:64px;border-radius:50%;background:var(--ink);color:var(--marigold);border:2px solid var(--marigold);display:grid;place-items:center;font-family:var(--serif);font-size:1.3rem;flex:none}
+.brand b{font-size:.95rem;font-weight:800;line-height:1.15}
+.brand small{display:block;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep)}
+
+/* hero */
+.hero{background:radial-gradient(ellipse 70% 60% at 85% 15%,rgba(201,162,76,.30),transparent 70%),radial-gradient(ellipse 50% 40% at 5% 95%,rgba(201,162,76,.14),transparent 70%),linear-gradient(180deg,var(--ink) 0%,var(--ink-2) 100%);color:var(--on-ink);padding-block:44px 68px;overflow:hidden}
+.hero .btn-gold{box-shadow:0 10px 24px -14px rgba(201,162,76,.9)}
+.hero .btn-outline{border-color:rgba(248,244,234,.55);color:var(--on-ink)}
+.hero .btn-outline:hover{background:var(--on-ink);color:var(--ink)}
+.teacher{display:flex;align-items:center;gap:12px;margin-top:22px}
+.teacher .av{width:52px;height:52px;border-radius:50%;overflow:hidden;border:2px solid var(--marigold);flex:none}
+.teacher .av img{width:100%;height:100%;object-fit:cover;display:block}
+.teacher span{font-size:.95rem;line-height:1.35;color:var(--on-ink-muted)}
+.teacher b{display:block;color:var(--on-ink)}
+.hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero .grid>*{min-width:0}
+.badge{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1.5px solid var(--marigold);color:var(--gold-hi);border-radius:999px;padding:8px 16px;font-size:.76rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.badge::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--butter)}
+.hero h1{margin-top:18px}
+.hero .htext{container-type:inline-size}
+.hero h1 .ttl{display:block;white-space:nowrap;font-size:min(4.3rem,10.4cqw)}
+.sale{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);background:linear-gradient(100deg,var(--blush) 0%,#fdf3d6 45%,var(--butter) 100%);background-size:200% 100%;border:1.5px solid var(--gold-deep);border-radius:16px;padding:10px 18px 10px 14px;box-shadow:0 10px 24px -16px rgba(134,102,31,.9);animation:saleshine 6s ease-in-out infinite}
+.sale svg{width:30px;height:30px;flex:none;fill:var(--gold-deep)}
+.sale span{display:grid;line-height:1.15}
+.sale b{font-family:var(--sans);font-size:.74rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep)}
+.sale span{font-family:var(--serif);font-size:1.45rem}
+.sale:hover{transform:translateY(-1px)}
+@keyframes saleshine{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@media (prefers-reduced-motion:reduce){.sale{animation:none}}
+.hero .subtitle{margin-top:6px;font-family:var(--serif);font-style:italic;font-size:clamp(1.3rem,2.6vw,1.75rem);line-height:1.2;color:var(--gold-deep)}
+.hero h1 .pre{display:block;font-size:.42em;line-height:1.2;margin-bottom:.15em;font-family:var(--sans);font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--marigold)}
+.hero h1 em{font-style:italic;color:var(--gold-hi);background:linear-gradient(180deg,var(--gold-hi) 20%,var(--marigold) 60%,var(--gold-lo) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;padding-right:.08em}
+.hero .lead{font-size:1.14rem;margin-top:18px;color:var(--on-ink-muted)}
+.hero .btn-row{margin-top:24px}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:28px}
+.facts div{background:rgba(248,244,234,.04);border:1px solid rgba(201,162,76,.55);border-radius:16px;padding:12px 14px 11px;min-width:0;text-align:left}
+.facts b{display:block;font-family:var(--serif);font-weight:400;font-size:1.8rem;line-height:1;color:var(--gold-hi)}
+.facts span{display:block;font-size:.8rem;font-weight:700;margin-top:6px;line-height:1.25;color:var(--on-ink-muted)}
+
+/* why join (new) */
+.whyjoin{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.whyjoin li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;background:rgba(255,253,248,.72);border:1px solid var(--gold-pale);border-radius:14px;padding:10px 12px;min-width:0;font-size:.92rem;line-height:1.35;color:var(--muted)}
+.whyjoin li b{display:block;color:var(--ink);font-size:.98rem}
+.whyjoin li i{font-style:normal;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:.95rem;background:var(--butter);border:1px solid var(--marigold);color:var(--gold-deep);font-weight:800}
+
+/* unseen card */
+.unseen{justify-self:center;width:min(420px,100%);background:var(--card);color:var(--ink);border:2px solid var(--marigold);border-radius:24px;box-shadow:10px 10px 0 var(--marigold);padding:22px 22px 18px;display:grid;gap:14px;transform:rotate(1.5deg)}
+.unseen .top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.unseen .lbl{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
+.unseen .title{font-family:var(--serif);font-size:1.5rem;line-height:1.1}
+.ring{position:relative;width:64px;height:64px;flex:none}
+.ring svg{width:64px;height:64px;transform:rotate(-90deg)}
+.ring .bg{fill:none;stroke:var(--line);stroke-width:6}
+.ring .fg{fill:none;stroke:var(--marigold);stroke-width:6;stroke-linecap:round;stroke-dasharray:176;stroke-dashoffset:0;animation:count 30s linear infinite}
+.ring span{position:absolute;inset:0;display:grid;place-items:center;font-weight:800;font-size:.95rem;font-variant-numeric:tabular-nums}
+@keyframes count{to{stroke-dashoffset:176}}
+.stave{width:100%;height:auto;display:block}
+.stave .ln{stroke:var(--ink);stroke-width:1.2}
+.stave .nt{fill:var(--ink)}
+.stave .st{stroke:var(--ink);stroke-width:1.6}
+.stave .tx{fill:var(--ink);font-family:var(--serif)}
+.stave .hint{fill:none;stroke:var(--marigold);stroke-width:2.5}
+.stave .hl{fill:var(--gold-deep);font:800 11px var(--sans);letter-spacing:.06em}
+.unseen .tip{background:var(--marigold-soft);border-radius:12px;padding:10px 12px;font-size:.92rem;line-height:1.45}
+.unseen .tip b{color:var(--ink)}
+.keys{height:34px;background:linear-gradient(to bottom,transparent 0 60%,var(--card) 60%),repeating-linear-gradient(90deg,transparent 0 22px,var(--ink) 22px 36px,transparent 36px 48px,var(--ink) 48px 62px,transparent 62px 96px,var(--ink) 96px 110px,transparent 110px 122px,var(--ink) 122px 136px,transparent 136px 148px,var(--ink) 148px 162px,transparent 162px 192px),repeating-linear-gradient(90deg,var(--card) 0 26px,var(--line) 26px 27px);border-top:3px solid var(--ink);border-bottom:1px solid var(--line)}
+
+/* run-sheet */
+.run{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;list-style:none;margin:0;padding:0}
+.run li{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.run li.big{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.run .t{align-self:flex-start;font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--marigold-soft);color:var(--gold-deep);border-radius:999px;padding:4px 10px;font-variant-numeric:tabular-nums}
+.run li.big .t{background:var(--marigold);color:var(--ink)}
+.run p{color:var(--muted);font-size:.96rem}
+.run li.big p{color:var(--on-ink-muted)}
+
+/* schedule */
+.sched-band{background:var(--card);border-block:1px solid var(--line)}
+.bands{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
+.bandkey{border-radius:18px;padding:18px;display:grid;gap:4px;align-content:start;border:1.5px solid var(--ink);min-width:0;text-align:center}
+.bandkey b{font-family:var(--serif);font-weight:400;font-size:1.6rem;line-height:1.05}
+.bandkey span{font-size:.92rem;color:var(--muted)}
+.bA{background:var(--marigold-soft)}.bB{background:var(--butter)}.bC{background:var(--blush)}
+.sessions{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;list-style:none;margin:0;padding:0}
+.sessions li{border:1px solid var(--line);background:var(--cream);border-radius:16px;padding:14px;display:grid;gap:6px;min-width:0;justify-items:center;text-align:center}
+.sessions .d{font-weight:800;font-variant-numeric:tabular-nums}
+.sessions .tm{font-size:.9rem;color:var(--muted)}
+.chip{font-size:.74rem;font-weight:800;border-radius:999px;padding:3px 10px;border:1.5px solid var(--ink);color:var(--ink)}
+.chip.bA{background:var(--marigold-soft)}.chip.bB{background:var(--butter)}.chip.bC{background:var(--blush)}
+.schednote{margin:16px auto 0;font-size:.92rem;color:var(--muted);text-align:center}
+
+/* skills */
+.skills{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.skills li{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 20px;display:grid;gap:8px;align-content:start;min-width:0}
+.skills h3{display:flex;gap:10px;align-items:baseline}
+.skills h3::before{content:"✦";color:var(--marigold);flex:none}
+.skills p{color:var(--muted);font-size:.96rem}
+
+/* instructor */
+.eric{background:var(--ink);color:var(--on-ink);border-block:1px solid var(--gold-lo)}
+.eric .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.eric .grid>*{min-width:0}
+.eric .photo{margin:0;border-radius:var(--radius);overflow:hidden;aspect-ratio:900/1020;border:2px solid var(--marigold);box-shadow:-10px 10px 0 var(--gold-lo);max-width:100%}
+.eric .photo img{width:100%;height:100%;object-fit:cover;object-position:50% 100%;display:block}
+.eric figure{max-width:480px;justify-self:center;width:100%}
+.eric figcaption{font-size:.82rem;color:var(--on-ink-muted);margin-top:10px}
+.eric .kicker{color:var(--marigold)}
+.eric h2{margin-top:12px;color:var(--gold-hi)}
+.eric .bio{margin-top:16px;color:var(--on-ink-muted);font-size:1.05rem}
+.efacts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}
+.efacts div{border:1px solid rgba(201,162,76,.55);border-radius:16px;padding:14px;min-width:0}
+.efacts b{display:block;font-family:var(--serif);font-weight:400;font-size:1.9rem;line-height:1;color:var(--gold-hi)}
+.efacts span{display:block;font-size:.84rem;color:var(--on-ink-muted);margin-top:6px;line-height:1.3}
+.creds{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:8px}
+.creds li{display:grid;grid-template-columns:20px 1fr;gap:8px;color:var(--on-ink-muted);font-size:.96rem}
+.creds li::before{content:"✦";color:var(--marigold)}
+
+/* booking */
+.reg{background:var(--ink);color:var(--on-ink);border-radius:30px;padding:44px;display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:start}
+.reg>*{min-width:0}
+.reg .kicker{color:var(--marigold)}
+.reg h2{margin-top:12px}
+.reg .lead{color:var(--on-ink-muted);margin-top:14px}
+.steps3{list-style:none;counter-reset:b;margin:24px 0 0;padding:0;display:grid;gap:14px}
+.steps3 li{counter-increment:b;display:grid;grid-template-columns:34px 1fr;column-gap:14px;align-items:start}
+.steps3 li::before{content:counter(b);grid-row:span 2;width:34px;height:34px;border-radius:50%;background:var(--marigold);color:var(--ink);font-weight:800;display:grid;place-items:center}
+.steps3 b{color:var(--on-ink)}
+.steps3 span{color:var(--on-ink-muted);font-size:.95rem}
+.mail{margin-top:22px;font-size:.95rem;color:var(--on-ink-muted)}
+.mail b{color:var(--marigold);user-select:all}
+form{background:var(--card);color:var(--ink);border-radius:22px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+form>*{min-width:0}
+form h3{grid-column:1/-1;font-family:var(--serif);font-weight:400;font-size:1.6rem}
+.field{display:grid;gap:6px;align-content:start}
+.field.span{grid-column:1/-1}
+label,.legend{font-size:.84rem;font-weight:700}
+label small,.legend small{font-weight:500;color:var(--muted)}
+input[type=text],input[type=email],input[type=tel],select{font:inherit;font-size:1rem;color:var(--ink);background:var(--cream);border:1.5px solid var(--line);border-radius:12px;height:50px;padding:0 14px;width:100%}
+input:focus,select:focus{border-color:var(--ink);outline:none;background:#fff}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0;margin-bottom:8px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{position:relative;display:flex;align-items:center;gap:10px;min-height:52px;padding:10px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--cream);cursor:pointer;font-size:.95rem;font-weight:500;line-height:1.3;min-width:0}
+.opt input{width:20px;height:20px;flex:none;accent-color:var(--ink);margin:0}
+.opt>span{min-width:0;flex:1}
+.req{white-space:nowrap}
+.opt:has(input:checked){border-color:var(--ink);background:var(--marigold-soft)}
+.opt:focus-within{outline:3px solid var(--gold-deep);outline-offset:2px}
+.opt.dis{opacity:.55;cursor:not-allowed}
+.opt small{display:block;font-size:.8rem;color:var(--muted);font-weight:500}
+.picks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.picks .empty{grid-column:1/-1;font-size:.92rem;color:var(--muted);background:var(--cream);border:1.5px dashed var(--line);border-radius:12px;padding:14px}
+.consent{display:grid;gap:8px}
+.consent .opt{align-items:flex-start;font-size:.9rem}
+.consent .opt input{margin-top:.12em}
+.seg .opt{align-items:flex-start}
+.seg .opt input{margin-top:.15em}
+.req{color:var(--err)}
+.formfoot{grid-column:1/-1;display:grid;gap:10px}
+.status{font-size:.95rem}
+.status.err{color:var(--err);font-weight:700}
+.hp{position:absolute;left:-9999px}
+.done{background:var(--card);color:var(--ink);border-radius:22px;padding:28px;display:grid;gap:16px;border:2px solid var(--marigold)}
+.done .ok{font-weight:800;color:var(--gold-deep)}
+.done h3{font-family:var(--serif);font-weight:400;font-size:1.7rem;line-height:1.1}
+.done ul{margin:0;padding-left:20px;display:grid;gap:4px}
+.done .next{background:var(--ink);color:var(--on-ink);border-radius:16px;padding:16px;display:grid;gap:10px}
+.done .next p{color:var(--on-ink-muted);font-size:.95rem}
+
+/* setup guide */
+.guide-band{background:var(--cream-2);border-block:1px solid var(--line)}
+.setups{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.setup{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:grid;gap:14px;align-content:start;min-width:0}
+.setup .tag{justify-self:start;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--marigold);border-radius:999px;padding:4px 12px}
+.setup h3{font-family:var(--serif);font-weight:400;font-size:1.7rem;line-height:1.1}
+.fig{background:var(--cream);border-radius:16px;padding:10px;border:1px solid var(--line)}
+.fig svg{width:100%;height:auto;display:block}
+.fig .k-w{fill:var(--card);stroke:var(--ink);stroke-width:1.2}
+.fig .k-b{fill:var(--ink)}
+.fig .body{fill:var(--cream-2);stroke:var(--ink);stroke-width:1.5}
+.fig .dev{fill:var(--ink)}
+.fig .scr{fill:var(--marigold)}
+.fig .cone{fill:var(--marigold);opacity:.22;stroke:var(--gold-deep);stroke-width:1.2;stroke-dasharray:4 4}
+.fig .ar{stroke:var(--gold-deep);stroke-width:1.6;fill:none}
+.fig .ah{fill:var(--gold-deep)}
+.fig text{font-family:var(--sans);font-size:12px;font-weight:700;fill:var(--ink)}
+.fig text.q{fill:var(--muted);font-weight:500}
+.dl{display:grid;margin:0}
+.dl>div{display:grid;grid-template-columns:110px 1fr;gap:12px;padding-block:10px;border-top:1px solid var(--line)}
+.dl dt{font-size:.74rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep);padding-top:3px}
+.dl dd{margin:0;font-size:.96rem;color:var(--muted)}
+.dl dd b{color:var(--ink)}
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.tipcard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;display:grid;gap:10px;align-content:start;min-width:0}
+.tipcard ul,.tipcard ol{margin:0;padding-left:20px;display:grid;gap:6px;color:var(--muted);font-size:.95rem}
+.tipcard li::marker{color:var(--gold-deep);font-weight:800}
+.tipcard b{color:var(--ink)}
+.check{margin-top:18px;background:var(--ink);color:var(--on-ink);border-radius:var(--radius);padding:26px;display:grid;grid-template-columns:.8fr 1.2fr;gap:24px;align-items:center}
+.check>*{min-width:0}
+.check h3{font-family:var(--serif);font-weight:400;font-size:1.8rem;line-height:1.1;color:var(--marigold)}
+.check p{color:var(--on-ink-muted);margin-top:8px}
+.checklist{display:grid;gap:8px}
+.checklist label{display:flex;align-items:center;gap:12px;background:rgba(250,245,233,.06);border:1px solid rgba(250,245,233,.16);border-radius:12px;padding:12px 14px;cursor:pointer;font-weight:500;font-size:.95rem}
+.checklist input{width:20px;height:20px;flex:none;accent-color:var(--marigold);margin:0}
+.checklist label:has(input:checked){border-color:var(--marigold);color:var(--marigold)}
+.progress{font-size:.85rem;font-weight:800;color:var(--marigold);margin-top:12px}
+
+/* terms */
+.terms{list-style:none;counter-reset:t;margin:0 auto;padding:0;max-width:860px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.terms li{counter-increment:t;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 20px 20px 62px;position:relative;display:grid;gap:6px;align-content:start;min-width:0}
+.terms li::before{content:counter(t);position:absolute;left:18px;top:18px;width:30px;height:30px;border-radius:50%;background:var(--butter);border:1px solid var(--marigold);color:var(--gold-deep);font-weight:800;font-size:.9rem;display:grid;place-items:center}
+.terms h3{font-size:1.02rem}
+.terms p{color:var(--muted);font-size:.95rem}
+.terms b{color:var(--ink);overflow-wrap:anywhere}
+.consent a{color:var(--gold-deep);font-weight:700}
+
+/* header menu */
+.hright{display:flex;align-items:center;gap:10px;justify-self:end}
+.burger{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--ink);background:var(--card);cursor:pointer;display:grid;place-items:center;padding:0;color:var(--ink);flex:none}
+.burger span{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:currentColor;border-radius:2px}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.scrim{position:fixed;inset:0;background:rgba(74,62,47,.35);z-index:30;opacity:0;transition:opacity .25s}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(300px,80vw);background:var(--card);color:var(--ink);z-index:31;transform:translateX(100%);transition:transform .3s cubic-bezier(.2,.7,.2,1);padding:calc(18px + env(safe-area-inset-top,0px)) calc(22px + env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) 22px;display:flex;flex-direction:column;gap:18px;border-left:3px solid var(--gold-pale);box-shadow:-20px 0 40px -30px rgba(74,62,47,.6);overflow-y:auto}
+.drawer.open{transform:none}.scrim.open{opacity:1}
+.dtop{display:flex;justify-content:space-between;align-items:center}
+.dtop b{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep)}
+.dclose{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--line);background:var(--cream);color:var(--ink);font-size:1rem;cursor:pointer}
+.drawer nav{display:grid}
+.drawer nav a{display:flex;justify-content:space-between;align-items:center;padding-block:15px;border-bottom:1px solid var(--line);text-decoration:none;font-weight:700;font-size:1.05rem}
+.drawer nav a::after{content:"→";color:var(--gold-deep)}
+.drawer nav a:hover{color:var(--gold-deep)}
+
+/* learn: skills + run-sheet side by side */
+.learn{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:start}
+.learn>*{min-width:0}
+.learn .skills{grid-template-columns:1fr 1fr;gap:10px}
+.learn .skills li{padding:16px;gap:4px}
+.learn .skills h3{font-size:1rem}
+.learn .skills p{font-size:.9rem}
+.runbox{background:var(--butter);border:1px solid var(--gold-pale);border-radius:20px;padding:20px;display:grid;gap:12px}
+.runbox h3{font-family:var(--serif);font-weight:400;font-size:1.4rem}
+.runbox h3 small{font-family:var(--sans);font-size:.75rem;color:var(--muted);display:none}
+.runbox .run{grid-template-columns:1fr;gap:8px}
+.runbox .run li{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:baseline;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:.92rem;color:var(--muted)}
+.runbox .run li.big{background:var(--card);border-color:var(--marigold);color:var(--muted)}
+.runbox .run b{color:var(--ink)}
+.runbox .run .t{font-size:.74rem;font-weight:800;color:var(--gold-deep);font-variant-numeric:tabular-nums;background:none;padding:0;border-radius:0;letter-spacing:0;text-transform:none}
+.runbox .run li.big .t{background:none;color:var(--gold-deep)}
+.runbox .run .t{white-space:nowrap}
+.runbox .run .t::after{content:" min"}
+
+/* timetable grid */
+.ttwrap{max-width:900px;margin-inline:auto;overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:var(--card)}
+.tt{width:100%;border-collapse:collapse;table-layout:fixed;font-variant-numeric:tabular-nums}
+.tt th,.tt td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:12px 10px;text-align:center;vertical-align:middle}
+.tt tr>*:last-child{border-right:0}
+.tt tbody tr:last-child>*{border-bottom:0}
+.tt thead th{font-size:.95rem;font-weight:800;line-height:1.2}
+.tt thead th small{display:block;font-size:.76rem;font-weight:600;color:var(--muted);margin-top:3px}
+.tt .dcol{width:24%;text-align:left;background:var(--cream)}
+.tt .hA{background:var(--butter)}.tt .hB{background:var(--blush)}.tt .hC{background:var(--sky)}
+.tt tbody th{text-align:left;font-weight:800;font-size:.95rem;background:var(--cream);white-space:nowrap}
+.tt tbody th small{display:block;font-weight:600;font-size:.76rem;color:var(--muted)}
+.slot{display:inline-block;border-radius:10px;padding:7px 10px;font-weight:800;font-size:.86rem;border:1px solid rgba(134,102,31,.3);white-space:nowrap}
+.slot.bA{background:var(--butter)}.slot.bB{background:var(--blush)}
+.tt .soonc{background:var(--sky);color:var(--sky-deep);font-weight:800;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
+.tt .soonc span{display:inline-block;writing-mode:vertical-rl;transform:rotate(180deg)}
+
+/* price */
+#price{padding-bottom:0}
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:900px;margin-inline:auto}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:4px;text-align:center;align-content:start;min-width:0}
+.pcard.hl{background:var(--butter);border-color:var(--marigold)}
+.pwhen{font-size:.74rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep)}
+.pcard b{font-family:var(--serif);font-weight:400;font-size:2.4rem;line-height:1.05}
+.pnote{font-size:.9rem;color:var(--muted)}
+
+.prices{grid-template-columns:repeat(3,1fr)}
+.pcard.lvA{background:var(--butter);border-color:var(--marigold)}
+.pcard.lvC{background:var(--sky);border-color:rgba(63,102,144,.3)}
+.pcard.lvC .pwhen{color:var(--sky-deep)}
+.pnote strong{color:var(--ink)}
+.pbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+.pbtns:not(:has(a:not([hidden]))){display:none}
+.pricenote{max-width:720px;margin:14px auto 0;text-align:center;font-size:.9rem;color:var(--muted)}
+.pricenote a{color:var(--gold-deep);font-weight:700}
+
+/* price grid */
+.pwrap{max-width:720px}
+.ptt .dcol{width:38%}
+.ptt thead th{background:var(--cream)}
+.ptt tbody th.hA{background:var(--butter)}.ptt tbody th.hB{background:var(--blush)}.ptt tbody th.hC{background:var(--sky)}
+.ptt tbody th{white-space:normal}
+.ptt td b{display:block;font-family:var(--serif);font-weight:400;font-size:1.7rem;line-height:1.1}
+.ptt td .btn{margin-top:6px;min-height:34px;padding:0 14px;font-size:.8rem}
+.ptt td.na{color:var(--muted)}
+
+.ptt th.best,.ptt td.best{background:#fffaf0}
+.ptt thead th.best{background:var(--butter)}
+.bv{display:inline-block;margin-top:5px;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--card);background:var(--gold-deep);border-radius:999px;padding:3px 9px}
+.save{display:inline-block;margin-top:4px;font-size:.74rem;font-weight:800;color:var(--gold-deep);background:var(--butter);border:1px solid var(--marigold);border-radius:999px;padding:2px 9px}
+
+.lockbox{max-width:720px;margin:14px auto 0;background:var(--butter);border:1px dashed var(--marigold);border-radius:14px;padding:12px 16px;text-align:center;font-size:.92rem;color:var(--ink)}
+.lockbox b{color:var(--gold-deep)}
+
+.slot .left{display:block;font-size:.68rem;font-weight:700;color:var(--muted);margin-top:2px}
+.slot.full{opacity:.6}
+.slot.full .left{color:var(--err)}
+
+/* payment step on the success screen */
+.paystep{background:var(--butter);border:1.5px solid var(--marigold);border-radius:16px;padding:16px;display:grid;gap:8px}
+.pstep{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep)}
+.paystep b{font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.15}
+.paystep p{color:var(--muted);font-size:.92rem}
+.paybtns{display:grid;gap:8px;margin-top:4px}
+.paynote{font-size:.82rem!important}
+.freenote{background:var(--cream);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--muted);font-size:.92rem}
+
+/* folds: setup guide and terms */
+#info{display:grid;gap:12px;padding-top:0;padding-bottom:0}
+.fold{background:var(--card);border:1px solid var(--line)!important;border-radius:20px;padding:0!important;scroll-margin-top:84px}
+.fold>summary{padding:20px 22px;font-weight:400}
+.fold>summary>span{display:grid;gap:4px}
+.fold>summary b{font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.15}
+.fold>summary small{font-size:.9rem;color:var(--muted);font-weight:500}
+.fold>summary .kicker{font-size:.7rem}
+.foldbody{padding:0 22px 22px;display:grid;gap:16px}
+.foldbody .terms{grid-template-columns:1fr;max-width:none}
+.foldbody .terms li{padding:14px 14px 14px 56px;border-radius:14px}
+.foldbody .terms li::before{left:14px;top:14px}
+.foldbody .tips,.foldbody .check{margin-top:0}
+.foldbody .setups{grid-template-columns:1fr}
+.foldbody .setup .fig{max-width:520px}
+
+/* faq */
+.faq{max-width:800px;margin-inline:auto}
+details{border-bottom:1px solid var(--line);padding-block:18px}
+details:first-of-type{border-top:1px solid var(--line)}
+summary{cursor:pointer;font-weight:800;font-size:1.04rem;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;font-size:1.1rem;line-height:1}
+details[open] summary::after{content:"–";background:var(--ink);color:var(--marigold)}
+details p{margin-top:10px;color:var(--muted)}
+details a{color:var(--gold-deep);font-weight:700}
+
+/* footer */
+footer{background:var(--ink);color:var(--on-ink-muted);padding-block:44px calc(48px + env(safe-area-inset-bottom,0px));border-top:4px solid var(--marigold);font-size:.95rem}
+footer .wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:32px;align-items:start}
+footer h4{color:var(--marigold);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;margin:0 0 14px}
+.contacts{display:grid;gap:10px}
+.ccard{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;background:rgba(250,245,233,.06);border:1px solid rgba(250,245,233,.14);border-radius:16px;padding:12px 14px;min-width:0}
+.cval{display:grid;min-width:0}
+.cval small{font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.cval span{color:var(--on-ink);font-weight:600;overflow-wrap:anywhere;user-select:all}
+.cact{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;border:1.5px solid var(--marigold);color:var(--marigold);font-weight:800;font-size:.82rem;text-decoration:none;white-space:nowrap}
+.cact:hover{background:var(--marigold);color:var(--ink)}
+.flinks{display:grid;gap:10px}
+.flinks .btn{color:var(--on-ink);border-color:rgba(250,245,233,.55)}
+.flinks .btn:hover{background:var(--on-ink);color:var(--ink)}
+.flinks .btn-gold{color:var(--ink);border-color:var(--marigold)}
+.fbase{display:flex!important;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:36px;padding-top:18px;border-top:1px solid rgba(250,245,233,.14);font-size:.85rem}
+.fbase a{text-decoration:none}
+
+/* responsive */
+/* ===== pastel theme: soft surfaces replace the dark bands ===== */
+header.site{background:rgba(252,248,239,.96)}
+.btn3d{border-color:var(--gold-deep);box-shadow:0 4px 0 var(--gold-deep);background:linear-gradient(180deg,#f6e6b4 0%,var(--gold-btn) 55%,#d4ae58 100%)}
+.btn3d:hover{box-shadow:0 5px 0 var(--gold-deep)}
+.btn-dark,.btn-gold{background:var(--gold-btn);border-color:var(--gold-btn);color:var(--ink);box-shadow:0 8px 20px -14px rgba(134,102,31,.8)}
+.btn-dark:hover,.btn-gold:hover{background:#ddbb63;border-color:#ddbb63}
+.btn-outline{border-color:var(--ink);color:var(--ink)}
+.btn-outline:hover{background:var(--butter);color:var(--ink)}
+.hero{background:radial-gradient(ellipse 60% 55% at 90% 10%,rgba(247,224,218,.95),transparent 70%),radial-gradient(ellipse 55% 50% at 0% 100%,rgba(251,239,192,.9),transparent 70%),linear-gradient(180deg,#f3e2b4 0%,#f8edd3 60%,var(--cream) 100%);color:var(--ink)}
+.hero h1 .pre{color:var(--gold-deep)}
+.hero h1 em{background:linear-gradient(180deg,#cfa148 10%,#a97f2c 60%,#86661f 100%);-webkit-background-clip:text;background-clip:text;color:#a97f2c}
+.hero .lead{color:var(--muted)}
+.hero .btn-gold{box-shadow:0 10px 24px -14px rgba(134,102,31,.8)}
+.hero .btn-outline{border-color:var(--ink);color:var(--ink)}
+.hero .btn-outline:hover{background:var(--card);color:var(--ink)}
+.badge{background:rgba(255,253,248,.8);border-color:var(--marigold);color:var(--gold-deep)}
+.badge::before{background:var(--marigold)}
+.facts div{background:rgba(255,253,248,.72);border-color:var(--gold-pale)}
+.facts b{color:var(--gold-deep)}
+.facts span{color:var(--muted)}
+.teacher span{color:var(--muted)}
+.teacher b{color:var(--ink)}
+.unseen{border-color:var(--marigold);box-shadow:10px 10px 0 var(--gold-pale)}
+.run li.big{background:var(--butter);border-color:var(--marigold);color:var(--ink)}
+.run li.big p{color:var(--muted)}
+.run li.big .t{background:var(--marigold);color:var(--ink)}
+.eric{background:linear-gradient(180deg,#f8e8e2 0%,#fcf4ec 100%);color:var(--ink);border-block:1px solid var(--line)}
+.eric .kicker{color:var(--gold-deep)}
+.eric h2{color:var(--ink)}
+.eric .photo{border-color:var(--marigold);box-shadow:-10px 10px 0 var(--gold-pale)}
+.eric figcaption,.eric .bio,.creds li,.efacts span{color:var(--muted)}
+.efacts div{background:var(--card);border-color:var(--line)}
+.efacts b{color:var(--gold-deep)}
+.creds li::before{color:var(--gold-deep)}
+.bandkey,.chip{border:1px solid rgba(134,102,31,.3)}
+.bA,.chip.bA{background:var(--butter)}.bB,.chip.bB{background:var(--blush)}.bC,.chip.bC{background:var(--sky)}
+.bandkey.bC{border-color:rgba(63,102,144,.35)}
+.soon{justify-self:center;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--sky-deep);background:var(--card);border:1px solid rgba(63,102,144,.35);border-radius:999px;padding:3px 10px;margin-top:4px}
+.reg{background:linear-gradient(160deg,#f5e6c0 0%,#faf0dc 100%);color:var(--ink);border:1px solid var(--gold-pale)}
+.reg .kicker{color:var(--gold-deep)}
+.reg .lead,.steps3 span,.mail{color:var(--muted)}
+.steps3 b{color:var(--ink)}
+.steps3 li::before{background:var(--card);border:1.5px solid var(--marigold);color:var(--gold-deep)}
+.mail b{color:var(--gold-deep)}
+form{border:1px solid var(--line)}
+.opt input,.checklist input{accent-color:var(--gold-deep)}
+.opt:has(input:checked){border-color:var(--gold-deep);background:var(--butter)}
+.done .next{background:var(--marigold-soft);color:var(--ink)}
+.done .next p{color:var(--muted)}
+.setup .tag{background:var(--butter);color:var(--gold-deep)}
+.fig .dev{fill:var(--ink-2)}
+.check{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.check h3,.progress{color:var(--gold-deep)}
+.check p{color:var(--muted)}
+.checklist label{background:var(--cream);border-color:var(--line)}
+.checklist label:has(input:checked){border-color:var(--marigold);background:var(--butter);color:var(--ink)}
+summary::after{border-color:var(--gold-deep);color:var(--gold-deep)}
+details[open] summary::after{background:var(--butter);color:var(--ink)}
+footer{background:linear-gradient(180deg,#f5e8c8 0%,#f8efdb 100%);color:var(--muted);border-top:4px solid var(--gold-pale)}
+footer h4{color:var(--gold-deep)}
+.ccard{background:var(--card);border-color:var(--line)}
+.cval span{color:var(--ink)}
+.cact{border-color:var(--gold-deep);color:var(--gold-deep)}
+.cact:hover{background:var(--butter);color:var(--ink)}
+.flinks .btn{color:var(--ink);border-color:var(--ink)}
+.flinks .btn:hover{background:var(--card);color:var(--ink)}
+.flinks .btn-gold{border-color:var(--gold-btn)}
+.fbase{border-top-color:var(--line)}
+
+@media (max-width:980px){
+  .reg{grid-template-columns:1fr;padding:32px 24px}
+  .run{grid-template-columns:1fr 1fr}
+  .skills{grid-template-columns:1fr 1fr}
+  .tips{grid-template-columns:1fr}
+  .check{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .hero .grid{grid-template-columns:1fr;gap:40px}
+  .eric .grid{grid-template-columns:1fr;gap:32px}
+  .setups{grid-template-columns:1fr}
+  footer .wrap{grid-template-columns:1fr}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  section{padding-block:60px}
+  .hero{padding-block:24px 48px}
+  .hero h1{font-size:2.7rem}
+  .facts{grid-template-columns:1fr 1fr}
+  .unseen{transform:none;box-shadow:6px 6px 0 var(--gold-pale)}
+  .terms{grid-template-columns:1fr}
+  .learn{grid-template-columns:1fr}
+  .learn .skills li{padding:12px}
+  .learn .skills h3{font-size:.92rem}
+  .learn .skills p{font-size:.82rem}
+  .runbox{padding:16px}
+  .runbox h3{font-size:1.25rem}
+  .runbox .run .t::after{content:""}
+  .runbox h3 small{display:inline}
+  .runbox .run li{grid-template-columns:40px 1fr;font-size:.86rem;padding:9px 10px}
+  .prices{grid-template-columns:1fr;gap:8px}
+  .pbtns{grid-column:1/-1;grid-row:3;justify-content:flex-start}
+  .pcard{grid-template-columns:1fr auto;align-items:center;text-align:left;column-gap:14px;padding:12px 16px}
+  .pcard .pwhen{grid-column:1;grid-row:1}
+  .pcard .pnote{grid-column:1;grid-row:2}
+  .pcard b{grid-column:2;grid-row:1/span 2;font-size:1.8rem}
+  .hbook{display:none!important}
+  .steps3{display:none}
+  .eric figcaption,.creds li:first-child{display:none}
+  .eric figure{max-width:360px}
+  .eric .grid{gap:20px}
+  .eric .bio{font-size:.98rem}
+  .unseen .tip{display:none}
+  .unseen{padding:16px 16px 12px}
+  .facts{grid-template-columns:repeat(4,1fr);gap:6px;margin-top:20px}
+  .facts div{padding:9px 7px}
+  .facts b{font-size:1.3rem}
+  .facts span{font-size:.68rem}
+  .teacher{margin-top:16px}
+  .whyjoin{grid-template-columns:1fr;gap:6px}
+  .whyjoin li{padding:8px 10px;font-size:.86rem}
+  .tt th,.tt td{padding:10px 4px}
+  .tt thead th{font-size:.78rem}
+  .tt thead th small,.tt tbody th small{font-size:.66rem}
+  .tt tbody th{font-size:.8rem;padding-left:8px;white-space:normal}
+  .tt .dcol{width:22%}
+  .ptt .dcol{width:40%}
+  .ptt td b{font-size:1.45rem}
+  .ptt tbody th{font-size:.84rem}
+  .slot{font-size:.72rem;padding:6px 4px;white-space:normal;line-height:1.2}
+  .fold>summary{padding:16px}
+  .foldbody{padding:0 14px 16px}
+  .fold>summary b{font-size:1.25rem}
+  .shead{margin-bottom:24px}
+  .bands{grid-template-columns:1fr}
+  .bandkey{padding:14px 16px}
+  .bandkey b{font-size:1.4rem}
+  .sessions{grid-template-columns:1fr}
+  .sessions .uk{display:none}
+  .sessions .d{min-width:5.6em}
+  .sessions .tm{white-space:nowrap}
+  .sessions li{grid-template-columns:auto 1fr auto;justify-items:start;align-items:center;text-align:left;column-gap:12px;padding:12px 14px}
+  .sessions .tm{font-size:.85rem}
+  form{grid-template-columns:1fr;padding:22px 18px}
+  .reg{padding:28px 18px;border-radius:24px}
+  .picks,.seg{grid-template-columns:1fr}
+  .dl>div{grid-template-columns:90px 1fr}
+  .btn3d .lg,.site .btn-sm .lg{display:none}
+  .btn3d .sm,.site .btn-sm .sm{display:inline}
+  .btn3d{padding:6px 16px;font-size:.88rem;min-height:42px}
+  .logoimg,.logofb{width:54px;height:54px}
+  .efacts{gap:8px}.efacts div{padding:12px 10px}.efacts b{font-size:1.6rem}
+  .hero .btn-row .btn{flex:1 1 100%}
+}
+header.site .btn-sm .sm{display:none}
+@media (max-width:620px){header.site .btn-sm .lg{display:none}header.site .btn-sm .sm{display:inline}}
+@media (max-width:370px){
+  .sessions li{grid-template-columns:1fr auto}
+  .sessions .tm{grid-row:2;grid-column:1}
+  .sessions .chip{grid-row:1/span 2;grid-column:2}
+}
+@media (prefers-reduced-motion:reduce){
+  .btn3d{transition:none}
+  html{scroll-behavior:auto}
+  .ring .fg{animation:none}
+  .btn,.btn .arr{transition:none}
+}
+</style>
+</head>
+<body>
+<header class="site full">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Cadenza London Music Academy, back to top">
+      <img class="logoimg" src="logo-circle.png" alt="Cadenza London Music Academy" width="400" height="400" id="logoImg">
+    </a>
+    <a class="btn3d" href="https://cadenza-london.com" target="_blank" rel="noopener"><span class="lg">Visit our official website</span><span class="sm">Official website</span></a>
+    <div class="hright">
+      <a class="btn btn-dark btn-sm hbook" href="#book">Book a free place</a>
+      <button class="burger" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" aria-label="Menu" hidden>
+  <div class="dtop"><b>Menu</b><button class="dclose" id="closeBtn" type="button" aria-label="Close menu">✕</button></div>
+  <nav>
+    <a href="#learn">Why join</a>
+    <a href="#schedule">Calendar</a>
+    <a href="#price">Price</a>
+    <a href="#terms">T&amp;C</a>
+    <a href="#contact">Contact us</a>
+  </nav>
+  <a class="btn btn-gold btn-block" href="#book">Book a free place <span class="arr">→</span></a>
+</aside>
+
+<div class="hero full" id="top">
+  <div class="wrap grid">
+    <div class="htext">
+      <a class="sale" href="#price"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0 C21 13 27 19 40 20 C27 21 21 27 20 40 C19 27 13 21 0 20 C13 19 19 13 20 0 Z"/></svg><span><b>New launch</b>Free until New Year!</span></a>
+      <h1><span class="pre">Online · Weekly · Piano · Grades 1–8</span><span class="ttl">Sight&#8209;Reading <em>Club</em></span></h1>
+      <p class="subtitle">Practice makes perfect</p>
+      <p class="lead">Read new music with us, every Tuesday. A friendly club where you practise together, ask anything, and become a better pianist.</p>
+      <ul class="whyjoin" aria-label="Why join">
+        <li><i>♪</i><span><b>Practise together</b>A friendly community that reads new music with you every week.</span></li>
+        <li><i>?</i><span><b>Ask anything</b>Stuck on a new score? Ask Eric there and then. Not just for exams.</span></li>
+        <li><i>✦</i><span><b>Learn the tricks</b>Quick, practical tips for reading any score faster.</span></li>
+        <li><i>↑</i><span><b>Be a better pianist</b>A little reading every week adds up.</span></li>
+      </ul>
+      <div class="btn-row">
+        <a class="btn btn-gold" href="#book">Book a free place <span class="arr">→</span></a>
+        <a class="btn btn-outline" href="#setup">How to set up your camera</a>
+      </div>
+      <div class="teacher"><span class="av"><img src="eric-chung.jpg" alt="" width="52" height="52"></span><span><b>Led by Eric Chung</b>Pianist and teacher, 15+ years teaching</span></div>
+      <div class="facts">
+        <div><b>45</b><span>minutes on Zoom</span></div>
+        <div><b>8</b><span>players, all play</span></div>
+        <div><b>Tue</b><span>every week, 6pm</span></div>
+        <div><b>£0</b><span>until 31 Dec</span></div>
+      </div>
+    </div>
+    <div class="unseen" aria-label="Example of a new piece to sight-read">
+      <div class="top">
+        <div><span class="lbl">New score · Beginner level</span><div class="title">You have 30 seconds</div></div>
+        <div class="ring" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="28"/><circle class="fg" cx="32" cy="32" r="28"/></svg><span>0:30</span></div>
+      </div>
+      <svg class="stave" viewBox="0 0 360 120" role="img" aria-label="A short melody in G major, 3/4 time, with the key signature and time signature circled">
+        <g class="ln"><line x1="8" y1="40" x2="352" y2="40"/><line x1="8" y1="50" x2="352" y2="50"/><line x1="8" y1="60" x2="352" y2="60"/><line x1="8" y1="70" x2="352" y2="70"/><line x1="8" y1="80" x2="352" y2="80"/><line x1="8" y1="40" x2="8" y2="80"/><line x1="180" y1="40" x2="180" y2="80"/><line x1="350" y1="40" x2="350" y2="80"/><line x1="352" y1="40" x2="352" y2="80" style="stroke-width:3"/></g>
+        <text class="tx" x="14" y="76" font-size="46">𝄞</text>
+        <text class="tx" x="46" y="46" font-size="22">♯</text>
+        <text class="tx" x="62" y="58" font-size="20">3</text>
+        <text class="tx" x="62" y="78" font-size="20">4</text>
+        <ellipse class="hint" cx="56" cy="58" rx="22" ry="30"/>
+        <text class="hl" x="20" y="112">KEY + TIME FIRST</text>
+        <g class="nt"><ellipse cx="96" cy="75" rx="6" ry="4.4" transform="rotate(-20 96 75)"/><ellipse cx="124" cy="70" rx="6" ry="4.4" transform="rotate(-20 124 70)"/><ellipse cx="152" cy="65" rx="6" ry="4.4" transform="rotate(-20 152 65)"/><ellipse cx="204" cy="60" rx="6" ry="4.4" transform="rotate(-20 204 60)"/><ellipse cx="236" cy="65" rx="6" ry="4.4" transform="rotate(-20 236 65)"/><ellipse cx="268" cy="70" rx="6" ry="4.4" transform="rotate(-20 268 70)"/><ellipse cx="310" cy="75" rx="7" ry="4.8" transform="rotate(-20 310 75)" style="fill:none;stroke:var(--ink);stroke-width:1.8"/></g>
+        <g class="st"><line x1="101.5" y1="73" x2="101.5" y2="44"/><line x1="129.5" y1="68" x2="129.5" y2="39"/><line x1="157.5" y1="63" x2="157.5" y2="34"/><line x1="209.5" y1="58" x2="209.5" y2="29"/><line x1="241.5" y1="63" x2="241.5" y2="34"/><line x1="273.5" y1="68" x2="273.5" y2="39"/><line x1="316.5" y1="73" x2="316.5" y2="44"/></g>
+        <text class="tx" x="300" y="104" font-size="15" font-style="italic">p</text>
+      </svg>
+      <p class="tip"><b>Eric's tip:</b> before you play, check the key, the time signature and the first note. Then keep the pulse going, even through a mistake.</p>
+    </div>
+  </div>
+</div>
+<div class="keys full" aria-hidden="true"></div>
+
+<main>
+  <div class="wrap">
+    <section id="learn">
+      <div class="shead c">
+        <span class="kicker"><span class="mark">Why join the club</span></span>
+        <h2><span class="mark">Practise together.</span> <span class="mark">Become a better pianist.</span></h2>
+        <p>For piano students of all ages, and adults coming back to the piano. Not just for exams: bring any question about a new score. Other instruments are coming soon.</p>
+      </div>
+      <div class="learn">
+        <ul class="skills">
+          <li><h3><span>A community to practise with</span></h3><p>Same friendly faces each week. Everyone stumbles on a new score, so nobody's judged.</p></li>
+          <li><h3><span>Ask anything</span></h3><p>Confused by a key, a rhythm or a sign? Ask Eric there and then.</p></li>
+          <li><h3><span>Read notes by shape</span></h3><p>Steps, skips and patterns, not note by note.</p></li>
+          <li><h3><span>Rhythm first</span></h3><p>Count it before you play, and keep the pulse.</p></li>
+          <li><h3><span>Scan before you start</span></h3><p>Key, time, clef, tempo and repeats in 30 seconds.</p></li>
+          <li><h3><span>Keep going</span></h3><p>Look ahead instead of stopping at a mistake.</p></li>
+        </ul>
+        <div class="runbox">
+          <h3>How a 45-minute session runs <small>(minutes)</small></h3>
+          <ol class="run">
+            <li><span class="t">0–5</span><span><b>Warm up.</b> Cameras on, and a rhythm clap to set the pulse.</span></li>
+            <li><span class="t">5–10</span><span><b>Tip of the week.</b> One reading skill for your level.</span></li>
+            <li class="big"><span class="t">10–40</span><span><b>Your turn.</b> A new piece, 30 seconds to look, then play it. Eric gives one fix and you try again. Every player plays, every session.</span></li>
+            <li><span class="t">40–45</span><span><b>Questions &amp; take it home.</b> Ask anything you got stuck on, then a short reading task for the week.</span></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="eric full" id="eric">
+    <div class="wrap grid">
+      <figure style="margin:0">
+        <div class="photo"><img src="eric-playing.jpg" alt="Eric Chung playing a grand piano at the Cadenza London 2025 student Christmas concert" width="900" height="1020" loading="lazy"></div>
+        <figcaption>Eric at the Cadenza London 2025 student Christmas concert</figcaption>
+      </figure>
+      <div>
+        <span class="kicker">Your instructor</span>
+        <h2>Eric Chung</h2>
+        <p class="bio">Every session is led by Eric, a London-based pianist and teacher. He hears what is holding a student back within a few bars, and gives one fix they can use straight away.</p>
+        <div class="efacts">
+          <div><b>15+</b><span>years teaching</span></div>
+          <div><b>100%</b><span>passing rate</span></div>
+          <div><b>200+</b><span>students with Merit or Distinction</span></div>
+        </div>
+        <ul class="creds">
+          <li>Trained at the Royal Conservatoire of Antwerp and the Hong Kong Academy for Performing Arts</li>
+          <li>Teaches piano, violin and voice, from first lessons to performance diplomas</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sched-band full" id="schedule">
+    <div class="wrap">
+      <div class="shead c">
+        <span class="kicker">Calendar</span>
+        <h2>Timetable</h2>
+        <p>On Zoom, UK time. Each session is for one level, so book the dates in your level's column.</p>
+      </div>
+      <div class="ttwrap">
+        <table class="tt" aria-label="Sight-Reading Club timetable">
+          <thead><tr>
+            <th scope="col" class="dcol">Date</th>
+            <th scope="col" class="hA">Beginner<small>Grades 1–3</small></th>
+            <th scope="col" class="hB">Intermediate<small>Grades 4–6</small></th>
+            <th scope="col" class="hC">Advanced<small>Grade 7+</small></th>
+          </tr></thead>
+          <tbody id="ttBody"></tbody>
+        </table>
+      </div>
+      <p class="schednote" id="schedNote"></p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section id="price">
+      <div class="shead c">
+        <span class="kicker">Price</span>
+        <h2>Free until 31 December</h2>
+        <p>From January 2027, pay per session, or pay monthly and save. Cadenza London students get 1 free session a month.</p>
+      </div>
+      <div class="ttwrap pwrap">
+        <table class="tt ptt" aria-label="Prices from January 2027">
+          <thead><tr>
+            <th scope="col" class="dcol">Level</th>
+            <th scope="col">Per session</th>
+            <th scope="col" class="best">Monthly<small>2 sessions a month</small><span class="bv">Best value</span></th>
+          </tr></thead>
+          <tbody>
+            <tr><th scope="row" class="hA">Beginner<small>Grades 1–3</small></th>
+              <td><b>£8</b><a class="btn btn-sm btn-gold" data-pay="single_beg" target="_blank" rel="noopener" hidden>Pay</a></td>
+              <td class="best"><b>£15</b><span class="save">Save £1</span><a class="btn btn-sm btn-outline" data-pay="monthly_beg" target="_blank" rel="noopener" hidden>Subscribe</a></td></tr>
+            <tr><th scope="row" class="hB">Intermediate<small>Grades 4–6</small></th>
+              <td><b>£10</b><a class="btn btn-sm btn-gold" data-pay="single_int" target="_blank" rel="noopener" hidden>Pay</a></td>
+              <td class="best"><b>£18</b><span class="save">Save £2</span><a class="btn btn-sm btn-outline" data-pay="monthly_int" target="_blank" rel="noopener" hidden>Subscribe</a></td></tr>
+            <tr><th scope="row" class="hC">Advanced<small>Grade 7+ · coming soon</small></th>
+              <td><b>£12</b><a class="btn btn-sm btn-gold" data-pay="single_adv" target="_blank" rel="noopener" hidden>Pay</a></td>
+              <td class="best"><b>£22</b><span class="save">Save £2</span><a class="btn btn-sm btn-outline" data-pay="monthly_adv" target="_blank" rel="noopener" hidden>Subscribe</a></td></tr>
+            <tr><th scope="row">Listener<small>Camera off, doesn't play</small></th>
+              <td><b>£5</b><a class="btn btn-sm btn-outline" data-pay="listener" target="_blank" rel="noopener" hidden>Pay</a></td>
+              <td class="na">–</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lockbox"><b>Early bird:</b> start a monthly plan by 31 January 2027 and keep that price for as long as your plan continues, even if prices go up later.</p>
+      <p class="pricenote">Cadenza London students: 1 free session each calendar month, then normal prices. Card payments by Stripe. Monthly plans renew on the same date each month. To stop, cancel at least 7 days before your next payment. <a data-pay="portal" target="_blank" rel="noopener" hidden>Manage or cancel your plan</a></p>
+    </section>
+
+    <section id="book">
+      <div class="reg">
+        <div>
+          <span class="kicker">Book your place</span>
+          <h2>Free until New Year</h2>
+          <p class="lead">Up to 8 players a session (Advanced: 6), and every player plays every time. When it's full, you can join as a listener and take the next free player place.</p>
+          <ol class="steps3">
+            <li><b>Request your sessions</b><span>Takes about a minute.</span></li>
+            <li><b>We confirm by email</b><span>Your place, plus the Zoom link before each session.</span></li>
+            <li><b>Do the 5-minute setup test</b><span>So your hands and sound come through clearly.</span></li>
+          </ol>
+          <p class="mail">Questions? Email <b>music@cadenza-london.com</b></p>
+        </div>
+        <div>
+          <form name="sight-reading-club" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="bookForm" novalidate>
+            <h3>Your details</h3>
+            <input type="hidden" name="form-name" value="sight-reading-club">
+            <input type="hidden" name="session_summary" id="sessionSummary">
+            <p class="hp"><label for="bot">Leave empty</label><input id="bot" name="bot-field" tabindex="-1" autocomplete="off"></p>
+
+            <fieldset class="field span">
+              <legend class="legend">Who is booking?</legend>
+              <div class="seg">
+                <label class="opt"><input type="radio" name="booking_for" value="Parent or guardian (student under 18)" id="forChild" checked><span>Parent or guardian<small>Student is under 18</small></span></label>
+                <label class="opt"><input type="radio" name="booking_for" value="Adult student (18+)" id="forAdult"><span>I'm the student<small>Aged 18 or over</small></span></label>
+              </div>
+            </fieldset>
+
+            <div class="field" id="guardianField"><label for="guardian">Parent or guardian's name&nbsp;<span class="req">*</span></label><input type="text" id="guardian" name="guardian_name" autocomplete="name"></div>
+            <div class="field"><label for="student">Student's name&nbsp;<span class="req">*</span></label><input type="text" id="student" name="student_name" required></div>
+            <div class="field"><label for="email">Email&nbsp;<span class="req">*</span></label><input type="email" id="email" name="email" required autocomplete="email"></div>
+            <div class="field"><label for="phone">Phone <small>(optional)</small></label><input type="tel" id="phone" name="phone" autocomplete="tel"></div>
+
+            <div class="field"><label for="instrument">Instrument&nbsp;<span class="req">*</span></label>
+              <select id="instrument" name="instrument" required>
+                <option selected>Piano or keyboard</option>
+                <option disabled>Other instruments (coming soon)</option>
+              </select></div>
+            <div class="field" id="otherField" hidden><label for="other">Which instrument?&nbsp;<span class="req">*</span></label><input type="text" id="other" name="other_instrument"></div>
+            <div class="field span"><label for="grade">Reading level <small>(one level per student)</small>&nbsp;<span class="req">*</span></label>
+              <select id="grade" name="reading_level" required>
+                <option value="">Choose your reading level</option>
+                <option value="Beginner (Grades 1–3)" data-band="A">Beginner (Grades 1–3)</option>
+                <option value="Intermediate (Grades 4–6)" data-band="B">Intermediate (Grades 4–6)</option>
+                <option value="Grade 7–8 (Intermediate sessions until 31 Dec)" data-band="B">Grade 7–8: join the Intermediate sessions, free until 31 Dec</option>
+                <option value="Not sure" data-band="all">Not sure</option>
+              </select></div>
+
+            <fieldset class="field span" id="pickSet">
+              <legend class="legend">Sessions&nbsp;<span class="req">*</span> <small>(tick all you can make)</small></legend>
+              <div class="picks" id="picks"></div>
+            </fieldset>
+
+            <fieldset class="field span">
+              <legend class="legend">How would you like to join?</legend>
+              <div class="seg">
+                <label class="opt"><input type="radio" name="role" value="Player" checked><span>Player<small>Plays a new piece each time</small></span></label>
+                <label class="opt"><input type="radio" name="role" value="Listener"><span>Listener<small>Camera off, doesn't play · £5 a session from January</small></span></label>
+              </div>
+            </fieldset>
+
+            <div class="field span"><label class="opt"><input type="checkbox" name="cadenza_student" value="Yes" id="cStudent"><span>The student is a current Cadenza London student<small>1 free session a month, then normal prices</small></span></label></div>
+
+            <div class="field span"><label for="plan">From January, I'd like to <small>(optional, helps us plan)</small></label>
+              <select id="plan" name="plan_interest">
+                <option value="">Not sure yet</option>
+                <option>Pay per session</option>
+                <option>Monthly plan</option>
+              </select></div>
+
+            <fieldset class="field span consent">
+              <legend class="legend">Consent</legend>
+              <label class="opt"><input type="checkbox" name="consent_join" value="Yes" id="cJoin"><span>I agree to the student joining an online group session run by Cadenza London.&nbsp;<span class="req">*</span></span></label>
+              <label class="opt" id="cGuardWrap"><input type="checkbox" name="consent_guardian_present" value="Yes" id="cGuard"><span>A parent or guardian will be in the room for the whole session.&nbsp;<span class="req">*</span></span></label>
+              <label class="opt"><input type="checkbox" name="consent_recording" value="Yes" id="cRec"><span>I agree that Cadenza London may record the session and post short clips of the student on its social media.&nbsp;<span class="req">*</span></span></label>
+              <label class="opt"><input type="checkbox" name="agree_terms" value="Yes" id="cTerms"><span>I have read and agree to the <a href="#terms">terms and conditions</a>, including the 24-hour cancellation rule, the 10-minute late arrival rule, the 7-day notice for monthly plans, and the ban on recording or screen-capturing sessions.&nbsp;<span class="req">*</span></span></label>
+              <label class="opt"><input type="checkbox" name="mailing_list" value="Yes" id="cMail"><span>Optional: send me Cadenza London news, practice tips and course dates. Unsubscribe any time.</span></label>
+            </fieldset>
+
+            <div class="formfoot">
+              <button class="btn btn-dark btn-block" type="submit" id="sendBtn">Request my place <span class="arr">→</span></button>
+              <span class="status" id="status" role="status" aria-live="polite"></span>
+            </div>
+          </form>
+
+          <div class="done" id="done" hidden tabindex="-1">
+            <p class="ok">✓ Request received</p>
+            <h3 id="doneTitle">See you at the session</h3>
+            <div><p class="muted">You asked for:</p><ul id="doneList"></ul></div>
+            <p class="muted" id="doneMail"></p>
+            <div class="paystep" id="payStep" hidden>
+              <span class="pstep">Next step · payment</span>
+              <b id="payTitle"></b>
+              <p id="payText"></p>
+              <div class="paybtns">
+                <a class="btn btn-gold btn-block" id="paySingle" target="_blank" rel="noopener"></a>
+                <a class="btn btn-outline btn-block" id="payMonthly" target="_blank" rel="noopener" hidden></a>
+              </div>
+              <p class="paynote" id="payNote"></p>
+            </div>
+            <p class="freenote" id="freeNote" hidden></p>
+            <div class="next">
+              <b>Before your first session</b>
+              <p>Do the 5-minute setup test, so Eric can see your hands and hear your piano clearly.</p>
+              <a class="btn btn-gold btn-block" href="#setup">Open the setup guide <span class="arr">→</span></a>
+            </div>
+            <button class="btn btn-outline btn-sm" type="button" id="againBtn">Book for another student</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="info">
+      <details class="fold" id="setup">
+        <summary><span><span class="kicker">Student guide</span><b>How to set up and record yourself</b><small>Camera position, sound, light, and a 5-minute test</small></span></summary>
+        <div class="foldbody">
+      <div class="setups">
+        <div class="setup">
+          <span class="tag">Piano and keyboard</span>
+          <h3>Camera at the treble end</h3>
+          <div class="fig">
+            <svg viewBox="0 0 400 210" role="img" aria-label="View from above: phone on a stand at the right-hand, treble end of the keyboard, angled down at the hands">
+              <rect class="k-w" x="30" y="60" width="300" height="60" rx="4"/>
+              <g class="k-w" style="stroke-width:1"><line x1="51" y1="60" x2="51" y2="120"/><line x1="72" y1="60" x2="72" y2="120"/><line x1="93" y1="60" x2="93" y2="120"/><line x1="114" y1="60" x2="114" y2="120"/><line x1="135" y1="60" x2="135" y2="120"/><line x1="156" y1="60" x2="156" y2="120"/><line x1="177" y1="60" x2="177" y2="120"/><line x1="198" y1="60" x2="198" y2="120"/><line x1="219" y1="60" x2="219" y2="120"/><line x1="240" y1="60" x2="240" y2="120"/><line x1="261" y1="60" x2="261" y2="120"/><line x1="282" y1="60" x2="282" y2="120"/><line x1="303" y1="60" x2="303" y2="120"/></g>
+              <g class="k-b"><rect x="45" y="60" width="12" height="34"/><rect x="66" y="60" width="12" height="34"/><rect x="108" y="60" width="12" height="34"/><rect x="129" y="60" width="12" height="34"/><rect x="150" y="60" width="12" height="34"/><rect x="192" y="60" width="12" height="34"/><rect x="213" y="60" width="12" height="34"/><rect x="255" y="60" width="12" height="34"/><rect x="276" y="60" width="12" height="34"/><rect x="297" y="60" width="12" height="34"/></g>
+              <ellipse class="body" cx="180" cy="168" rx="70" ry="26"/>
+              <ellipse class="body" cx="130" cy="126" rx="16" ry="9"/>
+              <ellipse class="body" cx="230" cy="126" rx="16" ry="9"/>
+              <path class="cone" d="M356 48 L40 70 L40 128 L330 128 Z"/>
+              <g transform="rotate(-30 362 46)"><rect class="dev" x="350" y="26" width="26" height="42" rx="5"/><rect class="scr" x="353" y="30" width="20" height="32" rx="2"/></g>
+              <text x="330" y="22" text-anchor="end">Phone on a stand</text>
+              <text class="q" x="330" y="38" text-anchor="end">treble end, angled down 45°</text>
+              <text class="q" x="30" y="205">View from above · both hands and all keys in frame</text>
+            </svg>
+          </div>
+          <dl class="dl">
+            <div><dt>Frame</dt><dd><b>Both hands and the whole keyboard.</b> Your face too, if it fits.</dd></div>
+            <div><dt>Turn it</dt><dd>Phone or tablet sideways (landscape), on a stand or a stack of books.</dd></div>
+            <div><dt>Avoid</dt><dd>Propping the phone on the music stand. Eric only sees your forehead.</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="tips">
+        <div class="tipcard">
+          <h3>Sound</h3>
+          <ul>
+            <li>In Zoom audio settings, turn on <b>Original sound for musicians</b> and switch off background noise suppression. Otherwise Zoom cuts out the piano's tone.</li>
+            <li>Keep the device about 1 m from the piano, so loud passages don't distort.</li>
+            <li>Stay muted until Eric calls your name.</li>
+          </ul>
+        </div>
+        <div class="tipcard">
+          <h3>Room and light</h3>
+          <ul>
+            <li>Light in front of you or from the side. A bright window behind you turns you into a silhouette.</li>
+            <li>Quiet room, door closed, other devices on silent.</li>
+            <li>Charger plugged in, and sit close to the Wi-Fi.</li>
+          </ul>
+        </div>
+        <div class="tipcard">
+          <h3>Record your weekly practice</h3>
+          <ol>
+            <li>Pick a short piece you haven't seen: a hymn book, an easy duet, a page from a new book, or Eric's weekly task.</li>
+            <li>Start recording, then take 30 seconds to look through it.</li>
+            <li>Play it once without stopping, even after a mistake.</li>
+            <li>Watch it back. Note one thing: pulse, notes or dynamics.</li>
+            <li>Bring that one thing as your question for Eric.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="check">
+        <div>
+          <h3>5-minute setup test</h3>
+          <p>Do this once before your first session. Tick as you go.</p>
+          <p class="progress" id="progress">0 of 4 done</p>
+        </div>
+        <div class="checklist" id="checklist">
+          <label><input type="checkbox" id="ck1">Device on a stand, in landscape, both hands and the keyboard fully in frame</label>
+          <label><input type="checkbox" id="ck2">Zoom installed and updated, original sound turned on</label>
+          <label><input type="checkbox" id="ck3">10-second test recording played back: clear, not distorted</label>
+          <label><input type="checkbox" id="ck4">Parent or guardian ready to sit in (students under 18)</label>
+        </div>
+      </div>
+        </div>
+      </details>
+
+      <details class="fold" id="terms">
+        <summary><span><span class="kicker">Before you book</span><b>Terms and conditions</b><small>Cancelling, arriving late, one level, no recording by participants, payment</small></span></summary>
+        <div class="foldbody">
+          <p class="muted">These apply to every Sight-Reading Club booking. Booking a place means you agree to them.</p>
+      <ol class="terms">
+        <li><h3>Cancelling</h3><p>To cancel, email <b>music@cadenza-london.com</b> at least 24 hours before the session starts. If you cancel within 24 hours of the start time, or don't attend without telling us, you will no longer be able to join any free sessions.</p></li>
+        <li><h3>Arriving late</h3><p>The session starts on time. Anyone joining more than 10 minutes after the start time will not be let in to that session.</p></li>
+        <li><h3>One level per student</h3><p>Each student can only join one level, unless advised by Cadenza London.</p></li>
+        <li><h3>Photos, video and social media</h3><p>Every session is recorded. Anyone taking part, including students under 18, may appear in photos, video or audio clips on Cadenza London's social media. To ask for a clip to be taken down, email us.</p></li>
+        <li><h3>No recording by participants</h3><p>You must not record, screenshot or screen-capture any part of a session, including the video, the audio and the music Eric shares. Only Cadenza London may record sessions. Anyone who breaks this rule will be removed from the session and from future sessions, without a refund, and Cadenza London may take legal action.</p></li>
+        <li><h3>Students under 18</h3><p>A parent or guardian must make the booking and stay in the room for the whole session.</p></li>
+        <li><h3>Places</h3><p>Places are confirmed by email. Beginner and Intermediate take up to 8 players; Advanced takes up to 6. Until 31 December 2026 a session runs with at least 3 players; from January 2027 it needs at least 4. Every player plays in every session they attend. Listeners keep their camera off and don't play. If you pay and a session turns out to be full, we refund you in full. If a session can't run, or we change a date, time or price, we will email you first.</p></li>
+        <li><h3>Payment and monthly plans</h3><p>Sessions are free until 31 December 2026. Monthly plans started by 31 January 2027 keep their price for as long as the plan continues without a break; if you cancel and rejoin later, the price at that time applies. From January 2027, current Cadenza London students get 1 free session each calendar month; any further sessions are charged at the normal price, and unused free sessions don't carry over. From January 2027 you pay by card through Stripe, per session or by monthly plan. A monthly plan renews on the same date each month. To stop it, cancel at least 7 days before your next payment date. If you cancel later, the next month is still charged, and the plan then ends.</p></li>
+      </ol>
+        </div>
+      </details>
+    </section>
+
+    <section id="faq">
+      <div class="shead c"><span class="kicker">Questions</span><h2>Good to know</h2></div>
+      <div class="faq">
+        <details><summary>Is it really free?</summary><p>Yes, every session until 31 December 2026 is free. See <a href="#price">Price</a> for January onwards. Current Cadenza London students get 1 free session a month.</p></details>
+        <details><summary>Is this exam preparation?</summary><p>No. It's for anyone who wants to read new piano music faster: children, teenagers, and adults coming back to the piano. Better reading helps in exams too, but that isn't the focus.</p></details>
+        <details><summary>Can I ask questions during the session?</summary><p>Yes, please do. If something in a new score confuses you, a key, a rhythm, a sign, ask Eric there and then. There's also time at the end for questions. They don't have to be about exams.</p></details>
+        <details><summary>Is it only for piano?</summary><p>For now, yes. Sessions for other instruments and voice are coming soon. Tick the newsletter box when you book and we'll tell you first.</p></details>
+        <details><summary>What do I need?</summary><p>A piano or keyboard, a phone, tablet or laptop with Zoom, and a stand to hold it. Eric shares each new piece on screen, so you don't need any books.</p></details>
+        <details><summary>What if only a few people book?</summary><p>Until 31 December a session runs with 3 or more players. From January it needs at least 4. If fewer have booked by 24 hours before, we'll email you and move your place to the next session for your level.</p></details>
+        <details><summary>What's the difference between a player and a listener?</summary><p>Players play a new piece each session. Listeners keep their camera off and learn by watching. If a player place opens, we offer it to listeners first.</p></details>
+        <details><summary>Will I always get to play?</summary><p>Yes. Every player plays in every session. That's why we cap groups at 8 (Advanced: 6). If a session is full, you can join as a listener, or we'll open another time slot.</p></details>
+        <details><summary>Can I record the session myself?</summary><p>No. Recording, screenshots and screen capture by participants are not allowed, including the music shown on screen. Breaking this rule means removal from the club and may lead to legal action. See the <a href="#terms">terms</a>.</p></details>
+        <details><summary>Can I cancel?</summary><p>Yes, by emailing music@cadenza-london.com at least 24 hours before the session. Cancelling later than that, or not turning up, means you can't join free sessions any more. See the <a href="#terms">terms</a>.</p></details>
+        <details><summary>Will I be recorded?</summary><p>Yes. Every session is recorded, and anyone taking part may appear in photos or clips on Cadenza London's Instagram and other social media. Agreeing to this is part of booking. To ask for a clip to be taken down, email music@cadenza-london.com.</p></details>
+        <details><summary>How do you keep children safe online?</summary><p>A parent or guardian registers every student under 18 and stays in the room for the session. The Zoom waiting room is on, Eric admits only booked names, private chat is off, and the joining link is sent by email only.</p></details>
+        <details><summary>Is this the same as a lesson?</summary><p>No. It's group practice for one skill: reading new music. For one-to-one help with your playing, <a href="https://cadenza-london.com" target="_blank" rel="noopener">book a private lesson with Eric</a>.</p></details>
+      </div>
+    </section>
+  </div>
+</main>
+
+
+<footer class="full" id="contact">
+  <div class="wrap">
+    <div class="flinks">
+      <h4>More from Cadenza London</h4>
+      <a class="btn btn-gold btn-block" href="https://cadenza-london.com" target="_blank" rel="noopener">Book a private lesson</a>
+      <a class="btn btn-outline btn-block" href="https://cadenza-london.com" target="_blank" rel="noopener">Visit our website</a>
+    </div>
+    <div>
+      <h4>Contact us</h4>
+      <div class="contacts">
+        <div class="ccard"><div class="cval"><small>Email</small><span>music@cadenza-london.com</span></div><a class="cact" href="mailto:music@cadenza-london.com">Email</a></div>
+        <div class="ccard"><div class="cval"><small>Phone</small><span>+44 7572 010370</span></div><a class="cact" href="tel:+447572010370">Call</a></div>
+        <div class="ccard"><div class="cval"><small>Instagram</small><span>@cadenza.london</span></div><a class="cact" href="https://www.instagram.com/cadenza.london/" target="_blank" rel="noopener">Follow</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap fbase"><span>© 2026 Cadenza London Music Academy · Colindale, North London and online</span><a href="#top">Back to top ↑</a></div>
+</footer>
+
+<script>
+/* ===== Club settings: change these when Eric confirms the day and time ===== */
+var CLUB = {
+  time: '18:00',              // usual start, 24-hour UK time
+  minutes: 45,                // length of every session
+  // Every session, one line each (A = Beginner, B = Intermediate).
+  // Cadenza is off 15–22 Nov, so there is no session on Tue 17 Nov.
+  dates: [
+    {date:'2026-11-03', time:'18:00', level:'A'},
+    {date:'2026-11-10', time:'18:00', level:'B'},
+    {date:'2026-11-24', time:'18:00', level:'A'},
+    {date:'2026-12-01', time:'18:00', level:'B'},
+    {date:'2026-12-08', time:'18:00', level:'A'},
+    {date:'2026-12-15', time:'18:00', level:'B'},
+    {date:'2026-12-22', time:'11:00', level:'A'}    // Christmas session, daytime
+  ],
+  levels: [
+    {id:'A', name:'Beginner'},
+    {id:'B', name:'Intermediate'},
+    {id:'C', name:'Advanced', comingSoon:true}  // shown as "coming soon" until it opens
+  ],
+  api: 'https://cadenza-sight-reading.jessiemovement.workers.dev',   // Cloudflare booking system (bookings + admin page)
+  freeUntil: '2026-12-31',    // sessions on or before this date are free; later ones ask for payment after booking
+  pay: {                      // paste your Stripe Payment Link URLs here; empty = button stays hidden
+    single_beg:  '',            // £8 one session, Beginner
+    monthly_beg: '',            // £15 a month subscription, Beginner
+    single_int:  '',            // £10 one session, Intermediate
+    monthly_int: '',            // £18 a month subscription, Intermediate
+    single_adv:  '',            // £12 one session, Advanced
+    monthly_adv: '',            // £22 a month subscription, Advanced
+    listener:    '',            // £5 one session, listener
+    portal:      ''             // Stripe customer portal link, for managing or cancelling plans
+  },
+};
+/* ========================================================================== */
+(function(){
+  var logo=document.getElementById('logoImg');
+  function noLogo(){
+    if(!logo.isConnected) return;
+    var s=document.createElement('span'); s.className='logofb'; s.setAttribute('aria-hidden','true'); s.textContent='C';
+    logo.replaceWith(s);
+  }
+  if(logo.complete && !logo.naturalWidth) noLogo(); else logo.addEventListener('error',noLogo);
+
+  function pad(n){return (n<10?'0':'')+n;}
+  function fmtTime(t){var h=+t.slice(0,2),m=t.slice(3,5);return ((h%12)||12)+(m==='00'?'':':'+m)+(h<12?'am':'pm');}
+  function endTime(t,mins){var tot=+t.slice(0,2)*60+ +t.slice(3,5)+mins;return pad(Math.floor(tot/60)%24)+':'+pad(tot%60);}
+  function fmtRange(a,b){var x=fmtTime(a),y=fmtTime(b);return (x.slice(-2)===y.slice(-2)?x.slice(0,-2):x)+'–'+y;}
+  // Sessions run Nov–Mar in GMT, so UK time = UTC here.
+  function levelById(id){return CLUB.levels.filter(function(l){return l.id===id;})[0];}
+  function makeSession(start,band,time,mins){
+    var d=new Date(start);
+    return {
+      start:start, band:band, mins:mins,
+      label:d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:'UTC'}).replace(',',''),
+      long:d.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).replace(',',''),
+      time:fmtRange(time,endTime(time,mins))
+    };
+  }
+  function buildSessions(){
+    var out=[];
+    (CLUB.dates||[]).forEach(function(x){
+      var band=levelById(x.level), t=x.time||CLUB.time;
+      if(band && !band.comingSoon) out.push(makeSession(Date.parse(x.date+'T'+t+':00Z'),band,t,x.minutes||CLUB.minutes));
+    });
+    out.sort(function(a,b){return a.start-b.start;});
+    var now=Date.now();
+    return out.filter(function(s){return s.start+s.mins*6e4>now;});
+  }
+  var sessions=buildSessions();
+
+  // timetable grid: one row per date, one column per level
+  var tb=document.getElementById('ttBody'), rows=[];
+  sessions.forEach(function(s){var last=rows[rows.length-1];if(last&&last[0].label===s.label)last.push(s);else rows.push([s]);});
+  rows.forEach(function(grp,r){var s=grp[0];
+    var tr=document.createElement('tr');
+    var th=document.createElement('th'); th.scope='row';
+    var dd=s.label.split(' '); th.innerHTML='<span></span><small></small>';
+    th.firstChild.textContent=dd.slice(1).join(' '); th.lastChild.textContent=dd[0];
+    tr.appendChild(th);
+    CLUB.levels.forEach(function(l){
+      if(l.comingSoon){
+        if(r===0){var c=document.createElement('td');c.className='soonc';c.rowSpan=rows.length;c.innerHTML='<span>Coming soon</span>';tr.appendChild(c);}
+        return;
+      }
+      var td=document.createElement('td');
+      grp.forEach(function(s){if(s.band.id===l.id){var sp=document.createElement('span');sp.className='slot b'+l.id;sp.textContent=s.time;sp.setAttribute('data-start',String(s.start));td.appendChild(sp);}});
+      tr.appendChild(td);
+    });
+    tb.appendChild(tr);
+  });
+  document.getElementById('schedNote').textContent= sessions.length
+    ? 'Tuesdays 6–6:45pm (no session on 17 November). The Christmas session on Tuesday 22 December is in the morning, 11–11:45am. Grade 7–8 players are welcome to join the Intermediate sessions for free until 31 December, while the Advanced group gets ready. January dates will be added in December.'
+    : 'New dates are coming soon. Email music@cadenza-london.com to be told first.';
+
+  // session picker: only the sessions for the chosen level
+  var gradeSel=document.getElementById('grade'), picks=document.getElementById('picks');
+  function levelFor(){
+    var o=gradeSel.options[gradeSel.selectedIndex];
+    return o && o.value ? o.getAttribute('data-band') : null;
+  }
+  function renderPicks(){
+    var b=levelFor();
+    var was={}; picks.querySelectorAll('input:checked').forEach(function(x){was[x.getAttribute('data-start')]=1;});
+    picks.innerHTML='';
+    if(!b){picks.innerHTML='<p class="empty">Choose your reading level above to see your sessions.</p>';return;}
+    var mine=sessions.filter(function(s){return b==='all'||s.band.id===b;});
+    if(!mine.length){picks.innerHTML='<p class="empty">No more sessions for this level this term. Email music@cadenza-london.com and we\'ll tell you the January dates.</p>';return;}
+    if(b==='all'){var h=document.createElement('p');h.className='empty';h.textContent='Not sure? Pick one session to start. Eric will tell you which level to book after that.';picks.appendChild(h);}
+    mine.forEach(function(s,i){
+      var lab=document.createElement('label'); lab.className='opt';
+      var inp=document.createElement('input'); inp.type='checkbox'; inp.name='sessions[]'; inp.id='pick'+i;
+      inp.value=s.long+', '+s.time+' ('+s.band.name+')';
+      inp.setAttribute('data-start',String(s.start)); inp.setAttribute('data-level',s.band.id);
+      var sp=document.createElement('span'); sp.innerHTML='<b></b><small></small>';
+      sp.querySelector('b').textContent=s.label;
+      var info=s.time+' · '+s.band.name, pl=placesLeft(s);
+      if(pl!==null){
+        if(isListener()) info+=' · listener places open';
+        else if(pl<=0){info+=' · Full, join as a listener'; inp.disabled=true; lab.classList.add('dis');}
+        else info+=' · '+pl+(pl===1?' place':' places')+' left';
+      }
+      sp.querySelector('small').textContent=info;
+      if(was[String(s.start)]&&!inp.disabled) inp.checked=true;
+      lab.appendChild(inp); lab.appendChild(sp); picks.appendChild(lab);
+    });
+  }
+  gradeSel.addEventListener('change',renderPicks);
+  // live places (only when the Cloudflare booking API is set up)
+  var AVAIL=null;
+  function isListener(){var r=document.querySelector('input[name="role"]:checked');return !!r&&r.value==='Listener';}
+  function placesLeft(s){
+    if(!AVAIL) return null;
+    var a=AVAIL.sessions[String(s.start)]||{players:0}, cap=(AVAIL.caps&&AVAIL.caps[s.band.id])||8;
+    return cap-a.players;
+  }
+  function markTimetable(){
+    document.querySelectorAll('.slot[data-start]').forEach(function(sp){
+      var s=sessions.filter(function(x){return String(x.start)===sp.getAttribute('data-start');})[0]; if(!s) return;
+      var pl=placesLeft(s), tag=sp.querySelector('.left');
+      if(pl===null) return;
+      if(!tag){tag=document.createElement('small');tag.className='left';sp.appendChild(tag);}
+      tag.textContent=pl<=0?'Full':pl+' left'; sp.classList.toggle('full',pl<=0);
+    });
+  }
+  function loadAvailability(){
+    if(!CLUB.api) return Promise.resolve();
+    return fetch(CLUB.api.replace(/\/$/,'')+'/api/availability',{cache:'no-store'})
+      .then(function(r){return r.ok?r.json():null;})
+      .then(function(j){if(j&&j.sessions){AVAIL=j;markTimetable();renderPicks();}})
+      .catch(function(){});
+  }
+  document.querySelectorAll('input[name="role"]').forEach(function(r){r.addEventListener('change',renderPicks);});
+  loadAvailability();
+  renderPicks();
+  var insSel=document.getElementById('instrument'), othField=document.getElementById('otherField');
+  function syncIns(){othField.hidden=insSel.value!=='Other';if(othField.hidden)document.getElementById('other').value='';}
+  insSel.addEventListener('change',syncIns);
+
+  // who is booking
+  var forChild=document.getElementById('forChild'), forAdult=document.getElementById('forAdult');
+  var gField=document.getElementById('guardianField'), gWrap=document.getElementById('cGuardWrap');
+  function syncWho(){
+    var child=forChild.checked;
+    gField.hidden=!child; gWrap.hidden=!child;
+    if(!child){document.getElementById('guardian').value='';document.getElementById('cGuard').checked=false;}
+  }
+  forChild.addEventListener('change',syncWho); forAdult.addEventListener('change',syncWho); syncWho();
+
+  // submit
+  var form=document.getElementById('bookForm'), status=document.getElementById('status'), send=document.getElementById('sendBtn');
+  var done=document.getElementById('done');
+  function fail(msg,el){status.className='status err';status.textContent=msg;if(el)el.focus();}
+  var live=/netlify\.app$/.test(location.hostname);   // Netlify Forms copy only works on Netlify hosting
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    status.className='status'; status.textContent='';
+    var child=forChild.checked;
+    var g=document.getElementById('guardian'), st=document.getElementById('student'), em=document.getElementById('email');
+    if(child && !g.value.trim()) return fail('Please add the parent or guardian\'s name.',g);
+    if(!st.value.trim()) return fail('Please add the student\'s name.',st);
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())) return fail('Please enter a valid email, so we can send the Zoom link.',em);
+    var ins=document.getElementById('instrument'), oth=document.getElementById('other');
+    if(!ins.value) return fail('Please choose your instrument.',ins);
+    if(ins.value==='Other' && !oth.value.trim()) return fail('Please tell us which instrument you play.',oth);
+    if(!gradeSel.value) return fail('Please choose your reading level, so we can show your sessions.',gradeSel);
+    var ticked=[].slice.call(form.querySelectorAll('input[name="sessions[]"]:checked'));
+    if(levelFor()==='all' && ticked.length>1) return fail('If you\'re not sure of your level, please pick just one session to start.',ticked[1]);
+    if(!ticked.length){var first=form.querySelector('input[name="sessions[]"]');return fail('Please tick at least one session.',first||gradeSel);}
+    if(!document.getElementById('cJoin').checked) return fail('Please tick the consent to join the session.',document.getElementById('cJoin'));
+    if(!document.getElementById('cTerms').checked) return fail('Please read and agree to the terms and conditions.',document.getElementById('cTerms'));
+    if(!document.getElementById('cRec').checked) return fail('Sessions are recorded for social media. Please tick to agree before booking.',document.getElementById('cRec'));
+    if(child && !document.getElementById('cGuard').checked) return fail('For students under 18, a parent or guardian needs to be in the room. Please tick to confirm.',document.getElementById('cGuard'));
+    document.getElementById('sessionSummary').value=ticked.map(function(t){return t.value;}).join(' | ');
+
+    function showDone(){
+      var ul=document.getElementById('doneList'); ul.innerHTML='';
+      ticked.forEach(function(t){var li=document.createElement('li');li.textContent=t.value;ul.appendChild(li);});
+      document.getElementById('doneTitle').textContent='See you at the session, '+st.value.trim().split(' ')[0];
+      document.getElementById('doneMail').textContent='We\'ll email '+em.value.trim()+' to confirm your place and send the Zoom link before each session. Check your spam folder if nothing arrives within 2 days.';
+      showPayment(ticked);
+      form.hidden=true; done.hidden=false;
+      done.scrollIntoView({behavior:'smooth',block:'start'}); done.focus({preventScroll:true});
+    }
+    if(CLUB.api){
+      send.disabled=true; send.textContent='Sending…';
+      var fd=new FormData(form), payload={};
+      fd.forEach(function(v,k){if(k!=='sessions[]'&&k!=='form-name')payload[k.replace(/-/g,'_')]=v;});
+      payload.sessions=ticked.map(function(t){return {start:+t.getAttribute('data-start'),label:t.value,level:t.getAttribute('data-level')};});
+      fetch(CLUB.api.replace(/\/$/,'')+'/api/book',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)})
+        .then(function(r){return r.json().catch(function(){return {};}).then(function(j){
+          if(r.ok){
+            showDone();loadAvailability();
+            // also send a copy through the Netlify form, so the email notification still arrives
+            if(live){try{fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()}).catch(function(){});}catch(e){}}
+            return;
+          }
+          fail(j.error||'That didn\'t send. Please try again, or email music@cadenza-london.com.');
+          if(r.status===409) loadAvailability();
+        });})
+        .catch(function(){fail('That didn\'t send. Check your connection and try again, or email music@cadenza-london.com.');})
+        .finally(function(){send.disabled=false;send.innerHTML='Request my place <span class="arr">→</span>';});
+      return;
+    }
+    if(!live){showDone();return;}
+    send.disabled=true; send.textContent='Sending…';
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()})
+      .then(function(r){if(!r.ok)throw new Error();showDone();})
+      .catch(function(){fail('That didn\'t send. Please try again, or email music@cadenza-london.com.');})
+      .finally(function(){send.disabled=false;send.innerHTML='Request my place <span class="arr">→</span>';});
+  });
+  // payment prompt on the success screen (only for sessions after the free period)
+  function payUrl(base){
+    var email=document.getElementById('email').value.trim();
+    var ref=document.getElementById('student').value.trim().replace(/[^A-Za-z0-9_-]+/g,'-').replace(/^-+|-+$/g,'').slice(0,190)||'student';
+    return base+(base.indexOf('?')>-1?'&':'?')+'prefilled_email='+encodeURIComponent(email)+'&client_reference_id='+encodeURIComponent(ref);
+  }
+  function showPayment(ticked){
+    var step=document.getElementById('payStep'), free=document.getElementById('freeNote');
+    step.hidden=true; free.hidden=true;
+    var cut=Date.parse(CLUB.freeUntil+'T23:59:59Z');
+    var paid=ticked.filter(function(t){return +t.getAttribute('data-start')>cut;});
+    var credit=0;
+    if(document.getElementById('cStudent').checked && paid.length){
+      // Cadenza students: the first session in each calendar month is free
+      var seen={}, keep=[];
+      paid.forEach(function(t){var d=new Date(+t.getAttribute('data-start')), k=d.getUTCFullYear()+'-'+d.getUTCMonth();
+        if(!seen[k]){seen[k]=true;credit++;}else{keep.push(t);}});
+      paid=keep;
+      if(!paid.length){free.textContent='No payment needed: '+(credit>1?'these use your free monthly sessions':'this uses your free session for the month')+' (Cadenza London students get 1 free session each calendar month). We\'ll check this when we confirm your place.';free.hidden=false;return;}
+    }
+    if(!paid.length){free.textContent='No payment needed: sessions are free until '+new Date(cut).toLocaleDateString('en-GB',{day:'numeric',month:'long',timeZone:'UTC'})+'.';free.hidden=false;return;}
+    var listener=(new FormData(form).get('role')==='Listener');
+    var lv=paid[0].getAttribute('data-level'), key={A:'beg',B:'int',C:'adv'}[lv];
+    var PRICE={A:{one:8,month:15},B:{one:10,month:18},C:{one:12,month:22}}[lv];
+    var unit=listener?5:PRICE.one, n=paid.length;
+    var single=(CLUB.pay||{})[listener?'listener':'single_'+key];
+    var monthly=listener?'':(CLUB.pay||{})['monthly_'+key];
+    if(!single && !monthly){free.textContent='We\'ll email you a payment link with your confirmation.';free.hidden=false;return;}
+    document.getElementById('payTitle').textContent=n+(n>1?' sessions':' session')+' to pay: £'+(unit*n);
+    document.getElementById('payText').textContent=(credit?'Your free Cadenza student session'+(credit>1?'s are':' is')+' already taken off. ':'')+'Pay by card through Stripe to hold your place. If a session turns out to be full, we refund you in full.';
+    var a=document.getElementById('paySingle');
+    if(single){a.href=payUrl(single);a.textContent='Pay £'+(unit*n)+' now';a.hidden=false;}else{a.hidden=true;}
+    var m=document.getElementById('payMonthly');
+    if(monthly){m.href=payUrl(monthly);m.textContent='Save with the monthly plan: £'+PRICE.month+' a month (save £'+(PRICE.one*2-PRICE.month)+')';m.hidden=false;}else{m.hidden=true;}
+    document.getElementById('payNote').textContent=(single&&n>1?'On the Stripe page, set the quantity to '+n+'. ':'')+(monthly?'Monthly plans cover 2 sessions a month and renew automatically. Start by 31 January 2027 to keep this price. Cancel at least 7 days before your next payment.':'');
+    step.hidden=false;
+  }
+
+  document.getElementById('againBtn').addEventListener('click',function(){
+    var keepEmail=document.getElementById('email').value, keepG=document.getElementById('guardian').value;
+    form.reset(); renderPicks(); syncWho(); syncIns();
+    document.getElementById('email').value=keepEmail; document.getElementById('guardian').value=keepG;
+    done.hidden=true; form.hidden=false; status.textContent='';
+    document.getElementById('student').focus();
+  });
+
+  // Stripe payment links: shown only once a link is filled in
+  document.querySelectorAll('[data-pay]').forEach(function(a){
+    var url=(CLUB.pay||{})[a.getAttribute('data-pay')];
+    if(url){a.href=url;a.hidden=false;}
+  });
+
+  // menu drawer
+  var mBtn=document.getElementById('menuBtn'), drawer=document.getElementById('drawer'), scrim=document.getElementById('scrim'), mClose=document.getElementById('closeBtn');
+  function openMenu(){drawer.hidden=false;scrim.hidden=false;requestAnimationFrame(function(){drawer.classList.add('open');scrim.classList.add('open');});mBtn.setAttribute('aria-expanded','true');mClose.focus();}
+  function closeMenu(){drawer.classList.remove('open');scrim.classList.remove('open');mBtn.setAttribute('aria-expanded','false');setTimeout(function(){drawer.hidden=true;scrim.hidden=true;},300);}
+  mBtn.addEventListener('click',openMenu);
+  mClose.addEventListener('click',function(){closeMenu();mBtn.focus();});
+  scrim.addEventListener('click',closeMenu);
+  drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!drawer.hidden){closeMenu();mBtn.focus();}});
+
+  // links to the folded guide or terms open them first
+  function openFold(id){var d=document.getElementById(id);if(d&&d.tagName==='DETAILS')d.open=true;}
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href="#setup"],a[href="#terms"]');
+    if(a) openFold(a.getAttribute('href').slice(1));
+  });
+  if(location.hash==='#setup'||location.hash==='#terms') openFold(location.hash.slice(1));
+
+  // setup checklist
+  var boxes=[].slice.call(document.querySelectorAll('#checklist input')), prog=document.getElementById('progress');
+  function upd(){var n=boxes.filter(function(b){return b.checked;}).length;prog.textContent=n===4?'All set. See you on Zoom.':n+' of 4 done';}
+  boxes.forEach(function(b){b.addEventListener('change',upd);});
+})();
+</script>
+</body>
+</html>
