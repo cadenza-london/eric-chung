@@ -379,7 +379,7 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
 <script>
 (function(){
   /* ===== LIVE CONFIG: set this to the upload address Cloudflare gives you ===== */
-  var UPLOAD_API = 'https://YOUR-UPLOAD-WORKER.workers.dev';
+  var UPLOAD_API = 'https://cadenza-exam-upload.jessiemovement.workers.dev';
   var MAX_VIDEO = 4 * 1024 * 1024 * 1024;  // 4 GB per video
   var MAX_SCORE = 20 * 1024 * 1024;        // 20 MB per score photo/PDF
   var MAX_SCORE_FILES = 10;                // per piece
@@ -387,8 +387,8 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
   var REGISTER_URL = 'https://cadenza-london.com';
 
   var SANDBOX = false; // true = preview with example details and a simulated upload; false = real page
-  var isLive = UPLOAD_API.indexOf('YOUR-') === -1;
-  var sandbox = SANDBOX && !isLive;
+  var isLive = UPLOAD_API.indexOf('YOUR-') === -1 && !SANDBOX; // sandbox never contacts the Worker
+  var sandbox = SANDBOX; // sandbox always simulates, even when the Worker is live
   var LINK = false; // all videos and score photos upload to Cloudflare
   function okUrl(v){ return /^https?:\/\/[^\s.]+\.\S+/i.test((v||'').trim()); }
   function hasVideo(p){ return LINK ? okUrl($('link'+p.n).value) : !!p.video; }
@@ -638,7 +638,7 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
     });
   }
   function netlifyBackup(){
-    if(LINK || !/netlify\.app$|cadenza-london\.com$/.test(location.hostname)) return;
+    if(LINK || !/netlify\.app$/.test(location.hostname)) return; // Netlify Forms copy: only on Netlify hosting
     var fd=new URLSearchParams();
     fd.append('form-name','exam-course-pieces'); fd.append('bot-field','');
     ['name','email','student','grade','board'].forEach(function(k){ fd.append(k,$(k).value.trim()); });
