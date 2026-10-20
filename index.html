@@ -461,6 +461,30 @@
   .drawer-links a .arrow { font-size: 0.85rem; opacity: 0.35; transition: opacity 0.2s, transform 0.2s; }
   .drawer-links a:hover .arrow { opacity: 1; transform: translateX(4px); }
 
+
+  /* Menu groups (Oct 2026): hover or tap to open */
+  .dgroup-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; background: none; border: 0; cursor: pointer;
+    padding: 0.75rem 0; font-family: 'Jost', sans-serif; font-size: 0.72rem; font-weight: 400; color: var(--cream);
+    letter-spacing: 0.18em; text-transform: uppercase; text-align: left; transition: color 0.2s; }
+  .dgroup-btn .chev { font-size: 1rem; opacity: 0.5; transition: transform 0.25s cubic-bezier(.2,.8,.2,1), opacity 0.2s; }
+  .dgroup-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.28s cubic-bezier(.2,.8,.2,1); }
+  .dgroup-body > div { overflow: hidden; }
+  .dgroup.open .dgroup-body { grid-template-rows: 1fr; }
+  .dgroup.open .dgroup-btn { color: var(--gold); }
+  .dgroup.open .dgroup-btn .chev { transform: rotate(90deg); opacity: 1; }
+  @media (hover: hover) {
+    .dgroup:hover .dgroup-body, .dgroup:focus-within .dgroup-body { grid-template-rows: 1fr; }
+    .dgroup:hover .dgroup-btn { color: var(--gold); }
+    .dgroup:hover .dgroup-btn .chev { transform: rotate(90deg); opacity: 1; }
+  }
+  .dgroup-body a, .dhead a { padding-left: 1.1rem !important; font-size: 0.66rem !important; }
+  .dgroup-body a { border-top: 1px solid rgba(201,168,76,0.07); }
+  .dgroup-body a:hover, .dhead a:hover { padding-left: 1.5rem !important; }
+  .dhead { padding-top: 0.6rem; }
+  .dhead-label { font-size: 0.56rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin: 0.4rem 0 0; }
+  .dtag-beta { background: #9b8cd9; color: #1C1C1C; }
+  @media (prefers-reduced-motion: reduce) { .dgroup-body, .dgroup-btn .chev { transition: none; } }
+
   .drawer-cta {
     margin-top: 1rem;
     display: block; text-align: center;
@@ -1383,16 +1407,30 @@
   <ul class="drawer-links">
     <li><a href="#about" class="drawer-link">About Eric <span class="arrow">→</span></a></li>
     <li><a href="#videos" class="drawer-link">Performances <span class="arrow">→</span></a></li>
-    <li><a href="#spotlight" class="drawer-link">🏆 Student Spotlight <span class="arrow">→</span></a></li>
-    <li><a href="#portfolio" class="drawer-link">⭐ Student Results <span class="arrow">→</span></a></li>
-    <li><a href="#concert" class="drawer-link">🎄 2025 Christmas Concert <span class="arrow">→</span></a></li>
+    <li class="dgroup">
+      <button type="button" class="dgroup-btn" aria-expanded="false">🏆 Student Spotlight <span class="chev">›</span></button>
+      <div class="dgroup-body"><div>
+        <a href="#spotlight" class="drawer-link">Student Spotlight <span class="arrow">→</span></a>
+        <a href="#portfolio" class="drawer-link">Student Results <span class="arrow">→</span></a>
+        <a href="#testimonials" class="drawer-link">Reviews <span class="arrow">→</span></a>
+      </div></div>
+    </li>
+    <li class="dgroup">
+      <button type="button" class="dgroup-btn" aria-expanded="false">🎄 Events <span class="chev">›</span></button>
+      <div class="dgroup-body"><div>
+        <a href="#concert" class="drawer-link">2025 Christmas Concert <span class="arrow">→</span></a>
+        <a href="aural.html" class="drawer-link">Aural Training <span class="dtag dtag-beta">Beta</span> <span class="arrow">→</span></a>
+      </div></div>
+    </li>
     <li><a href="#pricing" class="drawer-link">Lessons &amp; Fees <span class="arrow">→</span></a></li>
-    <li><a href="#feedback" class="drawer-link">Online Coaching <span class="dtag dtag-offer">First trial 20% off</span> <span class="arrow">→</span></a></li>
-    <li><a href="digital-exam-ready/" class="drawer-link">🎹 Digital Exam Ready Course <span class="dtag">New</span> <span class="arrow">→</span></a></li>
-    <li><a href="sight-reading-club/" class="drawer-link">🎼 Sight-Reading Club <span class="dtag">New</span> <span class="arrow">→</span></a></li>
-    <li><a href="aural.html" class="drawer-link">🎵 Aural Training <span class="arrow">→</span></a></li>
     <li><a href="#wedding" class="drawer-link" onclick="closeDrawer(); document.getElementById('wedding').style.display='block'; setTimeout(()=>{document.getElementById('wedding').scrollIntoView({behavior:'smooth'})},420);">Wedding &amp; Accompaniment <span class="arrow">→</span></a></li>
-    <li><a href="#testimonials" class="drawer-link">Reviews <span class="arrow">→</span></a></li>
+    <li class="dhead"><p class="dhead-label">Online Class</p>
+      <a href="#feedback" class="drawer-link">💻 Online Coaching <span class="dtag dtag-offer">First trial 20% off</span> <span class="arrow">→</span></a>
+    </li>
+    <li class="dhead"><p class="dhead-label">Clubs &amp; Workshops</p>
+      <a href="digital-exam-ready/" class="drawer-link">🎹 Digital Exam Ready Course <span class="dtag">New</span> <span class="arrow">→</span></a>
+      <a href="sight-reading-club/" class="drawer-link">🎼 Sight-Reading Club <span class="dtag">New</span> <span class="arrow">→</span></a>
+    </li>
     <li><a href="#contact" class="drawer-link">Contact Us <span class="arrow">→</span></a></li>
   </ul>
   <a href="https://booking-cadenzalondon.netlify.app" target="_blank" class="drawer-cta drawer-link">✦ &nbsp; Book a Lesson</a>
@@ -2350,6 +2388,13 @@
   const overlay = document.getElementById('drawerOverlay');
   const closeBtn = document.getElementById('drawerClose');
   const drawerLinks = document.querySelectorAll('.drawer-link');
+
+  // Menu groups: tap to open on phones (hover opens them on computers)
+  document.querySelectorAll('.dgroup-btn').forEach(btn => btn.addEventListener('click', () => {
+    const g = btn.parentElement, open = !g.classList.contains('open');
+    document.querySelectorAll('.dgroup.open').forEach(x => { x.classList.remove('open'); x.querySelector('.dgroup-btn').setAttribute('aria-expanded', 'false'); });
+    if (open) { g.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+  }));
 
   function openDrawer() {
     drawer.classList.add('open');
