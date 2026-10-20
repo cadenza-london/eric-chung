@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>if(/\/booking$/.test(location.pathname))location.replace(location.pathname+'/'+location.search+location.hash);</script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Book a trial lesson · Cadenza London Music Academy</title>
+<meta name="description" content="Request a trial piano, violin, theory or singing lesson at Cadenza London Music Academy, Colindale.">
+<meta name="theme-color" content="#FBF8F1">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<style>
+:root{
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --bg:#FBF8F1;--paper:#FFFFFF;--ink:#1F1B14;--ink-2:#5C554A;--ink-3:#9A927F;
+  --line:#E9E2D3;--line-2:#F2EDE1;--gold:#B8902A;--gold-soft:#F4EAD2;--gold-deep:#8F6D14;
+  --ok:#3E7C5C;--bad:#B4483C;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* ── top bar ── */
+.top{position:sticky;top:0;z-index:20;background:rgba(251,248,241,.86);backdrop-filter:saturate(140%) blur(14px);-webkit-backdrop-filter:saturate(140%) blur(14px);border-bottom:1px solid var(--line-2)}
+.top .in{max-width:680px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:12px}
+.top img{width:36px;height:36px;border-radius:50%;object-fit:cover}
+
+.top .home{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none}
+.top .brand{font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:.01em;line-height:1}
+.top .brand small{display:block;font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--ink-3);margin-top:3px}
+.top .steps{margin-left:auto;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--ink-3)}
+.top .steps b{color:var(--ink)}
+.bar{height:2px;background:var(--line-2)}
+.bar i{display:block;height:100%;width:25%;background:var(--gold);transition:width .5s var(--ease)}
+
+/* ── hero ── */
+.hero{max-width:680px;margin:0 auto;padding:30px 20px 4px;text-align:center}
+.hero .eyebrow{font-size:11px;font-weight:600;letter-spacing:.22em;color:var(--gold-deep);margin-bottom:14px}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(38px,8vw,54px);line-height:1.05;letter-spacing:-.01em;margin:0 0 14px}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--gold-deep)}
+.hero p{color:var(--ink-2);max-width:480px;margin:0 auto;font-size:16px}
+.hero .rule{width:44px;height:1px;background:var(--gold);margin:18px auto 0;opacity:.7}
+.why-trial{max-width:520px;margin:16px auto 0;padding:10px 14px;border:1px solid var(--line);border-radius:14px;background:var(--paper);font-size:12.5px;color:var(--ink-2);line-height:1.5;text-align:left}
+.why-trial b{color:var(--gold-deep);font-weight:600;display:block;margin-bottom:1px;font-family:var(--serif);font-size:17px}
+
+/* what happens next */
+.next3{max-width:520px;margin:12px auto 0;text-align:left}
+.next3 .nk{font-size:11px;font-weight:600;letter-spacing:.18em;color:var(--ink-3);margin:0 0 8px 2px}
+.next3 ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;counter-reset:n}
+.next3 li{counter-increment:n;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px 12px 11px;font-size:12.5px;color:var(--ink-2);line-height:1.45}
+.next3 li::before{content:counter(n);display:block;font-family:var(--serif);font-size:24px;font-weight:600;line-height:1;color:var(--gold-deep);margin-bottom:4px}
+.next3 li b{display:block;color:var(--ink);font-weight:600;font-size:13px;margin-bottom:1px}
+@media (max-width:560px){.next3 ol{grid-template-columns:minmax(0,1fr)}.next3 li{display:grid;grid-template-columns:26px 1fr;column-gap:8px}.next3 li::before{grid-row:span 2;margin:0}}
+
+/* ── stage ── */
+.stage{max-width:680px;margin:0 auto;padding:14px 20px 140px;position:relative;overflow:hidden}
+.step{display:none;animation:in .45s var(--ease) both}
+.step.on{display:block}
+.step.back{animation-name:inBack}
+@keyframes in{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes inBack{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+h2{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.15;margin:8px 0 6px;letter-spacing:-.005em}
+.lead{color:var(--ink-2);margin:0 0 24px;font-size:15px}
+.k{font-size:11px;font-weight:600;letter-spacing:.18em;color:var(--ink-3);margin:26px 0 12px}
+.k:first-of-type{margin-top:0}
+
+/* choice cards */
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.choice{position:relative;text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px 18px 18px;transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s}
+.choice:hover{transform:translateY(-2px);box-shadow:0 10px 30px -18px rgba(60,45,10,.35)}
+.choice.on{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset;background:var(--gold-soft)}
+.choice.off{opacity:.45;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.choice .why{display:none;margin-top:10px;font-size:12.5px;color:var(--gold-deep);font-weight:600}
+.choice.off .why{display:block}
+.choice .big{font-family:var(--serif);font-size:34px;font-weight:600;line-height:1}
+.choice .big small{font-size:16px;font-family:var(--sans);font-weight:500;color:var(--ink-2);margin-left:4px}
+.choice .d{color:var(--ink-2);font-size:13.5px;margin-top:8px;line-height:1.45}
+.choice .p{margin-top:14px;font-weight:600;font-size:14px}
+.choice .p span{color:var(--ink-3);font-weight:500}
+.choice .tick{position:absolute;top:14px;right:14px;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;transition:all .25s}
+.choice.on .tick{background:linear-gradient(135deg,#E9C25A 0%,#D4A62F 55%,#C08F1A 100%);border-color:#C08F1A;color:#fff}
+.choice .tick svg{width:12px;height:12px;opacity:0;transform:scale(.6);transition:all .25s}
+.choice.on .tick svg{opacity:1;transform:none}
+
+/* service menu */
+.svcg{background:var(--paper);border:1px solid var(--line);border-radius:20px;margin-bottom:12px;overflow:hidden}
+.svcg .gh{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:16px 18px;border:0;background:transparent;transition:background .2s}
+.svcg.open .gh{background:#FCFAF5}
+.svcg .gh .ic{width:38px;height:38px;border-radius:50%;background:var(--gold-soft);display:grid;place-items:center;font-size:18px;flex:none}
+.svcg .gh .gn{font-family:var(--serif);font-size:22px;font-weight:600;flex:1;min-width:0;line-height:1.1}
+.svcg .gh .gn small{display:block;font-family:var(--sans);font-size:12.5px;color:var(--ink-3);font-weight:400;margin-top:3px}
+.svcg .gh .chev{width:18px;height:18px;color:var(--ink-3);transition:transform .3s var(--ease);flex:none}
+.svcg.open .gh .chev{transform:rotate(180deg)}
+.svcg .gb{display:none;border-top:1px solid var(--line-2)}
+.svcg.open .gb{display:block}
+.svc{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:14px 18px;border:0;border-top:1px solid var(--line-2);background:transparent;transition:background .2s}
+.svc:first-child{border-top:0}
+.svc:hover{background:#FCFAF5}
+.svc .sn{flex:1;min-width:0;font-weight:500;font-size:15px}
+.svc .sn small{display:block;color:var(--ink-3);font-weight:400;font-size:12.5px;margin-top:2px;white-space:normal}
+.svc .sp{font-size:13.5px;color:var(--ink-2);white-space:nowrap}
+.svc .rad{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);flex:none;display:grid;place-items:center;transition:all .2s}
+.svc.on .rad{border-color:#C08F1A;background:linear-gradient(135deg,#E9C25A 0%,#D4A62F 55%,#C08F1A 100%)}
+.svc.on .rad::after{content:"";width:7px;height:7px;border-radius:50%;background:#fff}
+.svc.on{background:linear-gradient(135deg,#FBF1D2,#F3E1A8)}
+.durs{display:none;padding:4px 18px 16px 62px;gap:8px;flex-wrap:wrap}
+.dur{min-width:84px}
+.svc.on + .durs{display:flex}
+.dur{flex:1 1 84px;border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:11px 8px;text-align:center;font-weight:500;font-size:14px;transition:all .2s}
+.dur b{display:block;font-size:12.5px;font-weight:600;color:var(--ink-3);margin-top:2px}
+.dur.on{background:linear-gradient(135deg,#E9C25A 0%,#D4A62F 55%,#C08F1A 100%);color:#3A2C05;border-color:#C08F1A}
+.dur.on b{color:#5E4610}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:10px 16px;font-weight:500;font-size:14.5px;transition:all .2s}
+.pill.on{background:linear-gradient(135deg,#E9C25A 0%,#D4A62F 55%,#C08F1A 100%);color:#3A2C05;border-color:#C08F1A}
+select.sel,.fld input,.fld textarea{width:100%;border:1px solid var(--line);background:var(--paper);border-radius:14px;padding:15px 16px;font:inherit;font-size:16px;color:var(--ink);transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
+select.sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235C554A' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:42px}
+select.sel:focus,.fld input:focus,.fld textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+
+/* calendar */
+.calwrap{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:18px 16px 14px}
+.calhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding:0 4px}
+.calhead .m{font-family:var(--serif);font-size:24px;font-weight:600}
+.calhead button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--paper);display:grid;place-items:center;transition:all .2s}
+.calhead button:disabled{opacity:.3;cursor:default}
+.calhead button:not(:disabled):hover{background:var(--bg)}
+.dow{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--ink-3);margin-bottom:6px}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);row-gap:4px}
+.cell{aspect-ratio:1;display:grid;place-items:center;position:relative}
+.cell button{width:min(44px,100%);aspect-ratio:1;border-radius:50%;border:0;background:transparent;font-weight:500;font-size:15px;color:var(--ink);position:relative;transition:all .2s var(--ease)}
+.cell button:disabled{color:var(--ink-3);opacity:.45;cursor:default;text-decoration:line-through;text-decoration-color:transparent}
+.cell button.av::after{content:"";position:absolute;left:50%;bottom:5px;width:4px;height:4px;border-radius:50%;background:var(--gold);transform:translateX(-50%)}
+.cell button.av:hover{background:var(--gold-soft)}
+.cell button.on{background:linear-gradient(135deg,#E9C25A 0%,#D4A62F 55%,#C08F1A 100%);color:#3A2C05;font-weight:600}
+.cell button.on::after{background:#3A2C05}
+.cell button.today:not(.on){box-shadow:0 0 0 1px var(--line) inset}
+
+.times{margin-top:18px}
+.times .h{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.times .h b{font-family:var(--serif);font-size:20px;font-weight:600}
+.times .h span{font-size:12.5px;color:var(--ink-3)}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px}
+.tg{font-size:11px;font-weight:600;letter-spacing:.16em;color:var(--ink-3);margin:6px 0 8px}
+.t{border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:13px 4px;font-weight:500;font-size:15px;transition:all .18s var(--ease);animation:pop .35s var(--ease) both}
+.t:hover{border-color:var(--gold)}
+.t.on{background:linear-gradient(135deg,#E9C25A 0%,#D4A62F 55%,#C08F1A 100%);color:#3A2C05;border-color:#C08F1A;font-weight:600}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.quiet{color:var(--ink-3);font-family:var(--serif);font-style:italic;font-size:18px;text-align:center;padding:26px 10px}
+.alt{margin-top:22px;padding:20px 18px;border:1px dashed var(--line);border-radius:18px;text-align:center}
+.alt p{margin:0 0 12px;color:var(--ink-2);font-size:14.5px}
+.alt p b{color:var(--ink);font-family:var(--serif);font-size:20px;font-weight:500;display:block;margin-bottom:4px}
+.stale{background:#FFF6E8;border:1px solid #F1DDB4;color:#7A5A12;border-radius:14px;padding:12px 14px;font-size:13.5px;margin-bottom:14px}
+
+/* form */
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--ink-2);margin-bottom:7px}
+.fld label i{font-style:normal;color:var(--ink-3);font-weight:500}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.err{color:var(--bad);font-size:13px;font-weight:600;margin:4px 0 0;min-height:18px}
+.fld.bad input{border-color:var(--bad);box-shadow:0 0 0 1px var(--bad) inset}
+
+/* review */
+.review{background:var(--paper);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.review .row{display:flex;justify-content:space-between;gap:14px;padding:16px 20px;border-top:1px solid var(--line-2)}
+.review .row:first-child{border-top:0}
+.review .row .l{color:var(--ink-3);font-size:13px;letter-spacing:.04em;flex:none;padding-top:2px}
+.review .row .v{text-align:right;font-weight:500}
+.review .row .v small{display:block;color:var(--ink-2);font-weight:400;font-size:13.5px}
+.review .edit{border:0;background:none;color:var(--gold-deep);font-weight:600;font-size:13px;padding:0;margin-left:10px}
+.note{margin-top:16px;padding:16px 18px;border-radius:16px;background:var(--gold-soft);color:#5E4610;font-size:14px;line-height:1.55}
+.note b{color:var(--gold-deep)}
+.fine{font-size:12.5px;color:var(--ink-3);margin-top:14px;line-height:1.55}
+
+/* sticky action bar */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line-2);padding:12px 20px calc(12px + env(safe-area-inset-bottom));transform:translateY(0);transition:transform .35s var(--ease)}
+.dock.hide{transform:translateY(110%)}
+.dock .in{max-width:680px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.dock .sum{flex:1;min-width:0;font-size:13px;color:var(--ink-2);line-height:1.35}
+.dock .sum b{display:block;color:var(--ink);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{border:0;border-radius:999px;background:linear-gradient(135deg,#E9C25A 0%,#D4A62F 55%,#C08F1A 100%);color:#3A2C05;font-weight:600;font-size:15.5px;padding:16px 26px;display:inline-flex;align-items:center;gap:10px;transition:all .25s var(--ease);white-space:nowrap}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px -14px rgba(143,109,20,.6)}
+.btn:disabled{opacity:.35;transform:none;box-shadow:none;cursor:default}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);padding:15px 18px}
+.btn svg{width:16px;height:16px}
+.spin{width:16px;height:16px;border:2px solid rgba(58,44,5,.25);border-top-color:#3A2C05;border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* done */
+.done{text-align:center;padding:30px 0 10px}
+.done .ring{width:84px;height:84px;border-radius:50%;margin:0 auto 22px;background:var(--gold-soft);display:grid;place-items:center;animation:ring .6s var(--ease) both}
+.done .ring svg{width:38px;height:38px;stroke:var(--gold-deep);stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40;animation:draw .6s .25s var(--ease) forwards}
+@keyframes ring{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+@keyframes draw{to{stroke-dashoffset:0}}
+.done h2{font-size:36px}
+.done .card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:22px;margin:22px 0 0;text-align:left}
+.done .card .when{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+.done .card .what{color:var(--ink-2);margin-top:6px}
+
+/* skeleton */
+.sk{background:linear-gradient(90deg,var(--line-2) 25%,#F8F4EA 50%,var(--line-2) 75%);background-size:200% 100%;animation:sk 1.2s infinite;border-radius:10px}
+@keyframes sk{to{background-position:-200% 0}}
+
+footer{max-width:680px;margin:0 auto;padding:0 20px 40px;text-align:center;font-size:12.5px;color:var(--ink-3);line-height:1.7}
+footer a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
+@media (max-width:420px){.choices{grid-template-columns:1fr}.tgrid{grid-template-columns:repeat(3,1fr)}.two{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<form name="trial-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="trial-request">
+  <input name="bot-field"><input name="Requested time"><input name="Lesson length"><input name="Fee">
+  <input name="Student"><input name="Age"><input name="Instrument"><input name="Level">
+  <input name="Instructor"><input name="Parent / guardian"><input name="Email" type="email"><input name="Phone"><textarea name="Notes"></textarea>
+</form>
+
+<div class="top">
+  <div class="in">
+    <a href="https://cadenza-london.com" class="home" aria-label="Cadenza London home">
+    <img src="crest.png" alt="">
+    <div class="brand">Cadenza London<small>MUSIC ACADEMY</small></div>
+    </a>
+    <div class="steps" id="stepLbl">STEP <b>1</b> OF 4</div>
+  </div>
+  <div class="bar"><i id="barFill"></i></div>
+</div>
+
+<section class="hero" id="hero">
+  <div class="eyebrow">TRIAL LESSON · COLINDALE, NW9</div>
+  <h1>Begin with a <em>single lesson.</em></h1>
+  <p>Choose a time that suits you and tell us a little about the student. We'll reply by email to confirm — nothing to pay today.</p>
+  <div class="rule"></div>
+  <div class="why-trial"><b>Why a trial lesson?</b> A gentle first step: the student settles into the studio, meets the teacher, and we find the pace and approach that suits them. No commitment beyond this one lesson.</div>
+  <div class="next3" aria-label="What happens next">
+    <div class="nk">WHAT HAPPENS NEXT</div>
+    <ol>
+      <li><b>Send a request</b>About two minutes. Nothing to pay now.</li>
+      <li><b>We confirm by email</b>Usually within 24 hours, or we suggest the closest time.</li>
+      <li><b>Come for your lesson</b>Pay on the day by cash or bank transfer.</li>
+    </ol>
+  </div>
+</section>
+
+<main class="stage" id="stage">
+
+  <!-- STEP 1 · lesson -->
+  <section class="step on" id="s1">
+    <h2>Choose a lesson</h2>
+    <p class="lead">Pick the instrument and level closest to the student. Every subject is priced the same — by length and level.</p>
+    <div id="svcList"><div class="svcg" id="g-piano"><button class="gh" onclick="toggleGroup('piano')"><span class="ic">🎹</span><span class="gn">Piano lesson<small>All ages, classical and contemporary · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('piano',0)"><span class="rad"></span><span class="sn">Initial · Grade 1 to 3<small>30 or 45 or 60 min</small></span><span class="sp">£35–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('piano',1)"><span class="rad"></span><span class="sn">Grade 4<small>45 or 60 min</small></span><span class="sp">£46–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('piano',2)"><span class="rad"></span><span class="sn">Grade 5<small>45 or 60 min</small></span><span class="sp">£48–£60</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£48</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div><button class="svc" onclick="pickLevel('piano',3)"><span class="rad"></span><span class="sn">Grade 6 to 7<small>45 or 60 min</small></span><span class="sp">£50–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div><button class="svc" onclick="pickLevel('piano',4)"><span class="rad"></span><span class="sn">Grade 8<small>60 min</small></span><span class="sp">£70</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£70</b></button></div><button class="svc" onclick="pickLevel('piano',5)"><span class="rad"></span><span class="sn">Diploma<small>60 min</small></span><span class="sp">£80</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£80</b></button></div><button class="svc" onclick="pickLevel('piano',6)"><span class="rad"></span><span class="sn">Conservatoire<small>60 min</small></span><span class="sp">£90</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£90</b></button></div></div></div><div class="svcg" id="g-violin"><button class="gh" onclick="toggleGroup('violin')"><span class="ic">🎻</span><span class="gn">Violin lesson<small>Beginner to Grade 8 · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('violin',0)"><span class="rad"></span><span class="sn">Initial · Grade 1 to 3<small>30 or 45 or 60 min</small></span><span class="sp">£35–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('violin',1)"><span class="rad"></span><span class="sn">Grade 4<small>45 or 60 min</small></span><span class="sp">£46–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('violin',2)"><span class="rad"></span><span class="sn">Grade 5<small>45 or 60 min</small></span><span class="sp">£48–£60</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£48</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div><button class="svc" onclick="pickLevel('violin',3)"><span class="rad"></span><span class="sn">Grade 6 to 7<small>45 or 60 min</small></span><span class="sp">£50–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div><button class="svc" onclick="pickLevel('violin',4)"><span class="rad"></span><span class="sn">Grade 8<small>60 min</small></span><span class="sp">£70</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£70</b></button></div></div></div><div class="svcg" id="g-singing"><button class="gh" onclick="toggleGroup('singing')"><span class="ic">🎤</span><span class="gn">Classical vocal lesson<small>Technique, repertoire and exam preparation · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('singing',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div><div class="svcg" id="g-theory"><button class="gh" onclick="toggleGroup('theory')"><span class="ic">📘</span><span class="gn">Music theory class<small>Grades 1–8 · essential for ABRSM &amp; Trinity exams · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('theory',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div><div class="svcg" id="g-aural"><button class="gh" onclick="toggleGroup('aural')"><span class="ic">👂</span><span class="gn">Aural training class<small>Required for ABRSM &amp; Trinity instrumental exams · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('aural',0)"><span class="rad"></span><span class="sn">Initial · Grade 1 to 3<small>30 or 45 or 60 min</small></span><span class="sp">£35–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('aural',1)"><span class="rad"></span><span class="sn">Grade 4<small>45 or 60 min</small></span><span class="sp">£46–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('aural',2)"><span class="rad"></span><span class="sn">Grade 5<small>45 or 60 min</small></span><span class="sp">£48–£60</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£48</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div><button class="svc" onclick="pickLevel('aural',3)"><span class="rad"></span><span class="sn">Grade 6 to 7<small>45 or 60 min</small></span><span class="sp">£50–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div><button class="svc" onclick="pickLevel('aural',4)"><span class="rad"></span><span class="sn">Grade 8<small>60 min</small></span><span class="sp">£70</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£70</b></button></div></div></div><div class="svcg" id="g-pop"><button class="gh" onclick="toggleGroup('pop')"><span class="ic">🎛️</span><span class="gn">Pop music production class<small>Composition, arrangement and songwriting · with Jessica</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('pop',0)"><span class="rad"></span><span class="sn">Open level<small>60 min</small></span><span class="sp">£60</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div><button class="svc" onclick="pickLevel('pop',1)"><span class="rad"></span><span class="sn">Create your own song workshop<small>60 min · No teaching but making your own song for your wedding / engagement / special moments!</small></span><span class="sp">£60</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div></div></div><div class="svcg" id="g-accomp"><button class="gh" onclick="toggleGroup('accomp')"><span class="ic">🎼</span><span class="gn">Accompaniment<small>Exam, audition or performance accompaniment · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('accomp',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div><div class="svcg" id="g-aptitude"><button class="gh" onclick="toggleGroup('aptitude')"><span class="ic">🎯</span><span class="gn">Music aptitude test prep<small>Preparation for school music aptitude tests · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('aptitude',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div><div class="svcg" id="g-interview"><button class="gh" onclick="toggleGroup('interview')"><span class="ic">🎓</span><span class="gn">Music school interview coaching<small>Audition &amp; interview coaching · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('interview',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div></div>
+  </section>
+
+  <!-- STEP 2 · date & time -->
+  <section class="step" id="s2">
+    <h2>Date &amp; time</h2>
+    <p class="lead">Free times over the next four weeks. Dates with a dot have availability.</p>
+    <div class="stale" id="stale" style="display:none"></div>
+    <div class="calwrap">
+      <div class="calhead">
+        <button onclick="moveMonth(-1)" id="prevM" aria-label="Previous month"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="m" id="calTitle">—</div>
+        <button onclick="moveMonth(1)" id="nextM" aria-label="Next month"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="dow"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>
+      <div class="grid" id="calGrid"></div>
+    </div>
+    <div class="times" id="times"></div>
+    <div class="alt">
+      <p><b>Can’t find your preferred time?</b>Send us a trial lesson request and we’ll find a time together.</p>
+      <button class="btn ghost" onclick="goFlex()">Send a trial lesson request <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </div>
+  </section>
+
+  <!-- STEP 3 · details -->
+  <section class="step" id="s3">
+    <h2>About the student</h2>
+    <p class="lead">Just enough for us to prepare a lesson that fits.</p>
+    <div class="fld" id="wPref" style="display:none"><label>Preferred days &amp; times</label><textarea id="fPref" rows="2" placeholder="e.g. Weekday afternoons after 4pm, or Saturday mornings"></textarea></div>
+    <div class="fld" id="wName"><label>Student's name</label><input id="fName" placeholder="e.g. Emily" autocomplete="off"></div>
+    <div class="fld"><label>Age <i>· optional</i></label><input id="fAge" placeholder="e.g. 7, or Adult" autocomplete="off"></div>
+    <div class="fld" id="wParent"><label>Parent / guardian's name</label><input id="fParent" placeholder="Your name — or the student's again if booking for yourself" autocomplete="name"></div>
+    <div class="k">HOW WE'LL CONFIRM</div>
+    <div class="fld" id="wEmail"><label>Email</label><input id="fEmail" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email"></div>
+    <div class="fld" id="wPhone"><label>Phone / WhatsApp</label><input id="fPhone" type="tel" placeholder="07xxx xxxxxx" autocomplete="tel" inputmode="tel"></div>
+    <div class="fld"><label>Anything we should know? <i>· optional</i></label><textarea id="fNotes" rows="3" placeholder="Exam goals, a previous teacher, access needs…"></textarea></div>
+    <p class="err" id="err3"></p>
+  </section>
+
+  <!-- STEP 4 · review -->
+  <section class="step" id="s4">
+    <h2>Review your request</h2>
+    <p class="lead">Check the details, then send. We'll email you to confirm.</p>
+    <div class="review" id="review"></div>
+    <div class="note">📩 <b>This is a request, not a confirmed booking.</b> We check every request by hand and reply by email — usually within 24 hours. If the time has just been taken, we'll suggest the closest alternative.</div>
+    <p class="fine">Trial lesson fee is paid on the day by cash or bank transfer. Nothing is charged now.</p>
+    <p class="err" id="err4"></p>
+  </section>
+
+  <!-- DONE -->
+  <section class="step" id="s5">
+    <div class="done">
+      <div class="ring"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2>Request received</h2>
+      <p class="lead" id="doneLead">Thank you — we'll be in touch shortly.</p>
+      <div class="card">
+        <div class="when" id="doneWhen">—</div>
+        <div class="what" id="doneWhat">—</div>
+      </div>
+      <div class="note" style="text-align:left">⏳ <b>Not confirmed yet.</b> We'll email <b id="doneEmail"></b> to confirm, usually within 24 hours. Please check your junk folder if you don't hear from us.</div>
+      <p class="fine">You can close this page now.</p>
+    </div>
+  </section>
+</main>
+
+<footer>Cadenza London Music Academy · Colindale, London NW9<br><a href="https://cadenza-london.com">cadenza-london.com</a></footer>
+
+<div class="dock" id="dock">
+  <div class="in">
+    <button class="btn ghost" id="backBtn" onclick="go(-1)" style="display:none" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="sum" id="dockSum"></div>
+    <button class="btn" id="nextBtn" onclick="go(1)">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+</div>
+
+<script>
+var RATES = { '30':35, '45':50, '60':65, '60g8':70, '60dip':80 };
+var DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+var DAYS_L = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+var INST = { piano:'Piano', violin:'Violin', theory:'Music theory', singing:'Classical vocal', accomp:'Accompaniment', aptitude:'Music aptitude test', interview:'Music school interview', aural:'Aural training', pop:'Pop music production' };
+/* Lesson menu — grouped like the old Picktime page. Price follows length + level: 45 min £50 · 60 min £65 · Grade 8 £70 · Diploma £80 */
+/* Price ladders (per level, per length). Missing length = not offered at that level. */
+var P_GRADED = [
+  { level:'Initial · Grade 1 to 3', durs:[30,45,60], prices:{30:35,45:46,60:58} },
+  { level:'Grade 4', durs:[45,60], prices:{45:46,60:58} },
+  { level:'Grade 5', durs:[45,60], prices:{45:48,60:60} },
+  { level:'Grade 6 to 7', durs:[45,60], prices:{45:50,60:65} },
+  { level:'Grade 8', durs:[60], prices:{60:70} }
+];
+var P_PIANO = P_GRADED.concat([
+  { level:'Diploma', durs:[60], prices:{60:80} },
+  { level:'Conservatoire', durs:[60], prices:{60:90} }
+]);
+var P_FLAT = [ { level:'All levels', durs:[30,45,60], prices:{30:35,45:50,60:65} } ];
+var SERVICES = [
+  { id:'piano', icon:'🎹', name:'Piano lesson', sub:'All ages, classical and contemporary', levels:P_PIANO },
+  { id:'violin', icon:'🎻', name:'Violin lesson', sub:'Beginner to Grade 8', levels:P_GRADED },
+  { id:'singing', icon:'🎤', name:'Classical vocal lesson', sub:'Technique, repertoire and exam preparation', levels:P_FLAT },
+  { id:'theory', icon:'📘', name:'Music theory class', sub:'Grades 1–8 · essential for ABRSM & Trinity exams', levels:P_FLAT },
+  { id:'aural', icon:'👂', name:'Aural training class', sub:'Required for ABRSM & Trinity instrumental exams', levels:P_GRADED },
+  { id:'pop', icon:'🎛️', name:'Pop music production class', sub:'Composition, arrangement and songwriting', teacher:'Jessica', levels:[ { level:'Open level', durs:[60], prices:{60:60} }, { level:'Create your own song workshop', durs:[60], prices:{60:60}, note:'No teaching but making your own song for your wedding / engagement / special moments!' } ] },
+  { id:'accomp', icon:'🎼', name:'Accompaniment', sub:'Exam, audition or performance accompaniment', levels:P_FLAT },
+  { id:'aptitude', icon:'🎯', name:'Music aptitude test prep', sub:'Preparation for school music aptitude tests', levels:P_FLAT },
+  { id:'interview', icon:'🎓', name:'Music school interview coaching', sub:'Audition & interview coaching', levels:P_FLAT }
+];
+SERVICES.forEach(function(g){ if(!g.teacher) g.teacher = 'Eric'; });
+function teacherOf(){ var g = SERVICES.find(function(x){ return x.id === svc; }); return g ? g.teacher : ''; }
+var avail = null, jess = null, dur = null, inst = null, svc = null, lvl = null, openGroup = null, pickDate = null, pickStart = null, db = null;
+var step = 1, calM = null, calY = null, sending = false, flex = false;
+
+function $(id){ return document.getElementById(id); }
+function t2m(t){ var q = t.split(':'); return Number(q[0])*60 + Number(q[1]); }
+function m2t(m){ return String(Math.floor(m/60)).padStart(2,'0') + ':' + String(m%60).padStart(2,'0'); }
+function ampm(m){ var h = Math.floor(m/60), mm = m%60, ap = h >= 12 ? 'pm' : 'am'; h = h%12 || 12; return h + ':' + String(mm).padStart(2,'0') + ap; }
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function isoLocal(d){ return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+function today(){ return isoLocal(new Date()); }
+function cutoff(){ var d = new Date(); d.setDate(d.getDate() + 28); return isoLocal(d); }
+function parse(k){ var q = k.split('-'); return new Date(Number(q[0]), Number(q[1])-1, Number(q[2])); }
+function feeFor(l, d){ if(l && l.prices && l.prices[d] != null) return l.prices[d]; if(l && l.price) return l.price; return RATES[String(d)] || 0; }
+function fee(){ return feeFor(lvl, dur); }
+function levelText(){ return lvl ? lvl.level : ''; }
+function whenText(){ if(flex) return 'Time to be arranged'; if(!pickDate || pickStart == null) return ''; var d = parse(pickDate);
+  return DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()].slice(0,3) + ' · ' + ampm(pickStart) + '–' + ampm(pickStart + dur); }
+function whenLong(){ if(flex) return 'Time to be arranged<br><span style="font-size:15px;color:var(--ink-2)">' + esc($('fPref').value.trim()) + '</span>'; var d = parse(pickDate);
+  return DAYS_L[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()] + '<br>' + ampm(pickStart) + ' – ' + ampm(pickStart + dur); }
+
+/* availability */
+/* Trial lesson rules: never before 10:30am; Saturdays must finish by 3pm; starts on the half-hour */
+var TRIAL = { earliest: 10*60+30, satLatestEnd: 15*60, step: 30 };
+/* Jessica's availability is a simple weekly pattern (set on jessica.html) rather than a lesson timetable */
+function jessDays(){
+  var out = {}; if(!jess || !jess.week) return out;
+  var d = new Date(); d.setHours(12,0,0,0);
+  for(var i = 1; i <= 35; i++){
+    d.setDate(d.getDate() + 1);
+    var k = isoLocal(d), w = jess.week[String(d.getDay())];
+    if(!w || !w.on || (jess.blocked || []).indexOf(k) > -1) continue;
+    var ivs = (w.ranges || []).filter(function(r){ return r[0] && r[1] && t2m(r[1]) > t2m(r[0]); }).map(function(r){ return t2m(r[0]) + '-' + t2m(r[1]); });
+    if(ivs.length) out[k] = ivs;
+  }
+  return out;
+}
+function daysFor(){ return teacherOf() === 'Jessica' ? jessDays() : ((avail && avail.days) || {}); }
+function startsFor(k){
+  var ivs = daysFor()[k] || [], out = [];
+  var dow = parse(k).getDay(), own = teacherOf() === 'Jessica';
+  var latestEnd = (!own && dow === 6) ? TRIAL.satLatestEnd : 24*60;
+  ivs.forEach(function(iv){
+    if(typeof iv === 'string'){ var q = iv.split('-'); iv = [Number(q[0]), Number(q[1])]; }
+    var a = Math.max(iv[0], own ? 0 : TRIAL.earliest), z = Math.min(iv[1], latestEnd);
+    var m = Math.ceil(a / TRIAL.step) * TRIAL.step;          /* snap to :00 / :30 */
+    if(m + dur > z && a + dur <= z) m = a;                    /* odd gap that only fits unaligned — offer its real start */
+    for(; m + dur <= z; m += TRIAL.step) if(out.indexOf(m) === -1) out.push(m);
+  });
+  return out.sort(function(x,y){ return x - y; });
+}
+function hasFree(k){ return k > today() && k <= cutoff() && startsFor(k).length > 0; }
+function firstFreeMonth(){
+  var keys = Object.keys(daysFor()).filter(hasFree).sort();
+  var d = keys.length ? parse(keys[0]) : new Date();
+  return [d.getMonth(), d.getFullYear()];
+}
+
+/* step 1 */
+function drawServices(){
+  $('svcList').innerHTML = SERVICES.map(function(g){
+    var open = openGroup === g.id;
+    return '<div class="svcg' + (open ? ' open' : '') + '" id="g-' + g.id + '">' +
+      '<button class="gh" onclick="toggleGroup(\'' + g.id + '\')">' +
+        '<span class="ic">' + g.icon + '</span>' +
+        '<span class="gn">' + esc(g.name) + '<small>' + esc(g.sub) + ' · with ' + esc(g.teacher) + '</small></span>' +
+        '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>' +
+      '</button><div class="gb">' +
+      g.levels.map(function(l, i){
+        var on = svc === g.id && lvl === l;
+        var prices = l.durs.map(function(d){ return '£' + feeFor(l, d); });
+        var pr = prices.length > 1 && prices[0] !== prices[prices.length-1] ? prices[0] + '–' + prices[prices.length-1] : prices[0];
+        return '<button class="svc' + (on ? ' on' : '') + '" onclick="pickLevel(\'' + g.id + '\',' + i + ')">' +
+          '<span class="rad"></span>' +
+          '<span class="sn">' + esc(l.level) + '<small>' + l.durs.join(' or ') + ' min' + (l.note ? ' · ' + esc(l.note) : '') + '</small></span>' +
+          '<span class="sp">' + pr + '</span></button>' +
+          '<div class="durs">' + l.durs.map(function(d){
+            return '<button class="dur' + (on && dur === d ? ' on' : '') + '" onclick="pickDur(' + d + ')">' + d + ' min<b>£' + feeFor(l, d) + '</b></button>';
+          }).join('') + '</div>';
+      }).join('') +
+      '</div></div>';
+  }).join('');
+}
+function toggleGroup(id){ openGroup = openGroup === id ? null : id; drawServices();
+  if(openGroup){ setTimeout(function(){ var el = $('g-' + id); if(el) el.scrollIntoView({ behavior:'smooth', block:'start' }); }, 60); } }
+function pickLevel(gid, i){
+  var g = SERVICES.find(function(x){ return x.id === gid; });
+  var prevT = teacherOf(); svc = gid; inst = gid; lvl = g.levels[i]; openGroup = gid; if(teacherOf() !== prevT){ calM = null; pickDate = null; }
+  if(lvl.durs.indexOf(dur) === -1) dur = lvl.durs[0];
+  if(pickDate && !startsFor(pickDate).length){ pickDate = null; }
+  pickStart = null;
+  drawServices(); drawDock();
+}
+function pickDur(d){ dur = d; pickStart = null; drawServices(); drawDock(); }
+
+/* step 2 · calendar */
+function moveMonth(n){
+  var d = new Date(calY, calM + n, 1); calM = d.getMonth(); calY = d.getFullYear(); drawCal();
+}
+function drawCal(){
+  if(calM == null){ var f = firstFreeMonth(); calM = f[0]; calY = f[1]; }
+  $('calTitle').textContent = MONTHS[calM] + ' ' + calY;
+  var now = new Date(), lim = parse(cutoff());
+  $('prevM').disabled = (calY < now.getFullYear()) || (calY === now.getFullYear() && calM <= now.getMonth());
+  $('nextM').disabled = (calY > lim.getFullYear()) || (calY === lim.getFullYear() && calM >= lim.getMonth());
+  var first = new Date(calY, calM, 1), lead = (first.getDay() + 6) % 7, n = new Date(calY, calM + 1, 0).getDate();
+  var html = '', tk = today();
+  for(var i = 0; i < lead; i++) html += '<div class="cell"></div>';
+  for(var d = 1; d <= n; d++){
+    var k = isoLocal(new Date(calY, calM, d)), free = hasFree(k);
+    html += '<div class="cell"><button '+(free ? 'class="av'+(pickDate===k?' on':'')+(k===tk?' today':'')+'" onclick="pickDay(\''+k+'\')"' : 'disabled'+(k===tk?' class="today"':''))+'>'+d+'</button></div>';
+  }
+  $('calGrid').innerHTML = html;
+  drawTimes();
+}
+function pickDay(k){
+  flex = false; pickDate = k; pickStart = null; drawCal(); drawDock();
+  setTimeout(function(){ $('times').scrollIntoView({ behavior:'smooth', block:'nearest' }); }, 60);
+}
+function drawTimes(){
+  var el = $('times');
+  if(!avail){ el.innerHTML = '<div class="sk" style="height:48px;margin-top:8px"></div>'; return; }
+  if(!pickDate){
+    var any = Object.keys(daysFor()).some(hasFree);
+    el.innerHTML = '<div class="quiet">' + (any ? 'Select a date to see free times.' : 'No free ' + dur + '-minute times in the next four weeks — try the other length, or email us and we’ll find something.') + '</div>';
+    return;
+  }
+  var d = parse(pickDate), st = startsFor(pickDate);
+  var groups = [['Morning', 0, 12*60], ['Afternoon', 12*60, 17*60], ['Evening', 17*60, 24*60]];
+  var html = '<div class="h"><b>' + DAYS_L[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()] + '</b><span>' + st.length + ' free · ' + dur + ' min</span></div>';
+  var i = 0;
+  groups.forEach(function(g){
+    var list = st.filter(function(m){ return m >= g[1] && m < g[2]; });
+    if(!list.length) return;
+    html += '<div class="tg">' + g[0] + '</div><div class="tgrid">' + list.map(function(m){
+      return '<button class="t' + (pickStart === m ? ' on' : '') + '" style="animation-delay:' + Math.min((i++)*25, 250) + 'ms" onclick="pickSlot(' + m + ')">' + ampm(m) + '</button>';
+    }).join('') + '</div>';
+  });
+  el.innerHTML = html;
+}
+function pickSlot(m){ pickStart = m; drawTimes(); drawDock(); }
+
+function goFlex(){ flex = true; pickDate = null; pickStart = null; step = 3; show(false); setTimeout(function(){ $('fPref').focus(); }, 500); }
+
+/* step 3 validation */
+function validDetails(show){
+  var ok = true;
+  var name = $('fName').value.trim(), email = $('fEmail').value.trim();
+  var eOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  var pOk = !flex || $('fPref').value.trim().length > 0;
+  var parent = $('fParent').value.trim(), phone = $('fPhone').value.trim();
+  var phOk = phone.replace(/\D/g,'').length >= 10;
+  if(show){
+    $('wPref').classList.toggle('bad', !pOk);
+    $('wParent').classList.toggle('bad', !parent);
+    $('wPhone').classList.toggle('bad', !phOk);
+    $('wName').classList.toggle('bad', !name);
+    $('wEmail').classList.toggle('bad', !eOk);
+    $('err3').textContent = !pOk ? 'Please tell us which days or times would suit you.' : !name ? 'Please tell us the student’s name.' : !parent ? 'Please tell us the parent or guardian’s name.' : !eOk ? 'Please enter a valid email so we can confirm.' : !phOk ? 'Please enter a phone number we can reach you on.' : '';
+  }
+  return !!name && !!parent && eOk && phOk && pOk;
+}
+['fName','fEmail','fPref','fParent','fPhone'].forEach(function(id){ $(id).addEventListener('input', function(){ $('w' + id.slice(1)).classList.remove('bad'); $('err3').textContent = ''; drawDock(); }); });
+
+/* step 4 */
+function drawReview(){
+  var lv = levelText(), parent = $('fParent').value.trim(), age = $('fAge').value.trim();
+  function row(l, v, s){ return '<div class="row"><div class="l">' + l + '</div><div class="v">' + v + (s != null ? '<button class="edit" onclick="jump(' + s + ')">Edit</button>' : '') + '</div></div>'; }
+  $('review').innerHTML =
+    row('WHEN', whenLong(), 2) +
+    row('LESSON', INST[inst] + ' · ' + dur + ' min<small>' + esc(lv) + ' · with ' + esc(teacherOf()) + '</small>', 1) +
+    row('STUDENT', esc($('fName').value.trim()) + '<small>' + [age && ('Age ' + esc(age)), parent && ('with ' + esc(parent))].filter(Boolean).join(' · ') + '</small>', 3) +
+    row('CONTACT', esc($('fEmail').value.trim()) + '<small>' + esc($('fPhone').value.trim()) + '</small>', 3) +
+    row('FEE ON THE DAY', '£' + fee());
+}
+
+/* navigation */
+function canNext(){
+  if(step === 1) return !!(svc && dur);
+  if(step === 2) return flex || !!(pickDate && pickStart != null);
+  if(step === 3) return validDetails(false);
+  return true;
+}
+function jump(n){ var back = n < step; step = n; show(back); }
+function go(n){
+  if(n > 0 && step === 3 && !validDetails(true)) return;
+  if(n > 0 && step === 4){ submit(); return; }
+  var to = step + n; if(to < 1) return;
+  step = to; show(n < 0);
+}
+function show(back){
+  for(var i = 1; i <= 5; i++){ var el = $('s' + i); el.classList.remove('on','back'); }
+  var cur = $('s' + step); if(back) cur.classList.add('back'); void cur.offsetWidth; cur.classList.add('on');
+  $('stepLbl').innerHTML = step <= 4 ? 'STEP <b>' + step + '</b> OF 4' : '<b>DONE</b>';
+  $('barFill').style.width = (step <= 4 ? step * 25 : 100) + '%';
+  $('hero').style.display = step === 1 ? '' : 'none';
+  $('dock').classList.toggle('hide', step === 5);
+  $('backBtn').style.display = step > 1 && step < 5 ? '' : 'none';
+  if(step === 2){ drawCal(); $('stale').style.display = ($('stale').textContent && teacherOf() !== 'Jessica') ? 'block' : 'none'; }
+  if(step === 3) $('wPref').style.display = flex ? '' : 'none';
+  if(step === 4) drawReview();
+  drawDock();
+  window.scrollTo({ top: step === 1 ? 0 : $('stage').offsetTop - 70, behavior:'smooth' });
+}
+function drawDock(){
+  var nb = $('nextBtn'), sum = $('dockSum');
+  nb.disabled = !canNext() || sending;
+  var arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  if(step === 4){ nb.innerHTML = sending ? '<span class="spin"></span> Sending' : 'Send request ' + arrow; }
+  else if(step === 3){ nb.innerHTML = 'Review ' + arrow; }
+  else nb.innerHTML = 'Continue ' + arrow;
+  var line1 = svc ? INST[inst] + ' · ' + dur + ' min · £' + fee() : 'Trial lesson';
+  var line2 = svc ? (whenText() || (step === 2 ? 'Choose a date and time' : levelText())) : 'Choose a lesson to begin';
+  if(flex && step === 3) line2 = 'Time to be arranged';
+  sum.innerHTML = '<b>' + esc(line1) + '</b>' + esc(line2);
+}
+
+/* submit */
+var FORM_HOST = 'https://booking-cadenzalondon.netlify.app/';   /* keep this Netlify site live: it sends the booking emails */
+function sendEmailForm(rec){
+  var whenStr = 'FLEXIBLE — customer could not find a suitable slot. Preferred: ' + rec.pref;
+  if(rec.date){ var d = parse(rec.date); whenStr = DAYS_L[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear() + ', ' + ampm(t2m(rec.start)) + '–' + ampm(t2m(rec.start) + rec.dur); }
+  var data = {
+    'form-name':'trial-request', 'bot-field':'',
+    'Requested time': whenStr,
+    'Lesson length': rec.dur + ' min', 'Fee': '£' + rec.fee,
+    'Student': rec.name, 'Age': rec.age, 'Instrument': INST[rec.instrument] || rec.instrument, 'Level': rec.level, 'Instructor': rec.teacher,
+    'Parent / guardian': rec.parent, 'Email': rec.email, 'Phone': rec.phone, 'Notes': rec.notes
+  };
+  var body = Object.keys(data).map(function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k] == null ? '' : data[k]); }).join('&');
+  if(/netlify\.app$/.test(location.hostname)){
+    return fetch('/', { method:'POST', headers:{ 'Content-Type':'application/x-www-form-urlencoded' }, body:body })
+      .then(function(r){ if(!r.ok) throw new Error('form ' + r.status); });
+  }
+  /* cadenza-london.com is hosted on GitHub Pages, which has no form handling:
+     send the email copy to the Netlify booking site, which owns the 'trial-request' form and its email alert */
+  return fetch(FORM_HOST, { method:'POST', mode:'no-cors', headers:{ 'Content-Type':'application/x-www-form-urlencoded' }, body:body });
+}
+function submit(){
+  if(sending) return;
+  $('err4').textContent = '';
+  var rec = {
+    status:'pending', createdAt:Date.now(),
+    name:$('fName').value.trim().slice(0,80), age:$('fAge').value.trim().slice(0,20),
+    instrument:inst, level:levelText(), teacher:teacherOf(), parent:$('fParent').value.trim().slice(0,80),
+    phone:$('fPhone').value.trim().slice(0,30), email:$('fEmail').value.trim().slice(0,120),
+    notes:$('fNotes').value.trim().slice(0,500),
+    date:flex ? '' : pickDate, start:flex ? '' : m2t(pickStart), dur:dur, fee:fee(),
+    pref:flex ? $('fPref').value.trim().slice(0,200) : ''
+  };
+  sending = true; drawDock();
+  var p;
+  if(window.SANDBOX){ p = new Promise(function(r){ setTimeout(r, 900); }); }
+  else{
+    var viaEmail = sendEmailForm(rec).then(function(){ return 'email'; }, function(e){ console.warn('email form failed', e); return null; });
+    var viaDb = db ? db.collection('requests').add(rec).then(function(){ return 'db'; }, function(e){ console.warn('firestore failed', e); return null; }) : Promise.resolve(null);
+    p = Promise.all([viaEmail, viaDb]).then(function(r){ if(!r[0] && !r[1]) throw new Error('both failed'); });
+  }
+  p.then(function(){
+    $('doneWhen').innerHTML = whenLong();
+    $('doneWhat').textContent = INST[inst] + ' · ' + dur + ' min · with ' + rec.teacher + ' · £' + rec.fee + ' on the day';
+    $('doneEmail').textContent = rec.email;
+    $('doneLead').textContent = 'Thank you' + (rec.parent ? ', ' + rec.parent : '') + ' — we have your request for ' + rec.name + '.';
+    sending = false; step = 5; show(false);
+  }).catch(function(e){
+    console.error(e); sending = false; drawDock();
+    $('err4').textContent = 'Sorry, that didn’t go through. Please try again, or email us directly.';
+  });
+}
+
+/* boot */
+function applyAvail(d){
+  avail = d || { days:{} };
+  if(avail.rates){ RATES = Object.assign(RATES, avail.rates); }
+  var age = avail.updatedAt ? (Date.now() - avail.updatedAt) / 86400000 : 99;
+  if(age > 7){ var st = $('stale'); st.style.display = 'block';
+    st.textContent = 'Our availability was last updated ' + (age > 60 ? 'a while' : Math.round(age) + ' days') + ' ago, so some times may have gone. Send a request anyway and we’ll confirm or suggest an alternative.'; }
+  calM = null; if(step === 2) drawCal(); drawDock();
+}
+function boot(){
+  drawServices(); drawDock();
+  if(window.SANDBOX){ jess = window.SANDBOX_JESS || null; applyAvail(window.SANDBOX_AVAIL); return; }
+  try{
+    firebase.initializeApp(window.FIREBASE_CONFIG);
+    db = firebase.firestore();
+    db.collection('public').doc('jessica').get().then(function(snap){ jess = snap.exists ? snap.data() : null; if(step === 2) drawCal(); }).catch(function(){});
+    db.collection('public').doc('availability').get()
+      .then(function(snap){ applyAvail(snap.exists ? snap.data() : null); })
+      .catch(function(e){ console.error(e); applyAvail(null); });
+  }catch(e){ applyAvail(null); }
+}
+boot();
+</script>
+</body>
+</html>

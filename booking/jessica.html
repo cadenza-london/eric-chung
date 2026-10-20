@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Jessica · availability</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FBF8F1">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<style>
+:root{--serif:"Cormorant Garamond",Georgia,serif;--sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --bg:#FBF8F1;--paper:#fff;--ink:#1F1B14;--ink-2:#5C554A;--ink-3:#9A927F;--line:#E9E2D3;--line-2:#F2EDE1;--gold:#B8902A;--gold-soft:#F4EAD2;--gold-deep:#8F6D14;--ok:#3E7C5C;--bad:#B4483C}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+.top{position:sticky;top:0;z-index:5;background:rgba(251,248,241,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line-2)}
+.top .in{max-width:640px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:12px}
+.top img{width:36px;height:36px;border-radius:50%}
+.top .brand{font-family:var(--serif);font-size:20px;font-weight:600;line-height:1}
+.top .brand small{display:block;font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--ink-3);margin-top:3px}
+main{max-width:640px;margin:0 auto;padding:26px 20px 120px}
+h1{font-family:var(--serif);font-weight:600;font-size:34px;margin:0 0 6px;line-height:1.1}
+.lead{color:var(--ink-2);margin:0 0 22px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:6px 18px;margin-bottom:14px}
+.day{display:flex;align-items:center;gap:12px;padding:14px 0;border-top:1px solid var(--line-2)}
+.day:first-child{border-top:0}
+.day .dn{width:44px;font-weight:600;font-size:15px}
+.sw{position:relative;width:46px;height:28px;border-radius:14px;background:#DDD6C6;border:0;flex:none;transition:background .2s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .2s}
+.sw.on{background:var(--ok)}.sw.on::after{transform:translateX(18px)}
+.rng{display:flex;align-items:center;gap:6px;flex:1;flex-wrap:wrap}
+.rng input{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;font:inherit;font-size:15px;color:var(--ink);width:104px}
+.rng span{color:var(--ink-3)}
+.rng.off{opacity:.35;pointer-events:none}
+.add{border:0;background:transparent;color:var(--gold-deep);font-weight:600;font-size:13px;padding:0}
+.k{font-size:11px;font-weight:600;letter-spacing:.18em;color:var(--ink-3);margin:24px 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:var(--gold-soft);color:#5E4610;border-radius:999px;padding:7px 12px;font-size:13.5px;font-weight:500}
+.chip button{border:0;background:transparent;color:inherit;font-size:16px;line-height:1;padding:0}
+.row{display:flex;gap:8px;align-items:center}
+.row input[type=date]{flex:1;border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px;font:inherit;font-size:16px}
+.btn{border:0;border-radius:999px;background:var(--ink);color:#fff;font-weight:600;font-size:15.5px;padding:15px 24px}
+.btn.ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.btn:disabled{opacity:.4}
+.dock{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line-2);padding:12px 20px calc(12px + env(safe-area-inset-bottom))}
+.dock .in{max-width:640px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.dock .st{flex:1;font-size:13px;color:var(--ink-2)}
+.fld{margin-bottom:12px}.fld label{display:block;font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--ink-2);margin-bottom:6px}
+.fld input{width:100%;border:1px solid var(--line);background:#fff;border-radius:14px;padding:14px;font:inherit;font-size:16px}
+.err{color:var(--bad);font-size:13px;font-weight:600;min-height:18px;margin:6px 0}
+.note{background:var(--gold-soft);color:#5E4610;border-radius:14px;padding:12px 14px;font-size:13.5px;margin-bottom:16px}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="top"><div class="in"><img src="crest.png" alt=""><div class="brand">Cadenza London<small>JESSICA · AVAILABILITY</small></div></div></div>
+<main>
+  <section id="login">
+    <h1>Sign in</h1>
+    <p class="lead">Same studio email and password as the scheduler app. You only need to do this once on each phone.</p>
+    <div class="card" style="padding:18px">
+      <div class="fld"><label>EMAIL</label><input id="em" type="email" autocomplete="username" inputmode="email"></div>
+      <div class="fld"><label>PASSWORD</label><input id="pw" type="password" autocomplete="current-password"></div>
+      <p class="err" id="lerr"></p>
+      <button class="btn" style="width:100%" onclick="signIn()">Sign in</button>
+    </div>
+  </section>
+
+  <section id="editor" class="hide">
+    <h1>Your weekly hours</h1>
+    <p class="lead">These are the times customers can request a <b>Pop music production</b> trial with you. Eric's lessons use the scheduler app; this page only affects your classes.</p>
+    <div class="note">Classes are 60 minutes and are offered on the hour and half hour within these windows. Turn a day off to hide it completely.</div>
+    <div class="card" id="week"></div>
+    <div class="k">DAYS OFF · HOLIDAYS</div>
+    <div class="chips" id="blocked"></div>
+    <div class="row"><input type="date" id="bdate"><button class="btn ghost" onclick="addBlocked()">Add</button></div>
+    <p class="err" id="eerr"></p>
+    <p style="font-size:12.5px;color:var(--ink-3);margin-top:22px">Signed in as <span id="who"></span> · <a href="#" onclick="signOut();return false" style="color:var(--gold-deep)">Sign out</a> · <a href="index.html" style="color:var(--gold-deep)">Open booking page ↗</a></p>
+  </section>
+</main>
+<div class="dock" id="dock"><div class="in"><span class="st" id="st">Not saved yet</span><button class="btn" id="save" onclick="save()" disabled>Save</button></div></div>
+
+<script>
+var DN = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], ORDER = [1,2,3,4,5,6,0];
+var db = null, model = { week:{}, blocked:[] }, dirty = false;
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function blank(){ var w = {}; ORDER.forEach(function(d){ w[d] = { on:false, ranges:[['10:30','18:00']] }; }); return { week:w, blocked:[] }; }
+function mark(){ dirty = true; $('save').disabled = false; $('st').textContent = 'Unsaved changes'; }
+
+function drawWeek(){
+  $('week').innerHTML = ORDER.map(function(d){
+    var w = model.week[d] || { on:false, ranges:[['10:30','18:00']] }; model.week[d] = w;
+    return '<div class="day"><span class="dn">' + DN[d] + '</span>' +
+      '<button class="sw' + (w.on ? ' on' : '') + '" onclick="toggleDay(' + d + ')" aria-label="' + DN[d] + '"></button>' +
+      '<div class="rng' + (w.on ? '' : ' off') + '">' +
+        w.ranges.map(function(r, i){
+          return '<span style="display:inline-flex;align-items:center;gap:6px">' +
+            '<input type="time" value="' + esc(r[0]) + '" step="900" onchange="setT(' + d + ',' + i + ',0,this.value)">' +
+            '<span>–</span><input type="time" value="' + esc(r[1]) + '" step="900" onchange="setT(' + d + ',' + i + ',1,this.value)">' +
+            (w.ranges.length > 1 ? '<button class="add" onclick="delRange(' + d + ',' + i + ')" title="Remove">✕</button>' : '') + '</span>';
+        }).join('') +
+        (w.ranges.length < 2 ? '<button class="add" onclick="addRange(' + d + ')">+ another window</button>' : '') +
+      '</div></div>';
+  }).join('');
+}
+function drawBlocked(){
+  var list = (model.blocked || []).slice().sort();
+  $('blocked').innerHTML = list.length ? list.map(function(k){
+    var q = k.split('-'), dt = new Date(Number(q[0]), Number(q[1]) - 1, Number(q[2]));
+    return '<span class="chip">' + DN[dt.getDay()] + ' ' + dt.getDate() + '/' + (dt.getMonth() + 1) + '/' + q[0] + '<button onclick="delBlocked(\'' + k + '\')" aria-label="Remove">×</button></span>';
+  }).join('') : '<span style="font-size:13.5px;color:var(--ink-3)">None — add any dates you cannot teach.</span>';
+}
+function toggleDay(d){ model.week[d].on = !model.week[d].on; drawWeek(); mark(); }
+function setT(d, i, j, v){ model.week[d].ranges[i][j] = v; mark(); }
+function addRange(d){ model.week[d].ranges.push(['19:00','21:00']); drawWeek(); mark(); }
+function delRange(d, i){ model.week[d].ranges.splice(i, 1); drawWeek(); mark(); }
+function addBlocked(){ var v = $('bdate').value; if(!v) return; if(model.blocked.indexOf(v) === -1) model.blocked.push(v); $('bdate').value = ''; drawBlocked(); mark(); }
+function delBlocked(k){ model.blocked = model.blocked.filter(function(x){ return x !== k; }); drawBlocked(); mark(); }
+
+function save(){
+  $('save').disabled = true; $('st').textContent = 'Saving…'; $('eerr').textContent = '';
+  var today = new Date().toISOString().slice(0,10);
+  var data = { week:model.week, blocked:model.blocked.filter(function(k){ return k >= today; }), updatedAt:Date.now(), teacher:'Jessica' };
+  db.collection('public').doc('jessica').set(data).then(function(){
+    dirty = false; $('st').textContent = 'Saved ✓ · live on the booking page';
+  }).catch(function(e){ $('save').disabled = false; $('st').textContent = 'Not saved'; $('eerr').textContent = 'Could not save: ' + (e && e.message || e); });
+}
+function load(){
+  db.collection('public').doc('jessica').get().then(function(snap){
+    model = snap.exists ? snap.data() : blank();
+    if(!model.week) model.week = blank().week; if(!model.blocked) model.blocked = [];
+    drawWeek(); drawBlocked();
+    $('st').textContent = snap.exists && model.updatedAt ? 'Last saved ' + new Date(model.updatedAt).toLocaleDateString('en-GB') : 'Not saved yet';
+  }).catch(function(e){ $('eerr').textContent = 'Could not load: ' + (e && e.message || e); });
+}
+function signIn(){
+  $('lerr').textContent = 'Connecting…';
+  firebase.auth().signInWithEmailAndPassword($('em').value.trim(), $('pw').value)
+    .then(function(){ $('lerr').textContent = ''; })
+    .catch(function(e){ var m = String(e && e.code || e); $('lerr').textContent =
+      m.indexOf('wrong-password') > -1 || m.indexOf('invalid-credential') > -1 ? 'Wrong email or password.' :
+      m.indexOf('user-not-found') > -1 ? 'No account with that email.' :
+      m.indexOf('network') > -1 ? 'No connection — try again.' : 'Sign-in failed: ' + m; });
+}
+function signOut(){ firebase.auth().signOut(); }
+try{
+  firebase.initializeApp(window.FIREBASE_CONFIG);
+  db = firebase.firestore();
+  firebase.auth().onAuthStateChanged(function(u){
+    $('login').classList.toggle('hide', !!u); $('editor').classList.toggle('hide', !u); $('dock').classList.toggle('hide', !u);
+    if(u){ $('who').textContent = u.email || ''; load(); }
+  });
+}catch(e){ $('lerr').textContent = 'Firebase not configured.'; }
+window.addEventListener('beforeunload', function(e){ if(dirty){ e.preventDefault(); e.returnValue = ''; } });
+</script>
+</body>
+</html>
