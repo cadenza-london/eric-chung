@@ -386,6 +386,20 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
 .csteps li>b{width:28px;height:28px;border-radius:50%;background:var(--navy);color:var(--yellow);display:grid;place-items:center;font-size:.85rem}
 .cguide{justify-self:start;display:inline-flex;align-items:center;gap:8px;background:var(--yellow);color:var(--navy);border:2px solid var(--navy);border-radius:999px;padding:10px 18px;font-weight:800;text-decoration:none;box-shadow:0 4px 0 var(--navy)}
 .cguide:active{transform:translateY(2px);box-shadow:0 2px 0 var(--navy)}
+
+/* coaching explainer card: navy with light text so it stands out from the orange hero */
+.cwhat{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:6px 6px 0 var(--yellow)}
+.cwhat .ck{background:var(--yellow);color:var(--navy)}
+.cwhat h3{color:#fff}
+.cwhat p{color:#eef0fa}
+.cwhat .cstats div{background:rgba(255,255,255,.08);border-color:rgba(255,210,63,.55)}
+.cwhat .cstats b{color:var(--yellow)}
+.cwhat .cstats span{color:#dfe3f5}
+.cwhat .cpk div{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3)}
+.cwhat .cpk div.best{background:rgba(255,210,63,.16);border-color:var(--yellow)}
+.cwhat .cpk b,.cwhat .cpk em{color:#fff}
+.cwhat .cpk span{color:#dfe3f5}
+.cwhat .cmore{color:var(--yellow)}
 </style>
 
 <header class="gut">
@@ -716,11 +730,12 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     $('heroLead').textContent='Upload a video of your playing. Eric watches it and tells you exactly what to work on, then you pay securely with Stripe.';
     $('needVid').innerHTML='<b>At least 1 video</b>, one for each piece you want feedback on (up to 4)';
     var hc=document.querySelector('.hero .coach'); if(hc) hc.hidden=true;
+    var cb=document.querySelector('#chat .bub p'); if(cb) cb.innerHTML='Hi! 👋 Not sure how it works? Let me show you with a <b>step-by-step guide</b>. I\'ll point to exactly what to tap!';
+    var cg=$('chatGo'); if(cg) cg.innerHTML='Show me the steps →';
     $('wantCourse').hidden=true; $('coachWhat').hidden=false; $('coachSteps').hidden=false; $('dueBox').hidden=true;
     var wc=document.querySelector('input[name="want"][value="coaching"]'); if(wc) wc.checked=true;
     var PK={single:'Single Piece Check',full:'Full Exam Check',quick:'Single Piece Check',deep:'Full Exam Check',master:'Full Exam Check'}, want=PK[(q.get('pkg')||'').toLowerCase()];
     if(want){ var pr=document.querySelector('input[name="pkg"][value="'+want+'"]'); if(pr) pr.checked=true; }
-    try{ sessionStorage.setItem('cadenzaChatSeen','1'); }catch(e){}
   }
   if(!(reg.email&&reg.student) && sandbox){
     reg.name='Jane Smith'; reg.email='jane@example.com'; reg.student='Amy Smith'; reg.grade='Grade 5'; reg.board='ABRSM Performance Grade';
@@ -945,11 +960,12 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
   /* ---------- Eric's chat bubble: on first touch of piece 1, or after 2s of scrolling ---------- */
   (function(){
     var chat=$('chat'), shown=false, timer=null, KEY='cadenzaChatSeen';
+    if(COACH_MODE) KEY='cadenzaCoachChatSeen';
     function seen(){ if(sandbox) return false; try{ return sessionStorage.getItem(KEY)==='1'; }catch(e){ return false; } }
     function mark(){ try{ sessionStorage.setItem(KEY,'1'); }catch(e){} }
     function placeAbove(){ var st=$('sticky'); var h=st&&st.classList.contains('show')?st.offsetHeight:0; chat.style.setProperty('--sticky-h',h+'px'); }
     function show(){
-      if(shown||seen()||form.hidden||busy||wantVal()==='coaching') return; shown=true; mark();
+      if(shown||seen()||form.hidden||busy||(wantVal()==='coaching'&&!COACH_MODE)) return; shown=true; mark();
       placeAbove(); chat.hidden=false;
       requestAnimationFrame(function(){ requestAnimationFrame(function(){ chat.classList.add('show'); }); });
     }
