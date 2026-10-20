@@ -1197,6 +1197,41 @@
     .fee-card { padding: 2rem 1.4rem; }
     .reviews-box { padding: 2.2rem 1.4rem; }
   }
+
+  /* ══ ONLINE COACHING TIERS (Oct 2026) ══ */
+  .coach-tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; max-width: 1150px; margin: 0 auto 5rem; position: relative; }
+  .coach-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.22); padding: 2.2rem 1.6rem; display: flex; flex-direction: column; position: relative; transition: border-color 0.25s, background 0.25s; }
+  .coach-card:hover { border-color: var(--gold); background: rgba(255,255,255,0.07); }
+  .coach-card.entry { border-color: rgba(143,192,224,0.55); background: rgba(143,192,224,0.07); }
+  .coach-card.entry:hover { border-color: #8FC0E0; }
+  .coach-card.popular { background: var(--gold); border-color: var(--gold); }
+  .coach-kicker { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  .coach-card.entry .coach-kicker { color: #8FC0E0; }
+  .coach-card.popular .coach-kicker { color: #1C1C1C; opacity: 0.7; }
+  .coach-name { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; color: #FDFAF5; font-weight: 300; }
+  .coach-price { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; color: #FDFAF5; font-weight: 300; line-height: 1; margin-top: 1.1rem; }
+  .coach-price span { font-size: 1rem; color: var(--gold); margin-right: 0.15rem; }
+  .coach-card.entry .coach-price span { color: #8FC0E0; }
+  .coach-per { font-size: 0.7rem; color: rgba(253,250,245,0.45); margin: 0.3rem 0 1.4rem; padding-bottom: 1.4rem; border-bottom: 1px solid rgba(201,168,76,0.15); }
+  .coach-list { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.2rem; }
+  .coach-list li { font-size: 0.8rem; line-height: 1.5; color: rgba(253,250,245,0.72); display: flex; gap: 0.55rem; }
+  .coach-list li::before { content: '✦'; color: var(--gold); font-size: 0.5rem; margin-top: 0.35rem; flex-shrink: 0; }
+  .coach-card.entry .coach-list li::before { color: #8FC0E0; }
+  .coach-note { font-size: 0.72rem; color: var(--gold-light); margin-bottom: 1.4rem; margin-top: auto; }
+  .coach-card.entry .coach-note { color: #B9DAEE; }
+  .coach-card.popular .coach-name, .coach-card.popular .coach-price, .coach-card.popular .coach-price span, .coach-card.popular .coach-list li, .coach-card.popular .coach-note { color: #1C1C1C; }
+  .coach-card.popular .coach-per { color: rgba(28,28,28,0.6); border-bottom-color: rgba(28,28,28,0.2); }
+  .coach-card.popular .coach-list li::before { color: #1C1C1C; opacity: 0.5; }
+  .coach-btn { display: block; text-align: center; padding: 0.85rem; border: 1px solid var(--gold); color: var(--gold); font-family: 'Jost', sans-serif; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .coach-btn:hover { background: var(--gold); color: #1C1C1C; }
+  .coach-card.entry .coach-btn { border-color: #8FC0E0; color: #8FC0E0; }
+  .coach-card.entry .coach-btn:hover { background: #8FC0E0; color: #1C1C1C; }
+  .coach-card.popular .coach-btn { background: #1C1C1C; border-color: #1C1C1C; color: #FDFAF5; }
+  .coach-card.popular .coach-btn:hover { background: #333; }
+  .coach-badge { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: #1C1C1C; border: 1px solid var(--gold); color: var(--gold); font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.3rem 1rem; white-space: nowrap; }
+  #ff-total { font-size: 0.8rem; color: var(--gold-light); }
+  @media (max-width: 1100px) { .coach-tiers { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .coach-tiers { grid-template-columns: 1fr; } }
   @media (prefers-reduced-motion: reduce) {
     .spot-docs img, .concert-gallery img { transition: none; }
   }
@@ -1223,7 +1258,7 @@
     </div>
     <div class="ticker-item">
       <span class="ticker-sep">✦</span>
-      <span>Now Enrolling · Online Master Coaching</span>
+      <span>Now Enrolling · Online Coaching</span>
       <a href="https://cadenza-london.com/master-feedback">Book Your Session →</a>
     </div>
     <div class="ticker-item">
@@ -1243,7 +1278,7 @@
     </div>
     <div class="ticker-item">
       <span class="ticker-sep">✦</span>
-      <span>Now Enrolling · Online Master Coaching</span>
+      <span>Now Enrolling · Online Coaching</span>
       <a href="https://cadenza-london.com/master-feedback">Book Your Session →</a>
     </div>
     <div class="ticker-item">
@@ -1272,7 +1307,7 @@
     <li><a href="#spotlight" class="drawer-link">🏆 Student Spotlight <span class="arrow">→</span></a></li>
     <li><a href="#concert" class="drawer-link">🎄 2025 Christmas Concert <span class="arrow">→</span></a></li>
     <li><a href="#pricing" class="drawer-link">Lessons &amp; Fees <span class="arrow">→</span></a></li>
-    <li><a href="#feedback" class="drawer-link">Online Master Coaching <span class="arrow">→</span></a>
+    <li><a href="#feedback" class="drawer-link">Online Coaching <span class="arrow">→</span></a>
       <a href="#upload" class="drawer-link" onclick="closeDrawer(); document.getElementById('upload').style.display='block'; setTimeout(()=>{document.getElementById('upload').scrollIntoView({behavior:'smooth'})},420);" style="padding-left:2.2rem; font-size:0.72rem; letter-spacing:0.12em; opacity:0.7; border-top:1px solid rgba(201,168,76,0.08); background:rgba(201,168,76,0.03);">Video Upload Guide <span class="arrow" style="font-size:0.7rem;">→</span></a>
     </li>
     <li><a href="aural.html" class="drawer-link">🎵 Aural Training <span class="arrow">→</span></a></li>
@@ -1506,7 +1541,7 @@
     <p>Preparing for a competition,<br><em>Grade 8 or a diploma?</em></p>
     <div class="spot-cta-btns">
       <a href="https://booking-cadenzalondon.netlify.app" target="_blank" rel="noopener" class="btn-gold">Book a Trial Lesson</a>
-      <a href="https://cadenza-london.com/master-feedback" class="btn-ghost">Online Master Coaching</a>
+      <a href="https://cadenza-london.com/master-feedback" class="btn-ghost">Online Coaching</a>
     </div>
   </div>
 </section>
@@ -1773,14 +1808,14 @@
 
   <!-- Header -->
   <div style="text-align:center;max-width:680px;margin:0 auto 5rem;position:relative;">
-    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:500;">Online Master Coaching</p>
+    <p style="font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:500;">Online Coaching</p>
     <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:300;line-height:1.15;color:#FDFAF5;margin-bottom:1.5rem;">Eric Reviews Your <em style="font-style:italic;color:var(--gold);">Playing</em></h2>
     <div style="display:flex;align-items:center;gap:1rem;margin:1.5rem auto;max-width:200px;">
       <div style="flex:1;height:1px;background:rgba(201,168,76,0.25);"></div>
       <div style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;"></div>
       <div style="flex:1;height:1px;background:rgba(201,168,76,0.25);"></div>
     </div>
-    <p style="font-size:0.9rem;line-height:1.85;color:rgba(253,250,245,0.6);font-weight:300;">Can't make it to a lesson? Send Eric a video of your practice and receive a personal video response with detailed corrections, technique tips, and a tailored practice plan — all from the comfort of home.</p>
+    <p style="font-size:0.9rem;line-height:1.85;color:rgba(253,250,245,0.6);font-weight:300;">Send Eric a recording of your playing and get his personal feedback by email, from a quick voice note to a full written report with a practice plan. Piano and violin, any level, from anywhere.</p>
   </div>
 
   <!-- How It Works Steps -->
@@ -1803,7 +1838,7 @@
       </div>
       <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Submit</p>
       <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#FDFAF5;font-weight:300;margin-bottom:0.6rem;">Send to Eric</p>
-      <p style="font-size:0.78rem;color:rgba(253,250,245,0.5);line-height:1.7;font-weight:300;">Upload your video via the form below. Include your piece name, grade level, and what you'd like Eric to focus on.</p>
+      <p style="font-size:0.78rem;color:rgba(253,250,245,0.5);line-height:1.7;font-weight:300;">Paste your video link in the form below, with your piece, grade and what you'd like Eric to focus on.</p>
     </div>
 
     <div style="text-align:center;padding:0 1.5rem;position:relative;">
@@ -1812,72 +1847,77 @@
       </div>
       <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Receive</p>
       <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#FDFAF5;font-weight:300;margin-bottom:0.6rem;">Get Eric's Response</p>
-      <p style="font-size:0.78rem;color:rgba(253,250,245,0.5);line-height:1.7;font-weight:300;">Within 3–5 working days, Eric sends back a personal video with corrections, annotations and a practice plan.</p>
+      <p style="font-size:0.78rem;color:rgba(253,250,245,0.5);line-height:1.7;font-weight:300;">Eric replies by email within 48 hours (72 hours for Master Class). Add a video reply if you'd like to see him demonstrate.</p>
     </div>
   </div>
 
-  <!-- Pricing Cards -->
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:900px;margin:0 auto 5rem;position:relative;">
+  <!-- Pricing Cards (Online Coaching, 4 tiers) -->
+  <div class="coach-tiers">
 
-    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);padding:2.5rem 2rem;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(255,255,255,0.07)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.2)';this.style.background='rgba(255,255,255,0.04)'">
-      <p style="font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Essential</p>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#FDFAF5;font-weight:300;margin-bottom:0.4rem;">Quick Review</p>
-      <div style="display:flex;align-items:baseline;gap:0.3rem;margin:1.2rem 0 0.3rem;">
-        <span style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold);">£</span>
-        <span style="font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:#FDFAF5;font-weight:300;line-height:1;">18</span>
-      </div>
-      <p style="font-size:0.72rem;color:rgba(253,250,245,0.4);margin-bottom:1.8rem;">per submission</p>
-      <div style="height:1px;background:rgba(201,168,76,0.15);margin-bottom:1.5rem;"></div>
-      <ul style="list-style:none;display:flex;flex-direction:column;gap:0.7rem;margin-bottom:2rem;">
-        <li style="font-size:0.82rem;color:rgba(253,250,245,0.65);display:flex;gap:0.6rem;align-items:flex-start;"><span style="color:var(--gold);font-size:0.5rem;margin-top:0.35rem;">✦</span>Up to 3-min video reviewed</li>
-        <li style="font-size:0.82rem;color:rgba(253,250,245,0.65);display:flex;gap:0.6rem;align-items:flex-start;"><span style="color:var(--gold);font-size:0.5rem;margin-top:0.35rem;">✦</span>Written notes & corrections</li>
-        <li style="font-size:0.82rem;color:rgba(253,250,245,0.65);display:flex;gap:0.6rem;align-items:flex-start;"><span style="color:var(--gold);font-size:0.5rem;margin-top:0.35rem;">✦</span>3–5 day turnaround</li>
+    <div class="coach-card entry">
+      <p class="coach-kicker">Taster · Voice note</p>
+      <p class="coach-name">Quick Impression</p>
+      <p class="coach-price"><span>£</span>10</p>
+      <p class="coach-per">per clip</p>
+      <ul class="coach-list">
+        <li>Clip of up to 1 minute</li>
+        <li>2–3 min personal voice note from Eric</li>
+        <li>First impressions and the one thing to fix</li>
+        <li>Within 48 hours</li>
       </ul>
-      <a href="#feedback-form" onclick="event.preventDefault();scrollToFeedbackForm()" style="display:block;text-align:center;padding:0.85rem;border:1px solid var(--gold);color:var(--gold);font-family:'Jost',sans-serif;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='#1C1C1C'" onmouseout="this.style.background='transparent';this.style.color='var(--gold)'">Submit a Video</a>
+      <p class="coach-note">Clip over 1 minute? Choose Quick Review.</p>
+      <a href="#feedback-form" class="coach-btn" data-pkg="impression">Send a Clip</a>
     </div>
 
-    <div style="background:var(--gold);border:1px solid var(--gold);padding:2.5rem 2rem;position:relative;transform:scale(1.03);">
-      <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:#1C1C1C;border:1px solid var(--gold);color:var(--gold);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;padding:0.3rem 1rem;font-family:'Jost',sans-serif;white-space:nowrap;">Most Popular</div>
-      <p style="font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:#1C1C1C;opacity:0.7;margin-bottom:0.6rem;">Standard</p>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#1C1C1C;font-weight:300;margin-bottom:0.4rem;">Deep Feedback</p>
-      <div style="display:flex;align-items:baseline;gap:0.3rem;margin:1.2rem 0 0.3rem;">
-        <span style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#1C1C1C;">£</span>
-        <span style="font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:#1C1C1C;font-weight:300;line-height:1;">32</span>
-      </div>
-      <p style="font-size:0.72rem;color:rgba(28,28,28,0.55);margin-bottom:1.8rem;">per submission</p>
-      <div style="height:1px;background:rgba(28,28,28,0.2);margin-bottom:1.5rem;"></div>
-      <ul style="list-style:none;display:flex;flex-direction:column;gap:0.7rem;margin-bottom:2rem;">
-        <li style="font-size:0.82rem;color:#1C1C1C;display:flex;gap:0.6rem;align-items:flex-start;"><span style="font-size:0.5rem;margin-top:0.35rem;">✦</span>Up to 8-min video reviewed</li>
-        <li style="font-size:0.82rem;color:#1C1C1C;display:flex;gap:0.6rem;align-items:flex-start;"><span style="font-size:0.5rem;margin-top:0.35rem;">✦</span>Video response from Eric</li>
-        <li style="font-size:0.82rem;color:#1C1C1C;display:flex;gap:0.6rem;align-items:flex-start;"><span style="font-size:0.5rem;margin-top:0.35rem;">✦</span>Annotated score if needed</li>
-        <li style="font-size:0.82rem;color:#1C1C1C;display:flex;gap:0.6rem;align-items:flex-start;"><span style="font-size:0.5rem;margin-top:0.35rem;">✦</span>Tailored practice plan</li>
-        <li style="font-size:0.82rem;color:#1C1C1C;display:flex;gap:0.6rem;align-items:flex-start;"><span style="font-size:0.5rem;margin-top:0.35rem;">✦</span>2–3 day turnaround</li>
+    <div class="coach-card">
+      <p class="coach-kicker">Essential · Written</p>
+      <p class="coach-name">Quick Review</p>
+      <p class="coach-price"><span>£</span>18</p>
+      <p class="coach-per">per submission</p>
+      <ul class="coach-list">
+        <li>Up to 3 minutes of playing</li>
+        <li>3–5 written, numbered observations</li>
+        <li>One clear priority for this week</li>
+        <li>Personal note from Eric · within 48 hours</li>
       </ul>
-      <a href="#feedback-form" onclick="event.preventDefault();scrollToFeedbackForm()" style="display:block;text-align:center;padding:0.85rem;background:#1C1C1C;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#1C1C1C'">Submit a Video</a>
+      <p class="coach-note">Add a video reply +£10 (Grade 1–3 only)</p>
+      <a href="#feedback-form" class="coach-btn" data-pkg="quick">Submit a Video</a>
     </div>
 
-    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);padding:2.5rem 2rem;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(255,255,255,0.07)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.2)';this.style.background='rgba(255,255,255,0.04)'">
-      <p style="font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Premium</p>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#FDFAF5;font-weight:300;margin-bottom:0.4rem;">Master Class</p>
-      <div style="display:flex;align-items:baseline;gap:0.3rem;margin:1.2rem 0 0.3rem;">
-        <span style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold);">£</span>
-        <span style="font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:#FDFAF5;font-weight:300;line-height:1;">55</span>
-      </div>
-      <p style="font-size:0.72rem;color:rgba(253,250,245,0.4);margin-bottom:1.8rem;">per submission</p>
-      <div style="height:1px;background:rgba(201,168,76,0.15);margin-bottom:1.5rem;"></div>
-      <ul style="list-style:none;display:flex;flex-direction:column;gap:0.7rem;margin-bottom:2rem;">
-        <li style="font-size:0.82rem;color:rgba(253,250,245,0.65);display:flex;gap:0.6rem;align-items:flex-start;"><span style="color:var(--gold);font-size:0.5rem;margin-top:0.35rem;">✦</span>Full piece reviewed (any length)</li>
-        <li style="font-size:0.82rem;color:rgba(253,250,245,0.65);display:flex;gap:0.6rem;align-items:flex-start;"><span style="color:var(--gold);font-size:0.5rem;margin-top:0.35rem;">✦</span>Detailed video response</li>
-        <li style="font-size:0.82rem;color:rgba(253,250,245,0.65);display:flex;gap:0.6rem;align-items:flex-start;"><span style="color:var(--gold);font-size:0.5rem;margin-top:0.35rem;">✦</span>Eric plays a demonstration</li>
-        <li style="font-size:0.82rem;color:rgba(253,250,245,0.65);display:flex;gap:0.6rem;align-items:flex-start;"><span style="color:var(--gold);font-size:0.5rem;margin-top:0.35rem;">✦</span>Full score annotations</li>
-        <li style="font-size:0.82rem;color:rgba(253,250,245,0.65);display:flex;gap:0.6rem;align-items:flex-start;"><span style="color:var(--gold);font-size:0.5rem;margin-top:0.35rem;">✦</span>Priority 48-hour turnaround</li>
+    <div class="coach-card popular">
+      <span class="coach-badge">Most Popular</span>
+      <p class="coach-kicker">Standard · Written</p>
+      <p class="coach-name">Deep Feedback</p>
+      <p class="coach-price"><span>£</span>29</p>
+      <p class="coach-per">per piece</p>
+      <ul class="coach-list">
+        <li>One piece, up to 5 minutes</li>
+        <li>Timestamped written observations</li>
+        <li>Technique, tone, rhythm &amp; expression</li>
+        <li>2-week practice plan · within 48 hours</li>
       </ul>
-      <a href="#feedback-form" onclick="event.preventDefault();scrollToFeedbackForm()" style="display:block;text-align:center;padding:0.85rem;border:1px solid var(--gold);color:var(--gold);font-family:'Jost',sans-serif;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='var(--gold)';this.style.color='#1C1C1C'" onmouseout="this.style.background='transparent';this.style.color='var(--gold)'">Submit a Video</a>
+      <p class="coach-note">Add a video reply +£9</p>
+      <a href="#feedback-form" class="coach-btn" data-pkg="deep">Submit a Video</a>
+    </div>
+
+    <div class="coach-card">
+      <p class="coach-kicker">Premium · Grade 4+</p>
+      <p class="coach-name">Master Class</p>
+      <p class="coach-price"><span>£</span>43</p>
+      <p class="coach-per">per piece</p>
+      <ul class="coach-list">
+        <li>One piece, any length · Grade 4 and above</li>
+        <li>Full written report with timestamps</li>
+        <li>Prescribed exercises and a 4-week roadmap</li>
+        <li>One follow-up Q&amp;A · within 72 hours</li>
+      </ul>
+      <p class="coach-note">Add a video reply +£12</p>
+      <a href="#feedback-form" class="coach-btn" data-pkg="master">Submit a Video</a>
     </div>
 
   </div>
 
-  <!-- Submission Form -->
+<!-- Submission Form -->
   <div id="feedback-form" style="max-width:700px;margin:0 auto;position:relative;">
 
     <!-- Success state (hidden by default) -->
@@ -1912,9 +1952,10 @@
             <label style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Feedback Package <span style="color:#e8a0a0;">*</span></label>
             <select id="ff-package" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.85rem 1rem;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;appearance:none;cursor:pointer;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,168,76,0.2)'">
               <option value="" style="background:#1C1C1C;">Select package…</option>
+              <option value="impression" style="background:#1C1C1C;">Quick Impression — £10 (clip up to 1 min)</option>
               <option value="quick" style="background:#1C1C1C;">Quick Review — £18</option>
-              <option value="deep" style="background:#1C1C1C;">Deep Feedback — £32</option>
-              <option value="master" style="background:#1C1C1C;">Master Class — £55</option>
+              <option value="deep" style="background:#1C1C1C;">Deep Feedback — £29</option>
+              <option value="master" style="background:#1C1C1C;">Master Class — £43 (Grade 4+)</option>
             </select>
             <span id="ff-package-err" style="display:none;font-size:0.72rem;color:#e8a0a0;">Please select a package.</span>
           </div>
@@ -1929,6 +1970,16 @@
             </select>
             <span id="ff-level-err" style="display:none;font-size:0.72rem;color:#e8a0a0;">Please select your level.</span>
           </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:0.45rem;">
+          <label for="ff-video" style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Video reply from Eric</label>
+          <select id="ff-video" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.85rem 1rem;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;appearance:none;cursor:pointer;">
+            <option value="no" style="background:#1C1C1C;">No thanks, written / voice reply only</option>
+            <option value="yes" style="background:#1C1C1C;">Yes, add a video reply</option>
+          </select>
+          <span id="ff-video-err" style="display:none;font-size:0.72rem;color:#e8a0a0;"></span>
+          <p id="ff-total" aria-live="polite"></p>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:0.45rem;">
@@ -1989,11 +2040,11 @@
       <ol style="padding-left:1.2rem;display:flex;flex-direction:column;gap:0.7rem;margin-bottom:1.8rem;">
         <li style="font-size:0.82rem;color:#5A5047;line-height:1.6;">Open the YouTube app and tap <strong style="color:#1C1C1C;">＋ Create</strong></li>
         <li style="font-size:0.82rem;color:#5A5047;line-height:1.6;">Select your video and tap <strong style="color:#1C1C1C;">Upload</strong></li>
-        <li style="font-size:0.82rem;color:#5A5047;line-height:1.6;">Set visibility to <strong style="color:#1C1C1C;">"Unlisted"</strong> — only Eric can see it</li>
+        <li style="font-size:0.82rem;color:#5A5047;line-height:1.6;">Set visibility to <strong style="color:#1C1C1C;">"Unlisted"</strong> — only people with the link can see it</li>
         <li style="font-size:0.82rem;color:#5A5047;line-height:1.6;">Copy the link and paste into the form below</li>
       </ol>
       <div style="background:#FFF9F0;border:1px solid rgba(201,168,76,0.2);padding:0.8rem 1rem;border-radius:0;">
-        <p style="font-size:0.75rem;color:#5A5047;line-height:1.6;">💡 <strong>Why Unlisted?</strong> Your video won't appear in search or on your channel — it's completely private unless you share the link.</p>
+        <p style="font-size:0.75rem;color:#5A5047;line-height:1.6;">💡 <strong>Why Unlisted?</strong> Your video won't appear in search or on your channel — only people you send the link to can watch it.</p>
       </div>
     </div>
 
@@ -2327,8 +2378,8 @@
     <a href="#feedback" class="promo-service promo-service-link" onclick="closePromoPopup && closePromoPopup()">
       <div class="promo-service-icon">3</div>
       <div>
-        <div class="promo-service-title">Online Master Coaching <span class="promo-arrow">→</span></div>
-        <div class="promo-service-desc">One-to-one video feedback from Eric</div>
+        <div class="promo-service-title">Online Coaching <span class="promo-arrow">→</span></div>
+        <div class="promo-service-desc">Eric's personal feedback on your recording, from £10</div>
       </div>
     </a>
     <a href="#promo-mailing-form" class="promo-service promo-service-link" onclick="var f=document.getElementById('promo-name'); if(f){event.preventDefault(); f.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){f.focus({preventScroll:true});},350);}">
@@ -2597,6 +2648,60 @@
     }
   }
 
+  // ── ONLINE COACHING PRICING (single source: £10 / £18 / £29 / £43) ──
+  const COACH = {
+    impression: { name: 'Quick Impression', price: 10, video: null },
+    quick:      { name: 'Quick Review',     price: 18, video: 10 },
+    deep:       { name: 'Deep Feedback',    price: 29, video: 9 },
+    master:     { name: 'Master Class',     price: 43, video: 12 }
+  };
+  function coachIsBeginner() { return /Initial/.test(document.getElementById('ff-level').value); }
+  function coachRuleError() {
+    const pkg = document.getElementById('ff-package').value;
+    const lvl = document.getElementById('ff-level').value;
+    const vid = document.getElementById('ff-video').value === 'yes';
+    if (pkg === 'master' && lvl && coachIsBeginner()) return 'Master Class is for Grade 4 and above. Please choose Quick Review or Deep Feedback.';
+    if (vid && pkg === 'impression') return 'Quick Impression comes with a voice note only.';
+    if (vid && pkg === 'quick' && lvl && !coachIsBeginner()) return 'Video replies on Quick Review are for Grade 1–3 only. Choose Deep Feedback for a video reply.';
+    return '';
+  }
+  function coachTotal() {
+    const p = COACH[document.getElementById('ff-package').value];
+    if (!p) return 0;
+    const vid = document.getElementById('ff-video').value === 'yes' && p.video;
+    return p.price + (vid ? p.video : 0);
+  }
+  function coachRefresh() {
+    const p = COACH[document.getElementById('ff-package').value];
+    const vSel = document.getElementById('ff-video');
+    const yes = vSel.querySelector('option[value="yes"]');
+    if (p && p.video) { yes.disabled = false; yes.textContent = 'Yes, add a video reply (+£' + p.video + ')'; }
+    else { yes.textContent = p ? 'Not available for ' + p.name : 'Yes, add a video reply'; yes.disabled = !!p; if (p) vSel.value = 'no'; }
+    const tot = document.getElementById('ff-total');
+    const rule = coachRuleError();
+    tot.textContent = p ? 'Total: £' + coachTotal() : '';
+    const vErr = document.getElementById('ff-video-err');
+    if (rule) { vErr.textContent = rule; vErr.style.display = 'block'; } else { vErr.style.display = 'none'; }
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    ['ff-package','ff-level','ff-video'].forEach(function (id) {
+      const el = document.getElementById(id); if (el) el.addEventListener('change', coachRefresh);
+    });
+    document.querySelectorAll('.coach-btn[data-pkg]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        const sel = document.getElementById('ff-package');
+        if (sel) { sel.value = a.getAttribute('data-pkg'); coachRefresh(); }
+        if (typeof scrollToFeedbackForm === 'function') scrollToFeedbackForm();
+      });
+    });
+    try {
+      const want = new URLSearchParams(location.search).get('coach');
+      if (want && COACH[want]) { document.getElementById('ff-package').value = want; }
+    } catch (e) {}
+    coachRefresh();
+  });
+
   // ── FEEDBACK FORM ──
   function validateFeedbackForm() {
     let valid = true;
@@ -2620,6 +2725,10 @@
     check('ff-piece',   'ff-piece-err',   document.getElementById('ff-piece').value.trim() !== '');
     check('ff-link',    'ff-link-err',    document.getElementById('ff-link').value.trim() !== '');
     check('ff-notes',   'ff-notes-err',   document.getElementById('ff-notes').value.trim().length >= 5);
+    const rule = coachRuleError();
+    const vErr = document.getElementById('ff-video-err');
+    if (rule) { vErr.textContent = rule; vErr.style.display = 'block'; valid = false; }
+    else { vErr.style.display = 'none'; }
     return valid;
   }
 
@@ -2643,6 +2752,9 @@
       piece:     document.getElementById('ff-piece').value.trim(),
       videoLink: document.getElementById('ff-link').value.trim(),
       notes:     document.getElementById('ff-notes').value.trim(),
+      videoReply: document.getElementById('ff-video').value === 'yes' ? 'Yes' : 'No',
+      total:     coachTotal() ? '£' + coachTotal() : '',
+      _subject:  'Online Coaching request: ' + (COACH[document.getElementById('ff-package').value] || {}).name,
     };
     try {
       const res = await fetch('https://formspree.io/f/xeerjnqq', {
