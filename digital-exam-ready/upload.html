@@ -321,6 +321,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
 @media (prefers-reduced-motion:reduce){.tpoint{transition:opacity .2s ease}.tpoint.tap i{animation:none}}
 @media (prefers-reduced-motion:reduce){.tour{transition:opacity .2s ease;transform:none}}
 /* pay box on the done screen */
+.dpill{justify-self:start;display:inline-block;background:var(--yellow);color:var(--navy);font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:6px 12px}
 .paybox{display:grid;gap:10px;background:#fff8e1;color:var(--navy);border:2px solid var(--yellow);border-radius:18px;padding:16px}
 .paybox b.h{font-size:1.05rem}
 .paybox .btn-pay{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px;border-radius:999px;background:var(--yellow);color:var(--navy);border:2.5px solid var(--navy);box-shadow:0 5px 0 var(--navy);font:800 1.05rem var(--sans);text-decoration:none}
@@ -560,6 +561,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
 
     <div class="card dark done" id="done" hidden tabindex="-1">
       <span class="tick" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1c1712" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>
+      <span class="dpill" id="donePill">In-Person 4-Week Digital Exam Ready Course</span>
       <h2>Pieces received</h2>
       <p>Thank you. <span id="doneStudent"></span><span id="doneWhat">'s videos are safely with Eric</span>. We'll email <span id="doneEmail"></span> once he has listened.</p>
       <ol>
@@ -1143,6 +1145,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     if(window.hideChat) window.hideChat(); if(tourI>=0) endTour();
     if(isLive) netlifyBackup();
     $('doneStudent').textContent=$('student').value; $('doneEmail').textContent=$('email').value;
+    $('donePill').textContent=wantVal()==='coaching'?'Online Coaching':'In-Person 4-Week Digital Exam Ready Course';
     if(wantVal()==='coaching'){
       var d=$('done'), ol=d.querySelector('ol');
       d.querySelector('h2').textContent='Videos received';
@@ -1180,7 +1183,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       d1.querySelector('h2').textContent='No problem'; d1.querySelector('p').textContent='Your videos are safe with Eric. Use the payment link in your email whenever you\'re ready.'; var o1=d1.querySelector('ol'); if(o1) o1.hidden=true; stickyShow(); return; }
     if(h.indexOf('paid')===0){ var csm=h.match(/cs=(cs_[A-Za-z0-9_]+)/);
       if(csm&&isLive) fetch(UPLOAD_API+'/api/pay/check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({cs:csm[1]})}).catch(function(){}); form.hidden=true; $('before').hidden=true; $('gone').hidden=true; var d=$('done'); d.hidden=false;
-      d.querySelector('h2').textContent='Payment received';
+      $('donePill').textContent='Online Coaching'; d.querySelector('h2').textContent='Payment received';
       d.querySelector('p').textContent='Thank you! Eric now has everything he needs and will send your feedback by email.';
       var ol=d.querySelector('ol'); if(ol){ ol.hidden=false; ol.innerHTML='<li><b>Eric watches</b> your video(s) and marks them like the real exam.</li><li><b>You get his feedback by email</b> within 5 days.</li><li><b>Check your inbox</b> for your payment confirmation and Stripe receipt.</li>'; }
       $('payBox').hidden=true; $('hero').hidden=true; [].forEach.call(document.querySelectorAll('.keys'),function(k){ k.hidden=true; }); stickyShow(); window.scrollTo(0,0); return; }
