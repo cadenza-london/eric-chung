@@ -85,7 +85,6 @@
 </script>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fredoka:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --gold: #C9A84C;
@@ -503,6 +502,56 @@
     #promo-popup { width:94vw; max-height:88vh; max-height:88dvh; }
     #promo-popup .promo-left::before { right:3.6rem; top:.9rem; }
   }
+
+  /* ── Promo popup: D2 colours + site fonts (Oct 2026) ── */
+  #promo-popup { font-family:'Jost',sans-serif; }
+  #promo-popup .g2-launch { font:500 .62rem 'Jost',sans-serif; letter-spacing:.26em; text-transform:uppercase; padding:.45rem .95rem .45rem .8rem; }
+  #promo-popup .g2-launch b { font-weight:400; color:#C9741A; letter-spacing:0; }
+  #promo-popup .g2-h { font:300 2.45rem/1.08 'Cormorant Garamond',serif; letter-spacing:0; }
+  #promo-popup .g2-h em { font-style:italic; font-weight:400; }
+  #promo-popup .g2-tag { font:500 .56rem 'Jost',sans-serif; letter-spacing:.18em; text-transform:uppercase; padding:.24rem .65rem; }
+  #promo-popup .g2-t { font:500 1.45rem/1.12 'Cormorant Garamond',serif; }
+  #promo-popup .g2-open .g2-t { font-size:1.8rem; }
+  #promo-popup .g2-d { font:300 .8rem/1.45 'Jost',sans-serif; }
+  #promo-popup .g2-tog { font:500 .6rem 'Jost',sans-serif; letter-spacing:.18em; text-transform:uppercase; }
+  #promo-popup .g2-line { font:italic 500 1.25rem 'Cormorant Garamond',serif; }
+  #promo-popup .g2-ticks { font:300 .84rem/1.5 'Jost',sans-serif; }
+  #promo-popup .g2-steps small { font:500 .56rem 'Jost',sans-serif; letter-spacing:.16em; }
+  #promo-popup .g2-steps b { font:400 .8rem/1.3 'Jost',sans-serif; }
+  #promo-popup .g2-price { font:300 .84rem 'Jost',sans-serif; }
+  #promo-popup .g2-price strong, #promo-popup .g2-price .g2-eb { font-weight:500; }
+  #promo-popup .g2-cta { font:500 .72rem 'Jost',sans-serif; letter-spacing:.22em; text-transform:uppercase; padding:1.05rem 1.2rem; }
+  /* bottom: stay in the loop + big 20% coupon */
+  #promo-popup .promo-right-label { font:500 .62rem 'Jost',sans-serif; letter-spacing:.28em; text-transform:uppercase; color:#C9741A; margin-bottom:.6rem; }
+  #promo-popup .promo-right-title { font:300 2.15rem/1.1 'Cormorant Garamond',serif; color:#5A3410; margin:0 0 .7rem; }
+  #promo-popup .promo-right-title br { display:inline; }
+  #promo-popup .promo-right-title em { font-style:italic; font-weight:400; }
+  #promo-popup .g2-desc { font:300 .84rem/1.6 'Jost',sans-serif; color:#7A5A36; margin:0 0 1rem; }
+  #promo-popup .g2-coupon { position:relative; display:grid; justify-items:center; text-align:center; gap:.1rem; padding:1rem 1rem .95rem; margin:0 0 1.2rem; border-radius:18px; color:#5A3410;
+    background:linear-gradient(110deg,#F2A93B 0%,#FFD873 28%,#FFF2C2 46%,#F5B83D 66%,#E8962E 100%); background-size:220% 100%; animation:g2GoldFoil 4s ease-in-out infinite;
+    box-shadow:0 16px 30px -14px rgba(201,116,26,.85), inset 0 1px 0 rgba(255,255,255,.7); }
+  #promo-popup .g2-coupon::before { content:""; position:absolute; inset:6px; border:1.5px dashed rgba(90,52,16,.45); border-radius:13px; pointer-events:none; }
+  #promo-popup .g2-coupon-label { font:500 .58rem 'Jost',sans-serif; letter-spacing:.28em; text-transform:uppercase; color:#5A3410; background:rgba(255,255,255,.55); padding:.22rem .65rem; border-radius:999px; }
+  #promo-popup .g2-coupon-row { display:flex; align-items:center; gap:.55rem; line-height:1; margin-top:.15rem; }
+  #promo-popup .g2-coupon-row strong { font:500 4.1rem/0.9 'Cormorant Garamond',serif; color:#5A3410; letter-spacing:-.01em; }
+  #promo-popup .g2-coupon-row strong small { font-size:.55em; vertical-align:.55em; margin-left:.04em; }
+  #promo-popup .g2-coupon-off { font:600 1.05rem 'Jost',sans-serif; letter-spacing:.24em; color:#fff; background:#5A3410; padding:.4rem .55rem .4rem .75rem; border-radius:8px; }
+  #promo-popup .g2-coupon-text { font:400 .82rem/1.4 'Jost',sans-serif; color:#5A3410; }
+  #promo-popup .promo-label { font:500 .6rem 'Jost',sans-serif; letter-spacing:.24em; text-transform:uppercase; color:#8C6A44; }
+  #promo-popup .promo-input { font-family:'Jost',sans-serif; }
+  #promo-popup .promo-submit-btn { font:500 .74rem 'Jost',sans-serif; letter-spacing:.22em; text-transform:uppercase; padding:1.05rem; }
+  #promo-popup .promo-privacy { font:300 .72rem 'Jost',sans-serif; letter-spacing:.04em; }
+  @media (max-width:640px){
+    #promo-popup .g2-h { font-size:1.75rem; }
+    #promo-popup .g2-t { font-size:1.2rem; }
+    #promo-popup .g2-open .g2-t { font-size:1.45rem; }
+    #promo-popup .g2-cta { font-size:.66rem; letter-spacing:.18em; }
+    #promo-popup .promo-right-title { font-size:1.6rem; }
+    #promo-popup .promo-right-title br { display:none; }
+    #promo-popup .g2-coupon-row strong { font-size:3.4rem; }
+    #promo-popup .g2-coupon { padding:.85rem .8rem .8rem; }
+  }
+  @media (prefers-reduced-motion:reduce){ #promo-popup .g2-coupon { animation:none; } }
 
   /* ── NAV ── */
   nav {
@@ -2363,7 +2412,7 @@
 
   <!-- Left panel: announcement -->
   <div class="promo-left">
-    <span class="g2-launch"><i>New</i> New launch</span>
+    <span class="g2-launch"><b aria-hidden="true">✦</b> New launch</span>
     <h2 class="g2-h">New ways to learn <em>with Eric</em></h2>
     <div class="g2-rule" aria-hidden="true"></div>
     <div class="g2-list">
@@ -2407,17 +2456,22 @@
   <!-- Right panel: mailing list -->
   <div class="promo-right">
     <div class="promo-right-inner">
-      <p class="promo-right-label">VIP list · Limited</p>
-      <h3 class="promo-right-title">Get first access <em>before spots go</em></h3>
-      <div class="g2-offer"><strong>20%</strong><span>off your first Online Coaching session, plus early notice of new dates and early-bird prices.</span></div>
+      <p class="promo-right-label">Stay in the Loop</p>
+      <h3 class="promo-right-title">Join Our <br><em>Limited VIP List</em></h3>
+      <p class="g2-desc">Be first to hear about new services, limited spots and early-bird offers.</p>
+      <div class="g2-coupon" role="note" aria-label="Welcome gift: 20% off your first Online Coaching session">
+        <span class="g2-coupon-label">Welcome gift</span>
+        <span class="g2-coupon-row"><strong>20<small>%</small></strong><span class="g2-coupon-off">OFF</span></span>
+        <span class="g2-coupon-text">your first Online Coaching session</span>
+      </div>
 
       <form id="promo-mailing-form" novalidate>
         <div class="promo-field">
-          <label class="promo-label" for="promo-name">Your name</label>
+          <label class="promo-label" for="promo-name">Your Name</label>
           <input class="promo-input" type="text" id="promo-name" placeholder="Jane Smith" autocomplete="name" />
         </div>
         <div class="promo-field">
-          <label class="promo-label" for="promo-email">Email address</label>
+          <label class="promo-label" for="promo-email">Email Address</label>
           <input class="promo-input" type="email" id="promo-email" placeholder="jane@example.com" autocomplete="email" />
         </div>
         <p id="promo-error" style="display:none;font-size:0.75rem;color:#c0392b;margin-bottom:0.8rem;"></p>
@@ -2425,7 +2479,7 @@
           <span id="promo-btn-text">Claim my 20% off →</span>
           <span id="promo-btn-loading" style="display:none;">Sending…</span>
         </button>
-        <p class="promo-privacy">One email a month. Unsubscribe any time.</p>
+        <p class="promo-privacy">No spam, ever. Unsubscribe at any time.</p>
       </form>
 
       <div id="promo-success" style="display:none;" class="promo-success-msg">
