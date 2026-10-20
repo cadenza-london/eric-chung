@@ -8,10 +8,10 @@
 <meta name="description" content="Practice makes perfect. A friendly weekly online sight-reading club for piano students, Grades 1–8, led by Eric Chung of Cadenza London. Practise together, ask anything, pick up great tips. Live on Zoom.">
 <meta property="og:title" content="Sight-Reading Club | Cadenza London Music Academy">
 <meta property="og:description" content="Practice makes perfect. Read new music with a friendly community every Tuesday, ask Eric anything, and become a better pianist.">
-<meta name="theme-color" content="#f5e7c3">
+<meta name="theme-color" content="#fff7ee">
 <link rel="icon" type="image/png" href="logo-circle.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=DM+Serif+Display:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=DM+Serif+Display:ital@0;1&family=Fredoka:wght@500;600;700&display=swap">
 <style>
 /* Layout: Cadenza pastel gold look (ivory, champagne, butter and blush from the logo's stars, cocoa text, no black), set apart from the marigold course pages. Champagne hero with an "unseen piece" card, then cream / white / ink bands: how a session runs, schedule by grade band, booking form, setup guide, FAQ. Single light theme by design, matching the brand site. */
 :root{
@@ -630,6 +630,261 @@ header.site .btn-sm .sm{display:none}
   .ring .fg{animation:none}
   .btn,.btn .arr{transition:none}
 }
+
+/* =====================================================================
+   CUTE THEME (Oct 2026): candy pastels, rounded type, colourful booking form.
+   Sits on top of the styles above; no black anywhere, cocoa text.
+   ===================================================================== */
+:root{
+  --round:"Fredoka","DM Sans","Helvetica Neue",Arial,sans-serif;
+  --cream:#fffaf3; --cream-2:#fff3e6; --card:#fffefb; --line:#f2e3d3;
+  --butter:#fff0b8; --blush:#ffdbe3; --sky:#d9e9ff; --sky-deep:#36639e;
+  --mint:#d4f2e2; --mint-deep:#2c7a57; --lilac:#e8deff; --lilac-deep:#6a4caf;
+  --peach:#ffe3cf; --peach-deep:#ad5a26; --pink-deep:#b4436c;
+  --marigold:#f2c55c; --gold-btn:#f6d27a; --gold-pale:#f6e2b0; --gold-deep:#86621a;
+  --ink:#4a3a2c; --muted:#6f5f50;
+}
+body{background:var(--cream)}
+h1,h2{font-family:var(--round);font-weight:600;letter-spacing:-.005em}
+h2{font-size:clamp(2rem,4.4vw,2.9rem)}
+.kicker{font-family:var(--round);font-weight:600;letter-spacing:.12em;color:var(--pink-deep);gap:8px}
+.kicker::before{content:"♪";width:auto;height:auto;background:none;font-size:1.1em;letter-spacing:0}
+.shead p{color:var(--muted)}
+
+/* bubbly buttons */
+.btn{font-family:var(--round);font-weight:600;font-size:1.05rem;letter-spacing:.01em}
+.btn-dark,.btn-gold{background:linear-gradient(180deg,#ffe08f 0%,var(--marigold) 100%);border-color:transparent;color:var(--ink);box-shadow:0 4px 0 #d9a63a,0 12px 22px -14px rgba(173,120,30,.9)}
+.btn-dark:hover,.btn-gold:hover{background:linear-gradient(180deg,#ffe7a6 0%,#f5cc6c 100%);border-color:transparent}
+.btn-dark:active,.btn-gold:active{transform:translateY(3px);box-shadow:0 1px 0 #d9a63a}
+.btn-outline{background:var(--card);border-color:#ecc9d3;color:var(--ink)}
+.btn-outline:hover{background:var(--blush);color:var(--ink)}
+.btn3d{font-family:var(--round);font-weight:600;background:linear-gradient(180deg,#fff2c9 0%,var(--gold-btn) 100%);border-color:var(--gold-deep)}
+
+/* header */
+header.site{background:rgba(255,250,243,.94);border-bottom:2px dotted #f0d4dc}
+.burger{border-color:#e9bccb;background:var(--blush)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;background:
+  radial-gradient(40% 50% at 92% 8%,rgba(255,219,227,.95),transparent 70%),
+  radial-gradient(35% 45% at 70% 95%,rgba(232,222,255,.9),transparent 70%),
+  radial-gradient(40% 50% at 0% 100%,rgba(212,242,226,.9),transparent 70%),
+  radial-gradient(30% 40% at 25% 0%,rgba(255,240,184,.95),transparent 70%),
+  #fff7ee}
+.hero .grid{position:relative;z-index:1}
+.floaty{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.floaty span{position:absolute;font-family:var(--round);font-weight:600;opacity:.8;animation:bob 6s ease-in-out infinite}
+.floaty span:nth-child(1){left:4%;top:12%;font-size:34px;color:#f19bb3;animation-delay:-1s}
+.floaty span:nth-child(2){left:46%;top:6%;font-size:26px;color:#b49be8;animation-delay:-3s}
+.floaty span:nth-child(3){right:6%;top:46%;font-size:38px;color:#8fd1ae;animation-delay:-2s}
+.floaty span:nth-child(4){left:52%;bottom:10%;font-size:30px;color:#f2c55c;animation-delay:-4s}
+.floaty span:nth-child(5){right:30%;top:14%;font-size:22px;color:#8db7ee;animation-delay:-5s}
+.floaty span:nth-child(6){left:2%;bottom:18%;font-size:24px;color:#f6b38a;animation-delay:-2.5s}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-12px) rotate(6deg)}}
+.sale{border:2px solid #f0b9c8;border-radius:20px;background:linear-gradient(100deg,#ffe3ea 0%,#fff3d0 50%,#e9e0ff 100%);background-size:200% 100%;transform:rotate(-2deg);box-shadow:0 6px 0 #f3cbd5}
+.sale:hover{transform:rotate(-2deg) translateY(-2px)}
+.sale svg{fill:var(--pink-deep)}
+.sale b{font-family:var(--round);font-weight:600;color:var(--pink-deep)}
+.sale span{font-family:var(--round);font-weight:600;font-size:1.35rem}
+.hero h1 .pre{font-family:var(--round);font-weight:600;letter-spacing:.06em;color:var(--lilac-deep)}
+.hero h1 .ttl{font-weight:700}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,#e0688f 0%,#a77be6 55%,#5f9be0 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:#c2577a}
+.hero .subtitle{font-family:var(--serif);color:var(--pink-deep)}
+.whyjoin li{border:0;border-radius:18px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7),0 6px 16px -12px rgba(120,80,40,.5)}
+.whyjoin li:nth-child(1){background:var(--blush)}.whyjoin li:nth-child(2){background:var(--sky)}
+.whyjoin li:nth-child(3){background:var(--butter)}.whyjoin li:nth-child(4){background:var(--mint)}
+.whyjoin li i{background:#fff;border:0;font-size:1.05rem;box-shadow:0 2px 0 rgba(120,80,40,.12)}
+.whyjoin li:nth-child(1) i{color:var(--pink-deep)}.whyjoin li:nth-child(2) i{color:var(--sky-deep)}
+.whyjoin li:nth-child(3) i{color:var(--gold-deep)}.whyjoin li:nth-child(4) i{color:var(--mint-deep)}
+.whyjoin li b{font-family:var(--round);font-weight:600}
+.facts div{border:0;border-radius:18px;background:#fff;box-shadow:0 4px 0 rgba(120,80,40,.08)}
+.facts div:nth-child(1) b{color:var(--pink-deep)}.facts div:nth-child(2) b{color:var(--lilac-deep)}
+.facts div:nth-child(3) b{color:var(--sky-deep)}.facts div:nth-child(4) b{color:var(--mint-deep)}
+.facts b{font-family:var(--round);font-weight:600}
+.teacher .av{border:3px solid #fff;box-shadow:0 0 0 2px #f0b9c8}
+.unseen{border:2px solid #f0b9c8;border-radius:28px;box-shadow:10px 10px 0 var(--lilac);transform:rotate(1.5deg);position:relative}
+.unseen::before,.unseen::after{content:"";position:absolute;top:-12px;width:78px;height:24px;border-radius:4px;opacity:.85}
+.unseen::before{left:22px;background:repeating-linear-gradient(45deg,#ffc9d6 0 8px,#ffe0e7 8px 16px);transform:rotate(-6deg)}
+.unseen::after{right:22px;background:repeating-linear-gradient(45deg,#cfe3ff 0 8px,#e5efff 8px 16px);transform:rotate(5deg)}
+.unseen .lbl{color:var(--pink-deep)}
+.unseen .title{font-family:var(--round);font-weight:600}
+.ring .fg{stroke:#f19bb3}
+.stave .hint{stroke:#f19bb3}
+.stave .hl{fill:var(--pink-deep)}
+.unseen .tip{background:var(--butter);border-radius:16px}
+
+/* candy piano keys */
+.keys{height:30px;border-top:0;background:
+  linear-gradient(to bottom,transparent 0 58%,var(--card) 58%),
+  repeating-linear-gradient(90deg,transparent 0 22px,#f4a7bd 22px 36px,transparent 36px 48px,#b9a2ec 48px 62px,transparent 62px 96px,#94cfb0 96px 110px,transparent 110px 122px,#f5c76a 122px 136px,transparent 136px 148px,#93b9ec 148px 162px,transparent 162px 192px),
+  repeating-linear-gradient(90deg,var(--card) 0 26px,var(--line) 26px 27px);border-bottom:2px dotted #f0d4dc}
+
+/* ---------- why join ---------- */
+.mark{background:linear-gradient(transparent 60%,#ffd6e0 60%,#ffd6e0 92%,transparent 92%)}
+#learn .skills li{border:0;border-radius:22px;padding:20px;position:relative;box-shadow:0 6px 18px -14px rgba(120,80,40,.6)}
+#learn .skills li:nth-child(6n+1){background:var(--blush)}#learn .skills li:nth-child(6n+2){background:var(--sky)}
+#learn .skills li:nth-child(6n+3){background:var(--butter)}#learn .skills li:nth-child(6n+4){background:var(--mint)}
+#learn .skills li:nth-child(6n+5){background:var(--lilac)}#learn .skills li:nth-child(6n+6){background:var(--peach)}
+#learn .skills h3{font-family:var(--round);font-weight:600;font-size:1.05rem;padding-left:0;text-indent:0;display:flex;align-items:center;gap:10px}
+#learn .skills h3 span{background:none}
+#learn .skills h3::before{content:"";width:34px;height:34px;flex:none;border-radius:50%;background:#fff center/20px no-repeat;box-shadow:0 2px 0 rgba(120,80,40,.1);text-indent:0}
+#learn .skills li:nth-child(1) h3::before{content:"🤝";display:grid;place-items:center;font-size:17px}
+#learn .skills li:nth-child(2) h3::before{content:"💬";display:grid;place-items:center;font-size:17px}
+#learn .skills li:nth-child(3) h3::before{content:"🔍";display:grid;place-items:center;font-size:17px}
+#learn .skills li:nth-child(4) h3::before{content:"🥁";display:grid;place-items:center;font-size:17px}
+#learn .skills li:nth-child(5) h3::before{content:"⏱️";display:grid;place-items:center;font-size:17px}
+#learn .skills li:nth-child(6) h3::before{content:"🚀";display:grid;place-items:center;font-size:17px}
+#learn .skills p{color:var(--ink-2)}
+.runbox{background:#fff;border:2px dashed #f0b9c8;border-radius:26px}
+.runbox h3{font-family:var(--round);font-weight:600}
+.runbox .run{position:relative}
+.runbox .run li{border:0;border-radius:16px;background:var(--cream-2)}
+.runbox .run li:nth-child(1){background:var(--blush)}.runbox .run li:nth-child(2){background:var(--butter)}
+.runbox .run li:nth-child(3){background:var(--mint);box-shadow:inset 0 0 0 2px #9fd8ba}.runbox .run li:nth-child(4){background:var(--lilac)}
+.runbox .run .t{font-family:var(--round);font-weight:600;color:var(--ink)}
+
+/* ---------- Eric ---------- */
+.eric{background:linear-gradient(180deg,#fff0f3 0%,#fff8ef 100%);border-block:0}
+.eric .photo{border:10px solid #fff;border-bottom-width:44px;border-radius:10px;box-shadow:0 18px 36px -22px rgba(120,80,40,.6);transform:rotate(-2deg);position:relative;overflow:visible}
+.eric .photo img{border-radius:3px}
+.eric .photo::before{content:"";position:absolute;top:-22px;left:50%;width:110px;height:30px;margin-left:-55px;background:repeating-linear-gradient(45deg,#ffd9a8 0 8px,#ffecd2 8px 16px);opacity:.9;transform:rotate(3deg);border-radius:3px;z-index:1}
+.eric figcaption{text-align:center;font-family:var(--round);margin-top:16px}
+.eric h2{color:var(--ink)}
+.efacts div{border:0;border-radius:20px}
+.efacts div:nth-child(1){background:var(--butter)}.efacts div:nth-child(2){background:var(--mint)}.efacts div:nth-child(3){background:var(--sky)}
+.efacts b{font-family:var(--round);font-weight:600;color:var(--ink)}
+.creds li::before{content:"✿";color:#e8829f}
+
+/* ---------- timetable & price ---------- */
+.sched-band{background:#fff;border-block:0}
+.ttwrap{border:2px solid var(--line);border-radius:24px;box-shadow:0 10px 28px -22px rgba(120,80,40,.6)}
+.tt th,.tt td{border-color:#f5ebdf}
+.tt thead th{font-family:var(--round);font-weight:600}
+.slot{border:0;border-radius:999px;padding:7px 14px;box-shadow:0 3px 0 rgba(120,80,40,.12);font-family:var(--round);font-weight:600}
+.slot.bA{background:var(--butter)}.slot.bB{background:var(--blush)}
+.tt .soonc{background:repeating-linear-gradient(135deg,var(--sky) 0 14px,#e6f0ff 14px 28px)}
+.ptt td b,.ptt th{font-family:var(--round)}
+.ptt td b{font-weight:600}
+.bv{background:var(--pink-deep)}
+.save{background:var(--mint);border-color:#9fd8ba;color:var(--mint-deep)}
+.lockbox{background:var(--lilac);border:2px dashed #c5b2f2;border-radius:18px}
+.lockbox b{color:var(--lilac-deep)}
+
+/* ---------- booking ---------- */
+.reg{background:
+  radial-gradient(45% 40% at 100% 0%,rgba(255,219,227,.9),transparent 70%),
+  radial-gradient(45% 45% at 0% 100%,rgba(212,242,226,.9),transparent 70%),
+  radial-gradient(40% 40% at 0% 0%,rgba(255,240,184,.9),transparent 70%),
+  #fff6ec;border:2px solid #f6dfe5;border-radius:36px}
+.reg h2{font-size:clamp(2rem,4vw,2.7rem)}
+.buddy{display:block;width:150px;height:auto;margin:6px 0 4px;animation:bob 5s ease-in-out infinite}
+.steps3 li::before{width:38px;height:38px;border:0;font-family:var(--round);font-weight:600;color:#fff;box-shadow:0 3px 0 rgba(120,80,40,.15)}
+.steps3 li:nth-child(1)::before{background:#ef8fa9}.steps3 li:nth-child(2)::before{background:#a98ae6}.steps3 li:nth-child(3)::before{background:#6fc199}
+.steps3 b{font-family:var(--round);font-weight:600}
+.mail b{color:var(--pink-deep)}
+
+form#bookForm{background:transparent;border:0;padding:0;gap:16px;display:grid;grid-template-columns:1fr}
+form#bookForm>h3{display:flex;align-items:center;gap:10px;font-family:var(--round);font-weight:600;font-size:1.7rem}
+.fprog{display:flex;gap:6px;flex-wrap:wrap}
+.fprog span{display:inline-flex;align-items:center;gap:6px;font-family:var(--round);font-weight:600;font-size:.82rem;border-radius:999px;padding:5px 12px 5px 6px;background:#fff;color:var(--muted);box-shadow:0 2px 0 rgba(120,80,40,.08);transition:background-color .25s,color .25s}
+.fprog i{font-style:normal;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:.72rem;color:#fff;background:#d8cbbd;transition:background-color .25s}
+.fprog span.ok i{background:var(--mint-deep)}
+.fprog span.ok i::before{content:"✓"}
+.fprog span.ok i b{display:none}
+.fstep{--tint:var(--blush);--deep:var(--pink-deep);--ring:#f3b6c7;background:#fff;border-radius:26px;padding:20px 20px 22px;display:grid;grid-template-columns:1fr 1fr;gap:14px;box-shadow:0 0 0 2px var(--tint),0 14px 30px -24px rgba(120,80,40,.8);position:relative;min-width:0}
+.fstep>*{min-width:0}
+.fstep.s2{--tint:var(--butter);--deep:var(--gold-deep);--ring:#f2d27e}
+.fstep.s3{--tint:var(--mint);--deep:var(--mint-deep);--ring:#9fd8ba}
+.fstep.s4{--tint:var(--lilac);--deep:var(--lilac-deep);--ring:#c5b2f2}
+.fhead{grid-column:1/-1;display:flex;align-items:center;gap:12px;margin:-4px 0 2px}
+.fhead .num{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:var(--tint);font-size:1.35rem;flex:none;transform:rotate(-4deg)}
+.fhead b{display:block;font-family:var(--round);font-weight:600;font-size:1.22rem;line-height:1.15}
+.fhead small{display:block;font-size:.84rem;color:var(--muted);font-weight:500}
+.fstep label,.fstep .legend{font-family:var(--round);font-weight:600;font-size:.92rem;color:var(--ink)}
+.fstep input[type=text],.fstep input[type=email],.fstep input[type=tel],.fstep select{background:#fff;border:2px solid var(--tint);border-radius:16px;height:52px;transition:border-color .15s,box-shadow .15s}
+.fstep select{appearance:none;-webkit-appearance:none;padding-right:42px;background-image:linear-gradient(45deg,transparent 50%,var(--deep) 50%),linear-gradient(135deg,var(--deep) 50%,transparent 50%);background-position:calc(100% - 22px) 22px,calc(100% - 16px) 22px;background-size:6px 6px,6px 6px;background-repeat:no-repeat}
+.fstep input:focus,.fstep select:focus{border-color:var(--ring);box-shadow:0 0 0 4px var(--tint);outline:none}
+.fstep .opt{border:2px solid var(--tint);background:#fff;border-radius:16px;font-weight:500;transition:background-color .15s,border-color .15s,transform .15s}
+.fstep .opt:hover{transform:translateY(-1px)}
+.fstep .opt:has(input:checked){background:var(--tint);border-color:var(--ring)}
+.fstep .opt small{color:var(--muted)}
+.fstep .opt:focus-within{outline:3px solid var(--ring);outline-offset:2px}
+/* round, colourful ticks and radios */
+.fstep .opt input{appearance:none;-webkit-appearance:none;width:24px;height:24px;border:2px solid var(--ring);background:#fff;border-radius:8px;display:grid;place-items:center;cursor:pointer;transition:background-color .15s,border-color .15s;flex:none}
+.fstep .opt input[type=radio]{border-radius:50%}
+.fstep .opt input:checked{background:var(--deep);border-color:var(--deep)}
+.fstep .opt input[type=checkbox]:checked::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:translateY(-1px) rotate(45deg)}
+.fstep .opt input[type=radio]:checked::after{content:"";width:9px;height:9px;border-radius:50%;background:#fff}
+.fstep .opt input:focus-visible{outline:none}
+.fstep .req{color:var(--pink-deep)}
+/* session picks as little tickets */
+.fstep .picks{gap:10px}
+.fstep .picks .opt{border-style:dashed;padding:12px 14px}
+.fstep .picks .opt b{display:block;font-family:var(--round);font-weight:600}
+.fstep .picks .empty{background:var(--cream);border:2px dashed var(--ring);border-radius:16px;color:var(--muted)}
+.fstep .consent .opt{font-size:.9rem}
+.formfoot{gap:12px}
+#sendBtn{min-height:62px;font-size:1.2rem;border-radius:22px;background:linear-gradient(90deg,#ffb3c6 0%,#ffd98a 50%,#a9e3c4 100%);box-shadow:0 5px 0 #d99aab,0 16px 30px -18px rgba(180,67,108,.8)}
+#sendBtn:hover{filter:saturate(1.1)}
+#sendBtn:active{transform:translateY(4px);box-shadow:0 1px 0 #d99aab}
+.status.err{background:#ffe1e6;border-radius:14px;padding:10px 14px;color:#9b2c4a}
+.fnote{text-align:center;font-size:.88rem;color:var(--muted)}
+
+/* success card */
+.done{border:2px solid #f6dfe5;border-radius:30px}
+.yay{background:linear-gradient(120deg,#ffdbe3 0%,#fff0b8 50%,#d4f2e2 100%)}
+.done .ok{color:var(--pink-deep);font-family:var(--round);font-weight:600}
+.done h3{font-family:var(--round);font-weight:600}
+.ykeys{height:10px;background:repeating-linear-gradient(90deg,#fff 0 14px,#f4a7bd 14px 22px,#fff 22px 36px,#b9a2ec 36px 44px,#fff 44px 58px,#94cfb0 58px 66px)}
+.ticket{border:2px dashed #f0b9c8;border-radius:18px}
+.ticket .tdate{border-right:2px dashed #f0b9c8}
+.ticket .tdate b,.ticket .tmain b{font-family:var(--round);font-weight:600}
+.done .next{background:var(--mint);border-radius:20px}
+.dinner,.tickets,.ticket .tmain{min-width:0}
+.dinner{grid-template-columns:minmax(0,1fr)}
+.done .btn{white-space:normal;line-height:1.2;padding-block:10px}
+.ticket{grid-template-columns:62px minmax(0,1fr) auto}
+.dinner p{overflow-wrap:anywhere}
+@media (max-width:380px){.ticket .tlvl{margin-right:8px;padding:3px 8px;font-size:.68rem}}
+
+/* setup, terms, faq */
+.fold{border:2px solid var(--line)!important;border-radius:26px}
+.fold#setup{background:linear-gradient(120deg,#eef6ff,#fff)}
+.fold#terms{background:linear-gradient(120deg,#f5f0ff,#fff)}
+.fold>summary b{font-family:var(--round);font-weight:600}
+.terms li{border:0;border-radius:20px;background:var(--cream-2)}
+.terms li::before{border:0;background:#fff;color:var(--lilac-deep);font-family:var(--round);font-weight:600;box-shadow:0 2px 0 rgba(120,80,40,.1)}
+.terms h3{font-family:var(--round);font-weight:600}
+#faq details{border:0;background:#fff;border-radius:20px;padding:16px 20px;margin-bottom:10px;box-shadow:0 0 0 2px var(--line)}
+#faq details:nth-child(4n+1){box-shadow:0 0 0 2px var(--blush)}#faq details:nth-child(4n+2){box-shadow:0 0 0 2px var(--butter)}
+#faq details:nth-child(4n+3){box-shadow:0 0 0 2px var(--mint)}#faq details:nth-child(4n+4){box-shadow:0 0 0 2px var(--lilac)}
+#faq summary{font-family:var(--round);font-weight:600}
+summary::after{border:0;background:var(--blush);color:var(--pink-deep);font-weight:700}
+details[open] summary::after{background:var(--pink-deep);color:#fff}
+footer{background:linear-gradient(180deg,#fff0f3 0%,#fff7ea 100%);border-top:3px dotted #f0b9c8}
+footer h4{color:var(--pink-deep);font-family:var(--round);font-weight:600}
+.ccard{border:2px solid var(--line);border-radius:20px}
+.cact{border-color:#f0b9c8;color:var(--pink-deep);font-family:var(--round);font-weight:600}
+.cact:hover{background:var(--blush)}
+
+@media (max-width:620px){
+  .fstep{grid-template-columns:1fr;padding:16px 14px 18px;border-radius:22px}
+  .fhead .num{width:38px;height:38px;font-size:1.2rem}
+  .reg{border-radius:28px}
+  .buddy{width:110px}
+  .floaty span:nth-child(n+4){display:none}
+  .unseen{transform:none}
+  .eric .photo{transform:none}
+  #faq details{padding:14px 16px}
+  #learn .skills li{padding:14px}
+  #learn .skills h3{flex-direction:column;align-items:flex-start;gap:6px}
+  #learn .skills h3::before{width:30px;height:30px;font-size:15px!important}
+}
+@media (min-width:981px){.reg>div:first-child{position:sticky;top:112px}}
+@media (prefers-reduced-motion:reduce){
+  .floaty span,.buddy{animation:none}
+  .sale,.fstep .opt{transition:none}
+}
 </style>
 </head>
 <body>
@@ -660,6 +915,7 @@ header.site .btn-sm .sm{display:none}
 </aside>
 
 <div class="hero full" id="top">
+  <div class="floaty" aria-hidden="true"><span>♪</span><span>♫</span><span>✦</span><span>♪</span><span>♬</span><span>✿</span></div>
   <div class="wrap grid">
     <div class="htext">
       <a class="sale" href="#price"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0 C21 13 27 19 40 20 C27 21 21 27 20 40 C19 27 13 21 0 20 C13 19 19 13 20 0 Z"/></svg><span><b>New launch</b>Free until New Year!</span></a>
@@ -819,6 +1075,20 @@ header.site .btn-sm .sm{display:none}
     <section id="book">
       <div class="reg">
         <div>
+          <svg class="buddy" viewBox="0 0 160 150" aria-hidden="true" focusable="false">
+            <ellipse cx="80" cy="141" rx="44" ry="6" fill="#f1d6c6" opacity=".8"/>
+            <rect x="104" y="18" width="10" height="90" rx="5" fill="#8a6bd1"/>
+            <path d="M113 20c20 8 34 22 28 46-4-12-14-18-28-20z" fill="#b9a2ec"/>
+            <ellipse cx="80" cy="104" rx="38" ry="31" fill="#ffb8c9" transform="rotate(-14 80 104)"/>
+            <ellipse cx="63" cy="89" rx="9" ry="5" fill="#fff" opacity=".75" transform="rotate(-30 63 89)"/>
+            <ellipse cx="70" cy="106" rx="4.2" ry="5.6" fill="#4a3a2c"/><ellipse cx="94" cy="100" rx="4.2" ry="5.6" fill="#4a3a2c"/>
+            <circle cx="71.5" cy="104" r="1.5" fill="#fff"/><circle cx="95.5" cy="98" r="1.5" fill="#fff"/>
+            <ellipse cx="59" cy="116" rx="6.5" ry="3.8" fill="#f2788f" opacity=".55"/><ellipse cx="106" cy="108" rx="6.5" ry="3.8" fill="#f2788f" opacity=".55"/>
+            <path d="M76 115q8 7 15-3" stroke="#4a3a2c" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M28 40c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12 8-1 11-4 12-12z" fill="#f5c76a"/>
+            <path d="M146 96c.8 5 2.6 7 7.6 7.6-5 .8-6.8 2.6-7.6 7.6-.8-5-2.6-6.8-7.6-7.6 5-.6 6.8-2.6 7.6-7.6z" fill="#94cfb0"/>
+            <path d="M48 12c.6 4 2 5.4 6 6-4 .6-5.4 2-6 6-.6-4-2-5.4-6-6 4-.6 5.4-2 6-6z" fill="#93b9ec"/>
+          </svg>
           <span class="kicker">Book your place</span>
           <h2>Free until New Year</h2>
           <p class="lead">Up to 8 players a session (Advanced: 6), and every player plays every time. When it's full, you can join as a listener and take the next free player place.</p>
@@ -831,11 +1101,14 @@ header.site .btn-sm .sm{display:none}
         </div>
         <div>
           <form name="sight-reading-club" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="bookForm" novalidate>
-            <h3>Your details</h3>
+            <h3>Book in 4 little steps</h3>
+            <div class="fprog" id="fprog" aria-hidden="true"><span data-s="1"><i><b>1</b></i>About you</span><span data-s="2"><i><b>2</b></i>Sessions</span><span data-s="3"><i><b>3</b></i>Join as</span><span data-s="4"><i><b>4</b></i>Small print</span></div>
             <input type="hidden" name="form-name" value="sight-reading-club">
             <input type="hidden" name="session_summary" id="sessionSummary">
             <p class="hp"><label for="bot">Leave empty</label><input id="bot" name="bot-field" tabindex="-1" autocomplete="off"></p>
 
+            <div class="fstep s1" data-step="1">
+              <div class="fhead"><span class="num" aria-hidden="true">🌸</span><span><b>About you</b><small>Who's booking and how we can reach you</small></span></div>
             <fieldset class="field span">
               <legend class="legend">Who is booking?</legend>
               <div class="seg">
@@ -849,6 +1122,10 @@ header.site .btn-sm .sm{display:none}
             <div class="field"><label for="email">Email&nbsp;<span class="req">*</span></label><input type="email" id="email" name="email" required autocomplete="email"></div>
             <div class="field"><label for="phone">Phone <small>(optional)</small></label><input type="tel" id="phone" name="phone" autocomplete="tel"></div>
 
+            </div>
+
+            <div class="fstep s2" data-step="2">
+              <div class="fhead"><span class="num" aria-hidden="true">🎹</span><span><b>Your level and sessions</b><small>Pick a level, then tick every date you can make</small></span></div>
             <div class="field"><label for="instrument">Instrument&nbsp;<span class="req">*</span></label>
               <select id="instrument" name="instrument" required>
                 <option selected>Piano or keyboard</option>
@@ -869,6 +1146,10 @@ header.site .btn-sm .sm{display:none}
               <div class="picks" id="picks"></div>
             </fieldset>
 
+            </div>
+
+            <div class="fstep s3" data-step="3">
+              <div class="fhead"><span class="num" aria-hidden="true">🎧</span><span><b>How you'll join</b><small>Play along, or sit back and listen</small></span></div>
             <fieldset class="field span">
               <legend class="legend">How would you like to join?</legend>
               <div class="seg">
@@ -886,18 +1167,24 @@ header.site .btn-sm .sm{display:none}
                 <option>Monthly plan</option>
               </select></div>
 
+            </div>
+
+            <div class="fstep s4" data-step="4">
+              <div class="fhead"><span class="num" aria-hidden="true">📝</span><span><b>The small print</b><small>A few ticks and you're done</small></span></div>
             <fieldset class="field span consent">
               <legend class="legend">Consent</legend>
               <label class="opt"><input type="checkbox" name="consent_join" value="Yes" id="cJoin"><span>I agree to the student joining an online group session run by Cadenza London.&nbsp;<span class="req">*</span></span></label>
               <label class="opt" id="cGuardWrap"><input type="checkbox" name="consent_guardian_present" value="Yes" id="cGuard"><span>A parent or guardian will be in the room for the whole session.&nbsp;<span class="req">*</span></span></label>
               <label class="opt"><input type="checkbox" name="consent_recording" value="Yes" id="cRec"><span>I agree that Cadenza London may record the session and post short clips of the student on its social media.&nbsp;<span class="req">*</span></span></label>
-              <label class="opt"><input type="checkbox" name="agree_terms" value="Yes" id="cTerms"><span>I have read and agree to the <a href="#terms">terms and conditions</a>, including the 24-hour cancellation rule, the 10-minute late arrival rule, the 7-day notice for monthly plans, and the ban on recording or screen-capturing sessions.&nbsp;<span class="req">*</span></span></label>
+              <label class="opt"><input type="checkbox" name="agree_terms" value="Yes" id="cTerms"><span>I have read and agree to the <a href="#terms">terms and conditions</a>, including the 48-hour cancellation rule, the 10-minute late arrival rule, the 7-day notice for monthly plans, and the ban on recording or screen-capturing sessions.&nbsp;<span class="req">*</span></span></label>
               <label class="opt"><input type="checkbox" name="mailing_list" value="Yes" id="cMail"><span>Optional: send me Cadenza London news, practice tips and course dates. Unsubscribe any time.</span></label>
             </fieldset>
+            </div>
 
             <div class="formfoot">
               <button class="btn btn-dark btn-block" type="submit" id="sendBtn">Request my place <span class="arr">→</span></button>
               <span class="status" id="status" role="status" aria-live="polite"></span>
+              <p class="fnote">💌 Free until 31 December · We confirm by email within 2 days</p>
             </div>
           </form>
 
@@ -1016,7 +1303,7 @@ header.site .btn-sm .sm{display:none}
         <div class="foldbody">
           <p class="muted">These apply to every Sight-Reading Club booking. Booking a place means you agree to them.</p>
       <ol class="terms">
-        <li><h3>Cancelling</h3><p>To cancel, email <b>music@cadenza-london.com</b> at least 24 hours before the session starts. If you cancel within 24 hours of the start time, or don't attend without telling us, you will no longer be able to join any free sessions.</p></li>
+        <li><h3>Cancelling</h3><p>To cancel, email <b>music@cadenza-london.com</b> at least 48 hours before the session starts. If you cancel within 48 hours of the start time, or don't attend without telling us, you will no longer be able to join any free sessions.</p></li>
         <li><h3>Arriving late</h3><p>The session starts on time. Anyone joining more than 10 minutes after the start time will not be let in to that session.</p></li>
         <li><h3>One level per student</h3><p>Each student can only join one level, unless advised by Cadenza London.</p></li>
         <li><h3>Photos, video and social media</h3><p>Every session is recorded. Anyone taking part, including students under 18, may appear in photos, video or audio clips on Cadenza London's social media. To ask for a clip to be taken down, email us.</p></li>
@@ -1041,7 +1328,7 @@ header.site .btn-sm .sm{display:none}
         <details><summary>What's the difference between a player and a listener?</summary><p>Players play a new piece each session. Listeners keep their camera off and learn by watching. If a player place opens, we offer it to listeners first.</p></details>
         <details><summary>Will I always get to play?</summary><p>Yes. Every player plays in every session. That's why we cap groups at 8 (Advanced: 6). If a session is full, you can join as a listener, or we'll open another time slot.</p></details>
         <details><summary>Can I record the session myself?</summary><p>No. Recording, screenshots and screen capture by participants are not allowed, including the music shown on screen. Breaking this rule means removal from the club and may lead to legal action. See the <a href="#terms">terms</a>.</p></details>
-        <details><summary>Can I cancel?</summary><p>Yes, by emailing music@cadenza-london.com at least 24 hours before the session. Cancelling later than that, or not turning up, means you can't join free sessions any more. See the <a href="#terms">terms</a>.</p></details>
+        <details><summary>Can I cancel?</summary><p>Yes, by emailing music@cadenza-london.com at least 48 hours before the session. Cancelling later than that, or not turning up, means you can't join free sessions any more. See the <a href="#terms">terms</a>.</p></details>
         <details><summary>Will I be recorded?</summary><p>Yes. Every session is recorded, and anyone taking part may appear in photos or clips on Cadenza London's Instagram and other social media. Agreeing to this is part of booking. To ask for a clip to be taken down, email music@cadenza-london.com.</p></details>
         <details><summary>How do you keep children safe online?</summary><p>A parent or guardian registers every student under 18 and stays in the room for the session. The Zoom waiting room is on, Eric admits only booked names, private chat is off, and the joining link is sent by email only.</p></details>
         <details><summary>Is this the same as a lesson?</summary><p>No. It's group practice for one skill: reading new music. For one-to-one help with your playing, <a href="https://cadenza-london.com" target="_blank" rel="noopener">book a private lesson with Eric</a>.</p></details>
@@ -1391,6 +1678,25 @@ var CLUB = {
   var boxes=[].slice.call(document.querySelectorAll('#checklist input')), prog=document.getElementById('progress');
   function upd(){var n=boxes.filter(function(b){return b.checked;}).length;prog.textContent=n===4?'All set. See you on Zoom.':n+' of 4 done';}
   boxes.forEach(function(b){b.addEventListener('change',upd);});
+})();
+</script>
+<script>
+/* little step ticks above the booking form */
+(function(){
+  var f=document.getElementById('bookForm'), p=document.getElementById('fprog');
+  if(!f||!p) return;
+  function v(id){var e=document.getElementById(id);return e&&!e.closest('[hidden]')?e.value.trim():'x';}
+  function on(id){var e=document.getElementById(id);return !e||!!e.closest('[hidden]')||e.checked;}
+  function check(){
+    var s1=v('student')&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('email'))&&v('guardian');
+    var s2=document.getElementById('grade').value&&f.querySelector('input[name="sessions[]"]:checked');
+    var s4=on('cJoin')&&on('cGuard')&&on('cRec')&&on('cTerms');
+    var ok={1:s1,2:s2,3:s1&&s2,4:s4};
+    p.querySelectorAll('span[data-s]').forEach(function(x){x.classList.toggle('ok',!!ok[x.getAttribute('data-s')]);});
+  }
+  var st=document.getElementById('status');
+  function clearErr(){if(st&&st.classList.contains('err')){st.className='status';st.textContent='';}}
+  f.addEventListener('input',function(){check();clearErr();}); f.addEventListener('change',check); check();
 })();
 </script>
 </body>
