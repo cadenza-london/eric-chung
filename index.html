@@ -1826,7 +1826,7 @@
           <li><span>Grade 7–8</span><b>£25</b></li>
           <li><span>Diploma</span><b>£35</b></li>
       </ul>
-      <a href="#feedback-form" class="coach-btn" data-pkg="single">Send One Piece</a>
+      <a href="https://cadenza-london.com/digital-exam-ready/upload.html?mode=coaching&pkg=single" class="coach-btn" data-pkg="single">Send One Piece</a>
     </div>
     <div class="coach-card popular">
       <span class="coach-badge">Best Value</span>
@@ -1840,7 +1840,7 @@
           <li><span>Grade 7–8</span><b>£89</b></li>
           <li><span>Diploma</span><b>£129</b></li>
       </ul>
-      <a href="#feedback-form" class="coach-btn" data-pkg="full">Send All 4 Pieces</a>
+      <a href="https://cadenza-london.com/digital-exam-ready/upload.html?mode=coaching&pkg=full" class="coach-btn" data-pkg="full">Send All 4 Pieces</a>
     </div>
   </div>
   <div class="coach-extras">
@@ -1851,14 +1851,14 @@
   <!-- Submission: new coaching submission page (launching soon).
        When it is live, put its address in the href of #coach-submit-link and remove the "soon" text. -->
   <div id="feedback-form" class="coach-soon">
-    <span class="coach-soon-tag">Launching soon</span>
+    <span class="coach-soon-tag">Now open</span>
     <h3>Send your video to Eric</h3>
-    <p>Our new Online Coaching submission page is almost ready. You'll upload your video directly, choose your package and pay securely in one place.</p>
+    <p>Upload your video straight from your phone, choose your package and pay securely with Stripe, all in one place. No links or Google Drive needed.</p>
     <div class="coach-soon-btns">
-      <a id="coach-submit-link" class="coach-soon-btn is-soon" href="#footer-email" aria-disabled="true">Submission page · coming soon</a>
+      <a id="coach-submit-link" class="coach-soon-btn" href="https://cadenza-london.com/digital-exam-ready/upload.html?mode=coaching">Upload your video →</a>
       <a class="coach-soon-alt" href="#footer-email" onclick="event.preventDefault();var e=document.getElementById('footer-email');if(e){e.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){e.focus({preventScroll:true});},600);}">Get the link first: join the VIP list →</a>
     </div>
-    <p class="coach-soon-note">Join the mailing list now for 20% off your first coaching session. Questions in the meantime? <a href="mailto:music@cadenza-london.com">music@cadenza-london.com</a></p>
+    <p class="coach-soon-note">Join the mailing list first for 20% off your first coaching session. Questions in the meantime? <a href="mailto:music@cadenza-london.com">music@cadenza-london.com</a></p>
   </div>
 
 </section>
@@ -2262,6 +2262,12 @@
         <div class="promo-success-check">✓</div>
         <p class="promo-success-title">You're on the list</p>
         <p class="promo-success-sub">Thank you! We'll be in touch with the latest from Cadenza London.</p>
+        <div id="promo-code-box" style="display:none;margin-top:1.2rem;border:1.5px dashed #b8902e;background:#fffaf0;padding:1rem;text-align:center;">
+          <p style="font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:#7a5a12;margin:0 0 0.4rem;font-weight:600;">Your 20% welcome code</p>
+          <p id="promo-code" style="font-size:1.3rem;letter-spacing:0.12em;font-weight:600;margin:0;user-select:all;color:#1C1C1C;"></p>
+          <p style="font-size:0.72rem;color:#5e554a;margin:0.5rem 0 0;">For your first Online Coaching session. We've emailed it to you too.</p>
+        </div>
+        <p id="promo-code-msg" style="display:none;font-size:0.75rem;color:#5e554a;margin-top:1rem;"></p>
       </div>
     </div>
   </div>
@@ -2493,7 +2499,7 @@
   // Coaching package buttons scroll to the submission card
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.coach-btn[data-pkg]').forEach(function (a) {
-      a.addEventListener('click', function (e) { e.preventDefault(); var c = document.getElementById('feedback-form'); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+      // buttons now go straight to the Online Coaching upload page (href); nothing to intercept
     });
     var s = document.getElementById('coach-submit-link');
     if (s && s.classList.contains('is-soon')) s.addEventListener('click', function (e) { e.preventDefault(); });
@@ -2623,6 +2629,21 @@
   }
 
   // Mailing list form submission
+  // 20% welcome code: issued by the Cadenza upload server, one per email and one per connection
+  async function getWelcomeCode(name, email) {
+    try {
+      const r = await fetch('https://cadenza-exam-upload.jessiemovement.workers.dev/api/welcome-code', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name || '', email })
+      });
+      return await r.json();
+    } catch (e) { return { error: 'network' }; }
+  }
+  function welcomeMsg(j) {
+    if (j && j.error === 'email_used') return 'This email already has a welcome code. Check your inbox.';
+    if (j && j.error === 'ip_used') return 'A welcome code has already been claimed from this connection, so we can\'t send another one.';
+    return '';
+  }
+
   promoForm && promoForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     const nameVal = document.getElementById('promo-name').value.trim();
@@ -2651,7 +2672,14 @@
       if (res.ok) {
         promoForm.style.display = 'none';
         promoSuccess.style.display = 'block';
-        setTimeout(closePromoPopup, 3500);
+        const w = await getWelcomeCode(nameVal, emailVal);
+        if (w && w.code) {
+          document.getElementById('promo-code').textContent = w.code;
+          document.getElementById('promo-code-box').style.display = 'block';
+        } else if (welcomeMsg(w)) {
+          const m = document.getElementById('promo-code-msg'); m.textContent = welcomeMsg(w); m.style.display = 'block';
+          setTimeout(closePromoPopup, 6000);
+        } else setTimeout(closePromoPopup, 3500);
       } else {
         errEl.textContent = 'Something went wrong. Please try again.';
         errEl.style.display = 'block';
@@ -2694,6 +2722,9 @@
       if (res.ok) {
         footerForm.style.display = 'none';
         successEl.style.display = 'block';
+        const w = await getWelcomeCode('', emailVal);
+        if (w && w.code) successEl.innerHTML = '✓ &nbsp;You\'re on the list! Your 20% welcome code: <b style="letter-spacing:0.1em;user-select:all;">' + w.code + '</b> (also sent to your inbox)';
+        else if (welcomeMsg(w)) successEl.innerHTML = '✓ &nbsp;You\'re on the list. ' + welcomeMsg(w);
       } else {
         errEl.textContent = 'Something went wrong. Please try again.';
         errEl.style.display = 'block';
