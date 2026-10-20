@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Upload your pieces | Cadenza Digital Exam Ready Course</title>
-<meta name="description" content="Send Eric the videos and score photos of your four exam pieces for the Cadenza Digital Exam Ready Course.">
+<meta name="description" content="Send Eric the videos and score photos of your exam pieces (1 to 4) for the Cadenza Digital Exam Ready Course.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#eca945">
 <link rel="icon" type="image/png" href="logo-circle.png">
@@ -71,6 +71,13 @@ header .nm span{font-size:.9rem;color:var(--muted)}
 .tag{display:inline-flex;justify-content:center;border-radius:999px;padding:3px 8px;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
 .tag.req{background:var(--ink);color:var(--marigold)}
 .tag.opt{background:var(--tint);color:var(--muted);border:1px solid var(--line)}
+/* not-ready prompt -> Online Master Coaching */
+.coach{background:var(--butter);border:2px dashed var(--ink);border-radius:20px;padding:16px 18px;display:grid;gap:8px}
+.coach b.h{font-size:1.08rem;font-weight:800}
+.coach p{font-size:.95rem;margin:0}
+.coach a{justify-self:start;display:inline-flex;align-items:center;gap:6px;background:var(--ink);color:var(--marigold);border-radius:999px;padding:10px 16px;font-weight:800;font-size:.92rem;text-decoration:none}
+.coach a:active{transform:scale(.97)}
+.piece.skip{opacity:.78}
 .btn-go{background:var(--marigold);color:var(--ink);border:2.5px solid var(--ink);box-shadow:4px 4px 0 var(--ink);font-size:1.08rem;min-height:60px}
 .btn-go:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 var(--ink)}
 .btn-go:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
@@ -225,7 +232,7 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
 <section class="hero gut" id="hero">
   <div class="col">
     <span class="pill">Step 2 of 4 · Screening videos</span>
-    <h1>Send Eric your <em>four pieces.</em></h1>
+    <h1>Send Eric your <em>exam pieces.</em></h1>
     <p class="lead">Eric listens to every recording before he confirms a place on the course. Send them on this page before the deadline.</p>
 
     <div class="deadline" id="dueBox">
@@ -241,11 +248,17 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
     <div class="need">
       <h3>What you need to send</h3>
       <ul>
-        <li><span class="tag req">Required</span><p id="needVid"><b>4 videos</b>, one for each exam piece</p></li>
-        <li><span class="tag req">Required</span><p><b>The name of each piece</b> (title and composer)</p></li>
+        <li><span class="tag req">Required</span><p id="needVid"><b>At least 1 video</b>, one for each piece that's ready (up to 4)</p></li>
+        <li><span class="tag req">Required</span><p><b>The name of each piece</b> you send (title and composer)</p></li>
         <li><span class="tag opt">Optional</span><p><b>Photos of the score</b>, so Eric can follow along</p></li>
       </ul>
       <p class="small" id="needSmall">A phone video is fine · One take per piece · Up to 4 GB per video</p>
+    </div>
+
+    <div class="coach">
+      <b class="h">Not all four pieces ready yet?</b>
+      <p>No problem. Send Eric the pieces you have now. For any piece that isn't ready, send him your video and let him fast-track it for you in an <b>Online Master Coaching</b> session.</p>
+      <a href="https://cadenza-london.com/master-feedback" target="_blank" rel="noopener">Online Master Coaching <span aria-hidden="true">→</span></a>
     </div>
 
     <a class="btn btn-go" href="#up">Start uploading <span aria-hidden="true">↓</span></a>
@@ -280,9 +293,15 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
       </div>
       <p class="example" id="exampleNote" hidden>Preview: example details. On the live page they come from the family's registration link.</p>
 
-      <div class="sh"><span class="sn">2</span><div><h3>Add your four pieces</h3><p id="step2p">For each piece: type its name and choose its video. Score photos are optional.</p></div></div>
+      <div class="sh"><span class="sn">2</span><div><h3>Add your pieces</h3><p id="step2p">Add at least one piece: type its name and choose its video. Leave any piece that isn't ready empty. Score photos are optional.</p></div></div>
       <div class="count" id="count"><b id="countN">0 of 4</b> pieces ready</div>
       <div class="pieces" id="pieces"></div>
+
+      <div class="coach" id="coachForm" hidden>
+        <b class="h">Not ready with <span id="coachWhich">the other pieces</span>?</b>
+        <p>Send Eric your video and let him fast-track it for you in an Online Master Coaching session.</p>
+        <a href="https://cadenza-london.com/master-feedback" target="_blank" rel="noopener">Book Online Master Coaching <span aria-hidden="true">→</span></a>
+      </div>
 
       <p class="note" id="wifiNote">On a phone, use Wi-Fi if you can. Four videos can take 20–40 minutes, and you'll need to keep this page open.</p>
 
@@ -310,7 +329,7 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
         <p id="pmsg">Uploading. Keep this page open.</p>
       </div>
 
-      <button class="btn btn-go" type="submit" id="send">Upload all 4 pieces <span aria-hidden="true">→</span></button>
+      <button class="btn btn-go" type="submit" id="send">Upload my pieces <span aria-hidden="true">→</span></button>
       <p class="fine" id="sendHint">You'll see a progress bar, then a confirmation screen and email.</p>
       <p class="fine" id="previewFine" hidden>Preview: the upload is simulated and nothing is sent.</p>
     </form>
@@ -318,9 +337,9 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
     <div class="card dark done" id="done" hidden tabindex="-1">
       <span class="tick" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1c1712" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>
       <h2>Pieces received</h2>
-      <p>Thank you. <span id="doneStudent"></span><span id="doneWhat">'s four videos are safely with Eric</span>. We'll email <span id="doneEmail"></span> once he has listened.</p>
+      <p>Thank you. <span id="doneStudent"></span><span id="doneWhat">'s videos are safely with Eric</span>. We'll email <span id="doneEmail"></span> once he has listened.</p>
       <ol>
-        <li><b>Eric listens</b> to all four pieces, usually within a week.</li>
+        <li><b>Eric listens</b> to every piece you sent, usually within a week.</li>
         <li><b>We email you</b> to confirm the place and the group dates.</li>
         <li><b>No more reminders.</b> Your place is held while Eric reviews.</li>
       </ol>
@@ -364,7 +383,7 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
 
 <div class="sticky" id="sticky" aria-hidden="true">
   <div class="col">
-    <span><b id="stickyN">0 of 4 pieces ready</b><i id="stickyHint" style="font-style:normal">Add a name and video for each</i></span>
+    <span><b id="stickyN">0 of 4 pieces ready</b><i id="stickyHint" style="font-style:normal">Add at least one piece</i></span>
     <button class="btn btn-go" type="button" id="stickyGo" tabindex="-1">Continue <span aria-hidden="true">↓</span></button>
   </div>
 </div>
@@ -458,16 +477,17 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
   /* ---------- four piece blocks ---------- */
   var VID='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#eca945" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="13" height="14" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>';
   var SCORE='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1c1712" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/><circle cx="9" cy="12" r="1.8" fill="#1c1712"/><path d="M10.8 12V5"/></svg>';
+  function TAG(n){ return n===1?'<span class="tag req">Required</span>':'<span class="tag opt">If ready</span>'; }
   var pieces=[0,1,2,3].map(function(i){
     var n=i+1, el=document.createElement('div'); el.className='piece'; el.id='piece'+n;
     el.innerHTML=
-      '<div class="ph"><span class="n">'+n+'</span><b>Piece '+n+'</b><span class="state" id="st'+n+'">To do</span></div>'+
-      '<div class="field"><div class="rq"><label for="title'+n+'">Name of the piece <small>(title and composer)</small></label><span class="tag req">Required</span></div><input id="title'+n+'" name="title'+n+'" placeholder="'+['e.g. Minuet in G, J. S. Bach','e.g. Für Elise, Beethoven','e.g. The Entertainer, Joplin','e.g. Arabesque No. 1, Debussy'][i]+'" required></div>'+
+      '<div class="ph"><span class="n">'+n+'</span><b>Piece '+n+'</b><span class="state" id="st'+n+'">'+(n===1?'To do':'Optional')+'</span></div>'+
+      '<div class="field"><div class="rq"><label for="title'+n+'">Name of the piece <small>(title and composer)</small></label>'+TAG(n)+'</div><input id="title'+n+'" name="title'+n+'" placeholder="'+['e.g. Minuet in G, J. S. Bach','e.g. Für Elise, Beethoven','e.g. The Entertainer, Joplin','e.g. Arabesque No. 1, Debussy'][i]+'" required></div>'+
       (LINK ?
-      '<div class="field"><div class="rq"><label for="link'+n+'">Video link of piece '+n+'</label><span class="tag req">Required</span></div><input id="link'+n+'" type="url" inputmode="url" autocomplete="off" placeholder="Paste a YouTube or Google Drive link"></div>'+
+      '<div class="field"><div class="rq"><label for="link'+n+'">Video link of piece '+n+'</label>'+TAG(n)+'</div><input id="link'+n+'" type="url" inputmode="url" autocomplete="off" placeholder="Paste a YouTube or Google Drive link"></div>'+
       '<div class="field"><div class="rq"><label for="slink'+n+'">Score photos link</label></div><input id="slink'+n+'" type="url" inputmode="url" autocomplete="off" placeholder="Google Drive or Google Photos link"></div>'
       :
-      '<div class="rq"><span class="lbl">Video of piece '+n+'</span><span class="tag req">Required</span></div>'+
+      '<div class="rq"><span class="lbl">Video of piece '+n+'</span>'+TAG(n)+'</div>'+
       '<label class="pick" id="vp'+n+'" for="video'+n+'"><input id="video'+n+'" type="file" accept="video/*,.mov,.mp4,.m4v"><span class="ic" aria-hidden="true">'+VID+'</span><span class="tx"><b id="vt'+n+'">No video yet</b><span id="vs'+n+'">MP4 or MOV, up to 4 GB</span></span><span class="go" id="vg'+n+'">Choose</span></label>'+
       '<div class="rq"><span class="lbl">Score photos</span></div>'+
       '<label class="pick sc" id="sp'+n+'" for="score'+n+'"><input id="score'+n+'" type="file" accept="image/*,.pdf" multiple><span class="ic" aria-hidden="true">'+SCORE+'</span><span class="tx"><b id="ct'+n+'">No score added</b><span id="cs'+n+'">Photos or PDF, up to 10</span></span><span class="go" id="sg'+n+'">Add</span></label>')+
@@ -478,7 +498,8 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
     function refresh(){
       var t=$('title'+n).value.trim(), v=hasVideo(p), ok=v&&t;
       el.classList.toggle('ready',!!ok);
-      $('st'+n).textContent=ok?'Ready':(v?'Add the name':(t?(LINK?'Add the link':'Add the video'):'To do'));
+      $('st'+n).textContent=ok?'Ready':(v?'Add the name':(t?(LINK?'Add the link':'Add the video'):(n===1?'To do':'Optional')));
+      el.classList.toggle('skip', n>1 && !v && !t);
       updateCount();
     }
     p.refresh=refresh;
@@ -515,19 +536,27 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
     new IntersectionObserver(function(e){ sendOn=e[0].isIntersecting; stickyShow(); }).observe(send);
   }
   $('stickyGo').addEventListener('click',function(){
-    var next=pieces.filter(function(p){ return !(hasVideo(p)&&$('title'+p.n).value.trim()); })[0];
+    var next=pieces.filter(function(p){ return isStarted(p)&&!isReady(p); })[0]||(readyCount()?null:pieces[0]);
     var target=next?(!$('title'+next.n).value.trim()?$('title'+next.n):$((LINK?'link':'video')+next.n)):$('consentBox');
     (next?next.el:$('consentBox').closest('label')).scrollIntoView({behavior:'smooth',block:'center'});
     setTimeout(function(){ try{ target.focus({preventScroll:true}); }catch(e){} },400);
   });
-  function readyCount(){ return pieces.filter(function(p){ return hasVideo(p)&&$('title'+p.n).value.trim(); }).length; }
+  function isReady(p){ return hasVideo(p)&&!!$('title'+p.n).value.trim(); }
+  function isStarted(p){ return hasVideo(p)||!!$('title'+p.n).value.trim()||(LINK&&!!$('slink'+p.n).value.trim())||(!LINK&&p.scores.length>0); }
+  function chosen(){ return pieces.filter(isStarted); }
+  function readyCount(){ return pieces.filter(isReady).length; }
   function updateCount(){
     if(typeof pieces==='undefined') return;
     var c=readyCount();
     $('countN').textContent=c+' of 4'; $('count').classList.toggle('all',c===4);
     $('stickyN').textContent=c+' of 4 pieces ready';
-    $('stickyGo').firstChild.textContent=c===4?'Go to upload ':'Continue ';
-    $('stickyHint').textContent=c===4?'Tick the consent box, then upload':(LINK?'Add a name and video link for each':'Add a name and video for each');
+    var half=pieces.filter(function(p){ return isStarted(p)&&!isReady(p); }).length, go=c>=1&&!half;
+    $('stickyGo').firstChild.textContent=go?'Go to upload ':'Continue ';
+    $('stickyHint').textContent=go?'Tick the consent box, then upload':(half?'Finish the piece you started':'Add at least one piece');
+    var miss=pieces.filter(function(p){ return !isReady(p); }).map(function(p){ return p.n; });
+    $('coachForm').hidden=!(c>=1&&c<4);
+    if(miss.length) $('coachWhich').textContent=(miss.length===1?'piece ':'pieces ')+miss.join(miss.length===2?' and ':', ').replace(/, (\d)$/,' and $1');
+    send.innerHTML=(c>=1&&c<4?'Upload '+c+(c===1?' piece':' pieces'):(c===4?'Upload all 4 pieces':'Upload my pieces'))+' <span aria-hidden="true">→</span>';
   }
   updateCount();
   function size(n){ return n>=1073741824?(n/1073741824).toFixed(2)+' GB':n>=1048576?Math.round(n/1048576)+' MB':Math.max(1,Math.round(n/1024))+' KB'; }
@@ -564,7 +593,7 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
   function liveUpload(meta){
     return api('/api/uploads/start',meta).then(function(sub){
       var chain=Promise.resolve();
-      pieces.forEach(function(p){
+      chosen().forEach(function(p){
         var acc={done:0,total:p.video.size+p.scores.reduce(function(a,f){return a+f.size;},0)};
         chain=chain.then(function(){ return sendFile(sub,p,p.video,'video',acc); });
         p.scores.forEach(function(f){ chain=chain.then(function(){ return sendFile(sub,p,f,'score',acc); }); });
@@ -575,7 +604,7 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
   /* ---------- preview: simulated ---------- */
   function fakeUpload(){
     var chain=Promise.resolve();
-    pieces.forEach(function(p){
+    chosen().forEach(function(p){
       var t=p.video.size+p.scores.reduce(function(a,f){return a+f.size;},0), done=0;
       chain=chain.then(function(){ return new Promise(function(res){
         $('pmsg').textContent='Uploading piece '+p.n+'. Keep this page open.';
@@ -591,12 +620,14 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
     if(miss.length){ openFields(true); showErr('Please fill in your details first.'); return $(miss[0]).focus(); }
     if(!/^\S+@\S+\.\S+$/.test($('email').value)){ openFields(true); showErr('Check the email address.'); return $('email').focus(); }
     if(!$('editBtn').hidden) openFields(false);
-    for(var i=0;i<4;i++){
-      var p=pieces[i];
+    if(!chosen().length){ showErr('Add at least one piece: its name and its video.'); pieces[0].el.scrollIntoView({block:'center'}); return $('title1').focus(); }
+    var picked=chosen();
+    for(var i=0;i<picked.length;i++){
+      var p=picked[i];
       if(!$('title'+p.n).value.trim()){ showErr('Type the name of piece '+p.n+'.'); return $('title'+p.n).focus(); }
       if(!hasVideo(p)){
         if(LINK){ showErr($('link'+p.n).value.trim()?'Piece '+p.n+': that doesn\'t look like a web link. Copy the full link starting with https://':'Piece '+p.n+' still needs its video link.'); p.el.scrollIntoView({block:'center'}); return $('link'+p.n).focus(); }
-        showErr('Piece '+p.n+' still needs its video. Tap Choose to add it.'); p.el.scrollIntoView({block:'center'}); return $('video'+p.n).focus();
+        showErr('Piece '+p.n+' still needs its video. Tap Choose to add it, or clear the piece name if it isn\'t ready.'); p.el.scrollIntoView({block:'center'}); return $('video'+p.n).focus();
       }
       if(LINK && $('slink'+p.n).value.trim() && !okUrl($('slink'+p.n).value)){ showErr('Piece '+p.n+': the score photos link doesn\'t look right. Copy the full link starting with https://, or leave it empty.'); p.el.scrollIntoView({block:'center'}); return $('slink'+p.n).focus(); }
     }
@@ -604,13 +635,14 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
 
     if(LINK) return sendLinks();
     if(!isLive && !sandbox){ showErr('Online upload isn\'t switched on yet. Please email music@cadenza-london.com and we\'ll help you send your pieces.'); return; }
-    total=pieces.reduce(function(a,p){ return a+p.video.size+p.scores.reduce(function(b,f){return b+f.size;},0); },0)||1; sent=0;
+    total=chosen().reduce(function(a,p){ return a+p.video.size+p.scores.reduce(function(b,f){return b+f.size;},0); },0)||1; sent=0;
     busy=true; stickyShow(); send.disabled=true; send.textContent='Uploading…'; $('prog').hidden=false;
     form.querySelectorAll('input,select').forEach(function(x){ x.disabled=true; });
     var meta={rid:reg.rid,token:reg.token,due:reg.due,name:$('name').value,email:$('email').value,student:$('student').value,grade:$('grade').value,board:$('board').value,consent:true,
-      pieces:pieces.map(function(p){ return {piece:p.n,title:$('title'+p.n).value.trim(),video:{filename:p.video.name,size:p.video.size},scores:p.scores.map(function(f){ return {filename:f.name,size:f.size}; })}; })};
+      pieces:chosen().map(function(p){ return {piece:p.n,title:$('title'+p.n).value.trim(),video:{filename:p.video.name,size:p.video.size},scores:p.scores.map(function(f){ return {filename:f.name,size:f.size}; })}; })};
     (isLive?liveUpload(meta):fakeUpload()).then(finish).catch(function(x){
       if(x&&(x.code==='released'||x.code==='withdrawn')) return showGone(x.code);
+      if(x&&x.code==='four_pieces_required'){ form.querySelectorAll('input,select').forEach(function(y){ y.disabled=false; }); busy=false; stickyShow(); $('prog').hidden=true; send.disabled=false; updateCount(); return showErr('Sending fewer than 4 pieces isn\'t switched on yet. Please add all 4, or email music@cadenza-london.com and we\'ll help.'); }
       form.querySelectorAll('input,select').forEach(function(y){ y.disabled=false; });
       busy=false; stickyShow(); $('prog').hidden=true; send.disabled=false; send.innerHTML='Try again <span aria-hidden="true">→</span>';
       showErr(x&&x.message==='network'?'The connection dropped and the upload stopped. Check Wi-Fi and tap Try again.':'Something went wrong on our side. Tap Try again, or email music@cadenza-london.com if it keeps happening.');
@@ -623,7 +655,7 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
     fd.append('form-name','exam-course-pieces'); fd.append('bot-field','');
     ['name','email','student','grade','board'].forEach(function(k){ fd.append(k,$(k).value.trim()); });
     fd.append('upload_deadline',reg.due||''); fd.append('consent','yes');
-    pieces.forEach(function(p){
+    chosen().forEach(function(p){
       fd.append('piece'+p.n+'_title',$('title'+p.n).value.trim());
       fd.append('piece'+p.n+'_video',$('link'+p.n).value.trim());
       fd.append('piece'+p.n+'_score',$('slink'+p.n).value.trim());
@@ -633,7 +665,7 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
       ? fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:fd.toString()}).then(function(r){ if(!r.ok) throw new Error('send'); })
       : (sandbox ? new Promise(function(r){ setTimeout(r,700); }) : Promise.reject(new Error('preview')));
     go.then(finish).catch(function(x){
-      busy=false; stickyShow(); send.disabled=false; send.innerHTML='Send all 4 pieces <span aria-hidden="true">→</span>';
+      busy=false; stickyShow(); send.disabled=false; updateCount();
       showErr(x&&x.message==='preview'?'Preview only: this sends once the page is live on your Netlify site.':'That didn\'t send. Please try again, or email the links to music@cadenza-london.com.');
     });
   }
