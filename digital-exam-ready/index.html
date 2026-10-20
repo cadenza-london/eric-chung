@@ -12,7 +12,7 @@
 <meta name="theme-color" content="#eca945">
 <link rel="icon" type="image/png" href="logo-circle.png">
 <link rel="apple-touch-icon" href="logo-circle.png">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=DM+Serif+Display:ital@0;1&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,500..800,0..100,0..1;1,9..144,500..800,0..100,0..1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Figtree:wght@400;500;600;700;800&family=Gochi+Hand&display=swap">
 <style>
 /* Layout: Cadenza brand landing page — marigold hero with Eric, then the four "what you get" sections (included, fit check, at home vs Cadenza, at a glance), then meet Eric, how it works, prices, booking. One consistent button system. */
 :root{
@@ -431,8 +431,66 @@ footer a.cact:hover{background:var(--marigold);color:var(--ink)}
   .cmp>summary{padding:18px}
   .cmpbody{padding:0 14px 16px}
 }
+
+/* ===== Cute theme (Oct 2026): orange × yellow × burgundy, bubbly type ===== */
+:root{
+  --ink:#4b2416; --muted:#7d5544; --cream:#fff7ef; --card:#fffdfa; --line:#f3d9bf;
+  --marigold:#ff9a3c; --marigold-soft:#ffe3c7; --butter:#fff1b8; --blush:#f6e0c8;
+  --gold-deep:#d9532f; --on-ink:#fffaf5; --on-ink-muted:#ffe9e0;
+  --pink:#9b2847; --rasp:#8a1f3f; --yellow:#ffd64f; --burg:#7a1a36;
+  --cute-grad:linear-gradient(135deg,#6b1530 0%,#8f2343 45%,#d8622a 100%);
+  --btn-grad:linear-gradient(135deg,#8a1f3f 0%,#e56a2a 100%);
+  --sans:"Figtree","Helvetica Neue",Arial,sans-serif;
+  --serif:"Bagel Fat One","Arial Rounded MT Bold","Arial Black",sans-serif;
+  --soft:"Bagel Fat One","Arial Rounded MT Bold","Arial Black",sans-serif;
+  --hand:"Gochi Hand","Comic Sans MS","Chalkboard SE",cursive;
+}
+body{background-color:var(--cream);background-image:radial-gradient(rgba(138,31,63,.10) 1.6px,transparent 1.8px),radial-gradient(rgba(255,154,60,.14) 1.6px,transparent 1.8px);background-size:26px 26px,26px 26px;background-position:0 0,13px 13px}
+h1,h2{font-weight:400;letter-spacing:0;line-height:1.1}
+h3{font-weight:800}
+.kicker,.k{color:var(--gold-deep)}
+
+/* buttons: candy gradients with a chunky bottom edge */
+.btn-dark{background:var(--btn-grad);border-color:transparent;color:#fff;box-shadow:0 5px 0 #5c1229,0 14px 24px -14px rgba(122,26,54,.7)}
+.btn-dark:hover{box-shadow:0 7px 0 #5c1229,0 18px 26px -14px rgba(122,26,54,.7)}
+.btn-dark:active{transform:translateY(3px);box-shadow:0 2px 0 #5c1229}
+.btn-gold{background:var(--yellow);border-color:var(--ink);color:var(--ink);box-shadow:0 5px 0 var(--ink)}
+.btn-gold:active{transform:translateY(3px);box-shadow:0 2px 0 var(--ink)}
+.btn-outline:hover{background:var(--btn-grad);border-color:transparent;color:#fff}
+
+/* dark blocks become raspberry→orange sunsets with yellow accents */
+.ticker,footer,.drawer,.reg,.vs2 .us,.step.final,.more .private,.nsdue,.vcol.ws,.deadline,.sticky,.dark{background:var(--cute-grad);border-color:transparent;--marigold:#ffe27a;--gold-deep:#ffe27a;--on-ink-muted:#ffeee6;--muted:#ffeee6}
+footer{border-top:0}
+.sticky{border-top:0;box-shadow:0 -10px 24px -14px rgba(201,61,102,.6)}
+
+/* little dark chips → raspberry with white text */
+.mc b,.stages .sd,.disc,.sn,.tag.req,.pill,.pick .ic,.pick .go,.coach a,details[open] summary::after{background:var(--rasp);color:#fff;border-color:var(--rasp)}
+.bar i{background:var(--btn-grad)}
+
+/* cards: warm orange borders + candy offset shadows */
+.mini,.cmp,.need,.nextstep,.plan.hl,.card,form.card{border-color:#e9a46a;box-shadow:6px 6px 0 #ffe08a}
+.mini:nth-of-type(3n+2){box-shadow:6px 6px 0 #ffd0a0}
+.mini:nth-of-type(3n){box-shadow:6px 6px 0 #e9c7cf}
+.strip>div{border-color:#e9a46a;background:#fff6ea}
+.coach{background:#fff4c9;border-color:#ff8a3d}
+
+.hero{background:radial-gradient(ellipse 60% 50% at 95% 5%,rgba(138,31,63,.45),transparent 70%),radial-gradient(ellipse 60% 50% at 0% 95%,rgba(255,214,79,.75),transparent 70%),linear-gradient(180deg,#ffb26b 0%,#ffd9b0 55%,var(--cream) 100%)}
+.hero h1 .big{font-weight:400;font-variation-settings:normal;letter-spacing:0;color:var(--ink)}
+.hero h1 em{font-weight:400;font-style:normal;font-variation-settings:normal;color:var(--burg);-webkit-text-stroke:0;text-shadow:2px 2px 0 #ffd64f}
+.portrait .frame{border-color:var(--ink);box-shadow:10px 10px 0 var(--burg)}
+.eric .photo{box-shadow:-10px 10px 0 var(--burg)}
+.plan.hl{box-shadow:8px 8px 0 var(--yellow)}
+.cmp{box-shadow:6px 6px 0 #ffe08a}
 </style>
-<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+/* white form + next-step cards inside the dark register block: dark readable text */
+.reg #interest,.reg .nextstep{--marigold:#e8771f;--gold-deep:#a8431c;--muted:#6d4a3a;--on-ink-muted:#6d4a3a;color:var(--ink)}
+.reg #interest h3,.reg #interest legend,.reg #interest label,.reg .nextstep h3,.reg .nextstep li,.reg .nextstep .later{color:var(--ink)}
+.reg #interest .group{color:#a8431c}
+.reg #interest small,.reg #interest .hint{color:#6d4a3a}
+.reg .nextstep .done{color:#2f6b3a}
+.reg .nextstep a:not(.btn){color:#a8431c}
+</style>
 </head>
 <body>
 <div class="ticker full" aria-label="Announcements">
@@ -486,7 +544,7 @@ footer a.cact:hover{background:var(--marigold);color:var(--ink)}
       <span class="cap">Eric Chung<small>Pianist &amp; teacher</small></span>
       <svg class="spark a" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0 C21 13 27 19 40 20 C27 21 21 27 20 40 C19 27 13 21 0 20 C13 19 19 13 20 0 Z" fill="#1c1712"/></svg>
       <svg class="spark b" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0 C21 13 27 19 40 20 C27 21 21 27 20 40 C19 27 13 21 0 20 C13 19 19 13 20 0 Z" fill="#fbe08a"/></svg>
-      <svg class="spark c" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0 C21 13 27 19 40 20 C27 21 21 27 20 40 C19 27 13 21 0 20 C13 19 19 13 20 0 Z" fill="#f7c9c9"/></svg>
+      <svg class="spark c" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 0 C21 13 27 19 40 20 C27 21 21 27 20 40 C19 27 13 21 0 20 C13 19 19 13 20 0 Z" fill="#ffd64f"/></svg>
     </div>
   </div>
 </div>
