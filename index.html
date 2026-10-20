@@ -85,6 +85,7 @@
 </script>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fredoka:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --gold: #C9A84C;
@@ -382,6 +383,127 @@
     .promo-input { padding: 0.65rem 0.8rem; font-size: 16px; }
     .promo-privacy { margin-top: 0.5rem; }
   }
+  /* ── Promo popup: D2 Golden champagne (Oct 2026) ── */
+/* ===== shared structure ===== */
+#promo-popup{display:grid;grid-template-columns:1.25fr 1fr}
+#promo-popup .promo-close{position:absolute;top:12px;right:12px;width:36px;height:36px;border:0;cursor:pointer;font-size:1.3rem;line-height:1;z-index:5}
+#promo-popup .promo-left,#promo-popup .promo-right{min-width:0}
+#promo-popup .g2-list{display:flex;flex-direction:column;position:relative;z-index:0}
+#promo-popup .g2-it{position:relative}
+#promo-popup .g2-hd{width:100%;display:grid;grid-template-columns:1fr auto;align-items:center;gap:.8rem;background:none;border:0;text-align:left;cursor:pointer;color:inherit;font:inherit;transition:transform 160ms ease-out}
+#promo-popup .g2-hd:active{transform:scale(.985)}
+#promo-popup .g2-t,#promo-popup .g2-d,#promo-popup .g2-tag{display:block}
+#promo-popup .g2-tag{display:inline-block}
+#promo-popup .g2-tog{display:inline-flex;align-items:center;gap:.45rem;white-space:nowrap}
+#promo-popup .g2-tog b::before{content:"View"}
+#promo-popup .g2-open .g2-tog b::before{content:"Close"}
+#promo-popup .g2-tog i{font-style:normal;display:inline-block;transition:transform 250ms cubic-bezier(.23,1,.32,1)}
+#promo-popup .g2-open .g2-tog i{transform:rotate(45deg)}
+#promo-popup .g2-pn{display:grid;grid-template-rows:0fr;transition:grid-template-rows 300ms cubic-bezier(.23,1,.32,1)}
+#promo-popup .g2-open .g2-pn{grid-template-rows:1fr}
+#promo-popup .g2-pn>div{overflow:hidden}
+#promo-popup .g2-bd{display:flex;flex-direction:column}
+#promo-popup .g2-ticks{list-style:none;display:grid}
+#promo-popup .g2-steps{display:grid;grid-template-columns:repeat(3,1fr)}
+#promo-popup .g2-cta{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:.6rem;text-decoration:none;transition:transform 160ms ease-out,box-shadow 200ms ease,background-color 200ms ease}
+#promo-popup .g2-cta span{display:inline-block;transition:transform 200ms cubic-bezier(.23,1,.32,1)}
+#promo-popup .g2-cta:active{transform:scale(.97)}
+#promo-popup .g2-cta::before{content:"";position:absolute;top:0;bottom:0;left:-40%;width:30%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);pointer-events:none}
+#promo-popup .g2-open .g2-cta::before{animation:g2Sheen 900ms cubic-bezier(.23,1,.32,1) 400ms 1 both}
+@keyframes g2Sheen{from{left:-40%}to{left:120%}}
+@media (hover:hover) and (pointer:fine){#promo-popup .g2-cta:hover span{transform:translateX(5px)}#promo-popup .g2-cta:hover::before{animation:g2Sheen 700ms cubic-bezier(.23,1,.32,1) 1 both}}
+#promo-popup #promo-mailing-form{display:grid;gap:.25rem}
+#promo-popup .promo-label{display:block}
+#promo-popup .promo-input{width:100%;font:inherit;font-size:16px}
+#promo-popup .promo-submit-btn{width:100%;cursor:pointer;border:0;transition:transform 160ms ease-out}
+#promo-popup .promo-submit-btn:active{transform:scale(.97)}
+
+
+@media (max-width:640px){
+  #promo-popup{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){#promo-popup *,#promo-popup *::before{transition:none!important;animation:none!important}}
+
+/* ===== D2 · Golden champagne (orange / yellow / shiny gold) ===== */
+#promo-popup{color:#4A2E12;font-family:"DM Sans",sans-serif;border-radius:28px;
+  --amber:#E8962E;--amber2:#C9741A;--sun:#FFD873;--honey:#FFF1C9;--brown:#5A3410;--ring:#F2D49A;
+  background:linear-gradient(135deg,#FFF6DC 0%,#FFE7B0 30%,#FFF3D6 55%,#FFDDA0 80%,#FFF1CF 100%);background-size:220% 220%;animation:g2GoldDrift 12s ease-in-out infinite;
+  box-shadow:inset 0 0 0 1.5px rgba(232,150,46,.45),0 30px 60px -30px rgba(201,116,26,.6)}
+@keyframes g2GoldDrift{0%,100%{background-position:0% 0%}50%{background-position:100% 100%}}
+@keyframes g2GoldFoil{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+#promo-popup .promo-close{background:rgba(255,255,255,.85);border-radius:50%;color:var(--brown);font-size:1.05rem;box-shadow:0 0 0 1.5px var(--ring)}
+#promo-popup .promo-left{padding:1.8rem 1.8rem 1.6rem;position:relative;background:transparent}
+#promo-popup .promo-left::before{content:"✦";position:absolute;top:1.2rem;right:4.2rem;color:var(--amber);font-size:1.1rem;animation:g2Twk 2.6s ease-in-out infinite}
+#promo-popup .promo-left::after{content:"✧";position:absolute;top:2.8rem;right:2.6rem;color:#F5B83D;font-size:.8rem;animation:g2Twk 2.6s ease-in-out .9s infinite}
+@keyframes g2Twk{0%,100%{opacity:.25;transform:scale(.7) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(20deg)}}
+#promo-popup .g2-launch{align-self:flex-start;display:inline-flex;align-items:center;gap:.4rem;border-radius:999px;padding:.38rem .85rem .38rem .45rem;font:600 .72rem Fredoka,sans-serif;letter-spacing:.06em;color:var(--brown);
+  background:linear-gradient(110deg,#FFE7A3 0%,#FFC94D 30%,#FFF2C2 50%,#F2A93B 70%,#FFE7A3 100%);background-size:250% 100%;animation:g2GoldFoil 4s ease-in-out infinite;box-shadow:0 6px 14px -6px rgba(201,116,26,.7),inset 0 1px 0 rgba(255,255,255,.7)}
+#promo-popup .g2-launch i{font-style:normal;background:var(--brown);color:var(--sun);border-radius:999px;padding:.1rem .5rem;font-size:0}
+#promo-popup .g2-launch i::after{content:"NEW";font-size:.6rem}
+#promo-popup .g2-h{font:600 2.05rem/1.1 Fredoka,sans-serif;letter-spacing:-.01em;margin:.7rem 0 0;color:var(--brown)}
+#promo-popup .g2-h em{font-style:normal;background:linear-gradient(100deg,#B8650F 0%,#E8962E 30%,#F5B83D 48%,#D9821F 66%,#B8650F 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:g2GoldFoil 5s ease-in-out infinite}
+#promo-popup .g2-rule{height:0;margin:.9rem 0 .4rem}
+#promo-popup .g2-h{text-wrap:balance}
+#promo-popup .g2-list{gap:.7rem}
+#promo-popup .g2-it{background:rgba(255,255,255,.72);border:1.5px solid var(--ring);border-radius:20px;backdrop-filter:blur(6px);transition:box-shadow 200ms ease,border-color 200ms ease}
+#promo-popup .g2-it.g2-open{background:#FFFDF6;border:0;box-shadow:0 0 0 2px transparent,0 18px 36px -16px rgba(201,116,26,.6)}
+#promo-popup .g2-it.g2-open::before{content:"";position:absolute;inset:0;border-radius:20px;padding:2px;pointer-events:none;
+  background:linear-gradient(120deg,#E8962E,#FFE08A,#F5B83D,#FFF2C2,#C9741A,#E8962E);background-size:300% 300%;animation:g2GoldFoil 5s ease-in-out infinite;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+@media (hover:hover) and (pointer:fine){#promo-popup .g2-it:not(.g2-open):hover{border-color:var(--amber)}}
+#promo-popup .g2-hd{padding:.8rem 1rem}
+#promo-popup .g2-tag{font:600 .62rem Fredoka;letter-spacing:.04em;background:var(--brown);color:var(--sun);padding:.18rem .6rem;border-radius:999px;margin-bottom:.3rem}
+#promo-popup .g2-tag.g2-soft{background:var(--honey);color:var(--brown);box-shadow:inset 0 0 0 1px var(--ring)}
+#promo-popup .g2-t{font:600 1.2rem/1.15 Fredoka,sans-serif;color:var(--brown)}
+#promo-popup .g2-open .g2-t{font-size:1.45rem}
+#promo-popup .g2-d{font:400 .8rem/1.4 "DM Sans";color:#7A5A36}
+#promo-popup .g2-tog{font:600 .74rem Fredoka;color:var(--brown);background:var(--honey);border-radius:999px;padding:.38rem .45rem .38rem .8rem;box-shadow:inset 0 0 0 1px var(--ring)}
+#promo-popup .g2-tog i{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#F5B83D,#E8962E);color:#fff;display:grid;place-items:center;font-size:.9rem}
+#promo-popup .g2-bd{padding:0 1rem 1rem;gap:.7rem}
+#promo-popup .g2-line{font:600 1.08rem Fredoka;color:var(--amber2)}
+#promo-popup .g2-ticks{gap:.35rem;font:400 .84rem/1.45 "DM Sans"}
+#promo-popup .g2-ticks li::before{content:"✦ ";color:var(--amber)}
+#promo-popup .g2-steps{gap:.4rem}
+#promo-popup .g2-steps div{background:linear-gradient(180deg,#FFF6DC,#FFEBC0);border-radius:14px;padding:.55rem .4rem;text-align:center;display:grid;gap:.1rem;box-shadow:inset 0 0 0 1px var(--ring)}
+#promo-popup .g2-steps small{font:600 .6rem Fredoka;letter-spacing:.06em;text-transform:uppercase;color:var(--amber2)}
+#promo-popup .g2-steps b{font:500 .76rem/1.25 "DM Sans"}
+#promo-popup .g2-price{font:400 .84rem "DM Sans"}#promo-popup .g2-price strong{font-weight:700}#promo-popup .g2-price .g2-eb{color:var(--amber2);font-weight:700}
+#promo-popup .g2-cta,#promo-popup .promo-submit-btn{color:var(--brown);border-radius:999px;font:600 1rem Fredoka;
+  background:linear-gradient(110deg,#F2A93B 0%,#FFD873 25%,#FFF2C2 45%,#F5B83D 65%,#E8962E 100%);background-size:220% 100%;animation:g2GoldFoil 4s ease-in-out infinite;
+  box-shadow:0 14px 26px -12px rgba(201,116,26,.85),inset 0 1px 0 rgba(255,255,255,.75),inset 0 -2px 0 rgba(201,116,26,.35)}
+#promo-popup .g2-cta{padding:.95rem 1.2rem}
+#promo-popup .g2-cta::before{background:linear-gradient(105deg,transparent,rgba(255,255,255,.8),transparent)}
+@media (hover:hover) and (pointer:fine){#promo-popup .g2-cta:hover,#promo-popup .promo-submit-btn:hover{box-shadow:0 18px 32px -12px rgba(201,116,26,.95),inset 0 1px 0 rgba(255,255,255,.75)}}
+#promo-popup .promo-right{background:rgba(255,253,246,.62);padding:2.2rem 1.8rem 1.8rem;border-left:1.5px solid var(--ring)}
+#promo-popup .promo-right-label{font:600 .7rem Fredoka;letter-spacing:.14em;text-transform:uppercase;color:var(--amber2)}
+#promo-popup .promo-right-title{font:600 1.65rem/1.12 Fredoka;margin:.4rem 0 1rem;color:var(--brown)}
+#promo-popup .promo-right-title em{font-style:normal;background:linear-gradient(100deg,#B8650F 0%,#E8962E 30%,#F5B83D 48%,#D9821F 66%,#B8650F 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:g2GoldFoil 5s ease-in-out infinite}
+#promo-popup .g2-offer{display:flex;align-items:center;gap:.8rem;background:linear-gradient(135deg,#FFF2C2,#FFE0A0);border-radius:18px;padding:.75rem .9rem;margin-bottom:1rem;font:400 .8rem/1.4 "DM Sans";box-shadow:inset 0 0 0 1px var(--ring)}
+#promo-popup .g2-offer strong{font:600 2.2rem/1 Fredoka;background:linear-gradient(100deg,#A85A0C,#D9821F 40%,#E8962E 60%,#A85A0C);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:g2GoldFoil 4s ease-in-out infinite}
+#promo-popup .promo-label{font:600 .74rem Fredoka;margin-top:.5rem;color:#7A5A36}
+#promo-popup .promo-input{border:1.5px solid var(--ring);background:#fff;border-radius:14px;padding:.75rem .9rem}
+#promo-popup .promo-input:focus{outline:none;border-color:var(--amber)}
+#promo-popup .promo-submit-btn{margin-top:1rem;padding:.95rem}
+#promo-popup .promo-privacy{font-size:.74rem;color:#7A5A36;text-align:center;margin-top:.7rem}
+@media (max-width:640px){#promo-popup{border-radius:22px}#promo-popup .promo-left{padding:1.2rem .9rem 1.1rem}#promo-popup .promo-left::before{right:3.6rem;top:.9rem}#promo-popup .promo-left::after{display:none}#promo-popup .g2-h{font-size:1.5rem;padding-right:2.2rem}#promo-popup .g2-t{font-size:1.05rem}#promo-popup .g2-open .g2-t{font-size:1.25rem}#promo-popup .g2-hd{padding:.65rem .75rem}#promo-popup .g2-bd{padding:0 .75rem .85rem}#promo-popup .promo-right{border-left:0;border-top:1.5px solid var(--ring);padding:1.2rem .9rem}#promo-popup .promo-right-title{font-size:1.35rem}}
+@media (prefers-reduced-motion:reduce){#promo-popup,#promo-popup *,#promo-popup *::before,#promo-popup *::after{animation:none!important}}
+
+  /* site integration */
+  #promo-popup { width:min(940px,94vw); max-height:90vh; max-height:90dvh; overflow:hidden auto; }
+  #promo-popup .promo-left::before { content:"✦"; position:absolute; top:1.2rem; right:4.2rem; bottom:auto; color:#E8962E; font-size:1.1rem; line-height:1; animation:g2Twk 2.6s ease-in-out infinite; }
+  #promo-popup .promo-close { position:absolute; top:12px; right:12px; width:36px; height:36px; display:flex; align-items:center; justify-content:center; border:0; cursor:pointer; line-height:1; z-index:5; transform:none; }
+  #promo-popup .promo-right { border-top:0; }
+  #promo-popup .promo-right-title br { display:none; }
+  #promo-popup .promo-field { margin-bottom:0.4rem; }
+  #promo-popup .promo-label { display:block; letter-spacing:0; text-transform:none; margin-bottom:0.3rem; }
+  #promo-popup .promo-input { width:100%; font-family:'DM Sans',sans-serif; font-size:16px; color:#4A2E12; }
+  #promo-popup .promo-submit-btn { width:100%; border:0; cursor:pointer; letter-spacing:0; text-transform:none; }
+  #promo-popup .promo-submit-btn:disabled { opacity:.6; }
+  @media (max-width:640px){
+    #promo-popup { width:94vw; max-height:88vh; max-height:88dvh; }
+    #promo-popup .promo-left::before { right:3.6rem; top:.9rem; }
+  }
+
   /* ── NAV ── */
   nav {
     position: fixed; top: 28px; left: 0; right: 0; z-index: 100;
@@ -2241,59 +2363,69 @@
 
   <!-- Left panel: announcement -->
   <div class="promo-left">
-    <div class="promo-new-badge">New Launch</div>
-    <div class="promo-gold-line"></div>
-
-    <h2 class="promo-heading">New ways to learn <em>with Eric</em></h2>
-
-    <div class="promo-services">
-      <a href="sight-reading-club/" class="promo-service promo-service-link" onclick="closePromoPopup && closePromoPopup()">
-        <div class="promo-service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-        <div>
-          <div class="promo-service-title">Sight-Reading Club</div>
-          <div class="promo-service-desc">On Zoom · Free until 31 Dec</div>
-        </div>
-      </a>
-      <a href="digital-exam-ready/" class="promo-service promo-service-link" onclick="closePromoPopup && closePromoPopup()">
-        <div class="promo-service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg></div>
-        <div>
-          <div class="promo-service-title">Digital Exam Ready Course</div>
-          <div class="promo-service-desc">In person · ABRSM &amp; Trinity · Nov</div>
-        </div>
-      </a>
-      <a href="#feedback" class="promo-service promo-service-link" onclick="closePromoPopup && closePromoPopup()">
-        <div class="promo-service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-        <div>
-          <div class="promo-service-title">Online Coaching</div>
-          <div class="promo-service-desc">Exam-style marking · from £15</div>
-        </div>
-      </a>
+    <span class="g2-launch"><i>New</i> New launch</span>
+    <h2 class="g2-h">New ways to learn <em>with Eric</em></h2>
+    <div class="g2-rule" aria-hidden="true"></div>
+    <div class="g2-list">
+      <div class="g2-it" id="g2-club">
+        <button type="button" class="g2-hd" aria-expanded="false" aria-controls="g2-p-club">
+          <span><span class="g2-tag">New · Free until 31 Dec</span><span class="g2-t">Sight-Reading Club</span><span class="g2-d">Practice makes perfect · weekly on Zoom</span></span>
+          <span class="g2-tog" aria-hidden="true"><b></b><i>+</i></span>
+        </button>
+        <div class="g2-pn" id="g2-p-club"><div><div class="g2-bd">
+          <ul class="g2-ticks"><li>Read new music with a friendly community every Tuesday</li><li>Ask Eric anything and pick up great tips</li><li>Become a better pianist, Grades 1–8</li></ul>
+          <p class="g2-price"><strong>Free until 31 Dec</strong> · Tuesdays 6–6:45pm on Zoom</p>
+          <a class="g2-cta" href="sight-reading-club/" onclick="closePromoPopup && closePromoPopup()">Join free <span aria-hidden="true">→</span></a>
+        </div></div></div>
+      </div>
+      <div class="g2-it g2-open" id="g2-exam">
+        <button type="button" class="g2-hd" aria-expanded="true" aria-controls="g2-p-exam">
+          <span><span class="g2-tag">New · Starts 28 Nov</span><span class="g2-t">Digital Exam Ready Course</span><span class="g2-d">ABRSM &amp; Trinity · in person, London</span></span>
+          <span class="g2-tog" aria-hidden="true"><b></b><i>+</i></span>
+        </button>
+        <div class="g2-pn" id="g2-p-exam"><div><div class="g2-bd">
+          <p class="g2-line">Get coached. Get marked. Get recorded.</p>
+          <div class="g2-steps"><div><small>Weeks 1–3</small><b>3 coaching sessions</b></div><div><small>Week 3</small><b>Mock exam</b></div><div><small>Week 4</small><b>Exam video on a grand piano</b></div></div>
+          <p class="g2-price"><strong>From £295</strong> · <span class="g2-eb">Early bird: first 3 save £20</span></p>
+          <a class="g2-cta" href="digital-exam-ready/" onclick="closePromoPopup && closePromoPopup()">Register interest (free) <span aria-hidden="true">→</span></a>
+        </div></div></div>
+      </div>
+      <div class="g2-it" id="g2-coach">
+        <button type="button" class="g2-hd" aria-expanded="false" aria-controls="g2-p-coach">
+          <span><span class="g2-tag g2-soft">Now enrolling</span><span class="g2-t">Online Coaching</span><span class="g2-d">Exam-style marking from £15</span></span>
+          <span class="g2-tog" aria-hidden="true"><b></b><i>+</i></span>
+        </button>
+        <div class="g2-pn" id="g2-p-coach"><div><div class="g2-bd">
+          <ul class="g2-ticks"><li>Send a video of your piece from home</li><li>Eric marks it like an examiner, with written fixes</li><li>Single Piece Check or Full Exam Check, priced by grade</li></ul>
+          <p class="g2-price"><strong>From £15</strong> · <span class="g2-eb">20% off your first session</span></p>
+          <a class="g2-cta" href="#feedback" onclick="closePromoPopup && closePromoPopup()">Get feedback <span aria-hidden="true">→</span></a>
+        </div></div></div>
+      </div>
     </div>
   </div>
 
   <!-- Right panel: mailing list -->
   <div class="promo-right">
     <div class="promo-right-inner">
-      <p class="promo-right-label">Stay in the Loop</p>
-      <h3 class="promo-right-title">Join Our <br><em>Limited VIP List</em></h3>
-      <div class="promo-right-divider"></div>
-      <p class="promo-right-desc">Be first to hear about new services, limited spots and early-bird offers, plus 20% off your first Online Coaching session.</p>
+      <p class="promo-right-label">VIP list · Limited</p>
+      <h3 class="promo-right-title">Get first access <em>before spots go</em></h3>
+      <div class="g2-offer"><strong>20%</strong><span>off your first Online Coaching session, plus early notice of new dates and early-bird prices.</span></div>
 
       <form id="promo-mailing-form" novalidate>
         <div class="promo-field">
-          <label class="promo-label" for="promo-name">Your Name</label>
+          <label class="promo-label" for="promo-name">Your name</label>
           <input class="promo-input" type="text" id="promo-name" placeholder="Jane Smith" autocomplete="name" />
         </div>
         <div class="promo-field">
-          <label class="promo-label" for="promo-email">Email Address</label>
+          <label class="promo-label" for="promo-email">Email address</label>
           <input class="promo-input" type="email" id="promo-email" placeholder="jane@example.com" autocomplete="email" />
         </div>
         <p id="promo-error" style="display:none;font-size:0.75rem;color:#c0392b;margin-bottom:0.8rem;"></p>
         <button type="submit" id="promo-submit" class="promo-submit-btn">
-          <span id="promo-btn-text">Subscribe →</span>
+          <span id="promo-btn-text">Claim my 20% off →</span>
           <span id="promo-btn-loading" style="display:none;">Sending…</span>
         </button>
-        <p class="promo-privacy">No spam, ever. Unsubscribe at any time.</p>
+        <p class="promo-privacy">One email a month. Unsubscribe any time.</p>
       </form>
 
       <div id="promo-success" style="display:none;" class="promo-success-msg">
@@ -2643,6 +2775,21 @@
     document.body.style.overflow = '';
     sessionStorage.setItem('promoDismissed', 'true');
   };
+
+  // ── Promo popup accordion (Oct 2026) ──
+  (function(){
+    var items=[].slice.call(document.querySelectorAll('#promo-popup .g2-it'));
+    items.forEach(function(it){
+      it.querySelector('.g2-hd').addEventListener('click',function(){
+        var opening=!it.classList.contains('g2-open');
+        items.forEach(function(o){
+          var on=(o===it)&&opening;
+          o.classList.toggle('g2-open',on);
+          o.querySelector('.g2-hd').setAttribute('aria-expanded',on?'true':'false');
+        });
+      });
+    });
+  })();
 
   // ── PROMO POPUP ──
   const promoPopup = document.getElementById('promo-popup');
