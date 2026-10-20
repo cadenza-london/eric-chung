@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Piano &amp; Violin Lessons in Colindale, London &amp; Online | Cadenza London Music Academy</title>
-<meta name="description" content="Cadenza London Music Academy: 1-on-1 piano, violin and theory lessons with Eric Chung in Colindale (NW9), North West London, and online. ABRSM &amp; Trinity exams, diplomas and competitions. Lessons from £50.">
+<meta name="description" content="Cadenza London Music Academy: 1-on-1 piano, violin and theory lessons with Eric Chung in Colindale (NW9), North West London, and online. ABRSM &amp; Trinity exams, diplomas and competitions. Lessons from £35.">
 <link rel="canonical" href="https://cadenza-london.com/">
 
 <!-- Open Graph / WhatsApp / iMessage / Facebook preview -->
@@ -40,7 +40,7 @@
  "description": "1-on-1 piano, violin, theory and aural lessons with Eric Chung in Colindale, North West London, and online. ABRSM and Trinity exam, diploma and competition preparation.",
  "telephone": "+44 7572 010370",
  "email": "music@cadenza-london.com",
- "priceRange": "From £50 per lesson",
+ "priceRange": "From £35 per lesson",
  "address": {
   "@type": "PostalAddress",
   "addressLocality": "Colindale, London",
@@ -324,6 +324,64 @@
     .promo-left::before { font-size: 10rem; }
   }
 
+
+  /* ── Drawer tags (Oct 2026) ── */
+  .dtag { display: inline-block; font-size: 0.5rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; padding: 0.18rem 0.45rem; border-radius: 999px; background: #E86A4A; color: #fff; vertical-align: middle; margin-left: 0.3rem; line-height: 1.2; }
+  .dtag-offer { background: #7FB8DA; color: #1C1C1C; }
+
+  /* ── Coaching submission: coming soon ── */
+  .coach-soon { max-width: 700px; margin: 0 auto; position: relative; text-align: center; border: 1px solid rgba(201,168,76,0.3); background: rgba(255,255,255,0.04); padding: 2.6rem 2rem; }
+  .coach-soon-tag { display: inline-block; font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; background: var(--gold); color: #1C1C1C; padding: 0.3rem 0.8rem; border-radius: 999px; font-weight: 600; margin-bottom: 1rem; }
+  .coach-soon h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 300; color: #FDFAF5; margin-bottom: 0.8rem; }
+  .coach-soon p { font-size: 0.86rem; line-height: 1.8; color: rgba(253,250,245,0.7); font-weight: 300; max-width: 520px; margin: 0 auto; }
+  .coach-soon-btns { display: flex; flex-direction: column; align-items: center; gap: 0.9rem; margin: 1.6rem 0 1.2rem; }
+  .coach-soon-btn { display: inline-block; padding: 1rem 2rem; background: var(--gold); color: #1C1C1C; text-decoration: none; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; }
+  .coach-soon-btn.is-soon { background: rgba(201,168,76,0.25); color: rgba(253,250,245,0.75); cursor: default; }
+  .coach-soon-alt { color: var(--gold-light); font-size: 0.82rem; }
+  .coach-soon-note { font-size: 0.76rem !important; color: rgba(253,250,245,0.5) !important; }
+  .coach-soon-note a { color: var(--gold-light); }
+
+  /* ── Promo popup: light theme + icons (Oct 2026) ── */
+  .promo-popup { width: min(860px, 94vw); border-radius: 18px; overflow: hidden auto; }
+  .promo-left { background: linear-gradient(160deg, #FFF8EC 0%, #F6EBD3 100%); padding: 2.8rem 2.4rem; }
+  .promo-left::before { color: rgba(201,168,76,0.12); }
+  .promo-new-badge { background: #E86A4A; color: #fff; border-radius: 999px; margin-bottom: 1.2rem; }
+  .promo-heading { color: #1C1C1C; font-weight: 400; margin-bottom: 1.4rem; }
+  .promo-heading em { color: #9E7E2A; }
+  .promo-services { display: flex; flex-direction: column; gap: 0.7rem; }
+  .promo-service { margin: 0; padding: 0.8rem 0.9rem; border: 1px solid rgba(201,168,76,0.3); border-radius: 12px; background: rgba(255,255,255,0.7); align-items: center; }
+  .promo-service:last-of-type { border-bottom: 1px solid rgba(201,168,76,0.3); }
+  .promo-service-icon { width: 42px; height: 42px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .promo-service-icon svg { width: 20px; height: 20px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .promo-service-link .promo-service-title, .promo-service-title { color: #1C1C1C; font-size: 1.15rem; font-weight: 500; margin-bottom: 0.1rem; }
+  .promo-service-desc { color: #6B5E52; font-size: 0.76rem; }
+  .promo-service-link:hover { background: #fff; padding-left: 0.9rem; border-color: var(--gold); }
+  .promo-service-link:hover .promo-service-title { color: #9E7E2A; }
+  .promo-right { padding: 2.8rem 2.4rem; }
+  .promo-close { color: rgba(28,28,28,0.55); background: rgba(255,255,255,0.8); border-radius: 50%; width: 36px; height: 36px; top: 0.8rem; right: 0.8rem; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; }
+  @media (max-width: 680px) {
+    .promo-popup { width: 92vw; max-height: 88vh; max-height: 88dvh; border-radius: 16px; }
+    .promo-left { padding: 1.4rem 1.2rem 1rem; }
+    .promo-new-badge { margin-bottom: 0.6rem; font-size: 0.52rem; }
+    .promo-heading { font-size: 1.55rem; margin-bottom: 0.8rem; }
+    .promo-left::before { display: none; }
+    .promo-services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.45rem; }
+    .promo-service { flex-direction: column; text-align: center; gap: 0.35rem; padding: 0.6rem 0.3rem; }
+    .promo-service-icon { width: 34px; height: 34px; }
+    .promo-service-icon svg { width: 16px; height: 16px; }
+    .promo-service-title, .promo-service-link .promo-service-title { font-size: 0.86rem; line-height: 1.15; }
+    .promo-service-desc { display: none; }
+    .promo-service-link:hover { padding-left: 0.3rem; }
+    .promo-right { padding: 1.1rem 1.2rem 1.3rem; }
+    .promo-right-label { margin-bottom: 0.3rem; }
+    .promo-right-title { font-size: 1.45rem; margin-bottom: 0.4rem; }
+    .promo-right-title br { display: none; }
+    .promo-right-divider { display: none; }
+    .promo-right-desc { font-size: 0.76rem; line-height: 1.55; margin-bottom: 0.8rem; }
+    .promo-field { margin-bottom: 0.6rem; }
+    .promo-input { padding: 0.65rem 0.8rem; font-size: 16px; }
+    .promo-privacy { margin-top: 0.5rem; }
+  }
   /* ── NAV ── */
   nav {
     position: fixed; top: 28px; left: 0; right: 0; z-index: 100;
@@ -1328,11 +1386,10 @@
     <li><a href="#spotlight" class="drawer-link">🏆 Student Spotlight <span class="arrow">→</span></a></li>
     <li><a href="#concert" class="drawer-link">🎄 2025 Christmas Concert <span class="arrow">→</span></a></li>
     <li><a href="#pricing" class="drawer-link">Lessons &amp; Fees <span class="arrow">→</span></a></li>
-    <li><a href="#feedback" class="drawer-link">Online Coaching <span class="arrow">→</span></a>
-      <a href="#upload" class="drawer-link" onclick="closeDrawer(); document.getElementById('upload').style.display='block'; setTimeout(()=>{document.getElementById('upload').scrollIntoView({behavior:'smooth'})},420);" style="padding-left:2.2rem; font-size:0.72rem; letter-spacing:0.12em; opacity:0.7; border-top:1px solid rgba(201,168,76,0.08); background:rgba(201,168,76,0.03);">Video Upload Guide <span class="arrow" style="font-size:0.7rem;">→</span></a>
-    </li>
+    <li><a href="#feedback" class="drawer-link">Online Coaching <span class="dtag dtag-offer">First trial 20% off</span> <span class="arrow">→</span></a></li>
+    <li><a href="digital-exam-ready/" class="drawer-link">🎹 Digital Exam Ready Course <span class="dtag">New</span> <span class="arrow">→</span></a></li>
+    <li><a href="sight-reading-club/" class="drawer-link">🎼 Sight-Reading Club <span class="dtag">New</span> <span class="arrow">→</span></a></li>
     <li><a href="aural.html" class="drawer-link">🎵 Aural Training <span class="arrow">→</span></a></li>
-    <li><a href="sight-reading-club/" class="drawer-link">🎼 Sight-Reading Club <span class="arrow">→</span></a></li>
     <li><a href="#wedding" class="drawer-link" onclick="closeDrawer(); document.getElementById('wedding').style.display='block'; setTimeout(()=>{document.getElementById('wedding').scrollIntoView({behavior:'smooth'})},420);">Wedding &amp; Accompaniment <span class="arrow">→</span></a></li>
     <li><a href="#testimonials" class="drawer-link">Reviews <span class="arrow">→</span></a></li>
     <li><a href="#contact" class="drawer-link">Contact Us <span class="arrow">→</span></a></li>
@@ -1574,13 +1631,13 @@
       <p class="section-label">Community · December 2025</p>
       <h2 class="section-title">Our 2025 Student<br><em>Christmas Concert</em></h2>
     </div>
-    <p class="concert-intro fade-up delay-1">Last December, Eric's students, from our youngest beginners to advanced players, took to the stage on a Steinway grand in front of a room full of families and friends. Every performer went home with a certificate, and the concert ended with shared treats and a lot of proud parents.</p>
+    <p class="concert-intro fade-up delay-1">Last December, Eric's students, from our youngest beginners to advanced players, took to the stage on a Steinway grand in front of a room full of families and friends. Every performer went home with a certificate, and the afternoon ended with food prepared by Cadenza London Music Academy, served with help from our students and volunteers.</p>
   </div>
 
   <ul class="concert-points fade-up">
     <li><b>On a real stage</b>Students performed on a Steinway grand, with a real audience and stage lighting.</li>
     <li><b>Eric played too</b>Families heard Eric perform on both piano and violin.</li>
-    <li><b>Coaching, live</b>Eric coached a student on stage, so every family could see how a lesson works.</li>
+    <li><b>Duets with Eric</b>Eric sat down at the piano to play duets with the students, side by side on stage.</li>
   </ul>
 
   <div class="concert-gallery fade-up">
@@ -1600,17 +1657,17 @@
       <img src="images/christmas-2025/eric-violin-performance-800.jpg" width="800" height="533" loading="lazy" decoding="async" alt="Eric Chung playing violin with a pianist accompanying on a Steinway grand">
       <figcaption>Eric on violin</figcaption>
     </a>
-    <a class="cg-long" href="images/christmas-2025/eric-coaching-on-stage-1600.jpg" data-lightbox data-caption="A live coaching moment on stage">
-      <img src="images/christmas-2025/eric-coaching-on-stage-800.jpg" srcset="images/christmas-2025/eric-coaching-on-stage-800.jpg 800w, images/christmas-2025/eric-coaching-on-stage-1600.jpg 1600w" sizes="(max-width: 768px) 100vw, 575px" width="1600" height="942" loading="lazy" decoding="async" alt="Eric Chung coaching a young student at the piano on stage during the concert">
-      <figcaption>Live coaching on stage</figcaption>
+    <a class="cg-long" href="images/christmas-2025/eric-coaching-on-stage-1600.jpg" data-lightbox data-caption="Eric playing a piano duet with a student">
+      <img src="images/christmas-2025/eric-coaching-on-stage-800.jpg" srcset="images/christmas-2025/eric-coaching-on-stage-800.jpg 800w, images/christmas-2025/eric-coaching-on-stage-1600.jpg 1600w" sizes="(max-width: 768px) 100vw, 575px" width="1600" height="942" loading="lazy" decoding="async" alt="Eric Chung playing a piano duet with a young student on stage during the concert">
+      <figcaption>Piano duets with Eric</figcaption>
     </a>
     <a href="images/christmas-2025/eric-with-students-1600.jpg" data-lightbox data-caption="Eric with two of his students">
       <img src="images/christmas-2025/eric-with-students-800.jpg" width="800" height="533" loading="lazy" decoding="async" alt="Eric Chung with two young students next to the Christmas concert banner">
       <figcaption>Eric with students</figcaption>
     </a>
-    <a href="images/christmas-2025/refreshments-800.jpg" data-lightbox data-caption="Treats after the concert">
-      <img src="images/christmas-2025/refreshments-800.jpg" width="800" height="1421" loading="lazy" decoding="async" alt="Table of cakes and snacks shared after the concert">
-      <figcaption>Treats after the show</figcaption>
+    <a href="images/christmas-2025/refreshments-800.jpg" data-lightbox data-caption="Food prepared by Cadenza London Music Academy, served with help from students and volunteers">
+      <img src="images/christmas-2025/refreshments-800.jpg" width="800" height="1421" loading="lazy" decoding="async" alt="Table of food prepared by Cadenza London Music Academy for families after the concert">
+      <figcaption>Food by Cadenza, served by our volunteers</figcaption>
     </a>
   </div>
 
@@ -1634,21 +1691,21 @@
     <div class="fee-card fade-up delay-1">
       <p class="fee-kicker">🎹 Piano · 1-on-1</p>
       <h3>Piano Lessons</h3>
-      <p class="fee-from"><small>from</small> £50 <span>per lesson</span></p>
-      <p class="fee-desc">Beginners to diploma (ARSM, DipABRSM, LRSM, Trinity ATCL / LTCL / FTCL). 45 or 60 minutes, in person in Colindale or online.</p>
+      <p class="fee-from"><small>from</small> £35 <span>per lesson</span></p>
+      <p class="fee-desc">Beginners to diploma (ARSM, DipABRSM, LRSM, Trinity ATCL / LTCL / FTCL). In person in Colindale or online.</p>
       <div class="fee-btn"><a href="https://booking-cadenzalondon.netlify.app" target="_blank" rel="noopener">Book a Trial →</a></div>
     </div>
     <div class="fee-card fade-up delay-2">
       <p class="fee-kicker">🎻 Violin · 1-on-1</p>
       <h3>Violin Lessons</h3>
-      <p class="fee-from"><small>from</small> £50 <span>per lesson</span></p>
-      <p class="fee-desc">First notes to performance diplomas. 45 or 60 minutes, in person in Colindale or online.</p>
+      <p class="fee-from"><small>from</small> £35 <span>per lesson</span></p>
+      <p class="fee-desc">First notes to performance diplomas. In person in Colindale or online.</p>
       <div class="fee-btn"><a href="https://booking-cadenzalondon.netlify.app" target="_blank" rel="noopener">Book a Trial →</a></div>
     </div>
     <div class="fee-card fade-up delay-3">
       <p class="fee-kicker">📖 Theory &amp; Aural · 1-on-1</p>
       <h3>Theory &amp; Aural</h3>
-      <p class="fee-from"><small>from</small> £50 <span>per lesson</span></p>
+      <p class="fee-from"><small>from</small> £35 <span>per lesson</span></p>
       <p class="fee-desc">ABRSM and Trinity theory and aural tests, Grades 1–8. Try our free <a href="aural.html">aural practice</a> first.</p>
       <div class="fee-btn"><a href="https://booking-cadenzalondon.netlify.app" target="_blank" rel="noopener">Book a Trial →</a></div>
     </div>
@@ -1748,98 +1805,17 @@
     <p><b>🎁 20% off your first session:</b> join our mailing list and we'll send you a one-time welcome code to use at payment.</p>
   </div>
 
-<!-- Submission Form -->
-  <div id="feedback-form" style="max-width:700px;margin:0 auto;position:relative;">
-
-    <!-- Success state (hidden by default) -->
-    <div id="feedback-form-success" style="display:none;border:1px solid rgba(201,168,76,0.2);padding:3rem;background:rgba(255,255,255,0.03);text-align:center;">
-      <div style="width:64px;height:64px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.8rem;font-size:1.6rem;color:var(--gold);">✓</div>
-      <p style="font-size:0.65rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;">Submission Received</p>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:#FDFAF5;font-weight:300;margin-bottom:1rem;">Thank You</h3>
-      <div style="width:40px;height:1px;background:var(--gold);margin:0 auto 1.5rem;"></div>
-      <p style="font-size:0.88rem;line-height:1.85;color:rgba(253,250,245,0.6);font-weight:300;max-width:380px;margin:0 auto;">Eric will review your video and send back his personal feedback within the timeframe for your chosen package. Please ensure your video link remains accessible.</p>
+  <!-- Submission: new coaching submission page (launching soon).
+       When it is live, put its address in the href of #coach-submit-link and remove the "soon" text. -->
+  <div id="feedback-form" class="coach-soon">
+    <span class="coach-soon-tag">Launching soon</span>
+    <h3>Send your video to Eric</h3>
+    <p>Our new Online Coaching submission page is almost ready. You'll upload your video directly, choose your package and pay securely in one place.</p>
+    <div class="coach-soon-btns">
+      <a id="coach-submit-link" class="coach-soon-btn is-soon" href="#footer-email" aria-disabled="true">Submission page · coming soon</a>
+      <a class="coach-soon-alt" href="#footer-email" onclick="event.preventDefault();var e=document.getElementById('footer-email');if(e){e.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){e.focus({preventScroll:true});},600);}">Get the link first: join the VIP list →</a>
     </div>
-
-    <div id="feedback-form-inner" style="border:1px solid rgba(201,168,76,0.2);padding:3rem;background:rgba(255,255,255,0.03);">
-      <p style="font-size:0.65rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Submit Your Video</p>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:#FDFAF5;font-weight:300;margin-bottom:2rem;">Ready for Feedback?</h3>
-
-      <div style="display:flex;flex-direction:column;gap:1.1rem;">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-          <div style="display:flex;flex-direction:column;gap:0.45rem;">
-            <label style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Your Name <span style="color:#e8a0a0;">*</span></label>
-            <input id="ff-name" type="text" placeholder="Full name" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.85rem 1rem;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,168,76,0.2)'">
-            <span id="ff-name-err" style="display:none;font-size:0.72rem;color:#e8a0a0;">Please enter your name.</span>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:0.45rem;">
-            <label style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Email <span style="color:#e8a0a0;">*</span></label>
-            <input id="ff-email" type="email" placeholder="your@email.com" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.85rem 1rem;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,168,76,0.2)'">
-            <span id="ff-email-err" style="display:none;font-size:0.72rem;color:#e8a0a0;">Please enter a valid email.</span>
-          </div>
-        </div>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-          <div style="display:flex;flex-direction:column;gap:0.45rem;">
-            <label style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Feedback Package <span style="color:#e8a0a0;">*</span></label>
-            <select id="ff-package" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.85rem 1rem;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;appearance:none;cursor:pointer;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,168,76,0.2)'">
-              <option value="" style="background:#1C1C1C;">Select package…</option>
-              <option value="single" style="background:#1C1C1C;">Single Piece Check — one piece</option>
-              <option value="full" style="background:#1C1C1C;">Full Exam Check — all 4 pieces</option>
-            </select>
-            <span id="ff-package-err" style="display:none;font-size:0.72rem;color:#e8a0a0;">Please select a package.</span>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:0.45rem;">
-            <label style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Exam Grade <span style="color:#e8a0a0;">*</span></label>
-            <select id="ff-level" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.85rem 1rem;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;appearance:none;cursor:pointer;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,168,76,0.2)'">
-              <option value="" style="background:#1C1C1C;">Select level…</option>
-              <option value="g14" style="background:#1C1C1C;">Grade 1–4</option>
-              <option value="g56" style="background:#1C1C1C;">Grade 5–6</option>
-              <option value="g78" style="background:#1C1C1C;">Grade 7–8</option>
-              <option value="dip" style="background:#1C1C1C;">Diploma</option>
-              </select>
-            <span id="ff-level-err" style="display:none;font-size:0.72rem;color:#e8a0a0;">Please select the exam grade.</span>
-          </div>
-        </div>
-
-        <div style="display:flex;flex-direction:column;gap:0.45rem;">
-          <label for="ff-video" style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Delivery</label>
-          <select id="ff-video" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.85rem 1rem;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;appearance:none;cursor:pointer;">
-            <option value="no" style="background:#1C1C1C;">Standard: within 5 days</option>
-            <option value="yes" style="background:#1C1C1C;">48-hour express (+£10)</option>
-          </select>
-          <span id="ff-video-err" style="display:none;font-size:0.72rem;color:#e8a0a0;"></span>
-          <p id="ff-total" aria-live="polite"></p>
-          <p style="font-size:0.7rem;color:rgba(253,250,245,0.45);">Have a 20% welcome code? Add it in the message box below.</p>
-        </div>
-
-        <div style="display:flex;flex-direction:column;gap:0.45rem;">
-          <label style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Piece(s) & Composer <span style="color:#e8a0a0;">*</span></label>
-          <input id="ff-piece" type="text" placeholder="e.g. Chopin — Nocturne Op. 9 No. 2" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.85rem 1rem;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,168,76,0.2)'">
-          <span id="ff-piece-err" style="display:none;font-size:0.72rem;color:#e8a0a0;">Please enter the piece name.</span>
-        </div>
-
-        <div style="display:flex;flex-direction:column;gap:0.45rem;">
-          <label style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Video Link <span style="color:#e8a0a0;">*</span></label>
-          <input id="ff-link" type="url" placeholder="YouTube (unlisted), Google Drive or Dropbox link…" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.85rem 1rem;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,168,76,0.2)'">
-          <span id="ff-link-err" style="display:none;font-size:0.72rem;color:#e8a0a0;">Please paste a video link.</span>
-          <p style="font-size:0.7rem;color:rgba(253,250,245,0.3);margin-top:0.3rem;">Upload via YouTube (Unlisted), Google Drive or WeTransfer — <a href="#upload" onclick="document.getElementById('upload').style.display='block'; setTimeout(()=>{document.getElementById('upload').scrollIntoView({behavior:'smooth'})},100);" style="color:var(--gold);text-decoration:underline;">view upload guide</a> — then paste your link here.</p>
-        </div>
-
-        <div style="display:flex;flex-direction:column;gap:0.45rem;">
-          <label style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">What should Eric focus on? <span style="color:#e8a0a0;">*</span></label>
-          <textarea id="ff-notes" placeholder="e.g. My left hand feels uneven, I'm struggling with the tempo in bars 24–32, please also check my fingering…" rows="4" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.85rem 1rem;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;resize:vertical;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,168,76,0.2)'"></textarea>
-          <span id="ff-notes-err" style="display:none;font-size:0.72rem;color:#e8a0a0;">Please tell Eric what to focus on.</span>
-        </div>
-
-        <div style="display:flex;flex-direction:column;gap:0.6rem;align-self:flex-start;">
-          <button type="button" id="ff-submit" onclick="submitFeedbackForm(event)" style="padding:1.1rem 2.5rem;background:var(--gold);border:none;color:#1C1C1C;font-family:'Jost',sans-serif;font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;cursor:pointer;font-weight:500;transition:all 0.2s;" onmouseover="this.style.background='#FDFAF5'" onmouseout="this.style.background='var(--gold)'">
-            <span id="ff-btn-text">Submit for Review →</span>
-            <span id="ff-btn-loading" style="display:none;">Submitting…</span>
-          </button>
-          <p id="ff-general-error" style="display:none;font-size:0.78rem;color:#e8a0a0;">Something went wrong. Please try again or email Eric directly.</p>
-        </div>
-      </div>
-    </div>
+    <p class="coach-soon-note">Join the mailing list now for 20% off your first coaching session. Questions in the meantime? <a href="mailto:music@cadenza-london.com">music@cadenza-london.com</a></p>
   </div>
 
 </section>
@@ -2187,47 +2163,40 @@
     <div class="promo-new-badge">New Launch</div>
     <div class="promo-gold-line"></div>
 
-    <p class="promo-eyebrow">Cadenza London · 2026</p>
-    <h2 class="promo-heading">Where Talent Meets<br><em>Mastery.</em></h2>
-    <p class="promo-subtext">New ways to learn with Eric:</p>
+    <h2 class="promo-heading">New ways to learn <em>with Eric</em></h2>
 
-    <a href="sight-reading-club/" class="promo-service promo-service-link" onclick="closePromoPopup && closePromoPopup()">
-      <div class="promo-service-icon">1</div>
-      <div>
-        <div class="promo-service-title">Sight-Reading Club <span class="promo-arrow">→</span></div>
-        <div class="promo-service-desc">On Zoom · Starts 3 Nov · Free until 31 Dec</div>
-      </div>
-    </a>
-    <a href="digital-exam-ready/" class="promo-service promo-service-link" onclick="closePromoPopup && closePromoPopup()">
-      <div class="promo-service-icon">2</div>
-      <div>
-        <div class="promo-service-title">In-Person 4-Week Digital Exam Ready Course <span class="promo-arrow">→</span></div>
-        <div class="promo-service-desc">ABRSM &amp; Trinity · Starts November</div>
-      </div>
-    </a>
-    <a href="#feedback" class="promo-service promo-service-link" onclick="closePromoPopup && closePromoPopup()">
-      <div class="promo-service-icon">3</div>
-      <div>
-        <div class="promo-service-title">Online Coaching <span class="promo-arrow">→</span></div>
-        <div class="promo-service-desc">Eric marks your recording like an examiner, from £15</div>
-      </div>
-    </a>
-    <a href="#promo-mailing-form" class="promo-service promo-service-link" onclick="var f=document.getElementById('promo-name'); if(f){event.preventDefault(); f.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){f.focus({preventScroll:true});},350);}">
-      <div class="promo-service-icon">4</div>
-      <div>
-        <div class="promo-service-title">Join Our Mailing List <span class="promo-arrow">→</span></div>
-        <div class="promo-service-desc">Hear first about new courses &amp; offers</div>
-      </div>
-    </a>
+    <div class="promo-services">
+      <a href="sight-reading-club/" class="promo-service promo-service-link" onclick="closePromoPopup && closePromoPopup()">
+        <div class="promo-service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+        <div>
+          <div class="promo-service-title">Sight-Reading Club</div>
+          <div class="promo-service-desc">On Zoom · Free until 31 Dec</div>
+        </div>
+      </a>
+      <a href="digital-exam-ready/" class="promo-service promo-service-link" onclick="closePromoPopup && closePromoPopup()">
+        <div class="promo-service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg></div>
+        <div>
+          <div class="promo-service-title">Digital Exam Ready Course</div>
+          <div class="promo-service-desc">In person · ABRSM &amp; Trinity · Nov</div>
+        </div>
+      </a>
+      <a href="#feedback" class="promo-service promo-service-link" onclick="closePromoPopup && closePromoPopup()">
+        <div class="promo-service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div>
+          <div class="promo-service-title">Online Coaching</div>
+          <div class="promo-service-desc">Exam-style marking · from £15</div>
+        </div>
+      </a>
+    </div>
   </div>
 
   <!-- Right panel: mailing list -->
   <div class="promo-right">
     <div class="promo-right-inner">
       <p class="promo-right-label">Stay in the Loop</p>
-      <h3 class="promo-right-title">Join Our<br><em>Limited VIP List</em></h3>
+      <h3 class="promo-right-title">Join Our <br><em>Limited VIP List</em></h3>
       <div class="promo-right-divider"></div>
-      <p class="promo-right-desc">Be first to hear about new services, masterclasses, limited spots, and exclusive early-bird offers from Cadenza London.</p>
+      <p class="promo-right-desc">Be first to hear about new services, limited spots and early-bird offers, plus 20% off your first Online Coaching session.</p>
 
       <form id="promo-mailing-form" novalidate>
         <div class="promo-field">
@@ -2478,44 +2447,13 @@
     }
   }
 
-  // ── ONLINE COACHING PRICING (by exam grade; 48-hour express +£10) ──
-  const COACH = {
-    single: { name: 'Single Piece Check', price: { g14: 15, g56: 20, g78: 25, dip: 35 } },
-    full:   { name: 'Full Exam Check',    price: { g14: 49, g56: 69, g78: 89, dip: 129 } }
-  };
-  const COACH_EXPRESS = 10;
-  function coachRuleError() { return ''; }
-  function coachTotal() {
-    const p = COACH[document.getElementById('ff-package').value];
-    const g = document.getElementById('ff-level').value;
-    if (!p || !p.price[g]) return 0;
-    return p.price[g] + (document.getElementById('ff-video').value === 'yes' ? COACH_EXPRESS : 0);
-  }
-  function coachRefresh() {
-    const p = COACH[document.getElementById('ff-package').value];
-    const g = document.getElementById('ff-level').value;
-    const tot = document.getElementById('ff-total');
-    if (p && p.price[g]) tot.textContent = 'Total: £' + coachTotal() + (document.getElementById('ff-video').value === 'yes' ? ' (includes 48-hour express)' : '');
-    else if (p) tot.textContent = p.name + ' from £' + Math.min.apply(null, Object.values(p.price)) + '. Choose the exam grade to see your price.';
-    else tot.textContent = '';
-  }
+  // Coaching package buttons scroll to the submission card
   document.addEventListener('DOMContentLoaded', function () {
-    ['ff-package','ff-level','ff-video'].forEach(function (id) {
-      const el = document.getElementById(id); if (el) el.addEventListener('change', coachRefresh);
-    });
     document.querySelectorAll('.coach-btn[data-pkg]').forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        e.preventDefault();
-        const sel = document.getElementById('ff-package');
-        if (sel) { sel.value = a.getAttribute('data-pkg'); coachRefresh(); }
-        if (typeof scrollToFeedbackForm === 'function') scrollToFeedbackForm();
-      });
+      a.addEventListener('click', function (e) { e.preventDefault(); var c = document.getElementById('feedback-form'); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
     });
-    try {
-      const want = new URLSearchParams(location.search).get('coach');
-      if (want && COACH[want]) { document.getElementById('ff-package').value = want; }
-    } catch (e) {}
-    coachRefresh();
+    var s = document.getElementById('coach-submit-link');
+    if (s && s.classList.contains('is-soon')) s.addEventListener('click', function (e) { e.preventDefault(); });
   });
 
   // ── FEEDBACK FORM ──
