@@ -134,19 +134,20 @@
   .promo-heading em { font-style: italic; color: var(--gold); }
   .promo-subtext {
     font-size: 0.82rem; line-height: 1.75; color: rgba(253,250,245,0.55);
-    font-weight: 300; margin-bottom: 2rem;
+    font-weight: 300; margin-bottom: 1.4rem;
   }
 
   .promo-service {
-    display: flex; gap: 1rem; align-items: flex-start;
-    margin-bottom: 1.4rem;
-    padding-bottom: 1.4rem;
+    display: flex; gap: 0.9rem; align-items: flex-start;
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.9rem;
     border-bottom: 1px solid rgba(201,168,76,0.12);
   }
   .promo-service:last-of-type { border-bottom: none; }
   .promo-service-icon {
-    font-size: 1.5rem; color: var(--gold); flex-shrink: 0;
-    width: 36px; text-align: center; line-height: 1.3;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; color: var(--gold); flex-shrink: 0;
+    width: 28px; text-align: center; line-height: 1.1;
   }
   .promo-service-title {
     font-family: 'Cormorant Garamond', serif;
@@ -154,7 +155,7 @@
     margin-bottom: 0.3rem;
   }
   .promo-service-desc {
-    font-size: 0.78rem; line-height: 1.75; color: rgba(253,250,245,0.5);
+    font-size: 0.76rem; line-height: 1.5; color: rgba(253,250,245,0.5);
     font-weight: 300;
   }
 
@@ -1050,8 +1051,8 @@
     </div>
     <div class="ticker-item">
       <span class="ticker-sep">✦</span>
-      <span>New · Music Aptitude Test</span>
-      <a href="https://cadenza-london.com/music-aptest" target="_blank">Learn More →</a>
+      <span>New · In-Person 4-Week Digital Exam Ready Course · Starts November</span>
+      <a href="https://cadenza-london.com/digital-exam-ready/">Find Out More →</a>
     </div>
     <div class="ticker-item">
       <span class="ticker-sep">✦</span>
@@ -1070,8 +1071,8 @@
     </div>
     <div class="ticker-item">
       <span class="ticker-sep">✦</span>
-      <span>New · Music Aptitude Test</span>
-      <a href="https://cadenza-london.com/music-aptest" target="_blank">Learn More →</a>
+      <span>New · In-Person 4-Week Digital Exam Ready Course · Starts November</span>
+      <a href="https://cadenza-london.com/digital-exam-ready/">Find Out More →</a>
     </div>
     <div class="ticker-item">
       <span class="ticker-sep">✦</span>
@@ -2117,31 +2118,36 @@
     <div class="promo-new-badge">New Launch</div>
     <div class="promo-gold-line"></div>
 
-    <p class="promo-eyebrow">Cadenza London · 2025</p>
+    <p class="promo-eyebrow">Cadenza London · 2026</p>
     <h2 class="promo-heading">Where Talent Meets<br><em>Mastery.</em></h2>
-    <p class="promo-subtext">Three new ways to learn with Eric — crafted for those who refuse to settle for ordinary.</p>
+    <p class="promo-subtext">New ways to learn with Eric:</p>
 
     <a href="sight-reading-club/" class="promo-service promo-service-link" onclick="closePromoPopup && closePromoPopup()">
-      <div class="promo-service-icon">♫</div>
+      <div class="promo-service-icon">1</div>
       <div>
-        <div class="promo-service-title">Sight-Reading Club · Free until 31 Dec <span class="promo-arrow">→</span></div>
-        <div class="promo-service-desc">A friendly weekly piano club on Zoom. Read new music together, ask Eric anything, and become a better pianist. Grades 1–8.</div>
+        <div class="promo-service-title">Sight-Reading Club <span class="promo-arrow">→</span></div>
+        <div class="promo-service-desc">On Zoom · Starts 3 Nov · Free until 31 Dec</div>
       </div>
     </a>
-
+    <a href="digital-exam-ready/" class="promo-service promo-service-link" onclick="closePromoPopup && closePromoPopup()">
+      <div class="promo-service-icon">2</div>
+      <div>
+        <div class="promo-service-title">In-Person 4-Week Digital Exam Ready Course <span class="promo-arrow">→</span></div>
+        <div class="promo-service-desc">ABRSM &amp; Trinity · Starts November</div>
+      </div>
+    </a>
     <a href="#feedback" class="promo-service promo-service-link" onclick="closePromoPopup && closePromoPopup()">
-      <div class="promo-service-icon">♛</div>
+      <div class="promo-service-icon">3</div>
       <div>
         <div class="promo-service-title">Online Master Coaching <span class="promo-arrow">→</span></div>
-        <div class="promo-service-desc">Intensive one-to-one sessions with Eric for advanced students &amp; professionals preparing for competitions, recordings, or performance tours.</div>
+        <div class="promo-service-desc">One-to-one video feedback from Eric</div>
       </div>
     </a>
-
-    <a href="https://cadenza-london.com/music-aptest" class="promo-service promo-service-link" target="_blank" onclick="closePromoPopup && closePromoPopup()">
-      <div class="promo-service-icon">♩</div>
+    <a href="#promo-mailing-form" class="promo-service promo-service-link" onclick="var f=document.getElementById('promo-name'); if(f){event.preventDefault(); f.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){f.focus({preventScroll:true});},350);}">
+      <div class="promo-service-icon">4</div>
       <div>
-        <div class="promo-service-title">Music Aptitude Test <span class="promo-arrow">→</span></div>
-        <div class="promo-service-desc">A structured assessment designed to gauge musicality, ear training, and technique — ideal for grade-entry, school auditions &amp; self-evaluation.</div>
+        <div class="promo-service-title">Join Our Mailing List <span class="promo-arrow">→</span></div>
+        <div class="promo-service-desc">Hear first about new courses &amp; offers</div>
       </div>
     </a>
   </div>
