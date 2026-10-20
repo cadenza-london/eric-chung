@@ -365,6 +365,27 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
 .sheet .ticks b{color:#fff}
 .sheet .go2{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:54px;margin-top:18px;border-radius:999px;background:var(--yellow);color:var(--navy);border:2.5px solid var(--navy);box-shadow:0 5px 0 var(--navy);font:800 1.02rem var(--sans);cursor:pointer}
 .sheet .go2:active{transform:translateY(3px);box-shadow:0 2px 0 var(--navy)}
+
+/* coaching-mode hero cards */
+.cwhat,.csteps{background:#fff;color:var(--navy);border:2.5px solid var(--navy);border-radius:20px;padding:18px;display:grid;gap:10px;box-shadow:6px 6px 0 var(--yellow)}
+.cwhat .ck{justify-self:start;background:var(--navy);color:var(--yellow);font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:5px 11px}
+.cwhat h3,.csteps h3{font:400 1.35rem/1.15 var(--serif);margin:0}
+.cwhat p{font-size:.95rem;line-height:1.5}
+.cstats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cstats div{background:#fff4d6;border:1.5px solid #ffc06a;border-radius:14px;padding:9px 11px}
+.cstats b{display:block;font:400 1.2rem/1.1 var(--serif);color:var(--navy)}
+.cstats span{display:block;font-size:.78rem;line-height:1.3;color:var(--muted)}
+.cpk{display:grid;gap:8px}
+.cpk div{display:grid;grid-template-columns:1fr auto;gap:0 10px;align-items:center;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;background:#fffdf7}
+.cpk div.best{border-color:var(--navy);background:#fff4d6}
+.cpk b{font-size:.95rem}.cpk span{grid-column:1;font-size:.8rem;color:var(--muted)}
+.cpk em{grid-column:2;grid-row:1/span 2;font-style:normal;font-weight:800;white-space:nowrap}
+.cmore{font-weight:800;font-size:.9rem;color:#b4500a;text-decoration:underline;text-underline-offset:3px}
+.csteps ol{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.csteps li{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:.93rem;line-height:1.45}
+.csteps li>b{width:28px;height:28px;border-radius:50%;background:var(--navy);color:var(--yellow);display:grid;place-items:center;font-size:.85rem}
+.cguide{justify-self:start;display:inline-flex;align-items:center;gap:8px;background:var(--yellow);color:var(--navy);border:2px solid var(--navy);border-radius:999px;padding:10px 18px;font-weight:800;text-decoration:none;box-shadow:0 4px 0 var(--navy)}
+.cguide:active{transform:translateY(2px);box-shadow:0 2px 0 var(--navy)}
 </style>
 
 <header class="gut">
@@ -390,6 +411,23 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       <p>If we haven't received your videos by then, your place is released to the next family.</p>
     </div>
 
+    <div class="cwhat" id="coachWhat" hidden>
+      <span class="ck">Online Master Coaching</span>
+      <h3>What is Online Coaching?</h3>
+      <p>Send Eric a video of your playing from home. He watches it and tells you exactly what to fix, so you walk into your exam knowing where you stand.</p>
+      <div class="cstats">
+        <div><b>100%</b><span>exam pass rate</span></div>
+        <div><b>200+</b><span>Merit or Distinction</span></div>
+        <div><b>Within 5%</b><span>his predicted marks vs real results</span></div>
+        <div><b>15+ yrs</b><span>teaching exam candidates</span></div>
+      </div>
+      <div class="cpk">
+        <div><b>Single Piece Check</b><span>One piece · notes + video reply</span><em>from £15</em></div>
+        <div class="best"><b>Full Exam Check</b><span>All 4 pieces · predicted mark · practice plan</span><em>from £49</em></div>
+      </div>
+      <a href="#what-coaching" class="js-what cmore">Why Eric's marking is accurate &amp; full price list →</a>
+    </div>
+
     <div class="need">
       <h3>What you need to send</h3>
       <ul>
@@ -404,6 +442,17 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       <b class="h">Not all four pieces ready yet?</b>
       <p>No problem. Send Eric the pieces you have now. For any piece that isn't ready, send him your video and let him fast-track it for you in an <b>Online Master Coaching</b> session.</p>
       <div class="coachacts"><a href="#up" class="js-guide" data-at="0">Show me how to use Online Coaching <span aria-hidden="true">→</span></a><a class="more js-what" href="#what-coaching">What is Online Coaching?</a></div>
+    </div>
+
+    <div class="csteps" id="coachSteps" hidden>
+      <h3>How to send Eric your video</h3>
+      <ol>
+        <li><b>1</b><span><b>Add your piece:</b> type its name, choose the video, add score photos if you have them.</span></li>
+        <li><b>2</b><span><b>Choose your package:</b> one piece, or a Full Exam Check of all 4.</span></li>
+        <li><b>3</b><span><b>Tick, upload, then pay</b> securely with Stripe. Welcome code? Enter it there.</span></li>
+        <li><b>4</b><span><b>Get Eric's feedback</b> by email within 5 days.</span></li>
+      </ol>
+      <a href="#up" class="js-guide cguide" data-at="0">Guide me step by step <span aria-hidden="true">→</span></a>
     </div>
 
     <a class="btn btn-go" href="#up">Start uploading <span aria-hidden="true">↓</span></a>
@@ -667,7 +716,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     $('heroLead').textContent='Upload a video of your playing. Eric watches it and tells you exactly what to work on, then you pay securely with Stripe.';
     $('needVid').innerHTML='<b>At least 1 video</b>, one for each piece you want feedback on (up to 4)';
     var hc=document.querySelector('.hero .coach'); if(hc) hc.hidden=true;
-    $('wantCourse').hidden=true;
+    $('wantCourse').hidden=true; $('coachWhat').hidden=false; $('coachSteps').hidden=false; $('dueBox').hidden=true;
     var wc=document.querySelector('input[name="want"][value="coaching"]'); if(wc) wc.checked=true;
     var PK={single:'Single Piece Check',full:'Full Exam Check',quick:'Single Piece Check',deep:'Full Exam Check',master:'Full Exam Check'}, want=PK[(q.get('pkg')||'').toLowerCase()];
     if(want){ var pr=document.querySelector('input[name="pkg"][value="'+want+'"]'); if(pr) pr.checked=true; }
@@ -713,7 +762,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     el.classList.toggle('urgent',ms<24*3600e3);
   }
   setInterval(countdown,60e3);
-  if(reg.due) setDue(reg.due); else $('dueBox').hidden=true;
+  if(reg.due&&!COACH_MODE) setDue(reg.due); else $('dueBox').hidden=true;
 
   if(LINK){
     $('needVid').innerHTML='<b>4 video links</b>, one for each exam piece';
@@ -1107,7 +1156,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     fetch(UPLOAD_API+'/api/registrations/status?rid='+encodeURIComponent(reg.rid)+'&t='+encodeURIComponent(reg.token)).then(function(r){ return r.json(); }).then(function(j){
       if(j.status==='released'||j.status==='withdrawn') showGone(j.status);
       else if(j.status==='video_received'){ $('doneStudent').textContent=reg.student; $('doneEmail').textContent=reg.email; form.hidden=true; $('done').hidden=false; }
-      if(j.due) setDue(j.due);
+      if(j.due&&!COACH_MODE) setDue(j.due);
     }).catch(function(){});
   }
 })();

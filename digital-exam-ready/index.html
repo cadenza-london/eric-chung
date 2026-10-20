@@ -490,6 +490,44 @@ footer{border-top:0}
 .reg #interest small,.reg #interest .hint{color:#6d4a3a}
 .reg .nextstep .done{color:#2f6b3a}
 .reg .nextstep a:not(.btn){color:#a8431c}
+
+/* ===== Oct 20 re-theme: baby pink × yellow × orange, brown wherever contrast is needed ===== */
+:root{
+  --brown:#4b2416; --brown-2:#6d4a3a; --rust:#a8431c; --babypink:#ffd3df; --pink:#ffb6c9; --burg:#4b2416; --rasp:#4b2416;
+  --cute-grad:linear-gradient(135deg,#ffd6e1 0%,#ffe6b3 55%,#ffcf96 100%);
+  --btn-grad:linear-gradient(135deg,#ff9a3c 0%,#ffc04d 100%);
+}
+body{background-image:radial-gradient(rgba(255,150,180,.18) 1.6px,transparent 1.8px),radial-gradient(rgba(255,154,60,.14) 1.6px,transparent 1.8px)}
+/* the old dark blocks are now soft pink→yellow→peach with brown text */
+.ticker,footer,.drawer,.reg,.vs2 .us,.step.final,.more .private,.nsdue,.vcol.ws{background:var(--cute-grad);color:var(--brown);border-color:transparent;
+  --on-ink:#4b2416;--on-ink-muted:#6d4a3a;--muted:#6d4a3a;--marigold:#b9531a;--gold-deep:#a8431c}
+.ticker{border-bottom:2px solid #ffb6c9}
+footer{border-top:4px solid var(--pink)}
+.reg h2,.reg .lead,.vs2 .us *, .step.final *, .more .private *, .nsdue *, footer *{color:inherit}
+.reg .kicker,.nsdue span,.vs2 .us .k,.step.final .k{color:var(--rust)!important}
+.btn-outline-light{border-color:var(--brown);color:var(--brown)}
+.btn-outline-light:hover{background:var(--brown);color:#fff}
+/* buttons: orange → yellow with brown text */
+.btn-dark{background:var(--btn-grad);color:var(--brown);border-color:transparent;box-shadow:0 5px 0 #b9531a,0 14px 24px -14px rgba(185,83,26,.6)}
+.btn-dark:hover{box-shadow:0 7px 0 #b9531a,0 18px 26px -14px rgba(185,83,26,.6)}
+.btn-dark:active{box-shadow:0 2px 0 #b9531a}
+.btn-outline:hover{background:var(--btn-grad);color:var(--brown)}
+/* small badges: brown with white text */
+.mc b,.stages .sd,.disc,details[open] summary::after{background:var(--brown);color:#fff;border-color:var(--brown)}
+.stages .sd{border-color:var(--pink)}
+/* hero + photos + cards */
+.hero{background:radial-gradient(ellipse 60% 50% at 95% 5%,rgba(255,182,201,.85),transparent 70%),radial-gradient(ellipse 60% 50% at 0% 95%,rgba(255,214,79,.75),transparent 70%),linear-gradient(180deg,#ffbf7a 0%,#ffdcb8 55%,var(--cream) 100%)}
+.hero h1 em{color:var(--brown);text-shadow:2px 2px 0 #ffd64f}
+.portrait .frame{box-shadow:10px 10px 0 var(--pink)}
+.eric .photo{box-shadow:-10px 10px 0 var(--pink)}
+.mini,.cmp,.need,.nextstep,.plan.hl,.card{border-color:#f5a3b8}
+.mini:nth-of-type(3n+2){box-shadow:6px 6px 0 #ffd0dd}
+.mini:nth-of-type(3n){box-shadow:6px 6px 0 #ffd0a0}
+.cmp{box-shadow:6px 6px 0 #ffd0dd}
+.step.final .when,.vcol.ws .vtag,.reg .stages .sd{background:#ffc04d!important;color:var(--brown)!important;border-color:var(--brown)!important}
+.ticker-sep,.ticker .sep,.ticker i{color:var(--brown)!important}
+.notes .hl{background:#ffd3df!important;border-color:#f5a3b8!important;box-shadow:0 10px 24px -16px rgba(185,83,26,.5)!important}
+.notes .hl,.notes .hl *,.notes .hl b,.notes .hl span{color:var(--brown)!important}
 </style>
 </head>
 <body>
