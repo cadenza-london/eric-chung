@@ -284,6 +284,9 @@ footer{border-top:4px solid var(--orange)}
 .pkgs input{width:20px;height:20px;margin:0;accent-color:var(--orange)}
 .pkgs em{font-style:normal;margin-left:auto;font-weight:800;color:var(--navy)}
 .pkgs small{display:block;color:var(--muted);font-size:.8rem}
+.pkgs label.off{opacity:.5;cursor:not-allowed;background:#f6f1e6}
+.pkgs small.why{color:#b4500a;font-weight:700}
+.pkgs small.why:empty{display:none}
 .pkgnote{margin:0;font-size:.84rem;color:var(--muted)}
 
 .sticky .btn-go,.sticky .btn-go *{color:var(--navy)}
@@ -437,7 +440,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       </div>
       <div class="cpk">
         <div><b>Single Piece Check</b><span>One piece · notes + video reply</span><em>from £15</em></div>
-        <div class="best"><b>Full Exam Check</b><span>All 4 pieces · predicted mark · practice plan</span><em>from £49</em></div>
+        <div class="best"><b>Full Exam Check</b><span>2–4 pieces · predicted mark · practice plan</span><em>from £49</em></div>
       </div>
       <a href="#what-coaching" class="js-what cmore">Why Eric's marking is accurate &amp; full price list →</a>
     </div>
@@ -462,7 +465,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       <h3>How to send Eric your video</h3>
       <ol>
         <li><b>1</b><span><b>Add your piece:</b> type its name, choose the video, add score photos if you have them.</span></li>
-        <li><b>2</b><span><b>Choose your package:</b> one piece, or a Full Exam Check of all 4.</span></li>
+        <li><b>2</b><span><b>Your package is picked for you:</b> 1 piece = Single Piece Check, 2 or more = Full Exam Check.</span></li>
         <li><b>3</b><span><b>Tick, upload, then pay</b> securely with Stripe. Welcome code? Enter it there.</span></li>
         <li><b>4</b><span><b>Get Eric's feedback</b> by email within 5 days.</span></li>
       </ol>
@@ -520,8 +523,8 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
         <label class="wopt" id="wantCourse"><input type="radio" name="want" value="course" checked><div><b>In-Person 4-Week Digital Exam Ready Course</b><span>Eric checks your videos, then confirms your place on the course.</span></div></label>
         <label class="wopt"><input type="radio" name="want" value="coaching"><div><b>Online Coaching</b><span>Not quite ready? Eric reviews your video online and tells you exactly what to work on.</span></div></label>
         <div class="pkgs" id="pkgs" hidden>
-          <label><input type="radio" name="pkg" value="Single Piece Check"><span>Single Piece Check<small>One piece · written notes + short video reply from Eric</small></span><em id="priceSingle">from £15</em></label>
-          <label><input type="radio" name="pkg" value="Full Exam Check"><span>Full Exam Check<small>All 4 pieces marked like the real exam · predicted mark · practice plan</small></span><em id="priceFull">from £49</em></label>
+          <label><input type="radio" name="pkg" value="Single Piece Check"><span>Single Piece Check<small>1 piece · written notes + short video reply from Eric</small><small class="why" id="whySingle"></small></span><em id="priceSingle">from £15</em></label>
+          <label><input type="radio" name="pkg" value="Full Exam Check"><span>Full Exam Check<small>2–4 pieces marked like the real exam · predicted mark · practice plan</small><small class="why" id="whyFull"></small></span><em id="priceFull">from £49</em></label>
           <p class="pkgnote" id="pkgNote">Prices depend on the exam grade above.</p>
           <p class="pkgnote">🎁 Have a 20% welcome code? Enter it on the payment page.</p>
           <a href="#what-coaching" class="js-what" style="font-size:.85rem;font-weight:700;color:var(--gold-deep)">What's included in each package? →</a>
@@ -656,8 +659,8 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
 
   <h3>Choose your package</h3>
   <div class="pk">
-    <div><b class="t">Single Piece Check</b><span class="d">One piece reviewed · written notes + a short video reply from Eric. Ideal for a piece you're unsure about.</span></div>
-    <div class="best"><span class="tag2">Best value</span><b class="t">Full Exam Check</b><span class="d">All 4 exam pieces marked like the real exam, with a predicted mark, video reply and practice plan.</span></div>
+    <div><b class="t">Single Piece Check</b><span class="d">1 piece reviewed · written notes + a short video reply from Eric. Ideal for a piece you're unsure about.</span></div>
+    <div class="best"><span class="tag2">Best value</span><b class="t">Full Exam Check</b><span class="d">2 to 4 exam pieces marked like the real exam, with a predicted mark, video reply and practice plan.</span></div>
   </div>
 
   <h3>Prices by exam grade</h3>
@@ -939,17 +942,32 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
   /* ---------- what would you like: course or Online Coaching ---------- */
   function wantVal(){ var r=document.querySelector('input[name="want"]:checked'); return r?r.value:'course'; }
   function choiceText(){ if(wantVal()!=='coaching') return 'In-Person 4-Week Digital Exam Ready Course'; var k=document.querySelector('input[name="pkg"]:checked'); return 'Online Coaching · '+(k?k.value:'Single Piece Check'); }
+  // Package rule: 1 piece = Single Piece Check, 2 or more pieces = Full Exam Check (decided by the pieces added)
+  function readyCountSafe(){ try{ return readyCount(); }catch(e){ return 0; } }
   function priceQuote(){
     var g=$('grade').value, b=PRICES[bandOf(g)], full=((document.querySelector('input[name="pkg"]:checked')||{}).value==='Full Exam Check');
-    var n=Math.max(1,readyCountSafe());
-    return {known:!!g, single:b.single, full:b.full, isFull:full, n:n, total:full?b.full:b.single*n};
+    var n=readyCountSafe();
+    return {known:!!g, single:b.single, full:b.full, isFull:full, n:n, total:full?b.full:b.single};
   }
-  function readyCountSafe(){ try{ return readyCount(); }catch(e){ return 1; } }
+  function lockPkg(){
+    var n=readyCountSafe(), rs=document.querySelector('input[name="pkg"][value="Single Piece Check"]'), rf=document.querySelector('input[name="pkg"][value="Full Exam Check"]');
+    if(!rs||!rf) return;
+    if(n===0){ rs.disabled=false; rf.disabled=false; }
+    else if(n===1){ rs.disabled=false; rf.disabled=true; rs.checked=true; }
+    else { rf.disabled=false; rs.disabled=true; rf.checked=true; }
+    rs.closest('label').classList.toggle('off',rs.disabled); rf.closest('label').classList.toggle('off',rf.disabled);
+    $('whySingle').textContent=rs.disabled?'You\'ve added '+n+' pieces, so the Full Exam Check covers them all.':'';
+    $('whyFull').textContent=rf.disabled?'Add 2 or more pieces to choose this.':'';
+  }
   function syncPrice(){
-    var q=priceQuote(), picked=!!document.querySelector('input[name="pkg"]:checked');
-    $('priceSingle').textContent=q.known?gbp(q.single)+' per piece':'from £15';
+    lockPkg();
+    var q=priceQuote(), picked=!!document.querySelector('input[name="pkg"]:checked'), gr=$('grade').value;
+    $('priceSingle').textContent=q.known?gbp(q.single):'from £15';
     $('priceFull').textContent=q.known?gbp(q.full):'from £49';
-    $('pkgNote').textContent=!picked?'Choose a package above.'+(q.known?'':' Prices depend on the exam grade.'):!q.known?'Prices depend on the exam grade above.':q.isFull?'Full Exam Check for '+$('grade').value+': '+gbp(q.full)+'. Best value when you send all 4 pieces.':'Single Piece Check for '+$('grade').value+': '+gbp(q.single)+' × '+q.n+' piece'+(q.n>1?'s':'')+' = '+gbp(q.total)+'.';
+    $('pkgNote').textContent=
+      q.n===0?(picked?'Add your piece(s) above. 1 piece = Single Piece Check, 2 or more = Full Exam Check.':'Add your piece(s) above and we\'ll pick the right package: 1 piece = Single Piece Check, 2 or more = Full Exam Check.')
+      :!q.known?(q.isFull?'Full Exam Check for your '+q.n+' pieces. Choose the exam grade above to see the price.':'Single Piece Check for your piece. Choose the exam grade above to see the price.')
+      :q.isFull?'Full Exam Check for '+gr+': '+gbp(q.full)+' for your '+q.n+' pieces.':'Single Piece Check for '+gr+': '+gbp(q.single)+'.';
   }
   function syncWant(){ $('pkgs').hidden=wantVal()!=='coaching'; syncPrice(); }
   $('grade').addEventListener('change',syncPrice);
@@ -988,7 +1006,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     {t:'Add the score (optional)', x:'Have photos of the music? Tap Add so Eric can follow along. If not, tap Next.', el:function(){ return $('sp1'); }, pt:function(){ return $('sp1').querySelector('.go')||$('sp1'); }},
     {t:'Another piece? (optional)', x:'Want feedback on a second piece too? Add it here the same way. If not, tap Next.', el:function(){ return $('pieces').children[1]; }, pt:function(){ return $('title2'); }},
     {t:'Pick Online Coaching', x:'We\'ve ticked it for you. This tells Eric you want his feedback online.', el:function(){ return $('want'); }, pt:function(){ return document.querySelector('input[name="want"][value="coaching"]'); }, go:pickCoaching},
-    {t:'Choose your package', x:'One piece, or a Full Exam Check of all 4 pieces. The price shows once your grade is chosen.', el:function(){ return $('pkgs'); }, pt:function(){ return document.querySelector('input[name="pkg"]:checked')||document.querySelector('input[name="pkg"]'); }, go:pickCoaching},
+    {t:'Your package', x:'We pick it from your pieces: 1 piece = Single Piece Check, 2 or more = Full Exam Check. The price shows once your grade is chosen.', el:function(){ return $('pkgs'); }, pt:function(){ return document.querySelector('input[name="pkg"]:checked')||document.querySelector('input[name="pkg"]'); }, go:pickCoaching},
     {t:'Tick to agree', x:'Tick the box to say you\'re happy for Eric to watch your videos.', el:function(){ return $('consentBox').closest('label'); }, pt:function(){ return $('consentBox'); }},
     {t:'Upload, then pay', x:'Tap the yellow button. When the upload finishes, you\'ll get a Stripe button to pay. Got a welcome code? Enter it there.', el:function(){ return $('send'); }, pt:function(){ return $('send'); }}
   ];
@@ -1152,19 +1170,20 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
   function route(){
     var h=location.hash.slice(1);
     if(h==='released'||h==='withdrawn') return showGone(h);
-    if(h.indexOf('pay=')===0){ form.hidden=true; $('before').hidden=true; $('gone').hidden=true; var d0=$('done'); d0.hidden=false;
+    if(h.indexOf('pay=')===0){ $('hero').hidden=true; form.hidden=true; $('before').hidden=true; $('gone').hidden=true; var d0=$('done'); d0.hidden=false;
       d0.querySelector('h2').textContent='Opening secure payment…'; d0.querySelector('p').textContent='One moment, taking you to Stripe.'; var o0=d0.querySelector('ol'); if(o0) o0.hidden=true;
       fetch(UPLOAD_API+'/api/pay',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:h.slice(4)})}).then(function(r){ return r.json(); })
         .then(function(j){ if(j.url) location.href=j.url; else d0.querySelector('p').textContent='We couldn\'t open the payment page. Please email music@cadenza-london.com and we\'ll send you a link.'; })
         .catch(function(){ d0.querySelector('p').textContent='We couldn\'t open the payment page. Please check your connection and try the link again.'; });
       stickyShow(); return; }
-    if(h==='pay-later'){ form.hidden=true; $('before').hidden=true; $('gone').hidden=true; var d1=$('done'); d1.hidden=false;
+    if(h==='pay-later'){ $('hero').hidden=true; form.hidden=true; $('before').hidden=true; $('gone').hidden=true; var d1=$('done'); d1.hidden=false;
       d1.querySelector('h2').textContent='No problem'; d1.querySelector('p').textContent='Your videos are safe with Eric. Use the payment link in your email whenever you\'re ready.'; var o1=d1.querySelector('ol'); if(o1) o1.hidden=true; stickyShow(); return; }
     if(h.indexOf('paid')===0){ var csm=h.match(/cs=(cs_[A-Za-z0-9_]+)/);
       if(csm&&isLive) fetch(UPLOAD_API+'/api/pay/check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({cs:csm[1]})}).catch(function(){}); form.hidden=true; $('before').hidden=true; $('gone').hidden=true; var d=$('done'); d.hidden=false;
-      d.querySelector('h2').textContent='Payment received ✓';
+      d.querySelector('h2').textContent='Payment received';
       d.querySelector('p').textContent='Thank you! Eric now has everything he needs and will send your feedback by email.';
-      var ol=d.querySelector('ol'); if(ol) ol.hidden=true; $('payBox').hidden=true; stickyShow(); return; }
+      var ol=d.querySelector('ol'); if(ol){ ol.hidden=false; ol.innerHTML='<li><b>Eric watches</b> your video(s) and marks them like the real exam.</li><li><b>You get his feedback by email</b> within 5 days.</li><li><b>Check your inbox</b> for your payment confirmation and Stripe receipt.</li>'; }
+      $('payBox').hidden=true; $('hero').hidden=true; [].forEach.call(document.querySelectorAll('.keys'),function(k){ k.hidden=true; }); stickyShow(); window.scrollTo(0,0); return; }
     if(sandbox){ form.hidden=false; $('gone').hidden=true; $('hero').hidden=false; $('before').hidden=false; }
   }
   window.addEventListener('hashchange',route); route();

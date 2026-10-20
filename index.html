@@ -2641,7 +2641,8 @@
   function welcomeMsg(j) {
     if (j && j.error === 'email_used') return 'This email already has a welcome code. Check your inbox.';
     if (j && j.error === 'ip_used') return 'A welcome code has already been claimed from this connection, so we can\'t send another one.';
-    return '';
+    if (j && j.error === 'bad_email') return '';
+    return 'We couldn\'t create your welcome code just now. Email music@cadenza-london.com and we\'ll send you one.';
   }
 
   promoForm && promoForm.addEventListener('submit', async function(e) {
