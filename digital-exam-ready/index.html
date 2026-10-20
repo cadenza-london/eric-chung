@@ -195,6 +195,16 @@ header.site .wrap{display:grid;grid-template-columns:auto 1fr auto;align-items:c
 .step.final .when{background:var(--marigold);color:var(--ink)}
 .rec{margin:0;padding-left:20px;display:grid;gap:4px;color:var(--on-ink-muted);font-size:.95rem}
 .rec li::marker{color:var(--marigold);font-weight:800}
+.mc.mc4{grid-template-columns:repeat(2,1fr)}
+.step p.sub{margin-top:-6px;font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--gold-deep)}
+.step p.act{background:var(--marigold-soft);border-radius:14px;padding:12px 14px;color:var(--ink);font-size:.94rem}
+.step p.act b{font-weight:800}
+.step p.chips{display:flex;flex-wrap:wrap;gap:6px}
+.step p.chips span{font-size:.78rem;font-weight:700;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink)}
+.step.final .rec li b{color:inherit}
+.step.final p.sub{color:inherit;opacity:.85}
+@media (max-width:860px){.mc.mc4{grid-template-columns:1fr}}
+@media (min-width:861px){.step.final .pic{aspect-ratio:auto;min-height:100%;position:relative}.step.final .pic img{position:absolute;inset:0}}
 .step p.focus{color:var(--ink);font-weight:600}
 .step p.take{margin-top:auto;padding-top:10px;border-top:1px dashed var(--line);font-size:.92rem}
 .step p.focus b,.step p.take b{font-weight:800}
@@ -673,18 +683,19 @@ footer{border-top:4px solid var(--babypink)}
       <h2>A masterclass, 4 weeks</h2>
       <p>Every student plays. Eric fixes on the spot. Everyone learns from every fix.</p>
     </div>
-    <div class="mc">
-      <div><b>1</b><span><strong>Everyone plays</strong>Each student is picked to play in every session.</span></div>
-      <div><b>2</b><span><strong>Eric fixes live</strong>He works on your piece right there, in front of the group.</span></div>
-      <div><b>3</b><span><strong>Peers learn too</strong>Hearing others fixed teaches you what to listen for.</span></div>
+    <div class="mc mc4">
+      <div><b>1</b><span><strong>Decode every marking</strong>Pitch, tempo, dynamics, articulation, phrasing, ornaments and repeats.</span></div>
+      <div><b>2</b><span><strong>Play in style</strong>Pedalling, touch and dynamics to suit each piece, from Baroque to Jazz.</span></div>
+      <div><b>3</b><span><strong>Listen like an examiner</strong>Peer marking guided by Eric, using the published marking criteria.</span></div>
+      <div><b>4</b><span><strong>Record your best take</strong>Two complete takes on a grand piano, with Eric's debrief in between.</span></div>
     </div>
     <div class="steps">
-      <div class="step"><div class="wk">Week 1</div><span class="when">2-hour masterclass</span><h3>Play &amp; Fix</h3><p class="focus"><b>Focus:</b> find what's holding each piece back.</p><p>Each student plays a piece to the group. Eric pinpoints the main issues and fixes them on the spot, then you play it again and hear the difference.</p><p class="take"><b>You leave with:</b> a clear list of what to practise this week.</p></div>
-      <div class="step"><div class="wk">Week 2</div><span class="when">2-hour masterclass</span><h3>Refine</h3><p class="focus"><b>Focus:</b> from correct notes to real music.</p><p>Deeper work on pedalling, dynamics, pulse and tone, the details examiners reward.</p><p class="take"><b>You leave with:</b> targeted practice goals for each piece.</p></div>
-      <div class="step"><div class="wk">Week 3</div><span class="when">2-hour masterclass</span><h3>Mock Exam</h3><p class="focus"><b>Focus:</b> perform under exam conditions.</p><p>Play your pieces straight through to the group, as you would in the real exam. Receive marks and comments in the ABRSM/Trinity format.</p><p class="take"><b>You leave with:</b> an honest picture of where you stand and what to polish in the final week.</p></div>
+      <div class="step"><div class="wk">Week 1</div><span class="when">Group masterclass · 2 hours</span><h3>Score Detective</h3><p class="sub">Decoding every marking</p><p class="focus"><b>Focus:</b> understand and play every marking on the page.</p><p>Pitch (accidentals, key signatures, clefs), tempo and speed changes, dynamics, articulation, phrasing, ornaments and repeats, with instant coaching on any pitch or rhythm issues spotted along the way.</p><p class="act"><b>🔍 Activity: Marking Hunt.</b> Annotate your own score with colour pens, then play while classmates use a Junior Examiner Sheet to check that each marking is actually heard.</p><p class="take"><b>You leave with:</b> the habit of never missing a marking, and an ear that listens like an examiner.</p></div>
+      <div class="step"><div class="wk">Week 2</div><span class="when">Group masterclass · 2 hours</span><h3>Style &amp; Character</h3><p class="sub">Pedalling and dynamics for every piece</p><p class="focus"><b>Focus:</b> choose pedalling, touch and dynamics to suit each style.</p><p>From the light, clear touch of Baroque to the rich, blended colours of Romantic and Impressionist music.</p><p class="chips"><span>Baroque</span><span>Classical</span><span>Romantic</span><span>Impressionist</span><span>Modern / Jazz</span></p><p class="act"><b>🧪 Activity: Style Lab Blind Test.</b> Hear the same phrase played with different pedalling and dynamics, and decide which one fits the style best.</p><p class="take"><b>You leave with:</b> a performance that goes beyond accurate, with a clear sense of style and character.</p></div>
+      <div class="step"><div class="wk">Week 3</div><span class="when">Group masterclass · 2 hours</span><h3>Mock Exam</h3><p class="sub">Pressure-test your performance</p><p class="focus"><b>Focus:</b> a full run-through under realistic exam conditions.</p><p>Play your pieces straight through, as you would in the real exam, followed by detailed feedback.</p><p class="act"><b>⚖️ Activity: Peer Marking &amp; Consensus.</b> Evaluate performances, estimate marks and discuss the marking criteria together, with all feedback kept constructive and guided by Eric. Then Eric gives his own examiner-style feedback based on the published criteria.</p><p class="take"><b>You leave with:</b> confidence under pressure, a clear idea of how ABRSM and Trinity assess, and your target mark band before recording day.</p></div>
       <div class="step final">
         <div class="pic"><img src="piano.jpg" alt="Grand piano used for ABRSM and Trinity piano exam video recording in London" loading="lazy"></div>
-        <div class="body"><div class="wk">Week 4</div><span class="when">Your recording slot</span><h3>Professional Recording Day</h3><p class="focus"><b>Focus:</b> get a video you can submit.</p><p>Your own slot on a grand piano, filmed by a professional videographer with a professional camera and microphone.</p><ol class="rec"><li>Warm up on the grand piano</li><li>Complete take 1</li><li>Eric's advice</li><li>Complete take 2</li></ol><p class="take"><b>You leave with:</b> a submission-ready exam video, plus photos and a certificate.</p></div>
+        <div class="body"><div class="wk">Week 4</div><span class="when">Individual slot · grand piano · 30–50 min</span><h3>Recording Day</h3><p class="sub">Capture your best take</p><p class="focus"><b>Focus:</b> record your best performance for digital submission.</p><p>Filmed by a professional videographer with a professional camera and microphone.</p><ol class="rec"><li><b>Grand piano warm-up:</b> adapt your touch and tone to the acoustic instrument.</li><li><b>Take 1:</b> a first complete exam run-through.</li><li><b>Strategic debrief:</b> review Take 1 and get targeted coaching.</li><li><b>Take 2:</b> your final, polished recording.</li></ol><p class="take"><b>You leave with:</b> a high-quality, exam-standard video, plus photos and a certificate. You then submit the video to ABRSM or Trinity yourself.</p></div>
       </div>
     </div>
     <div class="slots">
