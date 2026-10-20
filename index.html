@@ -2495,6 +2495,41 @@
     setTimeout(openPromoPopup, 2000);
   }
 
+  // ── BREVO MAILING LIST ──
+  // Brevo → Contacts → Forms → your sign-up form → Share → "Use HTML code":
+  // copy the URL inside action="https://....sibforms.com/serve/...." and paste it here.
+  const BREVO_FORM_URL = '';
+  async function addToBrevo(email, name) {
+    if (!BREVO_FORM_URL) return false;
+    const body = new URLSearchParams({ EMAIL: email, email_address_check: '', locale: 'en' });
+    if (name) body.set('FIRSTNAME', name);
+    const url = BREVO_FORM_URL + (BREVO_FORM_URL.indexOf('?') > -1 ? '&' : '?') + 'isAjax=1';
+    try {
+      const r = await fetch(url, { method: 'POST', body: body });
+      let j = {};
+      try { j = await r.json(); } catch (_) {}
+      return r.ok && j.success !== false;
+    } catch (err) {
+      // If the browser blocks reading Brevo's reply, still send the sign-up.
+      try { await fetch(BREVO_FORM_URL, { method: 'POST', mode: 'no-cors', body: body }); return true; }
+      catch (_) { return false; }
+    }
+  }
+  // Sends to Brevo (stores the contact) and Formspree (email notification) together.
+  async function mailingSignup(email, name, subject) {
+    const fsPayload = { email: email, _subject: subject };
+    if (name) fsPayload.name = name;
+    const results = await Promise.all([
+      addToBrevo(email, name),
+      fetch('https://formspree.io/f/xpqydbyq', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(fsPayload)
+      }).then(function (r) { return r.ok; }).catch(function () { return false; })
+    ]);
+    return results[0] || results[1];
+  }
+
   // Mailing list form submission
   promoForm && promoForm.addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -2516,12 +2551,8 @@
     btnLoading.style.display = 'inline';
 
     try {
-      const res = await fetch('https://formspree.io/f/xpqydbyq', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ name: nameVal, email: emailVal, _subject: 'New Mailing List Signup — Cadenza London (Popup)' })
-      });
-      if (res.ok) {
+      const ok = await mailingSignup(emailVal, nameVal, 'New Mailing List Signup — Cadenza London (Popup)');
+      if (ok) {
         promoForm.style.display = 'none';
         promoSuccess.style.display = 'block';
         setTimeout(closePromoPopup, 3500);
@@ -2559,12 +2590,8 @@
     btn.disabled = true; btnText.style.display = 'none'; btnLoading.style.display = 'inline';
 
     try {
-      const res = await fetch('https://formspree.io/f/xpqydbyq', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ email: emailVal, _subject: 'New Mailing List Signup — Cadenza London Footer' })
-      });
-      if (res.ok) {
+      const ok = await mailingSignup(emailVal, '', 'New Mailing List Signup — Cadenza London Footer');
+      if (ok) {
         footerForm.style.display = 'none';
         successEl.style.display = 'block';
       } else {
