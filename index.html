@@ -40,7 +40,7 @@
  "description": "1-on-1 piano, violin, theory and aural lessons with Eric Chung in Colindale, North West London, and online. ABRSM and Trinity exam, diploma and competition preparation.",
  "telephone": "+44 7572 010370",
  "email": "music@cadenza-london.com",
- "priceRange": "£50–£80 per lesson",
+ "priceRange": "From £50 per lesson",
  "address": {
   "@type": "PostalAddress",
   "addressLocality": "Colindale, London",
@@ -1166,6 +1166,14 @@
   .fee-also div { padding: 1.6rem 1.8rem; background: #F8F4EE; border-left: 3px solid var(--gold); font-size: 0.84rem; line-height: 1.75; color: var(--mid); font-weight: 300; }
   .fee-also b { display: block; font-weight: 500; color: #1C1C1C; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.4rem; }
 
+  .fee-cards { grid-template-columns: repeat(3, 1fr); }
+  .fee-from { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; color: #1C1C1C; font-weight: 300; line-height: 1; margin-bottom: 1rem; }
+  .fee-from small { font-family: 'Jost', sans-serif; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); vertical-align: middle; margin-right: 0.3rem; }
+  .fee-from span { font-family: 'Jost', sans-serif; font-size: 0.72rem; color: var(--soft); }
+  .fee-desc { font-size: 0.84rem; line-height: 1.75; color: var(--mid); font-weight: 300; }
+  .fee-desc a { color: var(--gold); }
+  .fee-foot { max-width: 980px; margin: 1.4rem auto 0; text-align: center; font-size: 0.74rem; color: var(--soft); }
+  @media (max-width: 1024px) { .fee-cards { grid-template-columns: 1fr; } }
   /* ══ GOOGLE REVIEWS (replaces sample testimonials, Oct 2026) ══ */
   .reviews-box { max-width: 820px; margin: 0 auto; background: #fff; border: 1px solid rgba(201,168,76,0.22); padding: 3rem 2.6rem; text-align: center; }
   .reviews-g { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); margin-bottom: 1.2rem; }
@@ -1229,6 +1237,19 @@
   .coach-card.popular .coach-btn { background: #1C1C1C; border-color: #1C1C1C; color: #FDFAF5; }
   .coach-card.popular .coach-btn:hover { background: #333; }
   .coach-badge { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: #1C1C1C; border: 1px solid var(--gold); color: var(--gold); font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.3rem 1rem; white-space: nowrap; }
+  .coach-tiers.two { grid-template-columns: repeat(2, 1fr); max-width: 860px; margin-bottom: 1.6rem; }
+  .coach-price small { font-family: 'Jost', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-right: 0.4rem; vertical-align: middle; }
+  .coach-card.popular .coach-price small { color: #1C1C1C; opacity: 0.7; }
+  .coach-tiers.two .coach-per { font-size: 0.8rem; line-height: 1.6; color: rgba(253,250,245,0.65); }
+  .coach-grades { list-style: none; margin: 0 0 1.6rem; }
+  .coach-grades li { display: flex; justify-content: space-between; padding: 0.55rem 0; border-bottom: 1px solid rgba(201,168,76,0.14); font-size: 0.82rem; color: rgba(253,250,245,0.72); }
+  .coach-grades li b { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; color: #FDFAF5; }
+  .coach-card.popular .coach-grades li { color: #1C1C1C; border-bottom-color: rgba(28,28,28,0.18); }
+  .coach-card.popular .coach-grades li b, .coach-card.popular .coach-per { color: #1C1C1C; }
+  .coach-extras { max-width: 860px; margin: 0 auto 5rem; display: grid; grid-template-columns: 1fr 1.6fr; gap: 1.2rem; position: relative; }
+  .coach-extras p { border: 1px solid rgba(201,168,76,0.22); padding: 1rem 1.2rem; font-size: 0.8rem; line-height: 1.6; color: rgba(253,250,245,0.72); }
+  .coach-extras b { color: var(--gold-light); font-weight: 500; }
+  @media (max-width: 640px) { .coach-tiers.two, .coach-extras { grid-template-columns: 1fr; } }
   #ff-total { font-size: 0.8rem; color: var(--gold-light); }
   @media (max-width: 1100px) { .coach-tiers { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 640px) { .coach-tiers { grid-template-columns: 1fr; } }
@@ -1546,55 +1567,6 @@
   </div>
 </section>
 
-<!-- PORTFOLIO / STUDENT RESULTS -->
-<section id="portfolio">
-  <div class="portfolio-header fade-up">
-    <p class="section-label">Student Results</p>
-    <h2 class="section-title">Achievements &amp; <em>Milestones</em></h2>
-    <div class="gold-rule" style="margin:1.5rem auto;max-width:200px;"><div class="gold-diamond"></div></div>
-    <p class="section-intro">Eric's students consistently excel in examinations, competitions, and performances — a testament to the quality of tuition at Cadenza London Music Academy.</p>
-  </div>
-
-  <div class="portfolio-grid">
-    <div class="portfolio-card fade-up">
-      <div class="portfolio-award">🥇</div>
-      <div class="portfolio-name">Sophia Chen</div>
-      <div class="portfolio-result">ABRSM Grade 8 — Distinction</div>
-      <p class="portfolio-desc">Began lessons at age 7 with no prior experience. Achieved Grade 8 Distinction by 14 with a score of 142/150, one of the top results in London.</p>
-    </div>
-    <div class="portfolio-card fade-up">
-      <div class="portfolio-award">🎖️</div>
-      <div class="portfolio-name">James Whitfield</div>
-      <div class="portfolio-result">Trinity Grade 6 — Distinction</div>
-      <p class="portfolio-desc">Adult beginner who joined Cadenza at 35. Within 4 years, achieved a Trinity Distinction and performed at a local charity concert.</p>
-    </div>
-    <div class="portfolio-card fade-up">
-      <div class="portfolio-award">🏆</div>
-      <div class="portfolio-name">Mei Lin Okafor</div>
-      <div class="portfolio-result">London Young Musician Finalist</div>
-      <p class="portfolio-desc">Regional finalist in the London Young Musician competition, performing Ravel's Sonatine to a panel of professional adjudicators.</p>
-    </div>
-    <div class="portfolio-card fade-up">
-      <div class="portfolio-award">🎵</div>
-      <div class="portfolio-name">Thomas Laurent</div>
-      <div class="portfolio-result">Royal College of Music — Junior Dept</div>
-      <p class="portfolio-desc">Gained entry into the Junior Department of the Royal College of Music after two years of preparation under Eric's mentorship.</p>
-    </div>
-    <div class="portfolio-card fade-up">
-      <div class="portfolio-award">⭐</div>
-      <div class="portfolio-name">Aisha Patel</div>
-      <div class="portfolio-result">ABRSM Grade 5 Theory — Merit</div>
-      <p class="portfolio-desc">Joined Cadenza as a hobby learner; discovered a deep passion for music theory and performance, earning a Merit in her theory exam.</p>
-    </div>
-    <div class="portfolio-card fade-up">
-      <div class="portfolio-award">🎹</div>
-      <div class="portfolio-name">The Harrison Family</div>
-      <div class="portfolio-result">Three Siblings, Three Grades</div>
-      <p class="portfolio-desc">Three siblings taking lessons simultaneously, each progressing at their own pace from Grade 1 through Grade 5 — all achieving Merit or above.</p>
-    </div>
-  </div>
-</section>
-
 <!-- CHRISTMAS CONCERT 2025 -->
 <section id="concert">
   <div class="concert-header">
@@ -1655,150 +1627,40 @@
     <p class="section-label">Lessons &amp; Fees</p>
     <h2 class="section-title">Piano, Violin &amp; <em>Theory Lessons</em></h2>
     <div class="gold-rule" style="margin:1.5rem auto;max-width:200px;"><div class="gold-diamond"></div></div>
-    <p class="section-intro">Every lesson is 1-on-1 with Eric, in person in Colindale, North West London (NW9), or online worldwide. One simple price list: every subject is priced by lesson length and level.</p>
+    <p class="section-intro">Every lesson is 1-on-1 with Eric, in person in Colindale, North West London (NW9), or online worldwide.</p>
   </div>
 
   <div class="fee-cards">
     <div class="fee-card fade-up delay-1">
       <p class="fee-kicker">🎹 Piano · 1-on-1</p>
-      <h3>Piano Lessons, London &amp; Online</h3>
-      <table class="fee-table">
-        <thead><tr><th scope="col">Level</th><th scope="col">45 min</th><th scope="col">60 min</th></tr></thead>
-        <tbody>
-          <tr><td>Initial – Grade 7<small>Beginner to advanced</small></td><td>£50</td><td>£65</td></tr>
-          <tr><td>Grade 8<small>60-minute lessons only</small></td><td class="na">–</td><td>£70</td></tr>
-          <tr><td>Diploma &amp; beyond<small>ARSM, DipABRSM, LRSM, Trinity ATCL / LTCL / FTCL</small></td><td class="na">–</td><td>£80</td></tr>
-        </tbody>
-      </table>
+      <h3>Piano Lessons</h3>
+      <p class="fee-from"><small>from</small> £50 <span>per lesson</span></p>
+      <p class="fee-desc">Beginners to diploma (ARSM, DipABRSM, LRSM, Trinity ATCL / LTCL / FTCL). 45 or 60 minutes, in person in Colindale or online.</p>
       <div class="fee-btn"><a href="https://booking-cadenzalondon.netlify.app" target="_blank" rel="noopener">Book a Trial →</a></div>
     </div>
-
     <div class="fee-card fade-up delay-2">
       <p class="fee-kicker">🎻 Violin · 1-on-1</p>
-      <h3>Violin Lessons, London &amp; Online</h3>
-      <table class="fee-table">
-        <thead><tr><th scope="col">Level</th><th scope="col">45 min</th><th scope="col">60 min</th></tr></thead>
-        <tbody>
-          <tr><td>Initial – Grade 7<small>Beginner to advanced</small></td><td>£50</td><td>£65</td></tr>
-          <tr><td>Grade 8<small>60-minute lessons only</small></td><td class="na">–</td><td>£70</td></tr>
-          <tr><td>Diploma &amp; beyond<small>Performance diplomas</small></td><td class="na">–</td><td>£80</td></tr>
-        </tbody>
-      </table>
+      <h3>Violin Lessons</h3>
+      <p class="fee-from"><small>from</small> £50 <span>per lesson</span></p>
+      <p class="fee-desc">First notes to performance diplomas. 45 or 60 minutes, in person in Colindale or online.</p>
       <div class="fee-btn"><a href="https://booking-cadenzalondon.netlify.app" target="_blank" rel="noopener">Book a Trial →</a></div>
     </div>
-
-    <div class="fee-card full fade-up">
+    <div class="fee-card fade-up delay-3">
       <p class="fee-kicker">📖 Theory &amp; Aural · 1-on-1</p>
-      <h3>Music Theory &amp; Aural Training</h3>
-      <table class="fee-table">
-        <thead><tr><th scope="col">Level</th><th scope="col">45 min</th><th scope="col">60 min</th></tr></thead>
-        <tbody>
-          <tr><td>Grades 1 – 8<small>ABRSM &amp; Trinity theory and aural tests</small></td><td>£50</td><td>£65</td></tr>
-        </tbody>
-      </table>
+      <h3>Theory &amp; Aural</h3>
+      <p class="fee-from"><small>from</small> £50 <span>per lesson</span></p>
+      <p class="fee-desc">ABRSM and Trinity theory and aural tests, Grades 1–8. Try our free <a href="aural.html">aural practice</a> first.</p>
       <div class="fee-btn"><a href="https://booking-cadenzalondon.netlify.app" target="_blank" rel="noopener">Book a Trial →</a></div>
     </div>
   </div>
 
   <div class="fee-also fade-up">
-    <div><b>Also with Eric</b>Classical vocal lessons: same prices as piano and violin. Accompaniment, music school interview coaching and Music Aptitude Test prep: £50 for 45 min, £65 for 60 min, all levels.</div>
-    <div><b>Pop music production · with Jessica</b>Open-level production lessons and create-your-own-song workshops: £60 for 60 minutes.</div>
+    <div><b>Also with Eric</b>Classical vocal lessons, exam accompaniment, music school interview coaching and Music Aptitude Test preparation.</div>
+    <div><b>Pop music production · with Jessica</b>Open-level production lessons and create-your-own-song workshops.</div>
   </div>
-
-  <!-- Credits Note -->
-  <div style="max-width:980px; margin:2rem auto 0; padding:2rem 2.5rem; background:#F8F4EE; border-left:3px solid var(--gold); display:flex; gap:1.5rem; align-items:flex-start;">
-    <span style="font-size:1.5rem; flex-shrink:0;">✦</span>
-    <div>
-      <p style="font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:0.5rem;">Credit Packages Available Below</p>
-      <p style="font-size:0.85rem; line-height:1.8; color:#5A5047; font-weight:300;">Book more, save more. Credit packages reward students who go above the standard 4 lessons per month: 7% off your 5th lesson and 10% off lessons 5 &amp; 6 within a 4-week block.</p>
-    </div>
-  </div>
+  <p class="fee-foot fade-up">Exact prices for your level and lesson length are shown when you book.</p>
 </section>
 
-
-<!-- CREDITS -->
-<section id="credits" style="padding:8rem max(1.4rem, 8rem - 5vw); background:#FFFFFF;">
-  <div style="text-align:center; max-width:640px; margin:0 auto 5rem;">
-    <p class="section-label">Credit Packages</p>
-    <h2 class="section-title">More Lessons,<br><em>Better Value</em></h2>
-    <div style="display:flex;align-items:center;gap:1rem;margin:1.5rem auto;max-width:200px;">
-      <div style="flex:1;height:1px;background:rgba(201,168,76,0.3);"></div>
-      <div style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;"></div>
-      <div style="flex:1;height:1px;background:rgba(201,168,76,0.3);"></div>
-    </div>
-    <p style="font-size:0.88rem;line-height:1.85;color:#5A5047;font-weight:300;">Credits reward students who book more frequently. Standard monthly pace (4 lessons / month) pays the normal rate. Credits only kick in when you go above that — rewarding commitment without reducing value.</p>
-  </div>
-
-  <!-- How It Works -->
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:900px;margin:0 auto 4rem;">
-    <div style="text-align:center;padding:2rem 1.5rem;border:1px solid rgba(201,168,76,0.2);background:#fff;">
-      <div style="font-size:2rem;margin-bottom:1rem;">📅</div>
-      <p style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Standard</p>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#1C1C1C;margin-bottom:0.8rem;">4 lessons/month</p>
-      <p style="font-size:0.8rem;color:#5A5047;line-height:1.7;font-weight:300;">Pay per lesson at the normal rate. Your regular slot is reserved each week. Book through Booking Page or Send booking request to the studio as usual.</p>
-    </div>
-    <div style="text-align:center;padding:2rem 1.5rem;border:1px solid rgba(201,168,76,0.2);background:#fff;">
-      <div style="font-size:2rem;margin-bottom:1rem;">⭐</div>
-      <p style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Intensive</p>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#1C1C1C;margin-bottom:0.8rem;">5 lessons in 4 weeks <em style='font-style:italic;color:var(--gold);'>— 7% off 5th</em></p>
-      <p style="font-size:0.8rem;color:#5A5047;line-height:1.7;font-weight:300;">One extra lesson in 4 weeks — that 5th lesson is <strong>7% off</strong>. Same level, same duration.</p>
-    </div>
-    <div style="text-align:center;padding:2rem 1.5rem;border:1px solid var(--gold);background:#fff;position:relative;">
-      <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;padding:0.3rem 1rem;font-family:'Jost',sans-serif;">Best Value</div>
-      <div style="font-size:2rem;margin-bottom:1rem;">🏆</div>
-      <p style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Accelerated</p>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#1C1C1C;margin-bottom:0.8rem;">6 lessons in 4 weeks <em style='font-style:italic;color:var(--gold);'>— 10% off 5th & 6th</em></p>
-      <p style="font-size:0.8rem;color:#5A5047;line-height:1.7;font-weight:300;">Two extra lessons within 4 weeks — lessons 5 & 6 both at <strong>10% off</strong>. Ideal for exam prep or intensive practice.</p>
-    </div>
-  </div>
-
-  <!-- Worked Examples Table -->
-  <div style="max-width:900px;margin:0 auto;">
-    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
-    <p style="font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;text-align:center;">Worked Example — Initial to Grade 7, 60 min (£65/lesson)</p>
-    <div style="border:1px solid rgba(201,168,76,0.2);overflow:hidden;">
-      <!-- Header -->
-      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;background:#1C1C1C;padding:0.9rem 1.5rem;gap:1rem;">
-        <span style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(201,168,76,0.7);">Package</span>
-        <span style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(201,168,76,0.7);text-align:right;">Lessons</span>
-        <span style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(201,168,76,0.7);text-align:right;">Total</span>
-        <span style="font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(201,168,76,0.7);text-align:right;">Saving</span>
-      </div>
-      <!-- Row 1 -->
-      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:1rem 1.5rem;gap:1rem;border-bottom:1px solid rgba(201,168,76,0.1);background:#fff;">
-        <div>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#1C1C1C;margin-bottom:0.1rem;">Standard Monthly</p>
-          <p style="font-size:0.72rem;color:#8C7B6E;">4 lessons · pay as you go</p>
-        </div>
-        <span style="font-size:0.9rem;color:#1C1C1C;text-align:right;align-self:center;">4</span>
-        <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#1C1C1C;text-align:right;align-self:center;">£260</span>
-        <span style="font-size:0.85rem;color:#8C7B6E;text-align:right;align-self:center;">—</span>
-      </div>
-      <!-- Row 2 -->
-      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:1rem 1.5rem;gap:1rem;border-bottom:1px solid rgba(201,168,76,0.1);background:#FAFAFA;">
-        <div>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#1C1C1C;margin-bottom:0.1rem;">Intensive Block</p>
-          <p style="font-size:0.72rem;color:#8C7B6E;">5 lessons in 4 weeks · 7% off 5th lesson</p>
-        </div>
-        <span style="font-size:0.9rem;color:#1C1C1C;text-align:right;align-self:center;">5</span>
-        <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#1C1C1C;text-align:right;align-self:center;">£320.45</span>
-        <span style="font-size:0.85rem;color:#C9A84C;font-weight:500;text-align:right;align-self:center;">£4.55</span>
-      </div>
-      <!-- Row 3 -->
-      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:1rem 1.5rem;gap:1rem;background:#fff;">
-        <div>
-          <p style="font-family:'Cormorant Garamond',serif;font-size:1rem;color:#1C1C1C;margin-bottom:0.1rem;">Accelerated Block ✦</p>
-          <p style="font-size:0.72rem;color:#8C7B6E;">6 lessons in 4 weeks · 10% off extra 2 lessons</p>
-        </div>
-        <span style="font-size:0.9rem;color:#1C1C1C;text-align:right;align-self:center;">6</span>
-        <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#1C1C1C;text-align:right;align-self:center;">£377</span>
-        <span style="font-size:0.85rem;color:#C9A84C;font-weight:500;text-align:right;align-self:center;">£13</span>
-      </div>
-    </div>
-    </div>
-    <p style="font-size:0.7rem;color:#8C7B6E;margin-top:1rem;text-align:center;">✦ Credits are level-locked — a Beginner credit cannot be used for an Intermediate session. Prices never drop below the per-lesson rate.</p>
-  </div>
-</section>
 
 <!-- FEEDBACK -->
 <section id="feedback" style="padding:8rem max(1.4rem, 8rem - 5vw); background:#1C1C1C; position:relative; overflow:hidden;">
@@ -1815,7 +1677,7 @@
       <div style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;"></div>
       <div style="flex:1;height:1px;background:rgba(201,168,76,0.25);"></div>
     </div>
-    <p style="font-size:0.9rem;line-height:1.85;color:rgba(253,250,245,0.6);font-weight:300;">Send Eric a recording of your playing and get his personal feedback by email, from a quick voice note to a full written report with a practice plan. Piano and violin, any level, from anywhere.</p>
+    <p style="font-size:0.9rem;line-height:1.85;color:rgba(253,250,245,0.6);font-weight:300;">Send Eric a video of your playing from home. He watches it and tells you exactly what to fix, so you walk into your exam (or film your exam video) knowing where you stand.</p>
   </div>
 
   <!-- How It Works Steps -->
@@ -1829,7 +1691,7 @@
       </div>
       <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Record</p>
       <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#FDFAF5;font-weight:300;margin-bottom:0.6rem;">Film Your Practice</p>
-      <p style="font-size:0.78rem;color:rgba(253,250,245,0.5);line-height:1.7;font-weight:300;">Record yourself playing — any phone camera works. Show your hands and posture where possible.</p>
+      <p style="font-size:0.78rem;color:rgba(253,250,245,0.5);line-height:1.7;font-weight:300;">Film your piece on your phone. One take, like the real exam.</p>
     </div>
 
     <div style="text-align:center;padding:0 1.5rem;position:relative;">
@@ -1838,7 +1700,7 @@
       </div>
       <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Submit</p>
       <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#FDFAF5;font-weight:300;margin-bottom:0.6rem;">Send to Eric</p>
-      <p style="font-size:0.78rem;color:rgba(253,250,245,0.5);line-height:1.7;font-weight:300;">Paste your video link in the form below, with your piece, grade and what you'd like Eric to focus on.</p>
+      <p style="font-size:0.78rem;color:rgba(253,250,245,0.5);line-height:1.7;font-weight:300;">Paste your video link in the form below and choose your package.</p>
     </div>
 
     <div style="text-align:center;padding:0 1.5rem;position:relative;">
@@ -1847,74 +1709,43 @@
       </div>
       <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Receive</p>
       <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#FDFAF5;font-weight:300;margin-bottom:0.6rem;">Get Eric's Response</p>
-      <p style="font-size:0.78rem;color:rgba(253,250,245,0.5);line-height:1.7;font-weight:300;">Eric replies by email within 48 hours (72 hours for Master Class). Add a video reply if you'd like to see him demonstrate.</p>
+      <p style="font-size:0.78rem;color:rgba(253,250,245,0.5);line-height:1.7;font-weight:300;">Get Eric's feedback by email within 5 days: what's working, what to fix and how to practise it.</p>
     </div>
   </div>
 
-  <!-- Pricing Cards (Online Coaching, 4 tiers) -->
-  <div class="coach-tiers">
-
-    <div class="coach-card entry">
-      <p class="coach-kicker">Taster · Voice note</p>
-      <p class="coach-name">Quick Impression</p>
-      <p class="coach-price"><span>£</span>10</p>
-      <p class="coach-per">per clip</p>
-      <ul class="coach-list">
-        <li>Clip of up to 1 minute</li>
-        <li>2–3 min personal voice note from Eric</li>
-        <li>First impressions and the one thing to fix</li>
-        <li>Within 48 hours</li>
-      </ul>
-      <p class="coach-note">Clip over 1 minute? Choose Quick Review.</p>
-      <a href="#feedback-form" class="coach-btn" data-pkg="impression">Send a Clip</a>
-    </div>
-
+  <!-- Online Coaching packages (prices by exam grade) -->
+  <div class="coach-tiers two">
     <div class="coach-card">
-      <p class="coach-kicker">Essential · Written</p>
-      <p class="coach-name">Quick Review</p>
-      <p class="coach-price"><span>£</span>18</p>
-      <p class="coach-per">per submission</p>
-      <ul class="coach-list">
-        <li>Up to 3 minutes of playing</li>
-        <li>3–5 written, numbered observations</li>
-        <li>One clear priority for this week</li>
-        <li>Personal note from Eric · within 48 hours</li>
+      <p class="coach-kicker">One piece</p>
+      <p class="coach-name">Single Piece Check</p>
+      <p class="coach-price"><small>from</small><span>£</span>15</p>
+      <p class="coach-per">Written notes + a short video reply from Eric. Ideal for a piece you're unsure about.</p>
+      <ul class="coach-grades">
+          <li><span>Grade 1–4</span><b>£15</b></li>
+          <li><span>Grade 5–6</span><b>£20</b></li>
+          <li><span>Grade 7–8</span><b>£25</b></li>
+          <li><span>Diploma</span><b>£35</b></li>
       </ul>
-      <p class="coach-note">Add a video reply +£10 (Grade 1–3 only)</p>
-      <a href="#feedback-form" class="coach-btn" data-pkg="quick">Submit a Video</a>
+      <a href="#feedback-form" class="coach-btn" data-pkg="single">Send One Piece</a>
     </div>
-
     <div class="coach-card popular">
-      <span class="coach-badge">Most Popular</span>
-      <p class="coach-kicker">Standard · Written</p>
-      <p class="coach-name">Deep Feedback</p>
-      <p class="coach-price"><span>£</span>29</p>
-      <p class="coach-per">per piece</p>
-      <ul class="coach-list">
-        <li>One piece, up to 5 minutes</li>
-        <li>Timestamped written observations</li>
-        <li>Technique, tone, rhythm &amp; expression</li>
-        <li>2-week practice plan · within 48 hours</li>
+      <span class="coach-badge">Best Value</span>
+      <p class="coach-kicker">All 4 exam pieces</p>
+      <p class="coach-name">Full Exam Check</p>
+      <p class="coach-price"><small>from</small><span>£</span>49</p>
+      <p class="coach-per">All 4 pieces marked like the real exam, with a predicted mark, video reply and practice plan.</p>
+      <ul class="coach-grades">
+          <li><span>Grade 1–4</span><b>£49</b></li>
+          <li><span>Grade 5–6</span><b>£69</b></li>
+          <li><span>Grade 7–8</span><b>£89</b></li>
+          <li><span>Diploma</span><b>£129</b></li>
       </ul>
-      <p class="coach-note">Add a video reply +£9</p>
-      <a href="#feedback-form" class="coach-btn" data-pkg="deep">Submit a Video</a>
+      <a href="#feedback-form" class="coach-btn" data-pkg="full">Send All 4 Pieces</a>
     </div>
-
-    <div class="coach-card">
-      <p class="coach-kicker">Premium · Grade 4+</p>
-      <p class="coach-name">Master Class</p>
-      <p class="coach-price"><span>£</span>43</p>
-      <p class="coach-per">per piece</p>
-      <ul class="coach-list">
-        <li>One piece, any length · Grade 4 and above</li>
-        <li>Full written report with timestamps</li>
-        <li>Prescribed exercises and a 4-week roadmap</li>
-        <li>One follow-up Q&amp;A · within 72 hours</li>
-      </ul>
-      <p class="coach-note">Add a video reply +£12</p>
-      <a href="#feedback-form" class="coach-btn" data-pkg="master">Submit a Video</a>
-    </div>
-
+  </div>
+  <div class="coach-extras">
+    <p><b>Need it sooner?</b> 48-hour express is +£10.</p>
+    <p><b>🎁 20% off your first session:</b> join our mailing list and we'll send you a one-time welcome code to use at payment.</p>
   </div>
 
 <!-- Submission Form -->
@@ -1952,45 +1783,44 @@
             <label style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Feedback Package <span style="color:#e8a0a0;">*</span></label>
             <select id="ff-package" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.85rem 1rem;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;appearance:none;cursor:pointer;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,168,76,0.2)'">
               <option value="" style="background:#1C1C1C;">Select package…</option>
-              <option value="impression" style="background:#1C1C1C;">Quick Impression — £10 (clip up to 1 min)</option>
-              <option value="quick" style="background:#1C1C1C;">Quick Review — £18</option>
-              <option value="deep" style="background:#1C1C1C;">Deep Feedback — £29</option>
-              <option value="master" style="background:#1C1C1C;">Master Class — £43 (Grade 4+)</option>
+              <option value="single" style="background:#1C1C1C;">Single Piece Check — one piece</option>
+              <option value="full" style="background:#1C1C1C;">Full Exam Check — all 4 pieces</option>
             </select>
             <span id="ff-package-err" style="display:none;font-size:0.72rem;color:#e8a0a0;">Please select a package.</span>
           </div>
           <div style="display:flex;flex-direction:column;gap:0.45rem;">
-            <label style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Your Level <span style="color:#e8a0a0;">*</span></label>
+            <label style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Exam Grade <span style="color:#e8a0a0;">*</span></label>
             <select id="ff-level" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.85rem 1rem;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;appearance:none;cursor:pointer;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,168,76,0.2)'">
               <option value="" style="background:#1C1C1C;">Select level…</option>
-              <option style="background:#1C1C1C;">Beginner (Initial – Grade 3)</option>
-              <option style="background:#1C1C1C;">Intermediate (Grade 4–6)</option>
-              <option style="background:#1C1C1C;">Advanced (Grade 7–8)</option>
-              <option style="background:#1C1C1C;">Diploma / Professional</option>
-            </select>
-            <span id="ff-level-err" style="display:none;font-size:0.72rem;color:#e8a0a0;">Please select your level.</span>
+              <option value="g14" style="background:#1C1C1C;">Grade 1–4</option>
+              <option value="g56" style="background:#1C1C1C;">Grade 5–6</option>
+              <option value="g78" style="background:#1C1C1C;">Grade 7–8</option>
+              <option value="dip" style="background:#1C1C1C;">Diploma</option>
+              </select>
+            <span id="ff-level-err" style="display:none;font-size:0.72rem;color:#e8a0a0;">Please select the exam grade.</span>
           </div>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:0.45rem;">
-          <label for="ff-video" style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Video reply from Eric</label>
+          <label for="ff-video" style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Delivery</label>
           <select id="ff-video" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.85rem 1rem;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;appearance:none;cursor:pointer;">
-            <option value="no" style="background:#1C1C1C;">No thanks, written / voice reply only</option>
-            <option value="yes" style="background:#1C1C1C;">Yes, add a video reply</option>
+            <option value="no" style="background:#1C1C1C;">Standard: within 5 days</option>
+            <option value="yes" style="background:#1C1C1C;">48-hour express (+£10)</option>
           </select>
           <span id="ff-video-err" style="display:none;font-size:0.72rem;color:#e8a0a0;"></span>
           <p id="ff-total" aria-live="polite"></p>
+          <p style="font-size:0.7rem;color:rgba(253,250,245,0.45);">Have a 20% welcome code? Add it in the message box below.</p>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:0.45rem;">
-          <label style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Piece Name & Composer <span style="color:#e8a0a0;">*</span></label>
+          <label style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Piece(s) & Composer <span style="color:#e8a0a0;">*</span></label>
           <input id="ff-piece" type="text" placeholder="e.g. Chopin — Nocturne Op. 9 No. 2" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.85rem 1rem;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,168,76,0.2)'">
           <span id="ff-piece-err" style="display:none;font-size:0.72rem;color:#e8a0a0;">Please enter the piece name.</span>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:0.45rem;">
           <label style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.8);">Video Link <span style="color:#e8a0a0;">*</span></label>
-          <input id="ff-link" type="url" placeholder="YouTube, Google Drive, Dropbox or WeTransfer link…" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.85rem 1rem;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,168,76,0.2)'">
+          <input id="ff-link" type="url" placeholder="YouTube (unlisted), Google Drive or Dropbox link…" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.2);padding:0.85rem 1rem;color:#FDFAF5;font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:300;outline:none;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,168,76,0.2)'">
           <span id="ff-link-err" style="display:none;font-size:0.72rem;color:#e8a0a0;">Please paste a video link.</span>
           <p style="font-size:0.7rem;color:rgba(253,250,245,0.3);margin-top:0.3rem;">Upload via YouTube (Unlisted), Google Drive or WeTransfer — <a href="#upload" onclick="document.getElementById('upload').style.display='block'; setTimeout(()=>{document.getElementById('upload').scrollIntoView({behavior:'smooth'})},100);" style="color:var(--gold);text-decoration:underline;">view upload guide</a> — then paste your link here.</p>
         </div>
@@ -2379,7 +2209,7 @@
       <div class="promo-service-icon">3</div>
       <div>
         <div class="promo-service-title">Online Coaching <span class="promo-arrow">→</span></div>
-        <div class="promo-service-desc">Eric's personal feedback on your recording, from £10</div>
+        <div class="promo-service-desc">Eric marks your recording like an examiner, from £15</div>
       </div>
     </a>
     <a href="#promo-mailing-form" class="promo-service promo-service-link" onclick="var f=document.getElementById('promo-name'); if(f){event.preventDefault(); f.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){f.focus({preventScroll:true});},350);}">
@@ -2648,40 +2478,26 @@
     }
   }
 
-  // ── ONLINE COACHING PRICING (single source: £10 / £18 / £29 / £43) ──
+  // ── ONLINE COACHING PRICING (by exam grade; 48-hour express +£10) ──
   const COACH = {
-    impression: { name: 'Quick Impression', price: 10, video: null },
-    quick:      { name: 'Quick Review',     price: 18, video: 10 },
-    deep:       { name: 'Deep Feedback',    price: 29, video: 9 },
-    master:     { name: 'Master Class',     price: 43, video: 12 }
+    single: { name: 'Single Piece Check', price: { g14: 15, g56: 20, g78: 25, dip: 35 } },
+    full:   { name: 'Full Exam Check',    price: { g14: 49, g56: 69, g78: 89, dip: 129 } }
   };
-  function coachIsBeginner() { return /Initial/.test(document.getElementById('ff-level').value); }
-  function coachRuleError() {
-    const pkg = document.getElementById('ff-package').value;
-    const lvl = document.getElementById('ff-level').value;
-    const vid = document.getElementById('ff-video').value === 'yes';
-    if (pkg === 'master' && lvl && coachIsBeginner()) return 'Master Class is for Grade 4 and above. Please choose Quick Review or Deep Feedback.';
-    if (vid && pkg === 'impression') return 'Quick Impression comes with a voice note only.';
-    if (vid && pkg === 'quick' && lvl && !coachIsBeginner()) return 'Video replies on Quick Review are for Grade 1–3 only. Choose Deep Feedback for a video reply.';
-    return '';
-  }
+  const COACH_EXPRESS = 10;
+  function coachRuleError() { return ''; }
   function coachTotal() {
     const p = COACH[document.getElementById('ff-package').value];
-    if (!p) return 0;
-    const vid = document.getElementById('ff-video').value === 'yes' && p.video;
-    return p.price + (vid ? p.video : 0);
+    const g = document.getElementById('ff-level').value;
+    if (!p || !p.price[g]) return 0;
+    return p.price[g] + (document.getElementById('ff-video').value === 'yes' ? COACH_EXPRESS : 0);
   }
   function coachRefresh() {
     const p = COACH[document.getElementById('ff-package').value];
-    const vSel = document.getElementById('ff-video');
-    const yes = vSel.querySelector('option[value="yes"]');
-    if (p && p.video) { yes.disabled = false; yes.textContent = 'Yes, add a video reply (+£' + p.video + ')'; }
-    else { yes.textContent = p ? 'Not available for ' + p.name : 'Yes, add a video reply'; yes.disabled = !!p; if (p) vSel.value = 'no'; }
+    const g = document.getElementById('ff-level').value;
     const tot = document.getElementById('ff-total');
-    const rule = coachRuleError();
-    tot.textContent = p ? 'Total: £' + coachTotal() : '';
-    const vErr = document.getElementById('ff-video-err');
-    if (rule) { vErr.textContent = rule; vErr.style.display = 'block'; } else { vErr.style.display = 'none'; }
+    if (p && p.price[g]) tot.textContent = 'Total: £' + coachTotal() + (document.getElementById('ff-video').value === 'yes' ? ' (includes 48-hour express)' : '');
+    else if (p) tot.textContent = p.name + ' from £' + Math.min.apply(null, Object.values(p.price)) + '. Choose the exam grade to see your price.';
+    else tot.textContent = '';
   }
   document.addEventListener('DOMContentLoaded', function () {
     ['ff-package','ff-level','ff-video'].forEach(function (id) {
@@ -2752,7 +2568,8 @@
       piece:     document.getElementById('ff-piece').value.trim(),
       videoLink: document.getElementById('ff-link').value.trim(),
       notes:     document.getElementById('ff-notes').value.trim(),
-      videoReply: document.getElementById('ff-video').value === 'yes' ? 'Yes' : 'No',
+      express:   document.getElementById('ff-video').value === 'yes' ? '48-hour express (+£10)' : 'Standard (within 5 days)',
+      grade:     (document.getElementById('ff-level').selectedOptions[0] || {}).text || '',
       total:     coachTotal() ? '£' + coachTotal() : '',
       _subject:  'Online Coaching request: ' + (COACH[document.getElementById('ff-package').value] || {}).name,
     };

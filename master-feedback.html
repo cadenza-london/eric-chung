@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Online Coaching for Piano &amp; Violin | Cadenza London Music Academy</title>
-<meta name="description" content="Send Eric Chung a recording and get personal feedback by email: Quick Impression £10, Quick Review £18, Deep Feedback £29, Master Class £43. Piano and violin, any level.">
+<meta name="description" content="Send Eric Chung a video from home and get exam-standard feedback by email. Single Piece Check from £15, Full Exam Check with a predicted mark from £49. ABRSM &amp; Trinity, Grade 1 to Diploma.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -177,6 +177,19 @@
   @media (max-width: 1100px) { .pricing-grid.four { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 640px) { .pricing-grid.four { grid-template-columns: 1fr; } }
 
+  .pricing-grid.two { grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 860px; margin-left: auto; margin-right: auto; }
+  .pricing-grid.two .tier-name { font-size: 1.6rem; margin-bottom: 18px; }
+  .tier-price small { font-family: 'Jost', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; margin-right: 8px; vertical-align: middle; opacity: 0.75; }
+  .pricing-grid.two .tier-period { line-height: 1.6; font-size: 0.86rem; }
+  .grade-prices { list-style: none; margin-bottom: 28px; }
+  .grade-prices li { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  .grade-prices li b { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 400; }
+  .pricing-card.popular .grade-prices li { border-bottom-color: rgba(0,0,0,0.15); color: var(--dark); }
+  .pricing-card.popular .tier-period { color: var(--dark); }
+  .price-extras { max-width: 860px; margin: 20px auto 0; display: grid; grid-template-columns: 1fr 1.6fr; gap: 16px; }
+  .price-extras p { border: 1px solid var(--border); padding: 16px 18px; font-size: 0.86rem; line-height: 1.6; color: var(--grey); }
+  .price-extras b { color: var(--gold); font-weight: 600; }
+  @media (max-width: 768px) { .pricing-grid.two, .price-extras { grid-template-columns: 1fr; } }
   /* INSTRUMENTS */
   .instruments { background: var(--dark2); }
   .inst-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
@@ -292,7 +305,7 @@
     <p class="hero-sub">
       Submit a video of your performance and receive<br>
       conservatoire-level feedback — without leaving home.<br>
-      <span style="font-size:0.9rem;color:var(--gold);">A professional second opinion · No extra lessons needed · From just £10</span>
+      <span style="font-size:0.9rem;color:var(--gold);">Marked like the real exam · No extra lessons needed · From just £15</span>
     </p>
     <div class="hero-actions">
       <a href="https://cadenza-london.com/#feedback" target="_blank"><button class="btn-primary">Submit Your Video</button></a>
@@ -300,15 +313,15 @@
     </div>
     <div class="hero-stats">
       <div>
-        <div class="stat-num">48h</div>
-        <div class="stat-label">Most Replies Within</div>
+        <div class="stat-num">5 days</div>
+        <div class="stat-label">Feedback Within</div>
       </div>
       <div>
-        <div class="stat-num">4</div>
-        <div class="stat-label">Service Tiers</div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Exam Pass Rate</div>
       </div>
       <div>
-        <div class="stat-num">£10</div>
+        <div class="stat-num">£15</div>
         <div class="stat-label">Starting From</div>
       </div>
       <div>
@@ -330,21 +343,21 @@
         <div class="step-num">01</div>
         <div class="step-icon">🎬</div>
         <div class="step-title">Record Your Performance</div>
-        <p class="step-desc">Film yourself playing any piece on piano or violin. No professional setup needed — a smartphone works perfectly.</p>
+        <p class="step-desc">Film your piece on your phone. One take, like the real exam. No professional setup needed.</p>
         <div class="step-connector"></div>
       </div>
       <div class="how-step">
         <div class="step-num">02</div>
         <div class="step-icon">📤</div>
         <div class="step-title">Submit & Choose Your Tier</div>
-        <p class="step-desc">Paste your video link into our form and choose the level of feedback that suits your goals and budget.</p>
+        <p class="step-desc">Paste your video link into our form and choose Single Piece Check or Full Exam Check.</p>
         <div class="step-connector"></div>
       </div>
       <div class="how-step">
         <div class="step-num">03</div>
         <div class="step-icon">📬</div>
         <div class="step-title">Receive Expert Feedback</div>
-        <p class="step-desc">Get detailed, personalised feedback from Eric — a conservatoire-trained teacher — delivered straight to your inbox.</p>
+        <p class="step-desc">Get Eric's feedback by email within 5 days: what's working, what to fix and how to practise it.</p>
       </div>
     </div>
   </div>
@@ -386,78 +399,44 @@
   <div class="container">
     <div class="section-eyebrow">Transparent Pricing</div>
     <h2 class="section-title">Choose Your Level</h2>
-    <p class="section-sub">Every submission receives thoughtful, expert attention. Select the depth of feedback that matches your ambitions.</p>
-    <div class="pricing-grid four">
-
-      <div class="pricing-card entry">
-        <div class="tier-label">Taster · Voice note</div>
-        <div class="tier-name">Quick Impression</div>
-        <div class="tier-price"><span>£</span>10</div>
-        <div class="tier-period">per clip</div>
-        <div class="tier-divider"></div>
-        <ul class="tier-features">
-          <li>Clip of up to 1 minute</li>
-          <li>2–3 min personal voice note from Eric</li>
-          <li>First impressions and the one thing to focus on</li>
-          <li>Within 48 hours</li>
-        </ul>
-        <p class="tier-addon">Clip over 1 minute? Choose Quick Review.</p>
-        <a href="https://cadenza-london.com/?coach=impression#feedback" style="display:block;"><button class="tier-btn" style="width:100%;">Send a Clip ↗</button></a>
-      </div>
+    <p class="section-sub">Prices depend on the exam grade. Eric uses the same criteria as the exam boards: pitch, timing, tone, shape and performance.</p>
+    <div class="pricing-grid two">
 
       <div class="pricing-card">
-        <div class="tier-label">Essential · Written</div>
-        <div class="tier-name">Quick Review</div>
-        <div class="tier-price"><span>£</span>18</div>
-        <div class="tier-period">per submission</div>
+        <div class="tier-label">One piece</div>
+        <div class="tier-name">Single Piece Check</div>
+        <div class="tier-price"><small>from</small><span>£</span>15</div>
+        <div class="tier-period">Written notes + a short video reply from Eric. Ideal for a piece you're unsure about.</div>
         <div class="tier-divider"></div>
-        <ul class="tier-features">
-          <li>Up to 3 minutes of playing reviewed</li>
-          <li>3–5 written, numbered observations</li>
-          <li>One clear priority to focus on this week</li>
-          <li>Personal note from Eric</li>
-          <li>By email within 48 hours</li>
+        <ul class="grade-prices">
+          <li><span>Grade 1–4</span><b>£15</b></li>
+          <li><span>Grade 5–6</span><b>£20</b></li>
+          <li><span>Grade 7–8</span><b>£25</b></li>
+          <li><span>Diploma</span><b>£35</b></li>
         </ul>
-        <p class="tier-addon">Add a video reply +£10 (Grade 1–3 only)</p>
-        <a href="https://cadenza-london.com/?coach=quick#feedback" style="display:block;"><button class="tier-btn" style="width:100%;">Submit a Video ↗</button></a>
+        <a href="https://cadenza-london.com/?coach=single#feedback" style="display:block;"><button class="tier-btn" style="width:100%;">Send One Piece ↗</button></a>
       </div>
 
       <div class="pricing-card popular">
-        <div class="popular-badge">Most Popular</div>
-        <div class="tier-label">Standard · Written</div>
-        <div class="tier-name">Deep Feedback</div>
-        <div class="tier-price"><span>£</span>29</div>
-        <div class="tier-period">per piece</div>
+        <div class="popular-badge">Best Value</div>
+        <div class="tier-label">All 4 exam pieces</div>
+        <div class="tier-name">Full Exam Check</div>
+        <div class="tier-price"><small>from</small><span>£</span>49</div>
+        <div class="tier-period">All 4 pieces marked like the real exam, with a predicted mark, video reply and practice plan.</div>
         <div class="tier-divider"></div>
-        <ul class="tier-features">
-          <li>One piece, up to 5 minutes</li>
-          <li>Timestamped written observations</li>
-          <li>Technique, tone, rhythm &amp; expression covered</li>
-          <li>2-week practice plan tailored to your playing</li>
-          <li>By email within 48 hours</li>
+        <ul class="grade-prices">
+          <li><span>Grade 1–4</span><b>£49</b></li>
+          <li><span>Grade 5–6</span><b>£69</b></li>
+          <li><span>Grade 7–8</span><b>£89</b></li>
+          <li><span>Diploma</span><b>£129</b></li>
         </ul>
-        <p class="tier-addon">Add a video reply +£9</p>
-        <a href="https://cadenza-london.com/?coach=deep#feedback" style="display:block;"><button class="tier-btn" style="width:100%;">Submit a Video ↗</button></a>
+        <a href="https://cadenza-london.com/?coach=full#feedback" style="display:block;"><button class="tier-btn" style="width:100%;">Send All 4 Pieces ↗</button></a>
       </div>
 
-      <div class="pricing-card">
-        <div class="tier-label">Premium · Grade 4+</div>
-        <div class="tier-name">Master Class</div>
-        <div class="tier-price"><span>£</span>43</div>
-        <div class="tier-period">per piece</div>
-        <div class="tier-divider"></div>
-        <ul class="tier-features">
-          <li>One piece, any length (Grade 4 and above)</li>
-          <li>Full written report with timestamps</li>
-          <li>Prescribed exercises for weaknesses found</li>
-          <li>4-week practice roadmap</li>
-          <li>One follow-up Q&amp;A by email</li>
-          <li>Within 72 hours</li>
-        </ul>
-        <p class="tier-addon">Add a video reply +£12</p>
-        <a href="https://cadenza-london.com/?coach=master#feedback" style="display:block;"><button class="tier-btn" style="width:100%;">Submit a Video ↗</button></a>
-      </div>
-
+    </div>
+    <div class="price-extras">
+      <p><b>Need it sooner?</b> 48-hour express is +£10.</p>
+      <p><b>🎁 20% off your first session:</b> join the Cadenza London mailing list on our website and we'll send you a one-time welcome code to use at payment.</p>
     </div>
   </div>
 </section>
@@ -506,12 +485,12 @@
         <p class="faq-a">Yes — exam preparation is one of the most common use cases. Eric understands ABRSM and Trinity syllabi and can give targeted feedback aligned with exam criteria.</p>
       </div>
       <div class="faq-item">
-        <div class="faq-q">My clip is longer than 1 minute. Which tier?</div>
-        <p class="faq-a">Quick Impression covers clips of up to 1 minute. For up to 3 minutes choose Quick Review (£18); for one full piece up to 5 minutes choose Deep Feedback (£29); for a longer piece at Grade 4 or above choose Master Class (£43).</p>
+        <div class="faq-q">Which package should I choose?</div>
+        <p class="faq-a">Single Piece Check is for one piece you're unsure about. Full Exam Check marks all 4 of your exam pieces like the real exam and gives you a predicted mark, a video reply and a practice plan.</p>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Can Eric reply on video?</div>
-        <p class="faq-a">Yes. Add a video reply for +£10 on Quick Review (Grade 1–3 only), +£9 on Deep Feedback or +£12 on Master Class. Quick Impression is a voice note.</p>
+        <div class="faq-q">How fast will I get feedback?</div>
+        <p class="faq-a">Within 5 days by email. Need it sooner? 48-hour express is +£10.</p>
       </div>
       <div class="faq-item">
         <div class="faq-q">How is this different from a regular lesson?</div>
@@ -524,7 +503,7 @@
 <!-- FINAL CTA -->
 <section class="final-cta">
   <h2>Ready to <em>Transform</em><br>Your Playing?</h2>
-  <p>Join students who are improving faster with expert, personalised feedback. Submit your first video from just £10.</p>
+  <p>Join students who are improving faster with expert, personalised feedback. Your first video check starts from £15, and mailing-list members get 20% off their first session.</p>
   <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(201,152,42,0.08);border:1px solid var(--border);padding:12px 24px;border-radius:4px;margin-bottom:32px;font-size:0.78rem;color:var(--grey);">
     <span style="color:var(--gold);font-size:1rem;">↗</span>
     Clicking below will take you directly to the <strong style="color:var(--gold);">submission form on cadenza-london.com</strong>
