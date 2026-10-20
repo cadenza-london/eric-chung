@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Upload your pieces | Digital Exam Ready Course · Cadenza London Music Academy</title>
+<title>Upload your pieces | Cadenza Digital Exam Ready Course</title>
 <meta name="description" content="Send Eric the videos and score photos of your exam pieces (1 to 4) for the Cadenza Digital Exam Ready Course.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#eca945">
@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="logo-circle.png">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=DM+Serif+Display:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Figtree:wght@400;500;600;700;800&family=Gochi+Hand&display=swap">
 <style>
 /* Layout: follows Jess's mock — cream header, marigold hero with step pill, piano-key strip, one white form card (prefilled details, four piece blocks, consent, store accordion, upload), "Before you upload" card, dark "Private by design" card, dark footer. Single light brand look, matching the Exam-Ready course page. */
 :root{
@@ -71,7 +71,7 @@ header .nm span{font-size:.9rem;color:var(--muted)}
 .tag{display:inline-flex;justify-content:center;border-radius:999px;padding:3px 8px;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
 .tag.req{background:var(--ink);color:var(--marigold)}
 .tag.opt{background:var(--tint);color:var(--muted);border:1px solid var(--line)}
-/* not-ready prompt -> Online Coaching */
+/* not-ready prompt -> Online Master Coaching */
 .coach{background:var(--butter);border:2px dashed var(--ink);border-radius:20px;padding:16px 18px;display:grid;gap:8px}
 .coach b.h{font-size:1.08rem;font-weight:800}
 .coach p{font-size:.95rem;margin:0}
@@ -220,20 +220,200 @@ footer img{width:54px;height:54px;border-radius:50%;flex:none}
 footer a{color:var(--marigold);font-weight:800;text-decoration:none}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ===== Cute theme (Oct 2026): yellow × navy × orange, bubbly type ===== */
+:root{
+  --ink:#1f2a5c; --muted:#56608a; --cream:#fff8ea; --card:#fffdf7; --field:#fff4dc; --line:#f6dcaa; --tint:#fff0cc;
+  --marigold:#ff9a2e; --marigold-soft:#ffe2b8; --butter:#fff1b8; --gold-deep:#d9620f;
+  --navy:#1f2a5c; --orange:#ff8a1f; --yellow:#ffd23f;
+  --on-ink:#fffaf0; --on-ink-muted:#dfe3f5;
+  --sans:"Figtree","Helvetica Neue",Arial,sans-serif;
+  --serif:"Bagel Fat One","Arial Rounded MT Bold","Arial Black",sans-serif;
+  --hand:"Gochi Hand","Comic Sans MS","Chalkboard SE",cursive;
+}
+body{background-color:var(--cream);background-image:radial-gradient(rgba(255,154,46,.18) 1.6px,transparent 1.8px),radial-gradient(rgba(31,42,92,.08) 1.6px,transparent 1.8px);background-size:26px 26px,26px 26px;background-position:0 0,13px 13px}
+h1,h2{font-weight:400;letter-spacing:0;line-height:1.1}
+header{background:#fffcf3;border-bottom-color:var(--line)}
+.hero{background:radial-gradient(ellipse 70% 55% at 100% 0%,rgba(255,214,79,.9),transparent 70%),radial-gradient(ellipse 60% 50% at 0% 100%,rgba(255,226,120,.85),transparent 70%),linear-gradient(160deg,#ffb54a 0%,#ff9a2e 60%,#ffab3d 100%)}
+.hero h1 em{font-style:normal;color:var(--navy);-webkit-text-stroke:0;text-shadow:2px 2px 0 var(--yellow)}
+/* navy blocks with sunny accents */
+.deadline,.sticky,.dark,footer{background:var(--navy);border-color:transparent;--marigold:#ffd23f;--gold-deep:#ffd23f}
+footer{border-top:4px solid var(--orange)}
+.sticky{border-top:3px solid var(--orange);box-shadow:0 -10px 24px -16px rgba(31,42,92,.7)}
+.pill,.tag.req,.sn,.pick .ic,.pick .go,.coach a{background:var(--navy);color:var(--yellow);border-color:var(--navy)}
+.bar i{background:linear-gradient(90deg,var(--yellow),var(--orange))}
+/* buttons: chunky sunny press */
+.btn-go{background:var(--yellow);color:var(--navy);border-color:var(--navy);box-shadow:0 5px 0 var(--navy)}
+.btn-go:active{transform:translateY(3px);box-shadow:0 2px 0 var(--navy)}
+.btn-dark{background:var(--navy);color:var(--yellow);box-shadow:0 5px 0 #121a3d}
+/* cards: orange borders, yellow offset shadows */
+.need,form.card,.card:not(.dark){border-color:#ffc06a;box-shadow:6px 6px 0 #ffe08a}
+.coach{background:#fff4c9;border-color:var(--orange)}
+.coachacts{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.coach .coachacts a.more{background:none;color:var(--navy);padding:0;font-weight:700;font-size:.88rem;text-decoration:underline;text-underline-offset:3px;border:0;box-shadow:none}
+.pick{border-color:var(--navy);background:#fff1d6}
+.pick .ic svg *{stroke:var(--yellow)}
+
+/* ===== Eric chat bubble ===== */
+.chat{position:fixed;right:14px;left:14px;bottom:calc(var(--sticky-h,0px) + 14px);z-index:25;display:flex;gap:10px;align-items:flex-end;justify-content:flex-end;pointer-events:none;
+  opacity:0;transform:translateY(10px) scale(.96);transform-origin:bottom right;transition:opacity .22s cubic-bezier(.23,1,.32,1),transform .22s cubic-bezier(.23,1,.32,1)}
+.chat.show{opacity:1;transform:none;pointer-events:auto}
+.chat .av{flex:none;width:46px;height:46px;border-radius:50%;object-fit:cover;border:3px solid var(--yellow);box-shadow:0 4px 0 var(--navy);background:#fff}
+.chat .bub{position:relative;max-width:330px;background:#fff;color:var(--navy);border:2.5px solid var(--navy);border-radius:22px 22px 6px 22px;padding:14px 16px 14px;box-shadow:0 5px 0 var(--navy),0 18px 30px -18px rgba(31,42,92,.6);display:grid;gap:8px;order:-1}
+.chat .who{font:400 1.1rem/1 var(--hand);color:#b4500a}
+.chat .bub p{font-size:.98rem;line-height:1.45;margin:0}
+.chat .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
+.chat .acts a{display:inline-flex;align-items:center;gap:6px;background:var(--yellow);color:var(--navy);border:2px solid var(--navy);border-radius:999px;padding:8px 14px;font-weight:800;font-size:.9rem;text-decoration:none;box-shadow:0 3px 0 var(--navy);transition:transform .12s ease-out}
+.chat .acts a:active{transform:translateY(2px);box-shadow:0 1px 0 var(--navy)}
+.chat .acts button{background:none;border:0;color:var(--muted);font:700 .88rem var(--sans);padding:8px 6px;cursor:pointer}
+.chat .x{position:absolute;top:6px;right:8px;width:30px;height:30px;border:0;background:none;color:var(--muted);font-size:1.25rem;line-height:1;cursor:pointer;border-radius:50%}
+.chat .typing{display:inline-flex;gap:4px}
+@media (prefers-reduced-motion:reduce){.chat{transition:opacity .2s ease;transform:none}}
+
+/* ===== what would you like ===== */
+.want{display:grid;gap:10px;border:0;margin:0;padding:0;min-width:0}
+.want legend{font-weight:800;font-size:1.02rem;padding:0;margin-bottom:2px}
+.want .wopt{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start;border:2px solid var(--line);border-radius:16px;padding:14px;background:var(--card);cursor:pointer;transition:border-color .15s ease,background-color .15s ease}
+.want .wopt:has(input:checked){border-color:var(--navy);background:#fff4d6}
+.want input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--navy)}
+.want .wopt b{display:block}
+.want .wopt span{font-size:.9rem;color:var(--muted)}
+.pkgs{display:grid;gap:8px;margin:2px 0 0 36px}
+.pkgs label{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff;cursor:pointer;font-size:.92rem}
+.pkgs label:has(input:checked){border-color:var(--orange);background:#fff1dc}
+.pkgs input{width:20px;height:20px;margin:0;accent-color:var(--orange)}
+.pkgs em{font-style:normal;margin-left:auto;font-weight:800;color:var(--navy)}
+.pkgs small{display:block;color:var(--muted);font-size:.8rem}
+.pkgnote{margin:0;font-size:.84rem;color:var(--muted)}
+
+.sticky .btn-go,.sticky .btn-go *{color:var(--navy)}
+.pkgs a{color:#b4500a!important}
+
+/* ===== guided tour (after "Try Online Coaching") ===== */
+.tour{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:26;max-width:460px;margin-inline:auto;background:#fff;color:var(--navy);border:2.5px solid var(--navy);border-radius:22px;box-shadow:0 5px 0 var(--navy),0 18px 30px -18px rgba(31,42,92,.6);padding:14px 16px 12px;display:grid;gap:8px;
+  opacity:0;transform:translateY(12px) scale(.97);transform-origin:bottom center;transition:opacity .22s cubic-bezier(.23,1,.32,1),transform .22s cubic-bezier(.23,1,.32,1);pointer-events:none}
+.tour.show{opacity:1;transform:none;pointer-events:auto}
+.tour .top{display:flex;align-items:center;gap:10px}
+.tour .top img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid var(--yellow)}
+.tour .stp{font:800 .72rem/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#b4500a}
+.tour .dots{display:flex;gap:5px;margin-left:auto}
+.tour .dots i{width:8px;height:8px;border-radius:50%;background:#f3dcb2;transition:background-color .2s ease}
+.tour .dots i.on{background:var(--orange)}
+.tour h4{margin:0;font:400 1.15rem/1.15 var(--serif);color:var(--navy)}
+.tour p{font-size:.92rem}
+body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;pointer-events:none!important}
+.tour p{margin:0;font-size:.95rem;line-height:1.45}
+.tour .acts{display:flex;align-items:center;gap:8px;margin-top:4px}
+.tour .acts .next{margin-left:auto;background:var(--yellow);color:var(--navy);border:2px solid var(--navy);border-radius:999px;padding:9px 18px;font:800 .95rem var(--sans);box-shadow:0 3px 0 var(--navy);cursor:pointer;transition:transform .12s ease-out}
+.tour .acts .next:active{transform:translateY(2px);box-shadow:0 1px 0 var(--navy)}
+.tour .acts .ghost{background:none;border:0;color:var(--muted);font:700 .88rem var(--sans);padding:8px 4px;cursor:pointer}
+.tour-on{position:relative;z-index:24;border-radius:16px;box-shadow:0 0 0 4px var(--yellow),0 0 0 7px var(--navy),0 0 0 100vmax rgba(31,42,92,.42)!important;transition:box-shadow .25s ease-out;background-color:var(--card)}
+.tpoint{position:fixed;left:0;top:0;z-index:27;width:54px;height:54px;pointer-events:none;opacity:0;
+  transition:transform .55s cubic-bezier(.77,0,.175,1),opacity .2s ease;will-change:transform}
+.tpoint.show{opacity:1}
+.tpoint svg{width:54px;height:54px;filter:drop-shadow(0 4px 6px rgba(31,42,92,.35))}
+.tpoint i{position:absolute;left:4px;top:2px;width:22px;height:22px;border-radius:50%;background:rgba(255,210,63,.55);border:2px solid var(--navy);transform:scale(.6);opacity:0}
+.tpoint.tap i{animation:tap .9s ease-out .15s 2}
+@keyframes tap{0%{transform:scale(.5);opacity:.9}100%{transform:scale(2.2);opacity:0}}
+@media (prefers-reduced-motion:reduce){.tpoint{transition:opacity .2s ease}.tpoint.tap i{animation:none}}
+@media (prefers-reduced-motion:reduce){.tour{transition:opacity .2s ease;transform:none}}
+/* pay box on the done screen */
+.paybox{display:grid;gap:10px;background:#fff8e1;color:var(--navy);border:2px solid var(--yellow);border-radius:18px;padding:16px}
+.paybox b.h{font-size:1.05rem}
+.paybox .btn-pay{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px;border-radius:999px;background:var(--yellow);color:var(--navy);border:2.5px solid var(--navy);box-shadow:0 5px 0 var(--navy);font:800 1.05rem var(--sans);text-decoration:none}
+.paybox .btn-pay:active{transform:translateY(3px);box-shadow:0 2px 0 var(--navy)}
+.paybox small{color:var(--muted)}
+
+/* ===== "What is Online Coaching?" sheet ===== */
+.sheet-bg{position:fixed;inset:0;z-index:40;background:rgba(31,42,92,.5);opacity:0;transition:opacity .25s ease}
+.sheet-bg.show{opacity:1}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:41;max-height:88vh;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:var(--cream);color:var(--navy);border-radius:26px 26px 0 0;border-top:3px solid var(--navy);
+  padding:10px 20px calc(24px + env(safe-area-inset-bottom,0px));transform:translateY(100%);transition:transform .32s cubic-bezier(.32,.72,0,1)}
+.sheet.show{transform:none}
+@media (min-width:640px){.sheet{left:50%;right:auto;bottom:auto;top:50%;width:560px;max-height:86vh;border-radius:26px;border:3px solid var(--navy);transform:translate(-50%,-46%) scale(.97);opacity:0;transition:transform .25s cubic-bezier(.23,1,.32,1),opacity .2s ease}.sheet.show{transform:translate(-50%,-50%);opacity:1}}
+@media (prefers-reduced-motion:reduce){.sheet,.sheet-bg{transition:opacity .2s ease}}
+.sheet .grab{width:44px;height:5px;border-radius:9px;background:#e6cf9f;margin:0 auto 12px}
+.sheet .x{position:sticky;top:0;float:right;width:36px;height:36px;border-radius:50%;border:2px solid var(--navy);background:#fff;color:var(--navy);font-size:1.2rem;line-height:1;cursor:pointer}
+.sheet h2{font-size:1.7rem;margin:4px 0 8px}
+.sheet .sub{font-size:.98rem;line-height:1.5;margin:0 0 16px}
+.sheet h3{font-size:1.02rem;margin:18px 0 8px}
+.sheet .how{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.sheet .how li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;font-size:.95rem;line-height:1.45}
+.sheet .how b.n{width:30px;height:30px;border-radius:50%;background:var(--navy);color:var(--yellow);display:grid;place-items:center;font-size:.9rem}
+.sheet .pk{display:grid;gap:10px}
+.sheet .pk>div{background:#fff;border:2px solid #ffc06a;border-radius:16px;padding:14px;box-shadow:4px 4px 0 #ffe08a}
+.sheet .pk>div.best{border-color:var(--navy);box-shadow:4px 4px 0 var(--yellow)}
+.sheet .pk b.t{display:block;font-size:1.05rem}
+.sheet .pk span.d{display:block;font-size:.88rem;color:var(--muted);margin:2px 0 8px}
+.sheet .tag2{display:inline-block;background:var(--navy);color:var(--yellow);font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:999px;padding:3px 9px;margin-bottom:6px}
+.sheet table{width:100%;border-collapse:collapse;font-size:.9rem}
+.sheet th,.sheet td{text-align:left;padding:9px 4px;border-bottom:1px solid var(--line);white-space:nowrap}
+.sheet td{font-size:.95rem}
+.sheet th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#7a5216}
+.sheet td.r,.sheet th.r{text-align:right}
+.sheet .fine{font-size:.8rem;color:var(--muted);margin-top:6px}
+.sheet .gift{background:#fff4c9;border:2px dashed var(--orange);border-radius:16px;padding:12px 14px;font-size:.92rem;margin-top:16px}
+.sheet .why{background:var(--navy);color:#fff;border-radius:18px;padding:16px 16px 6px;margin:6px 0 4px;--muted:#dfe3f5}
+.sheet .why h3{color:var(--yellow)}
+.sheet .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.sheet .stats div{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,210,63,.5);border-radius:14px;padding:10px 12px}
+.sheet .stats b{display:block;font:400 1.35rem/1.1 var(--serif);color:var(--yellow)}
+.sheet .stats span{display:block;font-size:.8rem;line-height:1.3;color:#eef0fa;margin-top:3px}
+.sheet .ticks{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:.92rem;line-height:1.45}
+.sheet .ticks li{position:relative;padding-left:24px;color:#eef0fa}
+.sheet .ticks li::before{content:"✓";position:absolute;left:0;top:0;color:var(--yellow);font-weight:800}
+.sheet .ticks b{color:#fff}
+.sheet .go2{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:54px;margin-top:18px;border-radius:999px;background:var(--yellow);color:var(--navy);border:2.5px solid var(--navy);box-shadow:0 5px 0 var(--navy);font:800 1.02rem var(--sans);cursor:pointer}
+.sheet .go2:active{transform:translateY(3px);box-shadow:0 2px 0 var(--navy)}
+
+/* coaching-mode hero cards */
+.cwhat,.csteps{background:#fff;color:var(--navy);border:2.5px solid var(--navy);border-radius:20px;padding:18px;display:grid;gap:10px;box-shadow:6px 6px 0 var(--yellow)}
+.cwhat .ck{justify-self:start;background:var(--navy);color:var(--yellow);font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:5px 11px}
+.cwhat h3,.csteps h3{font:400 1.35rem/1.15 var(--serif);margin:0}
+.cwhat p{font-size:.95rem;line-height:1.5}
+.cstats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cstats div{background:#fff4d6;border:1.5px solid #ffc06a;border-radius:14px;padding:9px 11px}
+.cstats b{display:block;font:400 1.2rem/1.1 var(--serif);color:var(--navy)}
+.cstats span{display:block;font-size:.78rem;line-height:1.3;color:var(--muted)}
+.cpk{display:grid;gap:8px}
+.cpk div{display:grid;grid-template-columns:1fr auto;gap:0 10px;align-items:center;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;background:#fffdf7}
+.cpk div.best{border-color:var(--navy);background:#fff4d6}
+.cpk b{font-size:.95rem}.cpk span{grid-column:1;font-size:.8rem;color:var(--muted)}
+.cpk em{grid-column:2;grid-row:1/span 2;font-style:normal;font-weight:800;white-space:nowrap}
+.cmore{font-weight:800;font-size:.9rem;color:#b4500a;text-decoration:underline;text-underline-offset:3px}
+.csteps ol{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.csteps li{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;font-size:.93rem;line-height:1.45}
+.csteps li>b{width:28px;height:28px;border-radius:50%;background:var(--navy);color:var(--yellow);display:grid;place-items:center;font-size:.85rem}
+.cguide{justify-self:start;display:inline-flex;align-items:center;gap:8px;background:var(--yellow);color:var(--navy);border:2px solid var(--navy);border-radius:999px;padding:10px 18px;font-weight:800;text-decoration:none;box-shadow:0 4px 0 var(--navy)}
+.cguide:active{transform:translateY(2px);box-shadow:0 2px 0 var(--navy)}
+
+/* coaching explainer card: navy with light text so it stands out from the orange hero */
+.cwhat{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:6px 6px 0 var(--yellow)}
+.cwhat .ck{background:var(--yellow);color:var(--navy)}
+.cwhat h3{color:#fff}
+.cwhat p{color:#eef0fa}
+.cwhat .cstats div{background:rgba(255,255,255,.08);border-color:rgba(255,210,63,.55)}
+.cwhat .cstats b{color:var(--yellow)}
+.cwhat .cstats span{color:#dfe3f5}
+.cwhat .cpk div{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3)}
+.cwhat .cpk div.best{background:rgba(255,210,63,.16);border-color:var(--yellow)}
+.cwhat .cpk b,.cwhat .cpk em{color:#fff}
+.cwhat .cpk span{color:#dfe3f5}
+.cwhat .cmore{color:var(--yellow)}
 </style>
 
 <header class="gut">
   <div class="col">
     <a href="https://cadenza-london.com" target="_blank" rel="noopener" aria-label="Cadenza London official website"><img src="logo-circle.png" alt=""></a>
-    <div class="nm"><b>Exam-Ready Course</b><span>Cadenza London Music Academy</span></div>
+    <div class="nm"><b id="hdrName">Exam-Ready Course</b><span>Cadenza London Music Academy</span></div>
   </div>
 </header>
 
 <section class="hero gut" id="hero">
   <div class="col">
-    <span class="pill">Step 2 of 4 · Screening videos</span>
-    <h1>Send Eric your <em>exam pieces.</em></h1>
-    <p class="lead">Eric listens to every recording before he confirms a place on the course. Send them on this page before the deadline.</p>
+    <span class="pill" id="heroPill">Step 2 of 4 · Screening videos</span>
+    <h1 id="heroH1">Send Eric your <em>exam pieces.</em></h1>
+    <p class="lead" id="heroLead">Eric listens to every recording before he confirms a place on the course. Send them on this page before the deadline.</p>
 
     <div class="deadline" id="dueBox">
       <div class="dtop">
@@ -243,6 +423,23 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
       <b class="dday" id="dueDay"></b>
       <span class="dtime" id="dueTime"></span>
       <p>If we haven't received your videos by then, your place is released to the next family.</p>
+    </div>
+
+    <div class="cwhat" id="coachWhat" hidden>
+      <span class="ck">Online Master Coaching</span>
+      <h3>What is Online Coaching?</h3>
+      <p>Send Eric a video of your playing from home. He watches it and tells you exactly what to fix, so you walk into your exam knowing where you stand.</p>
+      <div class="cstats">
+        <div><b>100%</b><span>exam pass rate</span></div>
+        <div><b>200+</b><span>Merit or Distinction</span></div>
+        <div><b>Within 5%</b><span>his predicted marks vs real results</span></div>
+        <div><b>15+ yrs</b><span>teaching exam candidates</span></div>
+      </div>
+      <div class="cpk">
+        <div><b>Single Piece Check</b><span>One piece · notes + video reply</span><em>from £15</em></div>
+        <div class="best"><b>Full Exam Check</b><span>All 4 pieces · predicted mark · practice plan</span><em>from £49</em></div>
+      </div>
+      <a href="#what-coaching" class="js-what cmore">Why Eric's marking is accurate &amp; full price list →</a>
     </div>
 
     <div class="need">
@@ -257,8 +454,19 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
 
     <div class="coach">
       <b class="h">Not all four pieces ready yet?</b>
-      <p>No problem. Send Eric the pieces you have now. For any piece that isn't ready, send him your video and let him fast-track it for you in an <b>Online Coaching</b> session.</p>
-      <a href="https://cadenza-london.com/master-feedback" target="_blank" rel="noopener">Online Coaching <span aria-hidden="true">→</span></a>
+      <p>No problem. Send Eric the pieces you have now. For any piece that isn't ready, send him your video and let him fast-track it for you in an <b>Online Master Coaching</b> session.</p>
+      <div class="coachacts"><a href="#up" class="js-guide" data-at="0">Show me how to use Online Coaching <span aria-hidden="true">→</span></a><a class="more js-what" href="#what-coaching">What is Online Coaching?</a></div>
+    </div>
+
+    <div class="csteps" id="coachSteps" hidden>
+      <h3>How to send Eric your video</h3>
+      <ol>
+        <li><b>1</b><span><b>Add your piece:</b> type its name, choose the video, add score photos if you have them.</span></li>
+        <li><b>2</b><span><b>Choose your package:</b> one piece, or a Full Exam Check of all 4.</span></li>
+        <li><b>3</b><span><b>Tick, upload, then pay</b> securely with Stripe. Welcome code? Enter it there.</span></li>
+        <li><b>4</b><span><b>Get Eric's feedback</b> by email within 5 days.</span></li>
+      </ol>
+      <a href="#up" class="js-guide cguide" data-at="0">Guide me step by step <span aria-hidden="true">→</span></a>
     </div>
 
     <a class="btn btn-go" href="#up">Start uploading <span aria-hidden="true">↓</span></a>
@@ -287,9 +495,9 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
       <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
       <div class="field"><label for="student">Student's name</label><input id="student" name="student" required></div>
       <div class="field"><label for="grade">Exam grade</label>
-        <select id="grade" name="grade" required><option value="">Choose a grade</option><option>Grade 1</option><option>Grade 2</option><option>Grade 3</option><option>Grade 4</option><option>Grade 5</option><option>Grade 6</option><option>Grade 7</option><option>Grade 8</option></select></div>
+        <select id="grade" name="grade" required><option value="">Choose a grade</option><option>Grade 1</option><option>Grade 2</option><option>Grade 3</option><option>Grade 4</option><option>Grade 5</option><option>Grade 6</option><option>Grade 7</option><option>Grade 8</option><option>Diploma (ARSM, ATCL or similar)</option></select></div>
       <div class="field"><label for="board">Exam board</label>
-        <select id="board" name="board" required><option value="">Choose an exam board</option><option>ABRSM Performance Grade</option><option>Trinity Digital Grade (Repertoire-only)</option><option>Trinity Digital Grade (Technical Work)</option><option>Not sure yet</option></select></div>
+        <select id="board" name="board" required><option value="">Choose an exam board</option><option>ABRSM Performance Grade</option><option>Trinity Digital Grade (Repertoire-only)</option><option>Trinity Digital Grade (Technical Work)</option><option>Not sure yet</option><option>Not taking an exam</option></select></div>
       </div>
       <p class="example" id="exampleNote" hidden>Preview: example details. On the live page they come from the family's registration link.</p>
 
@@ -299,17 +507,30 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
 
       <div class="coach" id="coachForm" hidden>
         <b class="h">Not ready with <span id="coachWhich">the other pieces</span>?</b>
-        <p>Send Eric your video and let him fast-track it for you in an Online Coaching session.</p>
-        <a href="https://cadenza-london.com/master-feedback" target="_blank" rel="noopener">Book Online Coaching <span aria-hidden="true">→</span></a>
+        <p>Send Eric your video and let him fast-track it for you in an Online Master Coaching session.</p>
+        <div class="coachacts"><a href="#want" class="js-guide" data-at="4">Show me how to use Online Coaching <span aria-hidden="true">→</span></a><a class="more js-what" href="#what-coaching">What is Online Coaching?</a></div>
       </div>
 
       <p class="note" id="wifiNote">On a phone, use Wi-Fi if you can. Four videos can take 20–40 minutes, and you'll need to keep this page open.</p>
 
-      <div class="sh"><span class="sn">3</span><div><h3 id="step3h">Agree and upload</h3><p>Tick the box, then tap the yellow button to send everything.</p></div></div>
+      <div class="sh"><span class="sn">3</span><div><h3 id="step3h">Choose, agree and upload</h3><p>Pick what you'd like from Eric, tick the box, then tap the yellow button.</p></div></div>
+
+      <fieldset class="want" id="want">
+        <legend>What would you like from Eric?</legend>
+        <label class="wopt" id="wantCourse"><input type="radio" name="want" value="course" checked><div><b>In-Person 4-Week Digital Exam Ready Course</b><span>Eric checks your videos, then confirms your place on the course.</span></div></label>
+        <label class="wopt"><input type="radio" name="want" value="coaching"><div><b>Online Master Coaching</b><span>Not quite ready? Eric reviews your video online and tells you exactly what to work on.</span></div></label>
+        <div class="pkgs" id="pkgs" hidden>
+          <label><input type="radio" name="pkg" value="Single Piece Check" checked><span>Single Piece Check<small>One piece · written notes + short video reply from Eric</small></span><em id="priceSingle">from £15</em></label>
+          <label><input type="radio" name="pkg" value="Full Exam Check"><span>Full Exam Check<small>All 4 pieces marked like the real exam · predicted mark · practice plan</small></span><em id="priceFull">from £49</em></label>
+          <p class="pkgnote" id="pkgNote">Prices depend on the exam grade above.</p>
+          <p class="pkgnote">🎁 Have a 20% welcome code? Enter it on the payment page.</p>
+          <a href="#what-coaching" class="js-what" style="font-size:.85rem;font-weight:700;color:var(--gold-deep)">What's included in each package? →</a>
+        </div>
+      </fieldset>
 
       <label class="consent" for="consentBox">
         <input type="checkbox" id="consentBox" name="consent" required>
-        <span id="consentText">I'm the student's parent or guardian (or the student, aged 18 or over). I agree to these videos and score photos being used <b>only</b> for Eric Chung to assess the student for the Cadenza Digital Exam Ready Course. They won't be shared or published, and they are <b>deleted automatically after 90 days</b>.</span>
+        <span id="consentText">I'm the student's parent or guardian (or the student, aged 18 or over). I agree to these videos and score photos being used <b>only</b> for Eric Chung to assess the student for the Cadenza Digital Exam Ready Course or to give Online Master Coaching feedback. They won't be shared or published, and they are <b>deleted automatically after 90 days</b>.</span>
       </label>
 
       <details class="acc">
@@ -343,6 +564,11 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
         <li><b>We email you</b> to confirm the place and the group dates.</li>
         <li><b>No more reminders.</b> Your place is held while Eric reviews.</li>
       </ol>
+      <div class="paybox" id="payBox" hidden>
+        <b class="h" id="payTitle">Last step: pay for your coaching</b>
+        <a class="btn-pay" id="payBtn" href="#" target="_blank" rel="noopener">Pay securely with Stripe <span aria-hidden="true">→</span></a>
+        <small id="payNote">Card, Apple Pay or Google Pay. Eric starts on your feedback as soon as payment is in.</small>
+      </div>
       <a class="btn btn-light" href="https://cadenza-london.com" target="_blank" rel="noopener">Back to the official website</a>
     </div>
 
@@ -381,6 +607,78 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
   <input name="name"><input name="email"><input name="student"><input name="grade"><input name="board"><input name="upload_deadline"><input name="consent"><input name="piece1_title"><input name="piece1_video"><input name="piece1_score"><input name="piece2_title"><input name="piece2_video"><input name="piece2_score"><input name="piece3_title"><input name="piece3_video"><input name="piece3_score"><input name="piece4_title"><input name="piece4_video"><input name="piece4_score">
 </form>
 
+<div class="chat" id="chat" role="dialog" aria-live="polite" aria-label="Message from Eric" hidden>
+  <img class="av" src="eric.jpg" alt="Eric Chung">
+  <div class="bub">
+    <button class="x" type="button" id="chatX" aria-label="Close">×</button>
+    <span class="who">Eric</span>
+    <p>Hi! 👋 Not sure your pieces are ready yet? Find out where you're at with my <b>Online Coaching</b>: send me your video and I'll tell you exactly what to work on.</p>
+    <div class="acts"><a href="#want" id="chatGo">Try Online Coaching →</a><button type="button" id="chatLater">Maybe later</button></div>
+  </div>
+</div>
+
+<div class="tour" id="tour" role="dialog" aria-live="polite" aria-label="Online Coaching guide" hidden>
+  <div class="top"><img src="eric.jpg" alt=""><span class="stp" id="tourStep">Step 1 of 4</span><span class="dots" id="tourDots"><i></i><i></i><i></i><i></i></span></div>
+  <h4 id="tourTitle"></h4>
+  <p id="tourText"></p>
+  <div class="acts"><button type="button" class="ghost" id="tourSkip">Close</button><button type="button" class="ghost" id="tourBack">Back</button><button type="button" class="next" id="tourNext">Next →</button></div>
+</div>
+
+<div class="sheet-bg" id="whatBg" hidden></div>
+<div class="sheet" id="whatSheet" role="dialog" aria-modal="true" aria-labelledby="whatTitle" hidden tabindex="-1">
+  <div class="grab" aria-hidden="true"></div>
+  <button class="x" type="button" id="whatX" aria-label="Close">×</button>
+  <h2 id="whatTitle">What is Online Coaching?</h2>
+  <p class="sub">Send Eric a video of your playing from home. He watches it and tells you exactly what to fix, so you walk into your exam (or film your exam video) knowing where you stand.</p>
+
+  <div class="why">
+    <h3 style="margin-top:4px">Why parents trust Eric's marking</h3>
+    <div class="stats">
+      <div><b>100%</b><span>exam pass rate</span></div>
+      <div><b>200+</b><span>students with Merit or Distinction</span></div>
+      <div><b>Within 5%</b><span>his predicted marks vs real ABRSM &amp; Trinity results</span></div>
+      <div><b>15+ yrs</b><span>teaching exam candidates</span></div>
+    </div>
+    <ul class="ticks">
+      <li><b>He marks like an examiner.</b> Eric uses the same criteria the exam boards use (pitch, timing, tone, shape and performance), so his mark tells you where you really stand, not just "sounds nice".</li>
+      <li><b>You find out before it counts.</b> Fix the weak spots now, instead of discovering them in your result after paying the exam fee.</li>
+      <li><b>Conservatoire-trained.</b> Royal Conservatoire of Antwerp and the Hong Kong Academy for Performing Arts, and he runs exam-standard mock exams for every Cadenza student.</li>
+    </ul>
+  </div>
+
+  <h3>How it works</h3>
+  <ol class="how">
+    <li><b class="n">1</b><span><b>Film your piece</b> on your phone. One take, like the real exam.</span></li>
+    <li><b class="n">2</b><span><b>Upload it here</b> and choose your package.</span></li>
+    <li><b class="n">3</b><span><b>Pay securely</b> with Stripe (card, Apple Pay or Google Pay).</span></li>
+    <li><b class="n">4</b><span><b>Get Eric's feedback</b> by email within 5 days: what's working, what to fix, and how to practise it.</span></li>
+  </ol>
+
+  <h3>Choose your package</h3>
+  <div class="pk">
+    <div><b class="t">Single Piece Check</b><span class="d">One piece reviewed · written notes + a short video reply from Eric. Ideal for a piece you're unsure about.</span></div>
+    <div class="best"><span class="tag2">Best value</span><b class="t">Full Exam Check</b><span class="d">All 4 exam pieces marked like the real exam, with a predicted mark, video reply and practice plan.</span></div>
+  </div>
+
+  <h3>Prices by exam grade</h3>
+  <table>
+    <thead><tr><th>Grade</th><th class="r">Single piece</th><th class="r">Full Exam Check</th></tr></thead>
+    <tbody>
+      <tr><td>Grade 1–4</td><td class="r">£15</td><td class="r"><b>£49</b></td></tr>
+      <tr><td>Grade 5–6</td><td class="r">£20</td><td class="r"><b>£69</b></td></tr>
+      <tr><td>Grade 7–8</td><td class="r">£25</td><td class="r"><b>£89</b></td></tr>
+      <tr><td>Diploma</td><td class="r">£35</td><td class="r"><b>£129</b></td></tr>
+    </tbody>
+  </table>
+  <p class="fine">Need it sooner? 48-hour express is +£10.</p>
+
+  <div class="gift">🎁 <b>20% off your first session:</b> join the Cadenza London mailing list on our website and we'll send you a one-time welcome code to use at payment.</div>
+
+  <button class="go2" type="button" id="whatGo">Show me how to use Online Coaching →</button>
+</div>
+
+<div class="tpoint" id="tpoint" aria-hidden="true"><i></i><svg viewBox="0 0 54 54"><path d="M15 6c2.5 0 4.5 2 4.5 4.5v13l1.6-.3c2.4 0 4.3 1.6 4.8 3.8 1-.7 2.2-1.1 3.4-1.1 2.3 0 4.2 1.4 4.9 3.4.9-.5 1.9-.8 3-.8 3.3 0 6 2.7 6 6v6.5C43.2 48 37.9 52 31.8 52h-4.1c-4.6 0-8.8-2.4-11.2-6.3l-7.6-12.5c-1.2-2-.6-4.6 1.4-5.8 1.7-1 3.9-.7 5.2.7l-.1-17.6C10.5 8 12.5 6 15 6z" fill="#fff" fill-opacity=".92" stroke="#1f2a5c" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+
 <div class="sticky" id="sticky" aria-hidden="true">
   <div class="col">
     <span><b id="stickyN">0 of 4 pieces ready</b><i id="stickyHint" style="font-style:normal">Add at least one piece</i></span>
@@ -399,6 +697,11 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
 (function(){
   /* ===== LIVE CONFIG: set this to the upload address Cloudflare gives you ===== */
   var UPLOAD_API = 'https://cadenza-exam-upload.jessiemovement.workers.dev';
+  // Online Master Coaching prices in pence, by grade band (the upload server uses the same table to charge)
+  var PRICES={g1_4:{single:1500,full:4900},g5_6:{single:2000,full:6900},g7_8:{single:2500,full:8900},diploma:{single:3500,full:12900}};
+  function bandOf(g){ g=String(g||''); if(/diploma|arsm|atcl|ltcl|lrsm|ftcl|frsm|drsm/i.test(g)) return 'diploma'; var n=parseInt((g.match(/\d/)||['1'])[0],10); return n<=4?'g1_4':n<=6?'g5_6':'g7_8'; }
+  function gbp(p){ return '£'+(p/100).toFixed(p%100?2:0); }
+  var subId = '';
   var MAX_VIDEO = 4 * 1024 * 1024 * 1024;  // 4 GB per video
   var MAX_SCORE = 20 * 1024 * 1024;        // 20 MB per score photo/PDF
   var MAX_SCORE_FILES = 10;                // per piece
@@ -417,6 +720,23 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
   /* ---------- prefill from the email link: ?rid=&t=&name=&email=&student=&grade=&board=&due= ---------- */
   var q=new URLSearchParams(location.search);
   var reg={rid:q.get('rid')||'',token:q.get('t')||'',name:q.get('name')||'',email:q.get('email')||'',student:q.get('student')||'',grade:q.get('grade')||'',board:q.get('board')||'',due:q.get('due')||''};
+  /* ---------- coaching mode: /digital-exam-ready/upload.html?mode=coaching&pkg=deep ---------- */
+  var COACH_MODE=q.get('mode')==='coaching';
+  if(COACH_MODE){
+    document.title='Send Eric your video | Cadenza Online Master Coaching';
+    $('hdrName').textContent='Online Master Coaching';
+    $('heroPill').textContent='Online Master Coaching';
+    $('heroH1').innerHTML='Send Eric your <em>video.</em>';
+    $('heroLead').textContent='Upload a video of your playing. Eric watches it and tells you exactly what to work on, then you pay securely with Stripe.';
+    $('needVid').innerHTML='<b>At least 1 video</b>, one for each piece you want feedback on (up to 4)';
+    var hc=document.querySelector('.hero .coach'); if(hc) hc.hidden=true;
+    var cb=document.querySelector('#chat .bub p'); if(cb) cb.innerHTML='Hi! 👋 Not sure how it works? Let me show you with a <b>step-by-step guide</b>. I\'ll point to exactly what to tap!';
+    var cg=$('chatGo'); if(cg) cg.innerHTML='Show me the steps →';
+    $('wantCourse').hidden=true; $('coachWhat').hidden=false; $('coachSteps').hidden=false; $('dueBox').hidden=true;
+    var wc=document.querySelector('input[name="want"][value="coaching"]'); if(wc) wc.checked=true;
+    var PK={single:'Single Piece Check',full:'Full Exam Check',quick:'Single Piece Check',deep:'Full Exam Check',master:'Full Exam Check'}, want=PK[(q.get('pkg')||'').toLowerCase()];
+    if(want){ var pr=document.querySelector('input[name="pkg"][value="'+want+'"]'); if(pr) pr.checked=true; }
+  }
   if(!(reg.email&&reg.student) && sandbox){
     reg.name='Jane Smith'; reg.email='jane@example.com'; reg.student='Amy Smith'; reg.grade='Grade 5'; reg.board='ABRSM Performance Grade';
     reg.due=new Date(Date.now()+72*3600e3).toISOString();
@@ -457,7 +777,7 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
     el.classList.toggle('urgent',ms<24*3600e3);
   }
   setInterval(countdown,60e3);
-  if(reg.due) setDue(reg.due); else $('dueBox').hidden=true;
+  if(reg.due&&!COACH_MODE) setDue(reg.due); else $('dueBox').hidden=true;
 
   if(LINK){
     $('needVid').innerHTML='<b>4 video links</b>, one for each exam piece';
@@ -467,7 +787,7 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
     $('step3h').textContent='Agree and send';
     send.innerHTML='Send all 4 pieces <span aria-hidden="true">→</span>';
     $('sendHint').textContent='You\'ll see a confirmation screen straight away.';
-    $('consentText').innerHTML='I\'m the student\'s parent or guardian (or the student, aged 18 or over). I agree to these videos and score photos being used <b>only</b> for Eric Chung to assess the student for the Cadenza Digital Exam Ready Course. We won\'t share or publish them, and we <b>delete the links from our records after 90 days</b>.';
+    $('consentText').innerHTML='I\'m the student\'s parent or guardian (or the student, aged 18 or over). I agree to these videos and score photos being used <b>only</b> for Eric Chung to assess the student for the Cadenza Digital Exam Ready Course or to give Online Master Coaching feedback. We won\'t share or publish them, and we <b>delete the links from our records after 90 days</b>.';
     $('accSum').textContent='How we use your links';
     $('accBody').innerHTML='<p>Only Eric opens your links. We never share them or post your videos anywhere.</p><p>Your videos stay in your own YouTube or Google Drive, so you control them. Once Eric has reviewed them, you can delete them or switch off sharing.</p><p>We delete the links from our records 90 days after you send them. Email music@cadenza-london.com to have them removed sooner.</p>';
     $('privList').innerHTML='<li><p><b>Only Eric watches them.</b> Your links are never published or shared.</p></li><li><p><b>You stay in control.</b> Unlisted videos only play for people with the link, and you can delete them any time.</p></li><li><p><b>Removed after 90 days.</b> We delete the links from our records, or sooner if you ask.</p></li>';
@@ -554,7 +874,8 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
     $('stickyGo').firstChild.textContent=go?'Go to upload ':'Continue ';
     $('stickyHint').textContent=go?'Tick the consent box, then upload':(half?'Finish the piece you started':'Add at least one piece');
     var miss=pieces.filter(function(p){ return !isReady(p); }).map(function(p){ return p.n; });
-    $('coachForm').hidden=!(c>=1&&c<4);
+    $('coachForm').hidden=COACH_MODE||!(c>=1&&c<4);
+    if(typeof syncPrice==='function'&&$('priceSingle')) syncPrice();
     if(miss.length) $('coachWhich').textContent=(miss.length===1?'piece ':'pieces ')+miss.join(miss.length===2?' and ':', ').replace(/, (\d)$/,' and $1');
     send.innerHTML=(c>=1&&c<4?'Upload '+c+(c===1?' piece':' pieces'):(c===4?'Upload all 4 pieces':'Upload my pieces'))+' <span aria-hidden="true">→</span>';
   }
@@ -591,7 +912,7 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
     });
   }
   function liveUpload(meta){
-    return api('/api/uploads/start',meta).then(function(sub){
+    return api('/api/uploads/start',meta).then(function(sub){ subId=sub.id||'';
       var chain=Promise.resolve();
       chosen().forEach(function(p){
         var acc={done:0,total:p.video.size+p.scores.reduce(function(a,f){return a+f.size;},0)};
@@ -614,6 +935,122 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
     return chain.then(function(){ return new Promise(function(r){ setTimeout(r,300); }); });
   }
 
+
+  /* ---------- what would you like: course or Online Master Coaching ---------- */
+  function wantVal(){ var r=document.querySelector('input[name="want"]:checked'); return r?r.value:'course'; }
+  function choiceText(){ if(wantVal()!=='coaching') return 'In-Person 4-Week Digital Exam Ready Course'; var k=document.querySelector('input[name="pkg"]:checked'); return 'Online Master Coaching · '+(k?k.value:'Single Piece Check'); }
+  function priceQuote(){
+    var g=$('grade').value, b=PRICES[bandOf(g)], full=((document.querySelector('input[name="pkg"]:checked')||{}).value==='Full Exam Check');
+    var n=Math.max(1,readyCountSafe());
+    return {known:!!g, single:b.single, full:b.full, isFull:full, n:n, total:full?b.full:b.single*n};
+  }
+  function readyCountSafe(){ try{ return readyCount(); }catch(e){ return 1; } }
+  function syncPrice(){
+    var q=priceQuote();
+    $('priceSingle').textContent=q.known?gbp(q.single)+' per piece':'from £15';
+    $('priceFull').textContent=q.known?gbp(q.full):'from £49';
+    $('pkgNote').textContent=!q.known?'Prices depend on the exam grade above.':q.isFull?'Full Exam Check for '+$('grade').value+': '+gbp(q.full)+'. Best value when you send all 4 pieces.':'Single Piece Check for '+$('grade').value+': '+gbp(q.single)+' × '+q.n+' piece'+(q.n>1?'s':'')+' = '+gbp(q.total)+'.';
+  }
+  function syncWant(){ $('pkgs').hidden=wantVal()!=='coaching'; syncPrice(); }
+  $('grade').addEventListener('change',syncPrice);
+  document.querySelectorAll('input[name="pkg"]').forEach(function(r){ r.addEventListener('change',syncPrice); });
+  document.querySelectorAll('input[name="want"]').forEach(function(r){ r.addEventListener('change',syncWant); });
+  syncWant();
+
+  /* ---------- Eric's chat bubble: on first touch of piece 1, or after 2s of scrolling ---------- */
+  (function(){
+    var chat=$('chat'), shown=false, timer=null, KEY='cadenzaChatSeen';
+    if(COACH_MODE) KEY='cadenzaCoachChatSeen';
+    function seen(){ if(sandbox) return false; try{ return sessionStorage.getItem(KEY)==='1'; }catch(e){ return false; } }
+    function mark(){ try{ sessionStorage.setItem(KEY,'1'); }catch(e){} }
+    function placeAbove(){ var st=$('sticky'); var h=st&&st.classList.contains('show')?st.offsetHeight:0; chat.style.setProperty('--sticky-h',h+'px'); }
+    function show(){
+      if(shown||seen()||form.hidden||busy||(wantVal()==='coaching'&&!COACH_MODE)) return; shown=true; mark();
+      placeAbove(); chat.hidden=false;
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ chat.classList.add('show'); }); });
+    }
+    function hide(){ chat.classList.remove('show'); setTimeout(function(){ chat.hidden=true; },220); }
+    window.hideChat=hide;
+    window.addEventListener('scroll',function(){ if(!timer&&!shown) timer=setTimeout(show,2000); placeAbove(); },{passive:true});
+    window.addEventListener('resize',placeAbove);
+    $('pieces').addEventListener('focusin',function(e){ var f=$('pieces').firstElementChild; if(f&&f.contains(e.target)) show(); });
+    $('pieces').addEventListener('click',function(e){ var f=$('pieces').firstElementChild; if(f&&f.contains(e.target)) show(); });
+    $('chatX').addEventListener('click',hide);
+    $('chatLater').addEventListener('click',hide);
+    $('chatGo').classList.add('js-guide'); $('chatGo').setAttribute('data-at','0');
+  })();
+
+  /* ---------- guided tour: step by step to Online Coaching, with a moving pointer ---------- */
+  function pickCoaching(){ var c=document.querySelector('input[name="want"][value="coaching"]'); if(c&&!c.checked){ c.checked=true; syncWant(); } }
+  var TOUR=[
+    {t:'Name your first piece', x:'Tap here and type the piece name and composer.', el:function(){ return $('pieces').children[0]; }, pt:function(){ return $('title1'); }},
+    {t:'Choose its video', x:'Tap Choose and pick the video from your phone.', el:function(){ return $('vp1'); }, pt:function(){ return $('vp1').querySelector('.go')||$('vp1'); }},
+    {t:'Add the score (optional)', x:'Have photos of the music? Tap Add so Eric can follow along. If not, tap Next.', el:function(){ return $('sp1'); }, pt:function(){ return $('sp1').querySelector('.go')||$('sp1'); }},
+    {t:'Another piece? (optional)', x:'Want feedback on a second piece too? Add it here the same way. If not, tap Next.', el:function(){ return $('pieces').children[1]; }, pt:function(){ return $('title2'); }},
+    {t:'Pick Online Master Coaching', x:'We\'ve ticked it for you. This tells Eric you want his feedback online.', el:function(){ return $('want'); }, pt:function(){ return document.querySelector('input[name="want"][value="coaching"]'); }, go:pickCoaching},
+    {t:'Choose your package', x:'One piece, or a Full Exam Check of all 4 pieces. The price shows once your grade is chosen.', el:function(){ return $('pkgs'); }, pt:function(){ return document.querySelector('input[name="pkg"]:checked')||document.querySelector('input[name="pkg"]'); }, go:pickCoaching},
+    {t:'Tick to agree', x:'Tick the box to say you\'re happy for Eric to watch your videos.', el:function(){ return $('consentBox').closest('label'); }, pt:function(){ return $('consentBox'); }},
+    {t:'Upload, then pay', x:'Tap the yellow button. When the upload finishes, you\'ll get a Stripe button to pay. Got a welcome code? Enter it there.', el:function(){ return $('send'); }, pt:function(){ return $('send'); }}
+  ];
+  var tourI=-1, tourOn=null, tourPt=null, ptTimer=null;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function movePointer(){
+    var tp=$('tpoint'); if(!tourPt||tourI<0){ tp.classList.remove('show'); return; }
+    var r=tourPt.getBoundingClientRect(); if(!r.width&&!r.height){ tp.classList.remove('show'); return; }
+    var x=Math.min(r.left+Math.min(r.width*0.5,140)-8, innerWidth-50), y=r.top+Math.min(r.height*0.5,26)-4;
+    tp.style.transform='translate('+Math.round(x)+'px,'+Math.round(y)+'px)'; tp.classList.add('show');
+  }
+  function tapPointer(){ var tp=$('tpoint'); tp.classList.remove('tap'); void tp.offsetWidth; tp.classList.add('tap'); }
+  function tourShow(i){
+    var step=TOUR[i]; if(!step) return endTour();
+    tourI=i; if(step.go) step.go();
+    if(tourOn) tourOn.classList.remove('tour-on');
+    tourOn=step.el(); tourPt=step.pt?step.pt():tourOn;
+    $('tourStep').textContent='Step '+(i+1)+' of '+TOUR.length;
+    $('tourTitle').textContent=step.t; $('tourText').textContent=step.x;
+    var dots=$('tourDots'); dots.innerHTML=''; for(var k=0;k<TOUR.length;k++){ var d=document.createElement('i'); if(k<=i) d.className='on'; dots.appendChild(d); }
+    $('tourBack').hidden=i===0;
+    $('tourNext').textContent=i===TOUR.length-1?'Got it ✓':'Next →';
+    if(tourOn){ tourOn.classList.add('tour-on');
+      requestAnimationFrame(function(){
+        var r=(tourPt||tourOn).getBoundingClientRect(), y=r.top+window.scrollY-Math.max(90,innerHeight*0.28);
+        window.scrollTo({top:Math.max(0,y),behavior:reduce?'auto':'smooth'});
+        clearTimeout(ptTimer); ptTimer=setTimeout(function(){ keepClear(); movePointer(); setTimeout(tapPointer,560); },reduce?30:480); }); }
+  }
+  // if the card would sit on top of what to tap, nudge the page so the target sits above the card
+  function keepClear(){
+    if(!tourPt) return; var c=$('tour').getBoundingClientRect(), r=tourPt.getBoundingClientRect();
+    if(r.bottom>c.top-16){ window.scrollBy({top:r.bottom-(c.top-16)+8,behavior:'auto'}); }
+    r=tourPt.getBoundingClientRect(); if(r.top<70){ window.scrollBy({top:r.top-70,behavior:'auto'}); }
+  }
+  function startTour(at){ var t=$('tour'); t.hidden=false; document.body.classList.add('touring'); tourShow(at||0); requestAnimationFrame(function(){ requestAnimationFrame(function(){ t.classList.add('show'); }); }); }
+  function endTour(){ var t=$('tour'); t.classList.remove('show'); document.body.classList.remove('touring'); if(tourOn) tourOn.classList.remove('tour-on'); tourOn=null; tourPt=null; tourI=-1; $('tpoint').classList.remove('show'); setTimeout(function(){ t.hidden=true; },220); }
+  $('tourNext').addEventListener('click',function(){ if(tourI>=TOUR.length-1) endTour(); else tourShow(tourI+1); });
+  $('tourBack').addEventListener('click',function(){ if(tourI>0) tourShow(tourI-1); });
+  $('tourSkip').addEventListener('click',endTour);
+  window.addEventListener('scroll',function(){ if(tourI>=0) movePointer(); },{passive:true});
+  window.addEventListener('resize',function(){ if(tourI>=0) movePointer(); });
+  // "Not ready yet?" buttons start the guide instead of leaving the page
+  [].forEach.call(document.querySelectorAll('.js-guide'),function(btn){ btn.addEventListener('click',function(e){
+    e.preventDefault(); if(window.hideChat) window.hideChat(); var at=+(btn.getAttribute('data-at')||0);
+    if(at===0){ $('up').scrollIntoView({behavior:reduce?'auto':'smooth'}); setTimeout(function(){ startTour(0); },reduce?0:450); } else startTour(at);
+  }); });
+
+  /* ---------- "What is Online Coaching?" sheet ---------- */
+  (function(){
+    var bg=$('whatBg'), sh=$('whatSheet'), lastFocus=null;
+    function open(e){ if(e) e.preventDefault(); if(window.hideChat) window.hideChat(); if(tourI>=0) endTour();
+      lastFocus=document.activeElement; bg.hidden=false; sh.hidden=false; document.documentElement.style.overflow='hidden';
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ bg.classList.add('show'); sh.classList.add('show'); sh.focus({preventScroll:true}); }); }); }
+    function close(){ bg.classList.remove('show'); sh.classList.remove('show'); document.documentElement.style.overflow='';
+      setTimeout(function(){ bg.hidden=true; sh.hidden=true; },320); if(lastFocus&&lastFocus.focus) lastFocus.focus({preventScroll:true}); }
+    window.openWhat=open; window.closeWhat=close;
+    [].forEach.call(document.querySelectorAll('.js-what'),function(a){ a.addEventListener('click',open); });
+    $('whatX').addEventListener('click',close); bg.addEventListener('click',close);
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!sh.hidden) close(); });
+    $('whatGo').addEventListener('click',function(){ close(); var at=COACH_MODE?0:0;
+      setTimeout(function(){ $('up').scrollIntoView({behavior:reduce?'auto':'smooth'}); setTimeout(function(){ startTour(at); },reduce?0:450); },330); });
+  })();
   form.addEventListener('submit',function(e){
     e.preventDefault(); showErr('');
     var miss=['name','email','student','grade','board'].filter(function(k){ return !$(k).value.trim(); });
@@ -636,9 +1073,10 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
     if(LINK) return sendLinks();
     if(!isLive && !sandbox){ showErr('Online upload isn\'t switched on yet. Please email music@cadenza-london.com and we\'ll help you send your pieces.'); return; }
     total=chosen().reduce(function(a,p){ return a+p.video.size+p.scores.reduce(function(b,f){return b+f.size;},0); },0)||1; sent=0;
+    if(window.hideChat) window.hideChat(); if(tourI>=0) endTour();
     busy=true; stickyShow(); send.disabled=true; send.textContent='Uploading…'; $('prog').hidden=false;
     form.querySelectorAll('input,select').forEach(function(x){ x.disabled=true; });
-    var meta={rid:reg.rid,token:reg.token,due:reg.due,name:$('name').value,email:$('email').value,student:$('student').value,grade:$('grade').value,board:$('board').value,consent:true,
+    var meta={rid:reg.rid,token:reg.token,due:reg.due,name:$('name').value,email:$('email').value,student:$('student').value,grade:$('grade').value,board:$('board').value,consent:true,choice:choiceText(),
       pieces:chosen().map(function(p){ return {piece:p.n,title:$('title'+p.n).value.trim(),video:{filename:p.video.name,size:p.video.size},scores:p.scores.map(function(f){ return {filename:f.name,size:f.size}; })}; })};
     (isLive?liveUpload(meta):fakeUpload()).then(finish).catch(function(x){
       if(x&&(x.code==='released'||x.code==='withdrawn')) return showGone(x.code);
@@ -683,8 +1121,24 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
     fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:fd.toString()}).catch(function(){});
   }
   function finish(){
+    if(window.hideChat) window.hideChat(); if(tourI>=0) endTour();
     if(isLive) netlifyBackup();
     $('doneStudent').textContent=$('student').value; $('doneEmail').textContent=$('email').value;
+    if(wantVal()==='coaching'){
+      var d=$('done'), ol=d.querySelector('ol');
+      d.querySelector('h2').textContent='Videos received';
+      var q=priceQuote(), pkg=q.isFull?'Full Exam Check':'Single Piece Check';
+      if(ol) ol.innerHTML='<li><b>You chose Online Master Coaching: '+pkg+' ('+gbp(q.total)+').</b></li><li><b>Pay securely</b> with the button below. Got a welcome code? Enter it there for 20% off.</li><li><b>Eric sends your feedback</b> once payment is in.</li>';
+      $('payBox').hidden=false; $('payBtn').removeAttribute('href'); $('payBtn').setAttribute('aria-disabled','true');
+      $('payBtn').firstChild.textContent='Preparing secure payment… ';
+      var ready=function(url,total){ $('payBtn').href=url; $('payBtn').removeAttribute('aria-disabled'); $('payBtn').firstChild.textContent='Pay '+gbp(total)+' securely with Stripe '; };
+      if(sandbox){ $('payBtn').removeAttribute('target'); ready('#paid',q.total); $('payNote').textContent='Preview: the real button opens Stripe checkout.'; }
+      else fetch(UPLOAD_API+'/api/pay',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:subId})})
+        .then(function(r){ return r.json(); }).then(function(j){
+          if(j.url) ready(j.url,j.amount);
+          else { $('payBtn').hidden=true; $('payNote').textContent='We\'ll email you a secure payment link shortly.'; }
+        }).catch(function(){ $('payBtn').hidden=true; $('payNote').textContent='We\'ll email you a secure payment link shortly.'; });
+    }
     form.hidden=true; stickyShow(); $('before').hidden=true; $('done').hidden=false; $('demo').hidden=true;
     $('done').scrollIntoView({block:'start',behavior:'smooth'}); $('done').focus({preventScroll:true});
   }
@@ -697,6 +1151,19 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
   function route(){
     var h=location.hash.slice(1);
     if(h==='released'||h==='withdrawn') return showGone(h);
+    if(h.indexOf('pay=')===0){ form.hidden=true; $('before').hidden=true; $('gone').hidden=true; var d0=$('done'); d0.hidden=false;
+      d0.querySelector('h2').textContent='Opening secure payment…'; d0.querySelector('p').textContent='One moment, taking you to Stripe.'; var o0=d0.querySelector('ol'); if(o0) o0.hidden=true;
+      fetch(UPLOAD_API+'/api/pay',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:h.slice(4)})}).then(function(r){ return r.json(); })
+        .then(function(j){ if(j.url) location.href=j.url; else d0.querySelector('p').textContent='We couldn\'t open the payment page. Please email music@cadenza-london.com and we\'ll send you a link.'; })
+        .catch(function(){ d0.querySelector('p').textContent='We couldn\'t open the payment page. Please check your connection and try the link again.'; });
+      stickyShow(); return; }
+    if(h==='pay-later'){ form.hidden=true; $('before').hidden=true; $('gone').hidden=true; var d1=$('done'); d1.hidden=false;
+      d1.querySelector('h2').textContent='No problem'; d1.querySelector('p').textContent='Your videos are safe with Eric. Use the payment link in your email whenever you\'re ready.'; var o1=d1.querySelector('ol'); if(o1) o1.hidden=true; stickyShow(); return; }
+    if(h.indexOf('paid')===0){ var csm=h.match(/cs=(cs_[A-Za-z0-9_]+)/);
+      if(csm&&isLive) fetch(UPLOAD_API+'/api/pay/check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({cs:csm[1]})}).catch(function(){}); form.hidden=true; $('before').hidden=true; $('gone').hidden=true; var d=$('done'); d.hidden=false;
+      d.querySelector('h2').textContent='Payment received ✓';
+      d.querySelector('p').textContent='Thank you! Eric now has everything he needs and will send your feedback by email.';
+      var ol=d.querySelector('ol'); if(ol) ol.hidden=true; $('payBox').hidden=true; stickyShow(); return; }
     if(sandbox){ form.hidden=false; $('gone').hidden=true; $('hero').hidden=false; $('before').hidden=false; }
   }
   window.addEventListener('hashchange',route); route();
@@ -705,7 +1172,7 @@ footer a{color:var(--marigold);font-weight:800;text-decoration:none}
     fetch(UPLOAD_API+'/api/registrations/status?rid='+encodeURIComponent(reg.rid)+'&t='+encodeURIComponent(reg.token)).then(function(r){ return r.json(); }).then(function(j){
       if(j.status==='released'||j.status==='withdrawn') showGone(j.status);
       else if(j.status==='video_received'){ $('doneStudent').textContent=reg.student; $('doneEmail').textContent=reg.email; form.hidden=true; $('done').hidden=false; }
-      if(j.due) setDue(j.due);
+      if(j.due&&!COACH_MODE) setDue(j.due);
     }).catch(function(){});
   }
 })();
