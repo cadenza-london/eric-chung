@@ -9,7 +9,7 @@
 
 <!-- Open Graph / WhatsApp / iMessage / Facebook preview -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://cadenza-london.com">
+<meta property="og:url" content="https://cadenza-london.com/">
 <meta property="og:title" content="Cadenza London Music Academy · Piano &amp; Violin Lessons with Eric Chung">
 <meta property="og:description" content="Dedicated pianist & passionate music educator based in London. Bespoke piano & violin tuition for all ages and levels — nurturing students from first notes to competition stage.">
 <meta property="og:image" content="https://cadenza-london.com/IMG_2276.jpeg">
@@ -27,59 +27,160 @@
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
- "@type": [
-  "MusicSchool",
-  "LocalBusiness"
- ],
- "@id": "https://cadenza-london.com/#academy",
- "name": "Cadenza London Music Academy",
- "alternateName": "Cadenza London",
- "url": "https://cadenza-london.com/",
- "logo": "https://cadenza-london.com/sight-reading-club/logo-circle.png",
- "image": "https://cadenza-london.com/IMG_2276.jpeg",
- "description": "1-on-1 piano, violin, theory and aural lessons with Eric Chung in Colindale, North West London, and online. ABRSM and Trinity exam, diploma and competition preparation.",
- "telephone": "+44 7572 010370",
- "email": "music@cadenza-london.com",
- "priceRange": "From £35 per lesson",
- "address": {
-  "@type": "PostalAddress",
-  "addressLocality": "Colindale, London",
-  "postalCode": "NW9",
-  "addressRegion": "Greater London",
-  "addressCountry": "GB"
- },
- "areaServed": [
+ "@graph": [
   {
-   "@type": "City",
-   "name": "London"
+   "@type": [
+    "MusicSchool",
+    "LocalBusiness"
+   ],
+   "@id": "https://cadenza-london.com/#academy",
+   "name": "Cadenza London Music Academy",
+   "alternateName": "Cadenza London",
+   "url": "https://cadenza-london.com/",
+   "logo": "https://cadenza-london.com/sight-reading-club/logo-circle.png",
+   "image": "https://cadenza-london.com/IMG_2276.jpeg",
+   "description": "1-on-1 piano, violin, theory and aural lessons with Eric Chung in Colindale, North West London, and online. ABRSM and Trinity exam, diploma and competition preparation.",
+   "telephone": "+44 7572 010370",
+   "email": "music@cadenza-london.com",
+   "priceRange": "From £35 per lesson",
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Colindale, London",
+    "postalCode": "NW9",
+    "addressRegion": "Greater London",
+    "addressCountry": "GB"
+   },
+   "areaServed": [
+    {
+     "@type": "City",
+     "name": "London"
+    },
+    {
+     "@type": "Place",
+     "name": "Online, worldwide"
+    }
+   ],
+   "knowsLanguage": [
+    "en",
+    "yue"
+   ],
+   "founder": {
+    "@type": "Person",
+    "name": "Eric Chung",
+    "jobTitle": "Pianist, violinist and music teacher",
+    "alumniOf": [
+     {
+      "@type": "CollegeOrUniversity",
+      "name": "Royal Conservatoire Antwerp"
+     },
+     {
+      "@type": "CollegeOrUniversity",
+      "name": "The Hong Kong Academy for Performing Arts"
+     }
+    ]
+   },
+   "sameAs": [
+    "https://www.instagram.com/cadenza.london/",
+    "https://www.youtube.com/@eric-chungwl"
+   ],
+   "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Lessons, courses and clubs",
+    "itemListElement": [
+     {
+      "@type": "Offer",
+      "itemOffered": {
+       "@type": "Service",
+       "name": "1-on-1 piano lessons (in person in Colindale or online)",
+       "url": "https://cadenza-london.com/#pricing"
+      },
+      "priceSpecification": {
+       "@type": "PriceSpecification",
+       "minPrice": 35,
+       "priceCurrency": "GBP"
+      }
+     },
+     {
+      "@type": "Offer",
+      "itemOffered": {
+       "@type": "Service",
+       "name": "Online piano lessons",
+       "url": "https://cadenza-london.com/online-piano-lessons/"
+      },
+      "priceSpecification": {
+       "@type": "PriceSpecification",
+       "minPrice": 35,
+       "priceCurrency": "GBP"
+      }
+     },
+     {
+      "@type": "Offer",
+      "itemOffered": {
+       "@type": "Service",
+       "name": "1-on-1 violin lessons",
+       "url": "https://cadenza-london.com/#pricing"
+      },
+      "priceSpecification": {
+       "@type": "PriceSpecification",
+       "minPrice": 35,
+       "priceCurrency": "GBP"
+      }
+     },
+     {
+      "@type": "Offer",
+      "itemOffered": {
+       "@type": "Service",
+       "name": "Theory and aural lessons",
+       "url": "https://cadenza-london.com/#pricing"
+      },
+      "priceSpecification": {
+       "@type": "PriceSpecification",
+       "minPrice": 35,
+       "priceCurrency": "GBP"
+      }
+     },
+     {
+      "@type": "Offer",
+      "itemOffered": {
+       "@type": "Course",
+       "name": "Digital Exam Ready Course",
+       "url": "https://cadenza-london.com/digital-exam-ready/"
+      }
+     },
+     {
+      "@type": "Offer",
+      "itemOffered": {
+       "@type": "Course",
+       "name": "Online Sight-Reading Club",
+       "url": "https://cadenza-london.com/sight-reading-club/"
+      }
+     },
+     {
+      "@type": "Offer",
+      "itemOffered": {
+       "@type": "Service",
+       "name": "Online Coaching: video feedback on your playing",
+       "url": "https://cadenza-london.com/#feedback"
+      },
+      "priceSpecification": {
+       "@type": "PriceSpecification",
+       "minPrice": 15,
+       "priceCurrency": "GBP"
+      }
+     }
+    ]
+   }
   },
   {
-   "@type": "Place",
-   "name": "Online, worldwide"
-  }
- ],
- "knowsLanguage": [
-  "en",
-  "yue"
- ],
- "founder": {
-  "@type": "Person",
-  "name": "Eric Chung",
-  "jobTitle": "Pianist, violinist and music teacher",
-  "alumniOf": [
-   {
-    "@type": "CollegeOrUniversity",
-    "name": "Royal Conservatoire Antwerp"
+   "@type": "WebSite",
+   "@id": "https://cadenza-london.com/#website",
+   "url": "https://cadenza-london.com/",
+   "name": "Cadenza London Music Academy",
+   "publisher": {
+    "@id": "https://cadenza-london.com/#academy"
    },
-   {
-    "@type": "CollegeOrUniversity",
-    "name": "The Hong Kong Academy for Performing Arts"
-   }
-  ]
- },
- "sameAs": [
-  "https://www.instagram.com/cadenza.london/",
-  "https://www.youtube.com/@eric-chungwl"
+   "inLanguage": "en-GB"
+  }
  ]
 }
 </script>
@@ -1671,6 +1772,7 @@
     <li><a href="#pricing" class="drawer-link">Lessons &amp; Fees <span class="arrow">→</span></a></li>
     <li><a href="#wedding" class="drawer-link" onclick="closeDrawer(); document.getElementById('wedding').style.display='block'; setTimeout(()=>{document.getElementById('wedding').scrollIntoView({behavior:'smooth'})},420);">Wedding &amp; Accompaniment <span class="arrow">→</span></a></li>
     <li class="dhead"><p class="dhead-label">Online Class</p>
+      <a href="online-piano-lessons/" class="drawer-link">🎹 Online Piano Lessons <span class="arrow">→</span></a>
       <a href="#feedback" class="drawer-link">💻 Online Coaching <span class="dtag dtag-offer">First trial 20% off</span> <span class="arrow">→</span></a>
     </li>
     <li class="dhead"><p class="dhead-label">Clubs &amp; Workshops</p>
@@ -1688,10 +1790,10 @@
   <div class="hero-bg-text">Piano</div>
 
   <div class="hero-left">
-    <p class="hero-eyebrow">Cadenza London Music Academy</p>
-    <h1 class="hero-title">
+    <h1 class="hero-eyebrow">Cadenza London Music Academy<span style="display:block;margin-top:0.55rem;color:var(--soft);">Piano &amp; Violin · London &amp; Online</span></h1>
+    <p class="hero-title">
       The Art of<br><em>Music,</em><br>speaks our soul.
-    </h1>
+    </p>
     <p class="hero-subtitle">with Eric Chung</p>
     <div class="hero-divider"></div>
     <p class="hero-desc">
@@ -2247,7 +2349,7 @@
 <section style="padding:10rem max(1.4rem, 8rem - 5vw) 5rem; background:#1C1C1C; text-align:center; position:relative; overflow:hidden;">
   <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Cormorant Garamond',serif;font-size:18vw;font-weight:300;color:rgba(201,168,76,0.04);white-space:nowrap;pointer-events:none;">Cadenza</div>
   <p style="font-size:0.62rem; letter-spacing:0.26em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">Special Services</p>
-  <h1 style="font-family:'Cormorant Garamond',serif; font-size:clamp(2.5rem,6vw,4rem); font-weight:300; color:#F8F4EE; line-height:1.2; margin-bottom:1.5rem;">Wedding &amp; <em>Accompaniment</em></h1>
+  <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(2.5rem,6vw,4rem); font-weight:300; color:#F8F4EE; line-height:1.2; margin-bottom:1.5rem;">Wedding &amp; <em>Accompaniment</em></h2>
   <div style="width:40px; height:1px; background:var(--gold); margin:2rem auto;"></div>
   <p style="font-size:0.95rem; color:rgba(248,244,238,0.6); max-width:560px; margin:0 auto; line-height:1.8; font-weight:300;">Create a loving and truly memorable wedding with Eric's music — and perform with confidence, backed by a professional accompanist who elevates every note.</p>
 </section>
