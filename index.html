@@ -488,6 +488,20 @@
   @media (max-width: 1024px) {
     #hero .hero-image-frame { height: 100%; }
   }
+  /* Hero on phones/tablets: photo sits between the intro text and the buttons (Oct 2026) */
+  @media (max-width: 1024px) {
+    #hero { display: flex; flex-direction: column; align-items: stretch; }
+    #hero .hero-left { display: contents; }
+    #hero .hero-left > * { order: 1; margin-left: 4rem; margin-right: 4rem; }
+    #hero .hero-left > .hero-eyebrow { margin-top: 3rem; }
+    #hero .hero-left > .hero-desc { margin-bottom: 2.2rem; }
+    #hero .hero-right { order: 2; }
+    #hero .hero-left > .hero-btns { order: 3; margin-top: 2.2rem; margin-bottom: 3rem; }
+  }
+  @media (max-width: 768px) {
+    #hero .hero-left > * { margin-left: 1.4rem; margin-right: 1.4rem; }
+    #hero .hero-left > .hero-eyebrow { margin-top: 2rem; }
+  }
 
   /* Popup: "scroll for more" prompt (Oct 2026) */
   #promo-popup .pp-more { grid-column:1/-1; position:sticky; bottom:0; height:0; z-index:6; pointer-events:none; }
