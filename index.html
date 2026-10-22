@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script src="/analytics.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Piano &amp; Violin Lessons in Colindale, London &amp; Online | Cadenza London Music Academy</title>
 <meta name="description" content="Cadenza London Music Academy: 1-on-1 piano, violin and theory lessons with Eric Chung in Colindale (NW9), North West London, and online. ABRSM &amp; Trinity exams, diplomas and competitions. Lessons from £35.">
@@ -2766,6 +2767,7 @@
       if (res.ok) {
         document.getElementById('contact-form-wrapper').style.display = 'none';
         document.getElementById('contact-form-success').style.display = 'block';
+        window.cadTrack && cadTrack('generate_lead', { form: 'contact_enquiry', enquiry: data.enquiry });
         document.getElementById('contact-form-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
         const errMsg = (json.errors && json.errors[0] && json.errors[0].message) || json.error || ('Error ' + res.status);
@@ -2861,6 +2863,7 @@
       if (res.ok) {
         document.getElementById('feedback-form-inner').style.display = 'none';
         document.getElementById('feedback-form-success').style.display = 'block';
+        window.cadTrack && cadTrack('generate_lead', { form: 'online_coaching_link', package: data.package });
         document.getElementById('feedback-form-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
         generalErr.textContent = res.status === 403 ? 'Form not yet active — please email Eric directly.' :
@@ -2991,6 +2994,7 @@
       if (res.ok) {
         promoForm.style.display = 'none';
         promoSuccess.style.display = 'block';
+        window.cadTrack && cadTrack('sign_up', { method: 'mailing_list_popup' });
         const w = await getWelcomeCode(nameVal, emailVal);
         if (w && w.code) {
           document.getElementById('promo-code').textContent = w.code;
@@ -3041,6 +3045,7 @@
       if (res.ok) {
         footerForm.style.display = 'none';
         successEl.style.display = 'block';
+        window.cadTrack && cadTrack('sign_up', { method: 'mailing_list_footer' });
         const w = await getWelcomeCode('', emailVal);
         if (w && w.code) successEl.innerHTML = '✓ &nbsp;You\'re on the list! Your 20% welcome code: <b style="letter-spacing:0.1em;user-select:all;">' + w.code + '</b> (also sent to your inbox)';
         else if (welcomeMsg(w)) successEl.innerHTML = '✓ &nbsp;You\'re on the list. ' + welcomeMsg(w);

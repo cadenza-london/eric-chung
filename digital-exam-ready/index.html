@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script src="/analytics.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ABRSM &amp; Trinity Digital Exam Preparation, London | Cadenza London Music Academy</title>
 <link rel="canonical" href="https://cadenza-london.com/digital-exam-ready/">
@@ -1225,6 +1226,7 @@ var EMAILJS={publicKey:'YOUR_PUBLIC_KEY',serviceId:'YOUR_SERVICE_ID',templateId:
     sendReg()
       .then(function(){
         sendConfirmation();
+        window.cadTrack && cadTrack('generate_lead', { form: 'exam_course_interest' });
         showStep2();
       })
       .catch(function(){

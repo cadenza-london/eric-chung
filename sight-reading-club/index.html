@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script src="/analytics.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Online Piano Sight-Reading Classes, Grades 1–8 | Cadenza London Music Academy</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -1739,6 +1740,7 @@ var CLUB = {
     document.getElementById('sessionSummary').value=ticked.map(function(t){return t.value;}).join(' | ');
 
     function showDone(){
+      window.cadTrack && cadTrack('generate_lead', { form: 'sight_reading_club', sessions: ticked.length });
       var box=document.getElementById('doneList'); box.innerHTML='';
       ticked.forEach(function(t){
         var d=new Date(+t.getAttribute('data-start')), lv=t.getAttribute('data-level');

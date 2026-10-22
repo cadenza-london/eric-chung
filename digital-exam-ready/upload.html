@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script src="/analytics.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Upload your pieces | Cadenza Digital Exam Ready Course</title>
 <meta name="description" content="Send Eric the videos and score photos of your exam pieces (1 to 4) for the Cadenza Digital Exam Ready Course.">
@@ -1149,6 +1150,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     if(wantVal()==='coaching'){
       var d=$('done'), ol=d.querySelector('ol');
       d.querySelector('h2').textContent='Videos received';
+      window.cadTrack && cadTrack('generate_lead', { form: 'online_coaching_upload' });
       var q=priceQuote(), pkg=q.isFull?'Full Exam Check':'Single Piece Check';
       if(ol) ol.innerHTML='<li><b>You chose Online Coaching: '+pkg+' ('+gbp(q.total)+').</b></li><li><b>Pay securely</b> with the button below. Got a welcome code? Enter it there for 20% off.</li><li><b>Eric sends your feedback</b> once payment is in.</li>';
       $('payBox').hidden=false; $('payBtn').removeAttribute('href'); $('payBtn').setAttribute('aria-disabled','true');
@@ -1181,7 +1183,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       stickyShow(); return; }
     if(h==='pay-later'){ $('hero').hidden=true; form.hidden=true; $('before').hidden=true; $('gone').hidden=true; var d1=$('done'); d1.hidden=false;
       d1.querySelector('h2').textContent='No problem'; d1.querySelector('p').textContent='Your videos are safe with Eric. Use the payment link in your email whenever you\'re ready.'; var o1=d1.querySelector('ol'); if(o1) o1.hidden=true; stickyShow(); return; }
-    if(h.indexOf('paid')===0){ var csm=h.match(/cs=(cs_[A-Za-z0-9_]+)/);
+    if(h.indexOf('paid')===0){ window.cadTrack && cadTrack('purchase_complete', { product: 'online_coaching' }); var csm=h.match(/cs=(cs_[A-Za-z0-9_]+)/);
       if(csm&&isLive) fetch(UPLOAD_API+'/api/pay/check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({cs:csm[1]})}).catch(function(){}); form.hidden=true; $('before').hidden=true; $('gone').hidden=true; var d=$('done'); d.hidden=false;
       $('donePill').textContent='Online Coaching'; d.querySelector('h2').textContent='Payment received';
       d.querySelector('p').textContent='Thank you! Eric now has everything he needs and will send your feedback by email.';

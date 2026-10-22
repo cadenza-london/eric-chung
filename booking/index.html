@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script src="/analytics.js"></script>
 <script>if(/\/booking$/.test(location.pathname))location.replace(location.pathname+'/'+location.search+location.hash);</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Book a Trial Piano or Violin Lesson | Cadenza London Music Academy</title>
@@ -636,6 +637,7 @@ function submit(){
     $('doneEmail').textContent = rec.email;
     $('doneLead').textContent = 'Thank you' + (rec.parent ? ', ' + rec.parent : '') + ' — we have your request for ' + rec.name + '.';
     sending = false; step = 5; show(false);
+    window.cadTrack && cadTrack('generate_lead', { form: 'trial_booking', instrument: inst, lesson_minutes: dur });
   }).catch(function(e){
     console.error(e); sending = false; drawDock();
     $('err4').textContent = 'Sorry, that didn’t go through. Please try again, or email us directly.';
