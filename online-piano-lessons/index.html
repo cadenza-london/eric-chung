@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Online Piano Lessons, 1-on-1 with Eric Chung | Cadenza London Music Academy</title>
-<meta name="description" content="Live 1-on-1 online piano lessons from London with Eric Chung: beginners to ABRSM &amp; Trinity exams and diplomas, children and adults, in English or Cantonese. From £35 per lesson.">
+<title>Online Piano, Violin &amp; Theory Lessons with Eric Chung | Cadenza London</title>
+<meta name="description" content="Live 1-on-1 online lessons with Eric Chung: piano, violin, music theory, aural and music aptitude test preparation. Beginners to ABRSM &amp; Trinity exams and diplomas, in English or Cantonese. From £35.">
 <link rel="canonical" href="https://cadenza-london.com/online-piano-lessons/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cadenza-london.com/online-piano-lessons/">
-<meta property="og:title" content="Online Piano Lessons with Eric Chung | Cadenza London Music Academy">
-<meta property="og:description" content="Live 1-on-1 piano lessons from home: beginners to ABRSM &amp; Trinity exams and diplomas. From £35 per lesson.">
+<meta property="og:title" content="Online Piano, Violin &amp; Theory Lessons with Eric Chung | Cadenza London Music Academy">
+<meta property="og:description" content="Live 1-on-1 lessons from home: piano, violin, theory, aural and music aptitude tests. Beginners to ABRSM &amp; Trinity exams and diplomas. From £35.">
 <meta property="og:image" content="https://cadenza-london.com/images/christmas-2025/eric-at-the-piano-1600.jpg">
 <meta property="og:locale" content="en_GB">
 <meta name="theme-color" content="#C9A84C">
@@ -89,6 +89,11 @@
   .card li::before { content: "✦"; position: absolute; left: 0; top: 0.1rem; color: var(--gold); font-size: 0.6rem; }
 
   .band { background: var(--gold-pale); }
+  .subjects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.8rem; }
+  .subject { display: flex; flex-direction: column; }
+  .subject .from { margin-top: auto; padding-top: 1rem; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--charcoal); }
+  .subject .from strong { font-weight: 500; color: var(--gold-dark); }
+  .subject .from a { font-family: 'Jost', sans-serif; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dark); text-decoration: none; font-weight: 500; }
 
   /* steps */
   .steps { counter-reset: s; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.8rem; }
@@ -139,7 +144,7 @@
   @media (max-width: 860px) {
     .hero .wrap { grid-template-columns: 1fr; gap: 2.4rem; }
     .portrait { max-width: 420px; margin-right: 14px; }
-    .grid-3, .steps { grid-template-columns: 1fr; }
+    .grid-3, .steps, .subjects { grid-template-columns: 1fr; }
     .grid-2 { grid-template-columns: 1fr; }
     footer .wrap { grid-template-columns: 1fr; }
     section { padding: 3.75rem 0; }
@@ -159,20 +164,90 @@
   {
    "@type": "Service",
    "@id": "https://cadenza-london.com/online-piano-lessons/#service",
-   "name": "Online piano lessons",
-   "serviceType": "1-on-1 online piano lessons",
-   "description": "Live 1-on-1 online piano lessons with Eric Chung for children and adults, from beginners to ABRSM and Trinity grades and performance diplomas. Lessons in English or Cantonese.",
+   "name": "Online music lessons",
+   "serviceType": "1-on-1 online piano, violin, music theory, aural and music aptitude test lessons",
+   "description": "Live 1-on-1 online lessons with Eric Chung for children and adults: piano, violin, music theory, aural and music aptitude test preparation, from beginners to ABRSM and Trinity grades and performance diplomas. Lessons in English or Cantonese.",
    "url": "https://cadenza-london.com/online-piano-lessons/",
-   "provider": {"@id": "https://cadenza-london.com/#academy", "@type": "MusicSchool", "name": "Cadenza London Music Academy", "url": "https://cadenza-london.com/"},
-   "areaServed": {"@type": "Place", "name": "Online, worldwide"},
-   "availableLanguage": ["en", "yue"],
-   "offers": {"@type": "Offer", "url": "https://cadenza-london.com/booking/", "priceSpecification": {"@type": "PriceSpecification", "minPrice": 35, "priceCurrency": "GBP"}}
+   "provider": {
+    "@id": "https://cadenza-london.com/#academy",
+    "@type": "MusicSchool",
+    "name": "Cadenza London Music Academy",
+    "url": "https://cadenza-london.com/"
+   },
+   "areaServed": {
+    "@type": "Place",
+    "name": "Online, worldwide"
+   },
+   "availableLanguage": [
+    "en",
+    "yue"
+   ],
+   "offers": {
+    "@type": "Offer",
+    "url": "https://cadenza-london.com/booking/",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": 35,
+     "priceCurrency": "GBP"
+    }
+   },
+   "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Online lessons",
+    "itemListElement": [
+     {
+      "@type": "Offer",
+      "itemOffered": {
+       "@type": "Service",
+       "name": "Online piano lessons"
+      }
+     },
+     {
+      "@type": "Offer",
+      "itemOffered": {
+       "@type": "Service",
+       "name": "Online violin lessons"
+      }
+     },
+     {
+      "@type": "Offer",
+      "itemOffered": {
+       "@type": "Service",
+       "name": "Online music theory lessons"
+      }
+     },
+     {
+      "@type": "Offer",
+      "itemOffered": {
+       "@type": "Service",
+       "name": "Online aural lessons"
+      }
+     },
+     {
+      "@type": "Offer",
+      "itemOffered": {
+       "@type": "Service",
+       "name": "Online music aptitude test preparation"
+      }
+     }
+    ]
+   }
   },
   {
    "@type": "BreadcrumbList",
    "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Cadenza London Music Academy", "item": "https://cadenza-london.com/"},
-    {"@type": "ListItem", "position": 2, "name": "Online Piano Lessons", "item": "https://cadenza-london.com/online-piano-lessons/"}
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Cadenza London Music Academy",
+     "item": "https://cadenza-london.com/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Online Lessons",
+     "item": "https://cadenza-london.com/online-piano-lessons/"
+    }
    ]
   }
  ]
@@ -201,9 +276,9 @@
   <div class="wrap">
     <div>
       <p class="label">Cadenza London Music Academy · Online</p>
-      <h1>Online Piano Lessons <em>with Eric Chung</em></h1>
+      <h1>Online Piano &amp; Violin Lessons <em>with Eric Chung</em></h1>
       <div class="divider"></div>
-      <p class="lead">Live 1-on-1 piano lessons from your own home, with the same teacher our London students learn with. For all ages and levels, from first notes to ABRSM and Trinity exams and performance diplomas. Lessons in English or Cantonese.</p>
+      <p class="lead">Live 1-on-1 lessons from your own home, with the same teacher our London students learn with: piano, violin, music theory, aural and music aptitude test preparation. For all ages and levels, from first notes to ABRSM and Trinity exams and performance diplomas. Lessons in English or Cantonese.</p>
       <p class="price-line">Lessons <strong>from £35</strong></p>
       <div class="btn-row">
         <a class="btn btn-gold" href="/booking/">Book a trial lesson</a>
@@ -216,20 +291,60 @@
       </div>
     </div>
     <figure class="portrait">
-      <img src="/images/christmas-2025/eric-at-the-piano-800.jpg" srcset="/images/christmas-2025/eric-at-the-piano-800.jpg 800w, /images/christmas-2025/eric-at-the-piano-1600.jpg 1600w" sizes="(max-width: 860px) 90vw, 420px" alt="Eric Chung, online piano teacher at Cadenza London Music Academy, playing the piano" width="800" height="533" fetchpriority="high">
+      <img src="/images/christmas-2025/eric-at-the-piano-800.jpg" srcset="/images/christmas-2025/eric-at-the-piano-800.jpg 800w, /images/christmas-2025/eric-at-the-piano-1600.jpg 1600w" sizes="(max-width: 860px) 90vw, 420px" alt="Eric Chung, online piano and violin teacher at Cadenza London Music Academy, playing the piano" width="800" height="533" fetchpriority="high">
       <figcaption>Eric at the Cadenza London 2025 student Christmas concert</figcaption>
     </figure>
   </div>
 </section>
 
-<section id="why">
+<section id="subjects">
+  <div class="wrap">
+    <p class="label">What you can learn online</p>
+    <h2>Five subjects, <em>one teacher</em></h2>
+    <p class="intro">Every lesson is 1-on-1 with Eric, live on a video call.</p>
+    <div class="subjects">
+      <div class="card subject">
+        <div class="ico">🎹</div>
+        <h3>Piano</h3>
+        <p>Beginners to diploma (ARSM, DipABRSM, LRSM, Trinity ATCL / LTCL / FTCL).</p>
+        <p class="from">from <strong>£35</strong></p>
+      </div>
+      <div class="card subject">
+        <div class="ico">🎻</div>
+        <h3>Violin</h3>
+        <p>First notes to performance diplomas.</p>
+        <p class="from">from <strong>£35</strong></p>
+      </div>
+      <div class="card subject">
+        <div class="ico">📖</div>
+        <h3>Music theory</h3>
+        <p>ABRSM and Trinity theory, Grades 1–8.</p>
+        <p class="from">from <strong>£35</strong></p>
+      </div>
+      <div class="card subject">
+        <div class="ico">👂</div>
+        <h3>Aural</h3>
+        <p>ABRSM and Trinity aural tests, Grades 1–8. Try our <a href="/aural.html" style="color:var(--gold-dark);">free aural practice</a> first.</p>
+        <p class="from">from <strong>£35</strong></p>
+      </div>
+      <div class="card subject">
+        <div class="ico">🎼</div>
+        <h3>Music aptitude test</h3>
+        <p>Preparation for music aptitude tests.</p>
+        <p class="from"><a href="/music-aptest">Find out more →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why" class="band">
   <div class="wrap">
     <p class="label">Why learn online with Eric</p>
     <h2>A conservatoire-trained teacher, <em>wherever you live</em></h2>
-    <p class="intro">Eric Chung is a classically trained pianist with a Master of Music from the Royal Conservatoire of Antwerp and training in Classical Piano Performance at the Hong Kong Academy for Performing Arts. Online, you get the same tailored approach, nurturing technique, musicality and a lifelong love of music.</p>
+    <p class="intro">Eric Chung is a classically trained pianist and violinist with a Master of Music from the Royal Conservatoire of Antwerp and training in Classical Piano Performance and Violin Performance at the Hong Kong Academy for Performing Arts. Online, you get the same tailored approach, nurturing technique, musicality and a lifelong love of music.</p>
     <div class="grid-3">
       <div class="card">
-        <div class="ico">🎹</div>
+        <div class="ico">🎶</div>
         <h3>Truly 1-on-1</h3>
         <p>Every lesson is just you and Eric, live. He hears what is holding you back within a few bars and gives you a fix you can use straight away.</p>
       </div>
@@ -241,13 +356,13 @@
       <div class="card">
         <div class="ico">🏠</div>
         <h3>No travel, flexible times</h3>
-        <p>Learn on your own piano at home. Lessons run Monday to Saturday, with morning, afternoon and evening slots on UK time.</p>
+        <p>Learn on your own instrument at home. Lessons run Monday to Saturday, with morning, afternoon and evening slots on UK time.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="band" id="levels">
+<section id="levels">
   <div class="wrap">
     <p class="label">Who it's for</p>
     <h2>Every age, <em>every level</em></h2>
@@ -257,22 +372,22 @@
         <ul>
           <li>Beginners learning their first pieces</li>
           <li>ABRSM and Trinity grades 1–8, practical and digital</li>
-          <li>Theory and aural alongside piano</li>
-          <li>Competitions, school and music scholarship preparation</li>
+          <li>Theory and aural alongside piano or violin</li>
+          <li>Music aptitude tests, competitions, school and scholarship preparation</li>
         </ul>
       </div>
       <div class="card">
         <h3>Adults</h3>
         <ul>
           <li>Complete beginners, at your own pace</li>
-          <li>Returners picking up the piano again</li>
+          <li>Returners picking up the piano or violin again</li>
           <li>Repertoire you love, not only exam pieces</li>
           <li>Performance diplomas: ARSM, DipABRSM, LRSM, Trinity ATCL, LTCL and FTCL</li>
         </ul>
       </div>
     </div>
     <div class="levels" aria-label="Levels taught">
-      <span>Beginner</span><span>Grades 1–3</span><span>Grades 4–6</span><span>Grades 7–8</span><span>Diploma</span><span>Theory &amp; aural</span>
+      <span>Beginner</span><span>Grades 1–3</span><span>Grades 4–6</span><span>Grades 7–8</span><span>Diploma</span><span>Theory</span><span>Aural</span><span>Aptitude test</span>
     </div>
   </div>
 </section>
@@ -287,7 +402,7 @@
         <p>Choose a trial lesson for your level and a time that suits you. We confirm your place by email.</p>
       </div>
       <div class="step">
-        <h3>Set up your piano</h3>
+        <h3>Set up your space</h3>
         <p>A phone, tablet or laptop on a stand is all you need. The setup tips below take five minutes.</p>
       </div>
       <div class="step">
@@ -298,9 +413,10 @@
     <div class="setup">
       <h3>Five-minute setup</h3>
       <ul>
-        <li>Turn your phone or tablet sideways and place it at the treble end, angled down, so Eric sees both hands and the keys.</li>
-        <li>Keep the device about 1 metre from the piano so loud passages don't distort.</li>
-        <li>In Zoom, turn on Original sound for musicians, so the call doesn't cut out your piano's tone.</li>
+        <li>Piano: turn your phone or tablet sideways and place it at the treble end, angled down, so Eric sees both hands and the keys.</li>
+        <li>Violin: stand back far enough that Eric sees your bow arm, left hand and posture.</li>
+        <li>Keep the device about 1 metre from your instrument so loud passages don't distort.</li>
+        <li>In Zoom, turn on Original sound for musicians, so the call doesn't cut out your instrument's tone.</li>
         <li>Sit with the light in front of you or to the side, in a quiet room.</li>
       </ul>
     </div>
@@ -338,23 +454,31 @@
 <section id="faq">
   <div class="wrap">
     <p class="label">Good to know</p>
-    <h2>Online piano lessons: <em>your questions</em></h2>
+    <h2>Online lessons: <em>your questions</em></h2>
     <div class="faq">
       <details>
-        <summary>Can you really learn piano online?</summary>
-        <p>Yes. With the camera set up to show both hands and the keys, Eric can see and hear your playing in detail and fix technique, rhythm and sound just as he would in the room.</p>
+        <summary>Can you really learn an instrument online?</summary>
+        <p>Yes. With the camera set up to show your hands (and, for violin, your bow arm), Eric can see and hear your playing in detail and fix technique, rhythm and sound just as he would in the room.</p>
       </details>
       <details>
         <summary>Do I need a real piano?</summary>
         <p>A piano or a keyboard works. For exams and advanced repertoire, an acoustic piano or a full-size keyboard with weighted keys is best, because it lets you practise touch and dynamics properly. Choosing an instrument? Ask Eric in your trial lesson.</p>
       </details>
       <details>
-        <summary>How much do online piano lessons cost?</summary>
+        <summary>Can I learn violin online?</summary>
+        <p>Yes. Eric teaches violin online from first notes to performance diplomas, including ABRSM and Trinity grades.</p>
+      </details>
+      <details>
+        <summary>How much do online lessons cost?</summary>
         <p>Lessons start from £35. The exact price depends on your level and lesson length, and is shown when you <a href="/booking/">book</a>.</p>
       </details>
       <details>
         <summary>Can I prepare for ABRSM or Trinity exams online?</summary>
-        <p>Yes. Eric prepares students online for ABRSM and Trinity grades 1–8, digital Performance Grades, theory, aural and performance diplomas. For a digital exam, you can film your exam video at home, or join the in-person <a href="/digital-exam-ready/">Digital Exam Ready Course</a> in London to have it recorded on a grand piano.</p>
+        <p>Yes. Eric prepares students online for ABRSM and Trinity piano and violin grades 1–8, digital Performance Grades, theory, aural and performance diplomas. For a digital exam, you can film your exam video at home, or join the in-person <a href="/digital-exam-ready/">Digital Exam Ready Course</a> in London to have it recorded on a grand piano.</p>
+      </details>
+      <details>
+        <summary>Can I prepare for a music aptitude test online?</summary>
+        <p>Yes. Eric prepares students online for music aptitude tests. <a href="/music-aptest">Find out more</a>.</p>
       </details>
       <details>
         <summary>Are online lessons suitable for young children?</summary>
@@ -425,10 +549,10 @@
  "mainEntity": [
   {
    "@type": "Question",
-   "name": "Can you really learn piano online?",
+   "name": "Can you really learn an instrument online?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Yes. With the camera set up to show both hands and the keys, Eric can see and hear your playing in detail and fix technique, rhythm and sound just as he would in the room."
+    "text": "Yes. With the camera set up to show your hands (and, for violin, your bow arm), Eric can see and hear your playing in detail and fix technique, rhythm and sound just as he would in the room."
    }
   },
   {
@@ -441,7 +565,15 @@
   },
   {
    "@type": "Question",
-   "name": "How much do online piano lessons cost?",
+   "name": "Can I learn violin online?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Eric teaches violin online from first notes to performance diplomas, including ABRSM and Trinity grades."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How much do online lessons cost?",
    "acceptedAnswer": {
     "@type": "Answer",
     "text": "Lessons start from £35. The exact price depends on your level and lesson length, and is shown when you book ."
@@ -452,7 +584,15 @@
    "name": "Can I prepare for ABRSM or Trinity exams online?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Yes. Eric prepares students online for ABRSM and Trinity grades 1–8, digital Performance Grades, theory, aural and performance diplomas. For a digital exam, you can film your exam video at home, or join the in-person Digital Exam Ready Course in London to have it recorded on a grand piano."
+    "text": "Yes. Eric prepares students online for ABRSM and Trinity piano and violin grades 1–8, digital Performance Grades, theory, aural and performance diplomas. For a digital exam, you can film your exam video at home, or join the in-person Digital Exam Ready Course in London to have it recorded on a grand piano."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I prepare for a music aptitude test online?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Eric prepares students online for music aptitude tests. Find out more ."
    }
   },
   {
