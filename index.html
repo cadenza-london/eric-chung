@@ -648,11 +648,10 @@
   #concert, #feedback { --lt-ink:#2E2418; --lt-mid:#5A4D3F; --lt-gold:#9A7623; --lt-line:rgba(154,118,35,0.28); }
   #concert { background: radial-gradient(ellipse 70% 55% at 85% 0%, rgba(255,255,255,0.75), transparent 70%), linear-gradient(180deg, #F6E3BC 0%, #FBF1DC 100%) !important; color: var(--lt-ink) !important;
     border-top: 3px double rgba(176,138,48,0.55); border-bottom: 3px double rgba(176,138,48,0.55); position: relative; }
-  #feedback { background: radial-gradient(ellipse 70% 55% at 15% 0%, rgba(255,255,255,0.8), transparent 70%), linear-gradient(180deg, #E4EFF5 0%, #F5F9FB 100%) !important;
-    border-top: 3px double rgba(110,160,190,0.55); border-bottom: 3px double rgba(110,160,190,0.55); }
-  #feedback .coach-card { border-color: rgba(110,160,190,0.35); }
-  #feedback .coach-extras p { background: rgba(255,255,255,0.8); border-color: rgba(110,160,190,0.35); }
-  #feedback .coach-soon { border-color: rgba(110,160,190,0.4); }
+  #feedback { background: radial-gradient(ellipse 70% 55% at 85% 0%, rgba(255,255,255,0.75), transparent 70%), linear-gradient(180deg, #F6E3BC 0%, #FBF1DC 100%) !important;
+    border-top: 3px double rgba(176,138,48,0.55); border-bottom: 3px double rgba(176,138,48,0.55); }
+  #feedback .coach-card, #feedback .coach-soon { border-color: rgba(176,138,48,0.35); }
+  #feedback .coach-extras p { background: rgba(255,255,255,0.8); border-color: rgba(176,138,48,0.35); }
   #concert .section-title, #concert .concert-cta h3 { color: var(--lt-ink) !important; }
   #concert .section-label, #concert .section-title em, #concert .concert-cta h3 em { color: var(--lt-gold) !important; }
   #concert .concert-intro, #concert .concert-cta p { color: var(--lt-mid) !important; font-weight: 400; }
@@ -712,6 +711,15 @@
     #feedback .vf-side { border-left: 0; padding-left: 0; border-top: 1px solid rgba(110,160,190,0.3); padding-top: 1.4rem; }
     #feedback .vf-h { font-size: 1.5rem; }
   }
+
+  #feedback .vf-what { border-color: rgba(176,138,48,0.35) !important; }
+  #feedback .vf-side { border-color: rgba(176,138,48,0.3) !important; }
+  #feedback .vf-need li::before { color: var(--lt-gold) !important; }
+  #feedback .vf-cta { display: inline-flex; align-items: center; gap: 0.6rem; margin: 0 0 1.4rem; padding: 0.95rem 1.5rem; background: linear-gradient(180deg, #D4B05A 0%, #B8902E 100%); color: #fff; text-decoration: none; font-family: 'Jost', sans-serif; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; box-shadow: 0 10px 22px -10px rgba(126,99,32,0.85); transition: transform 160ms ease-out, box-shadow 200ms ease; }
+  #feedback .vf-cta span { display: inline-block; transition: transform 200ms cubic-bezier(0.23,1,0.32,1); }
+  #feedback .vf-cta:active { transform: scale(0.97); }
+  @media (hover: hover) and (pointer: fine) { #feedback .vf-cta:hover { box-shadow: 0 14px 28px -10px rgba(126,99,32,0.95); } #feedback .vf-cta:hover span { transform: translateX(4px); } }
+  @media (max-width: 860px) { #feedback .vf-cta { display: flex; justify-content: center; } }
 
   /* ── NAV ── */
   nav {
@@ -2158,7 +2166,8 @@
   <div class="vf-what">
     <div class="vf-col">
       <h3 class="vf-h">What is Video Feedback <span>(Online Coaching)</span>?</h3>
-      <p class="vf-lead">You film a piece at home and send it to Eric. He watches it and writes back with what's working, what to fix and how to practise it, plus a short video reply.</p>
+      <p class="vf-lead">You film a piece at home and send it to Eric. He watches it and sends you practice notes and written feedback: what's working, what to fix and how to practise it.</p>
+      <a class="vf-cta" href="https://cadenza-london.com/digital-exam-ready/upload.html?mode=coaching&amp;pkg=single">Get your assessment now! <span aria-hidden="true">→</span></a>
       <ul class="vf-ticks">
         <li><b>Specific, honest notes.</b> Not just "sounds nice": which bars need work and what to do about them.</li>
         <li><b>Before it counts.</b> Find the weak spots while there's still time to fix them, not in your exam result.</li>
