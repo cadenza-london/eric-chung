@@ -527,7 +527,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
           <label><input type="radio" name="pkg" value="Single Piece Check"><span>Single Piece Check<small>1 piece · written notes + short video reply from Eric</small><small class="why" id="whySingle"></small></span><em id="priceSingle">from £15</em></label>
           <label><input type="radio" name="pkg" value="Full Exam Check"><span>Full Exam Check<small>2–4 pieces marked like the real exam · predicted mark · practice plan</small><small class="why" id="whyFull"></small></span><em id="priceFull">from £49</em></label>
           <p class="pkgnote" id="pkgNote">Prices depend on the exam grade above.</p>
-          <p class="pkgnote">🎁 Have a 20% welcome code? Enter it on the payment page.</p>
+          <p class="pkgnote">🎁 Have a 10% welcome code? Enter it on the payment page.</p>
           <a href="#what-coaching" class="js-what" style="font-size:.85rem;font-weight:700;color:var(--gold-deep)">What's included in each package? →</a>
         </div>
       </fieldset>
@@ -677,7 +677,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
   </table>
   <p class="fine">Need it sooner? 48-hour express is +£10.</p>
 
-  <div class="gift">🎁 <b>20% off your first session:</b> join the Cadenza London mailing list on our website and we'll send you a one-time welcome code to use at payment.</div>
+  <div class="gift">🎁 <b>10% off your first session:</b> join the Cadenza London mailing list on our website and we'll send you a one-time welcome code to use at payment.</div>
 
   <button class="go2" type="button" id="whatGo">Show me how to use Video Feedback <small class="oc-sub" style="font-size:.72em;font-weight:400;opacity:.8;letter-spacing:inherit;text-transform:inherit;white-space:nowrap">(Online Coaching)</small> →</button>
 </div>
@@ -1150,7 +1150,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       var d=$('done'), ol=d.querySelector('ol');
       d.querySelector('h2').textContent='Videos received';
       var q=priceQuote(), pkg=q.isFull?'Full Exam Check':'Single Piece Check';
-      if(ol) ol.innerHTML='<li><b>You chose Video Feedback (Online Coaching): '+pkg+' ('+gbp(q.total)+').</b></li><li><b>Pay securely</b> with the button below. Got a welcome code? Enter it there for 20% off.</li><li><b>Eric sends your feedback</b> once payment is in.</li>';
+      if(ol) ol.innerHTML='<li><b>You chose Video Feedback (Online Coaching): '+pkg+' ('+gbp(q.total)+').</b></li><li><b>Pay securely</b> with the button below. Got a welcome code? Enter it there for 10% off.</li><li><b>Eric sends your feedback</b> once payment is in.</li>';
       $('payBox').hidden=false; $('payBtn').removeAttribute('href'); $('payBtn').setAttribute('aria-disabled','true');
       $('payBtn').firstChild.textContent='Preparing secure payment… ';
       var ready=function(url,total){ $('payBtn').href=url; $('payBtn').removeAttribute('aria-disabled'); $('payBtn').firstChild.textContent='Pay '+gbp(total)+' securely with Stripe '; };
