@@ -688,6 +688,30 @@
   .drawer { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
   .drawer .drawer-links { flex: 0 0 auto; }
 
+  /* Video Feedback: "What is it?" block (Oct 2026) */
+  #feedback .vf-what { position: relative; max-width: 1050px; margin: -1.5rem auto 4.5rem; display: grid; grid-template-columns: 1.25fr 1fr; gap: 2rem; background: rgba(255,255,255,0.82); border: 1px solid rgba(110,160,190,0.35); padding: 2.4rem 2.4rem 2.2rem; box-shadow: 0 18px 40px -28px rgba(46,36,24,0.45); }
+  #feedback .vf-col { min-width: 0; }
+  #feedback .vf-h { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 1.75rem; line-height: 1.2; color: var(--lt-ink); margin-bottom: 0.9rem; }
+  #feedback .vf-h span { font-size: 0.6em; color: var(--lt-mid); letter-spacing: 0.04em; }
+  #feedback .vf-lead { font-size: 0.92rem; line-height: 1.8; color: var(--lt-mid); margin-bottom: 1.2rem; }
+  #feedback .vf-ticks, #feedback .vf-need { list-style: none; display: grid; gap: 0.75rem; }
+  #feedback .vf-ticks li, #feedback .vf-need li { position: relative; padding-left: 1.4rem; font-size: 0.86rem; line-height: 1.7; color: var(--lt-mid); }
+  #feedback .vf-ticks li::before { content: '✦'; position: absolute; left: 0; top: 0.1rem; color: var(--lt-gold); font-size: 0.7rem; }
+  #feedback .vf-need li::before { content: '✓'; position: absolute; left: 0; top: 0; color: #4F8DB3; font-weight: 600; }
+  #feedback .vf-ticks b, #feedback .vf-need b { color: var(--lt-ink); font-weight: 500; }
+  #feedback .vf-need em { font-style: normal; color: #8A7E70; font-size: 0.8rem; }
+  #feedback .vf-side { border-left: 1px solid rgba(110,160,190,0.3); padding-left: 2rem; }
+  #feedback .vf-kick { font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--lt-gold); margin-bottom: 0.9rem; font-weight: 500; }
+  #feedback .vf-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+  #feedback .vf-stats div { background: #F2F7FA; border: 1px solid rgba(110,160,190,0.3); padding: 0.85rem 0.9rem; }
+  #feedback .vf-stats b { display: block; font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 1.6rem; line-height: 1.1; color: var(--lt-gold); }
+  #feedback .vf-stats span { display: block; font-size: 0.74rem; line-height: 1.45; color: var(--lt-mid); margin-top: 0.2rem; }
+  @media (max-width: 860px) {
+    #feedback .vf-what { grid-template-columns: 1fr; padding: 1.6rem 1.2rem; margin-top: -2rem; }
+    #feedback .vf-side { border-left: 0; padding-left: 0; border-top: 1px solid rgba(110,160,190,0.3); padding-top: 1.4rem; }
+    #feedback .vf-h { font-size: 1.5rem; }
+  }
+
   /* ── NAV ── */
   nav {
     position: fixed; top: 28px; left: 0; right: 0; z-index: 100;
@@ -2129,6 +2153,34 @@
     <p style="font-size:0.9rem;line-height:1.85;color:rgba(253,250,245,0.6);font-weight:300;">Send Eric a video of your playing from home. He watches it and tells you exactly what to fix, so you walk into your exam (or film your exam video) knowing where you stand.</p>
   </div>
 
+  <!-- What is Video Feedback? (copy from the upload page) -->
+  <div class="vf-what">
+    <div class="vf-col">
+      <h3 class="vf-h">What is Video Feedback <span>(Online Coaching)</span>?</h3>
+      <p class="vf-lead">You film a piece at home and send it to Eric. He reviews it like an examiner and replies with written notes and a short video, so you know exactly what to fix before the real exam or before you film your exam video.</p>
+      <ul class="vf-ticks">
+        <li><b>He marks like an examiner.</b> Eric uses the same criteria the exam boards use (pitch, timing, tone, shape and performance), so his mark tells you where you really stand, not just "sounds nice".</li>
+        <li><b>You find out before it counts.</b> Fix the weak spots now, instead of discovering them in your result after paying the exam fee.</li>
+        <li><b>Conservatoire-trained.</b> Royal Conservatoire of Antwerp and the Hong Kong Academy for Performing Arts, and he runs exam-standard mock exams for every Cadenza student.</li>
+      </ul>
+    </div>
+    <div class="vf-col vf-side">
+      <p class="vf-kick">Why parents trust Eric's marking</p>
+      <div class="vf-stats">
+        <div><b>100%</b><span>exam pass rate</span></div>
+        <div><b>200+</b><span>students with Merit or Distinction</span></div>
+        <div><b>Within 5%</b><span>his predicted marks vs real ABRSM &amp; Trinity results</span></div>
+        <div><b>15+ yrs</b><span>teaching exam candidates</span></div>
+      </div>
+      <p class="vf-kick" style="margin-top:1.4rem">What you need to send</p>
+      <ul class="vf-need">
+        <li><b>A phone video</b> of each piece, one take, like the real exam</li>
+        <li><b>The name of each piece</b> (title and composer)</li>
+        <li><b>Photos of the score</b> <em>(optional)</em>, so Eric can follow along</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- How It Works Steps -->
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:900px;margin:0 auto 5rem;position:relative;">
     <!-- connector line -->
@@ -2149,7 +2201,7 @@
       </div>
       <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Submit</p>
       <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#FDFAF5;font-weight:300;margin-bottom:0.6rem;">Send to Eric</p>
-      <p style="font-size:0.78rem;color:rgba(253,250,245,0.5);line-height:1.7;font-weight:300;">Paste your video link in the form below and choose your package.</p>
+      <p style="font-size:0.78rem;color:rgba(253,250,245,0.5);line-height:1.7;font-weight:300;">Upload it straight from your phone, choose your package and pay securely with Stripe.</p>
     </div>
 
     <div style="text-align:center;padding:0 1.5rem;position:relative;">
