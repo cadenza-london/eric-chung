@@ -141,6 +141,12 @@ dl.sum dd{margin:0;font-weight:800;overflow-wrap:anywhere}
 .piece.ready .state{background:var(--ok-soft);color:var(--ok)}
 .pick{position:relative;display:flex;align-items:center;gap:12px;border:2px solid var(--ink);border-radius:16px;padding:14px;cursor:pointer;min-width:0;background:var(--marigold-soft)}
 .pick.sc{border:1.5px dashed #d9c08a;background:var(--card)}
+.multi{display:flex;align-items:flex-start;gap:10px;margin:10px 2px 4px;font-size:.88rem;line-height:1.35;color:var(--ink);cursor:pointer}
+.multi input{flex:none;width:20px;height:20px;margin:1px 0 0;accent-color:var(--ink)}
+.multi small{display:block;color:var(--muted);font-size:.8rem}
+.vlist{list-style:none;margin:8px 0 2px;padding:0;display:grid;gap:6px}
+.vlist li{display:flex;gap:8px;align-items:baseline;font-size:.84rem;background:var(--cream);border-radius:10px;padding:8px 12px;min-width:0}
+.vlist li b{flex:none}.vlist li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}.vlist li em{margin-left:auto;flex:none;font-style:normal;color:var(--muted)}
 .pick .go{margin-left:auto;flex:none;font-size:.8rem;font-weight:800;background:var(--ink);color:var(--marigold);border-radius:999px;padding:6px 12px}
 .pick.sc .go{background:transparent;color:var(--gold-deep);border:1.5px solid var(--gold-deep)}
 .pick.has .go{background:transparent;color:var(--muted);border:1px solid var(--line)}
@@ -453,7 +459,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
         <li><span class="tag req">Required</span><p><b>The name of each piece</b> you send (title and composer)</p></li>
         <li><span class="tag opt">Optional</span><p><b>Photos of the score</b>, so Eric can follow along</p></li>
       </ul>
-      <p class="small" id="needSmall">A phone video is fine · One take per piece · Up to 4 GB per video</p>
+      <p class="small" id="needSmall">A phone video is fine · One take per piece (or per movement) · Up to 4 GB per video</p>
     </div>
 
     <div class="coach">
@@ -590,7 +596,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
         <li><i>1</i><p><b>Camera from the side.</b> Landscape, so we can see your hands, face and feet on the pedals.</p></li>
         <li><i>2</i><p><b>Quiet room, light in front.</b> Don't stand the phone on the piano itself.</p></li>
         <li><i>3</i><p><b>Introduce yourself.</b> At the start of piece 1, say your name, grade and exam board.</p></li>
-        <li><i>4</i><p><b>One take per piece, unedited.</b> Play each piece straight through, like the real exam.</p></li>
+        <li><i>4</i><p><b>One take per piece, unedited.</b> Play each piece straight through, like the real exam. For a long piece with movements, you can film each movement separately.</p></li>
       </ol>
     </section>
 
@@ -672,7 +678,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       <tr><td>Grade 1–4</td><td class="r">£15</td><td class="r"><b>£49</b></td></tr>
       <tr><td>Grade 5–6</td><td class="r">£20</td><td class="r"><b>£69</b></td></tr>
       <tr><td>Grade 7–8</td><td class="r">£25</td><td class="r"><b>£89</b></td></tr>
-      <tr><td>Diploma</td><td class="r">£35</td><td class="r"><b>£129</b></td></tr>
+      <tr><td>Diploma</td><td class="r">£38</td><td class="r"><b>£129</b></td></tr>
     </tbody>
   </table>
   <p class="fine">Need it sooner? 48-hour express is +£10.</p>
@@ -703,13 +709,14 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
   /* ===== LIVE CONFIG: set this to the upload address Cloudflare gives you ===== */
   var UPLOAD_API = 'https://cadenza-exam-upload.jessiemovement.workers.dev';
   // Online Coaching prices in pence, by grade band (the upload server uses the same table to charge)
-  var PRICES={g1_4:{single:1500,full:4900},g5_6:{single:2000,full:6900},g7_8:{single:2500,full:8900},diploma:{single:3500,full:12900}};
+  var PRICES={g1_4:{single:1500,full:4900},g5_6:{single:2000,full:6900},g7_8:{single:2500,full:8900},diploma:{single:3800,full:12900}};
   function bandOf(g){ g=String(g||''); if(/diploma|arsm|atcl|ltcl|lrsm|ftcl|frsm|drsm/i.test(g)) return 'diploma'; var n=parseInt((g.match(/\d/)||['1'])[0],10); return n<=4?'g1_4':n<=6?'g5_6':'g7_8'; }
   function gbp(p){ return '£'+(p/100).toFixed(p%100?2:0); }
   var subId = '';
   var MAX_VIDEO = 4 * 1024 * 1024 * 1024;  // 4 GB per video
   var MAX_SCORE = 20 * 1024 * 1024;        // 20 MB per score photo/PDF
   var MAX_SCORE_FILES = 10;                // per piece
+  var MAX_VIDEOS_PER_PIECE = 6;            // a piece with movements can have several videos (still one piece for the price)
   var CHUNK = 25 * 1024 * 1024;            // 25 MB upload parts
   var REGISTER_URL = 'https://cadenza-london.com';
 
@@ -718,7 +725,8 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
   var sandbox = SANDBOX; // sandbox always simulates, even when the Worker is live
   var LINK = false; // all videos and score photos upload to Cloudflare
   function okUrl(v){ return /^https?:\/\/[^\s.]+\.\S+/i.test((v||'').trim()); }
-  function hasVideo(p){ return LINK ? okUrl($('link'+p.n).value) : !!p.video; }
+  function hasVideo(p){ return LINK ? okUrl($('link'+p.n).value) : !!(p.videos&&p.videos.length); }
+  function vbytes(p){ return (p.videos||[]).reduce(function(a,f){ return a+f.size; },0); }
   var $ = function(id){ return document.getElementById(id); };
   var form=$('up'), err=$('err'), send=$('send');
 
@@ -814,12 +822,14 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       :
       '<div class="rq"><span class="lbl">Video of piece '+n+'</span>'+TAG(n)+'</div>'+
       '<label class="pick" id="vp'+n+'" for="video'+n+'"><input id="video'+n+'" type="file" accept="video/*,.mov,.mp4,.m4v"><span class="ic" aria-hidden="true">'+VID+'</span><span class="tx"><b id="vt'+n+'">No video yet</b><span id="vs'+n+'">MP4 or MOV, up to 4 GB</span></span><span class="go" id="vg'+n+'">Choose</span></label>'+
+      '<label class="multi" for="multi'+n+'"><input type="checkbox" id="multi'+n+'"><span>This piece has more than one video<small>For example, each movement of a sonata filmed separately. Still counts as one piece, at no extra cost.</small></span></label>'+
+      '<ul class="vlist" id="vl'+n+'" hidden></ul>'+
       '<div class="rq"><span class="lbl">Score photos</span></div>'+
       '<label class="pick sc" id="sp'+n+'" for="score'+n+'"><input id="score'+n+'" type="file" accept="image/*,.pdf" multiple><span class="ic" aria-hidden="true">'+SCORE+'</span><span class="tx"><b id="ct'+n+'">No score added</b><span id="cs'+n+'">Photos or PDF, up to 10</span></span><span class="go" id="sg'+n+'">Add</span></label>')+
       '<div class="thumbs" id="th'+n+'" hidden></div>'+
       '<div class="bar" id="pb'+n+'" hidden><i></i></div>';
     $('pieces').appendChild(el);
-    var p={n:n,el:el,video:null,scores:[]};
+    var p={n:n,el:el,video:null,videos:[],scores:[]};
     function refresh(){
       var t=$('title'+n).value.trim(), v=hasVideo(p), ok=v&&t;
       el.classList.toggle('ready',!!ok);
@@ -830,11 +840,32 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     p.refresh=refresh;
     $('title'+n).addEventListener('input',refresh);
     if(LINK) $('link'+n).addEventListener('input',refresh);
+    function showVideos(){
+      var vs=p.videos, multi=$('multi'+n).checked, ul=$('vl'+n);
+      p.video=vs[0]||null;
+      if(!vs.length){ $('vt'+n).textContent='No video yet'; $('vs'+n).textContent=multi?'Choose all the videos for this piece':'MP4 or MOV, up to 4 GB'; $('vg'+n).textContent='Choose'; $('vp'+n).classList.remove('has'); }
+      else if(vs.length===1){ $('vt'+n).textContent=vs[0].name; $('vs'+n).textContent=size(vs[0].size)+' · added'; $('vg'+n).textContent='Change'; $('vp'+n).classList.add('has'); }
+      else { $('vt'+n).textContent=vs.length+' videos added'; $('vs'+n).textContent=size(vbytes(p))+' in total · one piece'; $('vg'+n).textContent='Change'; $('vp'+n).classList.add('has'); }
+      ul.innerHTML=''; ul.hidden=!(multi&&vs.length);
+      if(multi) vs.forEach(function(f,i){ var li=document.createElement('li'), b=document.createElement('b'), sp=document.createElement('span'), em=document.createElement('em'); b.textContent='Video '+(i+1); sp.textContent=f.name; em.textContent=size(f.size); li.appendChild(b); li.appendChild(sp); li.appendChild(em); ul.appendChild(li); });
+      refresh();
+    }
+    if(!LINK) $('multi'+n).addEventListener('change',function(){
+      var inp=$('video'+n);
+      if(this.checked) inp.setAttribute('multiple',''); else { inp.removeAttribute('multiple'); if(p.videos.length>1) p.videos=p.videos.slice(0,1); }
+      showVideos();
+    });
     if(!LINK) $('video'+n).addEventListener('change',function(){
-      var f=this.files[0]; if(!f) return;
-      if(f.type && f.type.indexOf('video/')!==0){ this.value=''; return showErr('Piece '+n+': that file isn\'t a video. Choose the recording from Photos or Files.'); }
-      if(f.size>MAX_VIDEO){ this.value=''; return showErr('Piece '+n+': that video is '+size(f.size)+', over the 4 GB limit. Record at 1080p HD, 30 fps, or trim the start and end.'); }
-      showErr(''); p.video=f; $('vt'+n).textContent=f.name; $('vs'+n).textContent=size(f.size)+' · added'; $('vg'+n).textContent='Change'; $('vp'+n).classList.add('has'); refresh();
+      var fs=[].slice.call(this.files); if(!fs.length) return;
+      var multi=$('multi'+n).checked;
+      if(!multi) fs=fs.slice(0,1);
+      for(var k=0;k<fs.length;k++){
+        var f=fs[k];
+        if(f.type && f.type.indexOf('video/')!==0){ this.value=''; return showErr('Piece '+n+': '+(fs.length>1?f.name+' isn\'t':'that file isn\'t')+' a video. Choose the recording from Photos or Files.'); }
+        if(f.size>MAX_VIDEO){ this.value=''; return showErr('Piece '+n+': '+(fs.length>1?f.name:'that video')+' is '+size(f.size)+', over the 4 GB limit. Record at 1080p HD, 30 fps, or trim the start and end.'); }
+      }
+      if(fs.length>MAX_VIDEOS_PER_PIECE){ showErr('Piece '+n+': up to '+MAX_VIDEOS_PER_PIECE+' videos for one piece. We kept the first '+MAX_VIDEOS_PER_PIECE+'.'); fs=fs.slice(0,MAX_VIDEOS_PER_PIECE); } else showErr('');
+      p.videos=fs; showVideos();
     });
     if(!LINK) $('score'+n).addEventListener('change',function(){
       var fs=[].slice.call(this.files).filter(function(f){ return /^image\/|pdf$/.test(f.type)||/\.pdf$/i.test(f.name); });
@@ -920,8 +951,8 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     return api('/api/uploads/start',meta).then(function(sub){ subId=sub.id||'';
       var chain=Promise.resolve();
       chosen().forEach(function(p){
-        var acc={done:0,total:p.video.size+p.scores.reduce(function(a,f){return a+f.size;},0)};
-        chain=chain.then(function(){ return sendFile(sub,p,p.video,'video',acc); });
+        var acc={done:0,total:vbytes(p)+p.scores.reduce(function(a,f){return a+f.size;},0)};
+        p.videos.forEach(function(f){ chain=chain.then(function(){ return sendFile(sub,p,f,'video',acc); }); });
         p.scores.forEach(function(f){ chain=chain.then(function(){ return sendFile(sub,p,f,'score',acc); }); });
       });
       return chain.then(function(){ return api('/api/uploads/finish',{id:sub.id}); });
@@ -931,7 +962,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
   function fakeUpload(){
     var chain=Promise.resolve();
     chosen().forEach(function(p){
-      var t=p.video.size+p.scores.reduce(function(a,f){return a+f.size;},0), done=0;
+      var t=vbytes(p)+p.scores.reduce(function(a,f){return a+f.size;},0), done=0;
       chain=chain.then(function(){ return new Promise(function(res){
         $('pmsg').textContent='Uploading piece '+p.n+'. Keep this page open.';
         var iv=setInterval(function(){ var s=Math.min(t-done,t/10); done+=s; tick(p,s,done,t); if(done>=t){ clearInterval(iv); res(); } },90);
@@ -1093,12 +1124,12 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
 
     if(LINK) return sendLinks();
     if(!isLive && !sandbox){ showErr('Online upload isn\'t switched on yet. Please email music@cadenza-london.com and we\'ll help you send your pieces.'); return; }
-    total=chosen().reduce(function(a,p){ return a+p.video.size+p.scores.reduce(function(b,f){return b+f.size;},0); },0)||1; sent=0;
+    total=chosen().reduce(function(a,p){ return a+vbytes(p)+p.scores.reduce(function(b,f){return b+f.size;},0); },0)||1; sent=0;
     if(window.hideChat) window.hideChat(); if(tourI>=0) endTour();
     busy=true; stickyShow(); send.disabled=true; send.textContent='Uploading…'; $('prog').hidden=false;
     form.querySelectorAll('input,select').forEach(function(x){ x.disabled=true; });
     var meta={rid:reg.rid,token:reg.token,due:reg.due,name:$('name').value,email:$('email').value,student:$('student').value,grade:$('grade').value,board:$('board').value,consent:true,choice:choiceText(),
-      pieces:chosen().map(function(p){ return {piece:p.n,title:$('title'+p.n).value.trim(),video:{filename:p.video.name,size:p.video.size},scores:p.scores.map(function(f){ return {filename:f.name,size:f.size}; })}; })};
+      pieces:chosen().map(function(p){ return {piece:p.n,title:$('title'+p.n).value.trim(),video:{filename:p.video.name,size:p.video.size},videos:p.videos.map(function(f){ return {filename:f.name,size:f.size}; }),scores:p.scores.map(function(f){ return {filename:f.name,size:f.size}; })}; })};
     (isLive?liveUpload(meta):fakeUpload()).then(finish).catch(function(x){
       if(x&&(x.code==='released'||x.code==='withdrawn')) return showGone(x.code);
       if(x&&x.code==='four_pieces_required'){ form.querySelectorAll('input,select').forEach(function(y){ y.disabled=false; }); busy=false; stickyShow(); $('prog').hidden=true; send.disabled=false; updateCount(); return showErr('Sending fewer than 4 pieces isn\'t switched on yet. Please add all 4, or email music@cadenza-london.com and we\'ll help.'); }
@@ -1136,7 +1167,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     fd.append('upload_deadline',reg.due||''); fd.append('consent','yes');
     pieces.forEach(function(p){
       fd.append('piece'+p.n+'_title',$('title'+p.n).value.trim());
-      fd.append('piece'+p.n+'_video',p.video?p.video.name+' ('+size(p.video.size)+')':'');
+      fd.append('piece'+p.n+'_video',p.videos.map(function(f){ return f.name+' ('+size(f.size)+')'; }).join(', '));
       fd.append('piece'+p.n+'_score',p.scores.map(function(f){ return f.name; }).join(', '));
     });
     fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:fd.toString()}).catch(function(){});
