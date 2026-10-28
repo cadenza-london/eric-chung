@@ -644,6 +644,45 @@
     #promo-popup .promo-right-title br { display:none; }
   }
 
+  /* ══ Warm light theme for Christmas Concert + Video Feedback (Oct 2026): easier to read than black ══ */
+  #concert, #feedback { --lt-ink:#2E2418; --lt-mid:#5A4D3F; --lt-gold:#9A7623; --lt-line:rgba(154,118,35,0.28); }
+  #concert { background: linear-gradient(180deg, #FBF5EA 0%, #F4E8D3 100%) !important; color: var(--lt-ink) !important; }
+  #feedback { background: linear-gradient(180deg, #F7EDDC 0%, #FBF6EC 100%) !important; }
+  #concert .section-title, #concert .concert-cta h3 { color: var(--lt-ink) !important; }
+  #concert .section-label, #concert .section-title em, #concert .concert-cta h3 em { color: var(--lt-gold) !important; }
+  #concert .concert-intro, #concert .concert-cta p { color: var(--lt-mid) !important; font-weight: 400; }
+  #concert .concert-points li { color: var(--lt-mid) !important; border-top-color: var(--lt-line) !important; font-weight: 400; }
+  #concert .concert-points b { color: var(--lt-gold) !important; }
+  #concert .concert-gallery a { background: #E9DDC7; box-shadow: 0 10px 24px -16px rgba(46,36,24,0.55); }
+  #feedback [style*="color:#FDFAF5"] { color: var(--lt-ink) !important; }
+  #feedback [style*="color:rgba(253,250,245"] { color: var(--lt-mid) !important; font-weight: 400 !important; }
+  #feedback [style*="color:var(--gold)"] { color: var(--lt-gold) !important; }
+  #feedback [style*="background:#1C1C1C"] { background: #FFFDF8 !important; }
+  #feedback .coach-card { background: #FFFFFF; border-color: var(--lt-line); box-shadow: 0 14px 30px -22px rgba(46,36,24,0.5); }
+  #feedback .coach-card:hover { background: #FFFDF8; border-color: var(--gold); }
+  #feedback .coach-card.popular { background: var(--gold); border-color: var(--gold); }
+  #feedback .coach-kicker, #feedback .coach-price small, #feedback .coach-price span { color: var(--lt-gold); }
+  #feedback .coach-name, #feedback .coach-price, #feedback .coach-grades li b { color: var(--lt-ink); }
+  #feedback .coach-per, #feedback .coach-grades li, #feedback .coach-list li { color: var(--lt-mid); border-color: var(--lt-line); }
+  #feedback .coach-card.popular .coach-name, #feedback .coach-card.popular .coach-price, #feedback .coach-card.popular .coach-price span,
+  #feedback .coach-card.popular .coach-grades li, #feedback .coach-card.popular .coach-grades li b, #feedback .coach-card.popular .coach-per,
+  #feedback .coach-card.popular .coach-kicker, #feedback .coach-card.popular .coach-price small { color: #1C1C1C; }
+  #feedback .coach-btn { color: var(--lt-gold); border-color: var(--lt-gold); }
+  #feedback .coach-btn:hover { background: var(--lt-gold); color: #fff; }
+  #feedback .coach-card.popular .coach-btn { background: #2E2418; border-color: #2E2418; color: #FDFAF5; }
+  #feedback .coach-badge { background: #FFFDF8; color: var(--lt-gold); border-color: var(--lt-gold); }
+  #feedback .coach-extras p { color: var(--lt-mid); border-color: var(--lt-line); background: rgba(255,255,255,0.65); }
+  #feedback .coach-extras b { color: var(--lt-gold); }
+  #feedback .coach-soon { background: #FFFFFF; border-color: var(--lt-line); box-shadow: 0 16px 34px -24px rgba(46,36,24,0.55); }
+  #feedback .coach-soon h3 { color: var(--lt-ink); }
+  #feedback .coach-soon p { color: var(--lt-mid); font-weight: 400; }
+  #feedback .coach-soon-note { color: var(--lt-mid) !important; }
+  #feedback .coach-soon-alt, #feedback .coach-soon-note a { color: var(--lt-gold); }
+
+  /* Menu: scroll inside the drawer when groups are open (Oct 2026) */
+  .drawer { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+  .drawer .drawer-links { flex: 0 0 auto; }
+
   /* ── NAV ── */
   nav {
     position: fixed; top: 28px; left: 0; right: 0; z-index: 100;
