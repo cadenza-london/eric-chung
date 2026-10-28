@@ -112,6 +112,9 @@ main .col{display:grid;gap:22px}
 .card>p.sub{color:var(--muted);margin-top:-8px}
 
 /* fields */
+.pg-chk{display:flex;align-items:flex-start;gap:12px;background:var(--marigold-soft);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer;font-size:.95rem;font-weight:600;line-height:1.4}
+.pg-chk input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--ink);cursor:pointer}
+.pg-chk:has(input:checked){border-color:var(--ink)}
 .field{display:grid;gap:8px;min-width:0}
 .field label,.lbl{font-size:.92rem;font-weight:800}
 .lbl small,.field label small{font-weight:500;color:var(--muted);font-size:.8rem}
@@ -488,16 +491,17 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       <div class="sh"><span class="sn">1</span><div><h3>Check your details</h3><p>Already filled in from your registration. Tap Edit only if something is wrong.</p></div></div>
       <div class="dhead"><p class="prefill" id="prefillNote">Filled in from your registration</p><button type="button" class="edit" id="editBtn" aria-expanded="false" aria-controls="fields">Edit</button></div>
       <dl class="sum" id="summary">
-        <div><dt>Parent</dt><dd id="s-name"></dd></div>
-        <div><dt>Email</dt><dd id="s-email"></dd></div>
         <div><dt>Student</dt><dd id="s-student"></dd></div>
+        <div id="s-name-row"><dt>Parent</dt><dd id="s-name"></dd></div>
+        <div><dt>Email</dt><dd id="s-email"></dd></div>
         <div><dt>Grade</dt><dd id="s-grade"></dd></div>
         <div><dt>Exam board</dt><dd id="s-board"></dd></div>
       </dl>
       <div class="fieldset" id="fields">
-      <div class="field"><label for="name">Parent or guardian's name</label><input id="name" name="name" autocomplete="name" required></div>
+      <div class="field"><label for="student">Student's name</label><input id="student" name="student" autocomplete="name" required></div>
+      <label class="pg-chk" for="isParent"><input type="checkbox" id="isParent"><span>I'm a parent or guardian filling this in for the student</span></label>
+      <div class="field" id="nameField" hidden><label for="name">Parent or guardian's name</label><input id="name" name="name" autocomplete="name"></div>
       <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
-      <div class="field"><label for="student">Student's name</label><input id="student" name="student" required></div>
       <div class="field"><label for="grade">Exam grade</label>
         <select id="grade" name="grade" required><option value="">Choose a grade</option><option>Grade 1</option><option>Grade 2</option><option>Grade 3</option><option>Grade 4</option><option>Grade 5</option><option>Grade 6</option><option>Grade 7</option><option>Grade 8</option><option>Diploma (ARSM, ATCL or similar)</option></select></div>
       <div class="field"><label for="board">Exam board</label>
@@ -748,6 +752,14 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     $('exampleNote').hidden=false; $('previewFine').hidden=false; $('demo').hidden=false;
   }
   ['name','email','student','grade','board'].forEach(function(k){ if(reg[k]) $(k).value=reg[k]; });
+  /* parent / guardian: only asked for when the box is ticked; otherwise the student is the contact */
+  function isParent(){ return $('isParent').checked; }
+  function syncParent(){ var on=isParent(); $('nameField').hidden=!on; $('name').required=on; $('s-name-row').hidden=!on; }
+  if(reg.name && reg.name.trim().toLowerCase()!==(reg.student||'').trim().toLowerCase()) $('isParent').checked=true;
+  else $('name').value='';
+  syncParent();
+  $('isParent').addEventListener('change',function(){ syncParent(); if(isParent()) $('name').focus(); });
+  function contactName(){ return isParent()&&$('name').value.trim()?$('name').value.trim():$('student').value.trim(); }
   function syncSummary(){ ['name','email','student','grade','board'].forEach(function(k){ $('s-'+k).textContent=$(k).value||'—'; }); }
   function openFields(open){
     if(!open) syncSummary();
@@ -757,7 +769,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
   syncSummary();
   if(reg.email&&reg.student){ openFields(false); }
   else { $('prefillNote').hidden=true; $('editBtn').hidden=true; $('summary').hidden=true; }
-  $('editBtn').addEventListener('click',function(){ var o=$('fields').hidden; openFields(o); if(o) $('name').focus(); });
+  $('editBtn').addEventListener('click',function(){ var o=$('fields').hidden; openFields(o); if(o) $('student').focus(); });
 
   function fmtDue(iso){
     var d=new Date(iso); if(isNaN(d)) return '';
@@ -1073,7 +1085,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
   })();
   form.addEventListener('submit',function(e){
     e.preventDefault(); showErr('');
-    var miss=['name','email','student','grade','board'].filter(function(k){ return !$(k).value.trim(); });
+    var miss=['student'].concat(isParent()?['name']:[]).concat(['email','grade','board']).filter(function(k){ return !$(k).value.trim(); });
     if(miss.length){ openFields(true); showErr('Please fill in your details first.'); return $(miss[0]).focus(); }
     if(!/^\S+@\S+\.\S+$/.test($('email').value)){ openFields(true); showErr('Check the email address.'); return $('email').focus(); }
     if(!$('editBtn').hidden) openFields(false);
@@ -1097,7 +1109,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     if(window.hideChat) window.hideChat(); if(tourI>=0) endTour();
     busy=true; stickyShow(); send.disabled=true; send.textContent='Uploading…'; $('prog').hidden=false;
     form.querySelectorAll('input,select').forEach(function(x){ x.disabled=true; });
-    var meta={rid:reg.rid,token:reg.token,due:reg.due,name:$('name').value,email:$('email').value,student:$('student').value,grade:$('grade').value,board:$('board').value,consent:true,choice:choiceText(),
+    var meta={rid:reg.rid,token:reg.token,due:reg.due,name:contactName(),email:$('email').value,student:$('student').value,grade:$('grade').value,board:$('board').value,consent:true,choice:choiceText(),
       pieces:chosen().map(function(p){ return {piece:p.n,title:$('title'+p.n).value.trim(),video:{filename:p.video.name,size:p.video.size},scores:p.scores.map(function(f){ return {filename:f.name,size:f.size}; })}; })};
     (isLive?liveUpload(meta):fakeUpload()).then(finish).catch(function(x){
       if(x&&(x.code==='released'||x.code==='withdrawn')) return showGone(x.code);
@@ -1112,7 +1124,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     busy=true; stickyShow(); send.disabled=true; send.textContent='Sending…';
     var fd=new URLSearchParams();
     fd.append('form-name','exam-course-pieces'); fd.append('bot-field','');
-    ['name','email','student','grade','board'].forEach(function(k){ fd.append(k,$(k).value.trim()); });
+    ['email','student','grade','board'].forEach(function(k){ fd.append(k,$(k).value.trim()); }); fd.append('name',contactName()); fd.append('is_parent',isParent()?'yes':'no');
     fd.append('upload_deadline',reg.due||''); fd.append('consent','yes');
     chosen().forEach(function(p){
       fd.append('piece'+p.n+'_title',$('title'+p.n).value.trim());
@@ -1132,7 +1144,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     if(LINK || !/netlify\.app$/.test(location.hostname)) return; // Netlify Forms copy: only on Netlify hosting
     var fd=new URLSearchParams();
     fd.append('form-name','exam-course-pieces'); fd.append('bot-field','');
-    ['name','email','student','grade','board'].forEach(function(k){ fd.append(k,$(k).value.trim()); });
+    ['email','student','grade','board'].forEach(function(k){ fd.append(k,$(k).value.trim()); }); fd.append('name',contactName()); fd.append('is_parent',isParent()?'yes':'no');
     fd.append('upload_deadline',reg.due||''); fd.append('consent','yes');
     pieces.forEach(function(p){
       fd.append('piece'+p.n+'_title',$('title'+p.n).value.trim());
