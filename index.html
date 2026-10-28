@@ -646,8 +646,13 @@
 
   /* ══ Warm light theme for Christmas Concert + Video Feedback (Oct 2026): easier to read than black ══ */
   #concert, #feedback { --lt-ink:#2E2418; --lt-mid:#5A4D3F; --lt-gold:#9A7623; --lt-line:rgba(154,118,35,0.28); }
-  #concert { background: linear-gradient(180deg, #FBF5EA 0%, #F4E8D3 100%) !important; color: var(--lt-ink) !important; }
-  #feedback { background: linear-gradient(180deg, #F7EDDC 0%, #FBF6EC 100%) !important; }
+  #concert { background: radial-gradient(ellipse 70% 55% at 85% 0%, rgba(255,255,255,0.75), transparent 70%), linear-gradient(180deg, #F6E3BC 0%, #FBF1DC 100%) !important; color: var(--lt-ink) !important;
+    border-top: 3px double rgba(176,138,48,0.55); border-bottom: 3px double rgba(176,138,48,0.55); position: relative; }
+  #feedback { background: radial-gradient(ellipse 70% 55% at 15% 0%, rgba(255,255,255,0.8), transparent 70%), linear-gradient(180deg, #E4EFF5 0%, #F5F9FB 100%) !important;
+    border-top: 3px double rgba(110,160,190,0.55); border-bottom: 3px double rgba(110,160,190,0.55); }
+  #feedback .coach-card { border-color: rgba(110,160,190,0.35); }
+  #feedback .coach-extras p { background: rgba(255,255,255,0.8); border-color: rgba(110,160,190,0.35); }
+  #feedback .coach-soon { border-color: rgba(110,160,190,0.4); }
   #concert .section-title, #concert .concert-cta h3 { color: var(--lt-ink) !important; }
   #concert .section-label, #concert .section-title em, #concert .concert-cta h3 em { color: var(--lt-gold) !important; }
   #concert .concert-intro, #concert .concert-cta p { color: var(--lt-mid) !important; font-weight: 400; }
