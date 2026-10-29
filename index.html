@@ -199,7 +199,7 @@
 }
 </script>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -1706,6 +1706,86 @@
   @media (prefers-reduced-motion: reduce) {
     .spot-docs img, .concert-gallery img { transition: none; }
   }
+
+  /* ── Promo popup: simple gold frame (29 Oct 2026) ── */
+  #promo-popup.sp { --sp-gold:#C9A84C; --sp-deep:#8F6F22; --sp-pale:#F7F0E0; --sp-hair:#EADCB8; --sp-ink:#1C1C1C; --sp-mid:#5A5047; --sp-soft:#8C7B6E;
+    display:grid; grid-template-columns:none; gap:18px; width:min(460px,92vw); max-height:88vh; max-height:88dvh; overflow:hidden auto;
+    padding:28px 26px 22px; border:3px solid transparent; border-radius:20px; font-family:'Jost',sans-serif; color:var(--sp-ink);
+    background:linear-gradient(#fff,#fff) padding-box, linear-gradient(115deg,#8F6F22 0%,#C9A84C 18%,#FFF3C4 30%,#C9A84C 42%,#9E7E2A 55%,#E8D5A3 70%,#FFF7D9 80%,#C9A84C 90%,#8F6F22 100%) border-box;
+    background-size:100% 100%,300% 300%; animation:spShine 5s linear infinite;
+    box-shadow:0 0 0 1px rgba(201,168,76,.35),0 0 28px rgba(232,200,110,.45),0 24px 60px rgba(28,22,14,.28); }
+  @keyframes spShine{0%{background-position:0 0,0% 50%}100%{background-position:0 0,100% 50%}}
+  @keyframes spText{0%{background-position:100% 0}100%{background-position:-150% 0}}
+  #promo-popup.sp .promo-close { position:absolute; top:12px; right:12px; width:36px; height:36px; border-radius:50%; border:1px solid var(--sp-hair); background:#fff; color:var(--sp-mid);
+    font-size:1.2rem; line-height:1; display:grid; place-items:center; padding:0; cursor:pointer; transform:none; transition:background-color .2s ease, transform .16s ease-out; }
+  #promo-popup.sp .promo-close:active { transform:scale(.94); }
+  #promo-popup.sp .sp-head { display:grid; gap:6px; padding-right:36px; }
+  #promo-popup.sp .sp-eye { justify-self:start; display:inline-flex; align-items:center; gap:7px; font:700 .72rem/1.3 'Jost',sans-serif; letter-spacing:.24em; text-transform:uppercase;
+    background:linear-gradient(100deg,#8F6F22 0%,#B8902E 35%,#F3DC8C 50%,#B8902E 65%,#8F6F22 100%); background-size:250% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:spText 3.5s linear infinite; }
+  #promo-popup.sp .sp-eye i { font-style:normal; color:var(--sp-gold); -webkit-text-fill-color:var(--sp-gold); font-size:.85rem; }
+  #promo-popup.sp .sp-h { font:500 2rem/1.05 'Cormorant Garamond',serif; margin:0; color:var(--sp-ink); text-wrap:balance; }
+  #promo-popup.sp .sp-h em { font-style:italic; color:var(--sp-deep); }
+  #promo-popup.sp .sp-list { display:grid; gap:8px; margin:0; padding:0; list-style:none; }
+  #promo-popup.sp .sp-row { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:12px; padding:13px 14px; border:1px solid var(--sp-hair); border-radius:12px;
+    text-decoration:none; color:inherit; background:#fff; transition:background-color .2s ease, border-color .2s ease, transform .16s ease-out; }
+  #promo-popup.sp .sp-row:active { transform:scale(.985); }
+  #promo-popup.sp .sp-row:focus-visible, #promo-popup.sp .sp-btn:focus-visible, #promo-popup.sp .promo-close:focus-visible, #promo-popup.sp .sp-in:focus-visible { outline:2px solid var(--sp-deep); outline-offset:2px; }
+  #promo-popup.sp .sp-ic { width:42px; height:42px; border-radius:12px; display:grid; place-items:center; background:var(--sp-pale); color:var(--sp-deep); }
+  #promo-popup.sp .sp-ic svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+  #promo-popup.sp .sp-t { display:block; font:600 1.22rem/1.15 'Cormorant Garamond',serif; color:var(--sp-ink); }
+  #promo-popup.sp .sp-t small { font:400 .78rem 'Jost',sans-serif; color:var(--sp-soft); white-space:nowrap; }
+  #promo-popup.sp .sp-d { display:block; font:300 .82rem/1.45 'Jost',sans-serif; color:var(--sp-mid); margin-top:2px; }
+  #promo-popup.sp .sp-d b { font-weight:500; color:var(--sp-deep); }
+  #promo-popup.sp .sp-go { width:32px; height:32px; border-radius:50%; display:grid; place-items:center; border:1px solid var(--sp-gold); color:var(--sp-deep); font-size:.95rem; line-height:1;
+    transition:background-color .2s ease, color .2s ease, transform .2s cubic-bezier(0.23,1,0.32,1); }
+  #promo-popup.sp .sp-row.main { background:var(--sp-pale); border-color:var(--sp-gold); }
+  #promo-popup.sp .sp-row.main .sp-ic { background:#fff; }
+  #promo-popup.sp .sp-row.main .sp-go { background:var(--sp-gold); color:#fff; }
+  #promo-popup.sp .sp-offer { border-top:1px solid var(--sp-hair); padding-top:16px; }
+  #promo-popup.sp #promo-mailing-form { display:grid; gap:10px; }
+  #promo-popup.sp .sp-offer-h { display:flex; align-items:center; gap:12px; margin:0; }
+  #promo-popup.sp .sp-offer-h strong { flex:none; display:grid; place-items:center; text-align:center; background:var(--sp-deep); color:#fff; border-radius:12px; padding:8px 12px; font:700 1.9rem/1 'Jost',sans-serif; letter-spacing:-.01em; }
+  #promo-popup.sp .sp-offer-h strong small { display:block; font:500 .6rem/1 'Jost',sans-serif; letter-spacing:.22em; margin-top:4px; }
+  #promo-popup.sp .sp-offer-h span { font:400 .92rem/1.4 'Jost',sans-serif; color:var(--sp-ink); }
+  #promo-popup.sp .sp-offer-h span b { font-weight:500; }
+  #promo-popup.sp .sp-form { display:grid; grid-template-columns:1fr auto; gap:8px; }
+  #promo-popup.sp .sp-sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  #promo-popup.sp .sp-in { font:400 1rem 'Jost',sans-serif; color:var(--sp-ink); background:#fff; border:1px solid var(--sp-hair); border-radius:10px; padding:.8rem .9rem; min-width:0; width:100%; box-sizing:border-box; }
+  #promo-popup.sp .sp-in::placeholder { color:var(--sp-soft); }
+  #promo-popup.sp .sp-btn { font:500 .78rem 'Jost',sans-serif; letter-spacing:.12em; text-transform:uppercase; color:#fff; background:var(--sp-ink); border:0; border-radius:10px; padding:0 1.1rem; cursor:pointer; white-space:nowrap; transition:background-color .2s ease, transform .16s ease-out; }
+  #promo-popup.sp .sp-btn:active { transform:scale(.97); }
+  #promo-popup.sp .sp-btn:disabled { opacity:.7; cursor:default; }
+  #promo-popup.sp .sp-fine { font:300 .72rem 'Jost',sans-serif; color:var(--sp-soft); margin:0; }
+  #promo-popup.sp .sp-err { font:400 .78rem 'Jost',sans-serif; color:#A33A2A; margin:0; }
+  #promo-popup.sp .sp-done { display:grid; gap:8px; text-align:center; }
+  #promo-popup.sp .sp-done p { margin:0; }
+  #promo-popup.sp .sp-ok { font:600 1.3rem 'Cormorant Garamond',serif; color:var(--sp-ink); }
+  #promo-popup.sp #promo-code-box { gap:8px; }
+  #promo-popup.sp .k { font:500 .62rem 'Jost',sans-serif; letter-spacing:.24em; text-transform:uppercase; color:var(--sp-deep); margin-bottom:6px !important; }
+  #promo-popup.sp .sp-code { font:600 1.5rem 'Cormorant Garamond',serif; letter-spacing:.08em; border:1.5px dashed var(--sp-gold); background:var(--sp-pale); border-radius:10px; padding:.6rem; user-select:all; color:var(--sp-ink); }
+  #promo-popup.sp .s { font:300 .8rem/1.45 'Jost',sans-serif; color:var(--sp-mid); margin-top:6px !important; }
+  @media (hover:hover) and (pointer:fine) {
+    #promo-popup.sp .sp-row:hover { background:var(--sp-pale); border-color:var(--sp-gold); }
+    #promo-popup.sp .sp-row:hover .sp-go { background:var(--sp-gold); color:#fff; transform:translateX(2px); }
+    #promo-popup.sp .sp-btn:hover { background:#3a332b; }
+    #promo-popup.sp .promo-close:hover { background:var(--sp-pale); color:var(--sp-ink); }
+  }
+  @media (max-width:480px) {
+    #promo-popup.sp { padding:22px 16px 16px; gap:14px; width:94vw; }
+    #promo-popup.sp .sp-h { font-size:1.65rem; }
+    #promo-popup.sp .sp-row { padding:11px 12px; gap:10px; }
+    #promo-popup.sp .sp-ic { width:38px; height:38px; }
+    #promo-popup.sp .sp-t { font-size:1.12rem; }
+    #promo-popup.sp .sp-d { font-size:.78rem; }
+    #promo-popup.sp .sp-form { grid-template-columns:1fr; }
+    #promo-popup.sp .sp-btn { padding:.85rem; }
+    #promo-popup.sp .sp-offer-h strong { font-size:1.7rem; padding:7px 10px; }
+    #promo-popup.sp .sp-offer-h span { font-size:.86rem; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    #promo-popup.sp, #promo-popup.sp .sp-eye { animation:none; }
+    #promo-popup.sp .sp-row, #promo-popup.sp .sp-go, #promo-popup.sp .sp-btn, #promo-popup.sp .promo-close { transition:none; }
+  }
   </style>
 </head>
 <body>
@@ -2646,91 +2726,50 @@
      ══════════════════════════════════════════ -->
 <div id="promo-overlay" class="promo-overlay"></div>
 
-<div id="promo-popup" class="promo-popup" role="dialog" aria-modal="true" aria-label="New Services Announcement">
-  <button id="promo-close" class="promo-close" aria-label="Close">&times;</button>
-
-  <!-- Left panel: announcement -->
-  <div class="promo-left">
-    <span class="g2-launch">New launch</span>
-    <h2 class="g2-h">New ways to learn <em>with Eric</em></h2>
-    <div class="g2-rule" aria-hidden="true"></div>
-    <div class="g2-list">
-      <div class="g2-it" id="g2-club">
-        <button type="button" class="g2-hd" aria-expanded="false" aria-controls="g2-p-club">
-          <span><span class="g2-tag">New · Free until 31 Dec</span><span class="g2-t">Sight-Reading Club</span><span class="g2-d">Practice makes perfect · weekly on Zoom</span></span>
-          <span class="g2-tog" aria-hidden="true"><b></b><i>+</i></span>
-        </button>
-        <div class="g2-pn" id="g2-p-club"><div><div class="g2-bd">
-          <ul class="g2-ticks"><li>Read new music with a friendly community every Tuesday</li><li>Ask Eric anything and pick up great tips</li><li>Become a better pianist, Grades 1–8</li></ul>
-          <p class="g2-price"><strong>Free until 31 Dec</strong> · Tuesdays 6–6:45pm on Zoom</p>
-          <a class="g2-cta" href="sight-reading-club/" onclick="closePromoPopup && closePromoPopup()">Join free <span aria-hidden="true">→</span></a>
-        </div></div></div>
-      </div>
-      <div class="g2-it g2-open" id="g2-exam">
-        <button type="button" class="g2-hd" aria-expanded="true" aria-controls="g2-p-exam">
-          <span><span class="g2-tag">New · Starts 28 Nov</span><span class="g2-t">Digital Exam Ready Course</span><span class="g2-d">ABRSM &amp; Trinity · in person, London</span></span>
-          <span class="g2-tog" aria-hidden="true"><b></b><i>+</i></span>
-        </button>
-        <div class="g2-pn" id="g2-p-exam"><div><div class="g2-bd">
-          <p class="g2-line">Get coached. Get marked. Get recorded.</p>
-          <div class="g2-steps"><div><small>Weeks 1–3</small><b>Polish your pieces</b><em>Live coaching, learn from peers</em></div><div><small>Week 3</small><b>Mock exam</b><em>Examiner-standard marks</em></div><div><small>Week 4</small><b>Your exam video</b><em>Recorded on a grand piano</em></div></div>
-          <p class="g2-price"><strong>From £295</strong> · <span class="g2-eb">Early bird: first 3 save £20</span></p>
-          <a class="g2-cta" href="digital-exam-ready/" onclick="closePromoPopup && closePromoPopup()">Register interest (free) <span aria-hidden="true">→</span></a>
-        </div></div></div>
-      </div>
-      <div class="g2-it" id="g2-coach">
-        <button type="button" class="g2-hd" aria-expanded="false" aria-controls="g2-p-coach">
-          <span><span class="g2-tag g2-soft">Now enrolling</span><span class="g2-t">Video Feedback <small class="oc-sub" style="font-size:.72em;font-weight:400;opacity:.8;letter-spacing:inherit;text-transform:inherit;white-space:nowrap">(Online Coaching)</small></span><span class="g2-d">Exam-style marking from £15</span></span>
-          <span class="g2-tog" aria-hidden="true"><b></b><i>+</i></span>
-        </button>
-        <div class="g2-pn" id="g2-p-coach"><div><div class="g2-bd">
-          <ul class="g2-ticks"><li>Send a video of your piece from home</li><li>Eric marks it like an examiner, with written fixes</li><li>Single Piece Check or Full Exam Check, priced by grade</li></ul>
-          <p class="g2-price"><strong>From £15</strong> · <span class="g2-eb">10% off your first session</span></p>
-          <a class="g2-cta" href="https://cadenza-london.com/digital-exam-ready/upload.html?mode=coaching&amp;pkg=single" onclick="closePromoPopup && closePromoPopup()">Get feedback <span aria-hidden="true">→</span></a>
-        </div></div></div>
-      </div>
-    </div>
+<div id="promo-popup" class="promo-popup sp" role="dialog" aria-modal="true" aria-labelledby="sp-h">
+  <button id="promo-close" class="promo-close sp-x" type="button" aria-label="Close">&times;</button>
+  <div class="sp-head">
+    <span class="sp-eye"><i aria-hidden="true">&#10022;</i>New at Cadenza London<i aria-hidden="true">&#10022;</i></span>
+    <h2 class="sp-h" id="sp-h">New ways to learn <em>with Eric</em></h2>
   </div>
 
-  <!-- Right panel: mailing list -->
-  <div class="promo-right">
-    <div class="promo-right-inner">
-      <p class="promo-right-label">Stay in the Loop</p>
-      <h3 class="promo-right-title">Join Our <br><em>Limited VIP List</em></h3>
-      <p class="g2-desc">Be first to hear about new services, limited spots and early-bird offers.</p>
-      <div class="g2-offer"><strong>10%</strong><span>off your first Video Feedback <small class="oc-sub" style="font-size:.72em;font-weight:400;opacity:.8;letter-spacing:inherit;text-transform:inherit;white-space:nowrap">(Online Coaching)</small> session, plus early notice of new dates and early-bird prices.</span></div>
+  <ul class="sp-list">
+    <li><a class="sp-row" href="sight-reading-club/" onclick="closePromoPopup && closePromoPopup()">
+      <span class="sp-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 9.5h18M3 13h18M3 16.5h18"/><ellipse cx="8" cy="16.5" rx="2" ry="1.5" fill="currentColor"/><path d="M10 16.5V5"/><ellipse cx="15.5" cy="13" rx="2" ry="1.5" fill="currentColor"/><path d="M17.5 13V3.5"/></svg></span>
+      <span><span class="sp-t">Sight-Reading Club</span><span class="sp-d"><b>Free until 31 Dec</b> · Tuesdays on Zoom, Grades 1–8</span></span>
+      <span class="sp-go" aria-hidden="true">→</span></a></li>
+    <li><a class="sp-row main" href="digital-exam-ready/" onclick="closePromoPopup && closePromoPopup()">
+      <span class="sp-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path d="M9.5 9l1.8 1.8L15 7.2"/><path d="M8.5 13.5L7 21l5-2.5 5 2.5-1.5-7.5"/></svg></span>
+      <span><span class="sp-t">Digital Exam Ready Course</span><span class="sp-d">Coached, marked and recorded on a grand piano · <b>starts 28 Nov</b> · from £295</span></span>
+      <span class="sp-go" aria-hidden="true">→</span></a></li>
+    <li><a class="sp-row" href="https://cadenza-london.com/digital-exam-ready/upload.html?mode=coaching&amp;pkg=single" onclick="closePromoPopup && closePromoPopup()">
+      <span class="sp-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="M15.5 10.5l6-3.5v10l-6-3.5z"/><path d="M6.5 10.5h5M6.5 13.5h3"/></svg></span>
+      <span><span class="sp-t">Video Feedback <small>(Online Coaching)</small></span><span class="sp-d">Send a video from home, Eric marks it · from £15</span></span>
+      <span class="sp-go" aria-hidden="true">→</span></a></li>
+  </ul>
 
-      <form id="promo-mailing-form" novalidate>
-        <div class="promo-field">
-          <label class="promo-label" for="promo-name">Your Name</label>
-          <input class="promo-input" type="text" id="promo-name" placeholder="Jane Smith" autocomplete="name" />
-        </div>
-        <div class="promo-field">
-          <label class="promo-label" for="promo-email">Email Address</label>
-          <input class="promo-input" type="email" id="promo-email" placeholder="jane@example.com" autocomplete="email" />
-        </div>
-        <p id="promo-error" style="display:none;font-size:0.75rem;color:#c0392b;margin-bottom:0.8rem;"></p>
-        <button type="submit" id="promo-submit" class="promo-submit-btn">
-          <span id="promo-btn-text">Claim my 10% off →</span>
-          <span id="promo-btn-loading" style="display:none;">Sending…</span>
-        </button>
-        <p class="promo-privacy">No spam, ever. Unsubscribe at any time.</p>
-      </form>
-
-      <div id="promo-success" style="display:none;" class="promo-success-msg">
-        <div class="promo-success-check">✓</div>
-        <p class="promo-success-title">You're on the list</p>
-        <p class="promo-success-sub">Thank you! We'll be in touch with the latest from Cadenza London.</p>
-        <div id="promo-code-box" style="display:none;margin-top:1.2rem;border:1.5px dashed #b8902e;background:#fffaf0;padding:1rem;text-align:center;">
-          <p style="font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:#7a5a12;margin:0 0 0.4rem;font-weight:600;">Your 10% welcome code</p>
-          <p id="promo-code" style="font-size:1.3rem;letter-spacing:0.12em;font-weight:600;margin:0;user-select:all;color:#1C1C1C;"></p>
-          <p style="font-size:0.72rem;color:#5e554a;margin:0.5rem 0 0;">For your first Video Feedback <small class="oc-sub" style="font-size:.72em;font-weight:400;opacity:.8;letter-spacing:inherit;text-transform:inherit;white-space:nowrap">(Online Coaching)</small> session. We've emailed it to you too.</p>
-        </div>
-        <p id="promo-code-msg" style="display:none;font-size:0.75rem;color:#5e554a;margin-top:1rem;"></p>
+  <div class="sp-offer">
+    <form id="promo-mailing-form" novalidate>
+      <p class="sp-offer-h"><strong>10%<small>OFF</small></strong><span><b>Your first Video Feedback.</b> Plus early notice of new dates and early-bird prices.</span></p>
+      <div class="sp-form">
+        <label for="promo-email" class="sp-sr">Email address</label>
+        <input class="sp-in" type="email" id="promo-email" placeholder="Your email" autocomplete="email">
+        <button type="submit" id="promo-submit" class="sp-btn"><span id="promo-btn-text">Get my code</span><span id="promo-btn-loading" style="display:none;">Sending…</span></button>
       </div>
+      <p id="promo-error" class="sp-err" style="display:none;"></p>
+      <p class="sp-fine">No spam. Unsubscribe any time.</p>
+    </form>
+
+    <div id="promo-success" class="sp-done" style="display:none;">
+      <p class="sp-ok">✓ You're on the list</p>
+      <div id="promo-code-box" style="display:none;">
+        <p class="k">Your 10% welcome code</p>
+        <p id="promo-code" class="sp-code"></p>
+        <p class="s">For your first Video Feedback session. We've emailed it to you too.</p>
+      </div>
+      <p id="promo-code-msg" class="s" style="display:none;"></p>
     </div>
   </div>
-  <div class="pp-more" aria-hidden="true"><button type="button" class="pp-more-btn" tabindex="-1">Scroll for more <span>↓</span></button></div>
 </div>
 
 <dialog id="lightbox" aria-label="Enlarged photo">
@@ -3066,34 +3105,6 @@
     sessionStorage.setItem('promoDismissed', 'true');
   };
 
-  // ── Popup "scroll for more" prompt (Oct 2026) ──
-  (function(){
-    var pp=document.getElementById('promo-popup'); if(!pp) return;
-    var btn=pp.querySelector('.pp-more-btn');
-    function update(){ var end=pp.scrollHeight-pp.clientHeight-pp.scrollTop < 40; pp.classList.toggle('pp-at-end', end); }
-    pp.addEventListener('scroll', update, {passive:true});
-    window.addEventListener('resize', update);
-    if(btn) btn.addEventListener('click', function(){ pp.scrollBy({top: pp.clientHeight*0.7, behavior:'smooth'}); });
-    new MutationObserver(function(){ setTimeout(update, 50); setTimeout(update, 400); }).observe(pp, {attributes:true, attributeFilter:['class'], subtree:false});
-    pp.querySelectorAll('.g2-hd').forEach(function(h){ h.addEventListener('click', function(){ setTimeout(update, 350); }); });
-    update();
-  })();
-
-  // ── Promo popup accordion (Oct 2026) ──
-  (function(){
-    var items=[].slice.call(document.querySelectorAll('#promo-popup .g2-it'));
-    items.forEach(function(it){
-      it.querySelector('.g2-hd').addEventListener('click',function(){
-        var opening=!it.classList.contains('g2-open');
-        items.forEach(function(o){
-          var on=(o===it)&&opening;
-          o.classList.toggle('g2-open',on);
-          o.querySelector('.g2-hd').setAttribute('aria-expanded',on?'true':'false');
-        });
-      });
-    });
-  })();
-
   // ── PROMO POPUP ──
   const promoPopup = document.getElementById('promo-popup');
   const promoOverlay = document.getElementById('promo-overlay');
@@ -3142,16 +3153,16 @@
 
   promoForm && promoForm.addEventListener('submit', async function(e) {
     e.preventDefault();
-    const nameVal = document.getElementById('promo-name').value.trim();
+    const nameEl = document.getElementById('promo-name'); const nameVal = nameEl ? nameEl.value.trim() : '';
     const emailVal = document.getElementById('promo-email').value.trim();
     const btn = document.getElementById('promo-submit');
     const btnText = document.getElementById('promo-btn-text');
     const btnLoading = document.getElementById('promo-btn-loading');
     const errEl = document.getElementById('promo-error');
 
-    if (!nameVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
       errEl.style.display = 'block';
-      errEl.textContent = 'Please enter a valid name and email address.';
+      errEl.textContent = 'Please enter a valid email address.';
       return;
     }
     errEl.style.display = 'none';
@@ -3167,7 +3178,7 @@
       });
       if (res.ok) {
         promoForm.style.display = 'none';
-        promoSuccess.style.display = 'block';
+        promoSuccess.style.display = 'grid';
         const w = await getWelcomeCode(nameVal, emailVal);
         if (w && w.code) {
           document.getElementById('promo-code').textContent = w.code;
