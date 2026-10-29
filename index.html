@@ -3220,6 +3220,21 @@
     return 'We couldn\'t create your welcome code just now. Email music@cadenza-london.com and we\'ll send you one.';
   }
 
+  // Sign-up: Formspree list + welcome code run side by side, each with a 15s limit, so one slow service never leaves "Sending…" stuck
+  function withTimeout(promise, ms) {
+    return Promise.race([promise, new Promise(function(_, rej){ setTimeout(function(){ rej(new Error('timeout')); }, ms); })]);
+  }
+  async function subscribe(name, email, source) {
+    const list = withTimeout(fetch('https://formspree.io/f/xpqydbyq', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ name: name || '', email: email, _subject: 'New Mailing List Signup — Cadenza London (' + source + ')' })
+    }).then(function(r){ return r.ok; }), 15000).catch(function(){ return false; });
+    const code = withTimeout(getWelcomeCode(name, email), 15000).catch(function(){ return { error: 'network' }; });
+    const w = (await code) || {};
+    if (w.code || w.error === 'email_used' || w.error === 'ip_used') return { saved: true, w: w };  // the code service also keeps the email
+    return { saved: await list, w: w };
+  }
+
   promoForm && promoForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     const nameEl = document.getElementById('promo-name'); const nameVal = nameEl ? nameEl.value.trim() : '';
@@ -3228,47 +3243,25 @@
     const btnText = document.getElementById('promo-btn-text');
     const btnLoading = document.getElementById('promo-btn-loading');
     const errEl = document.getElementById('promo-error');
-
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-      errEl.style.display = 'block';
-      errEl.textContent = 'Please enter a valid email address.';
-      return;
+      errEl.style.display = 'block'; errEl.textContent = 'Please enter a valid email address.'; return;
     }
     errEl.style.display = 'none';
-    btn.disabled = true;
-    btnText.style.display = 'none';
-    btnLoading.style.display = 'inline';
-
-    try {
-      const res = await fetch('https://formspree.io/f/xpqydbyq', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ name: nameVal, email: emailVal, _subject: 'New Mailing List Signup — Cadenza London (Popup)' })
-      });
-      if (res.ok) {
-        promoForm.style.display = 'none';
-        promoSuccess.style.display = 'grid';
-        const w = await getWelcomeCode(nameVal, emailVal);
-        if (w && w.code) {
-          document.getElementById('promo-code').textContent = w.code;
-          document.getElementById('promo-code-box').style.display = 'block';
-        } else if (welcomeMsg(w)) {
-          const m = document.getElementById('promo-code-msg'); m.textContent = welcomeMsg(w); m.style.display = 'block';
-          setTimeout(closePromoPopup, 6000);
-        } else setTimeout(closePromoPopup, 3500);
-      } else {
-        errEl.textContent = 'Something went wrong. Please try again.';
-        errEl.style.display = 'block';
-        btn.disabled = false;
-        btnText.style.display = 'inline';
-        btnLoading.style.display = 'none';
+    btn.disabled = true; btnText.style.display = 'none'; btnLoading.style.display = 'inline';
+    const r = await subscribe(nameVal, emailVal, 'Popup');
+    if (r.saved) {
+      promoForm.style.display = 'none';
+      promoSuccess.style.display = 'grid';
+      if (r.w.code) {
+        document.getElementById('promo-code').textContent = r.w.code;
+        document.getElementById('promo-code-box').style.display = 'block';
+      } else if (welcomeMsg(r.w)) {
+        const m = document.getElementById('promo-code-msg'); m.textContent = welcomeMsg(r.w); m.style.display = 'block';
       }
-    } catch(err) {
-      errEl.textContent = 'Network error. Please try again.';
+    } else {
+      errEl.textContent = 'We couldn\'t connect just now. Check your internet and try again, or email music@cadenza-london.com.';
       errEl.style.display = 'block';
-      btn.disabled = false;
-      btnText.style.display = 'inline';
-      btnLoading.style.display = 'none';
+      btn.disabled = false; btnText.style.display = 'inline'; btnLoading.style.display = 'none';
     }
   });
   // ── FOOTER MAILING LIST ──
@@ -3281,33 +3274,20 @@
     const btnLoading = document.getElementById('footer-btn-loading');
     const errEl = document.getElementById('footer-mailing-error');
     const successEl = document.getElementById('footer-mailing-success');
-
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
       errEl.textContent = 'Please enter a valid email address.';
       errEl.style.display = 'block'; return;
     }
     errEl.style.display = 'none';
     btn.disabled = true; btnText.style.display = 'none'; btnLoading.style.display = 'inline';
-
-    try {
-      const res = await fetch('https://formspree.io/f/xpqydbyq', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ email: emailVal, _subject: 'New Mailing List Signup — Cadenza London Footer' })
-      });
-      if (res.ok) {
-        footerForm.style.display = 'none';
-        successEl.style.display = 'block';
-        const w = await getWelcomeCode('', emailVal);
-        if (w && w.code) successEl.innerHTML = '✓ &nbsp;You\'re on the list! Your 10% welcome code: <b style="letter-spacing:0.1em;user-select:all;">' + w.code + '</b> (also sent to your inbox)';
-        else if (welcomeMsg(w)) successEl.innerHTML = '✓ &nbsp;You\'re on the list. ' + welcomeMsg(w);
-      } else {
-        errEl.textContent = 'Something went wrong. Please try again.';
-        errEl.style.display = 'block';
-        btn.disabled = false; btnText.style.display = 'inline'; btnLoading.style.display = 'none';
-      }
-    } catch(err) {
-      errEl.textContent = 'Network error. Please try again.';
+    const r = await subscribe('', emailVal, 'Footer');
+    if (r.saved) {
+      footerForm.style.display = 'none';
+      successEl.style.display = 'block';
+      if (r.w.code) successEl.innerHTML = '✓ &nbsp;You\'re on the list! Your 10% welcome code: <b style="letter-spacing:0.1em;user-select:all;">' + r.w.code + '</b> (also sent to your inbox)';
+      else if (welcomeMsg(r.w)) successEl.innerHTML = '✓ &nbsp;You\'re on the list. ' + welcomeMsg(r.w);
+    } else {
+      errEl.textContent = 'We couldn\'t connect just now. Check your internet and try again, or email music@cadenza-london.com.';
       errEl.style.display = 'block';
       btn.disabled = false; btnText.style.display = 'inline'; btnLoading.style.display = 'none';
     }
