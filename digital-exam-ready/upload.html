@@ -686,7 +686,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       <tr><td>Grade 1–4</td><td class="r">£15</td><td class="r"><b>£49</b></td></tr>
       <tr><td>Grade 5–6</td><td class="r">£20</td><td class="r"><b>£69</b></td></tr>
       <tr><td>Grade 7–8</td><td class="r">£25</td><td class="r"><b>£89</b></td></tr>
-      <tr><td>Diploma</td><td class="r">£35</td><td class="r"><b>£129</b></td></tr>
+      <tr><td>Diploma</td><td class="r">£38</td><td class="r"><b>£129</b></td></tr>
     </tbody>
   </table>
   <p class="fine">Need it sooner? 48-hour express is +£10.</p>
@@ -717,7 +717,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
   /* ===== LIVE CONFIG: set this to the upload address Cloudflare gives you ===== */
   var UPLOAD_API = 'https://cadenza-exam-upload.jessiemovement.workers.dev';
   // Online Coaching prices in pence, by grade band (the upload server uses the same table to charge)
-  var PRICES={g1_4:{single:1500,full:4900},g5_6:{single:2000,full:6900},g7_8:{single:2500,full:8900},diploma:{single:3500,full:12900}};
+  var PRICES={g1_4:{single:1500,full:4900},g5_6:{single:2000,full:6900},g7_8:{single:2500,full:8900},diploma:{single:3800,full:12900}};
   function bandOf(g){ g=String(g||''); if(/diploma|arsm|atcl|ltcl|lrsm|ftcl|frsm|drsm/i.test(g)) return 'diploma'; var n=parseInt((g.match(/\d/)||['1'])[0],10); return n<=4?'g1_4':n<=6?'g5_6':'g7_8'; }
   function gbp(p){ return '£'+(p/100).toFixed(p%100?2:0); }
   var subId = '';
