@@ -115,6 +115,17 @@ main .col{display:grid;gap:22px}
 .pg-chk{display:flex;align-items:flex-start;gap:12px;background:var(--marigold-soft);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer;font-size:.95rem;font-weight:600;line-height:1.4}
 .pg-chk input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--ink);cursor:pointer}
 .pg-chk:has(input:checked){border-color:var(--ink)}
+.age-q{border:0;padding:0;margin:0;min-width:0}
+.age-q legend{font-size:.92rem;font-weight:800;margin-bottom:8px;padding:0}
+.age-seg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.age-seg label{display:block;cursor:pointer}
+.age-seg input{position:absolute;opacity:0;pointer-events:none}
+.age-seg span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:52px;padding:10px 12px;border:1.5px solid var(--line);border-radius:14px;background:var(--marigold-soft);font-weight:600;font-size:.95rem;line-height:1.3;transition:border-color .16s ease,background-color .16s ease,transform .12s ease-out}
+.age-seg label:active span{transform:scale(.97)}
+.age-seg input:checked+span{border-color:var(--ink);background:#fff;box-shadow:inset 0 0 0 1px var(--ink)}
+.age-seg input:focus-visible+span{outline:2px solid var(--ink);outline-offset:2px}
+#parentWrap{display:grid;gap:inherit}
+#parentWrap[hidden]{display:none}
 .field{display:grid;gap:8px;min-width:0}
 .field label,.lbl{font-size:.92rem;font-weight:800}
 .lbl small,.field label small{font-weight:500;color:var(--muted);font-size:.8rem}
@@ -498,7 +509,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       <h2>Upload your pieces</h2>
       <p class="sub">Three short steps. Everything stays on this page.</p>
 
-      <div class="sh"><span class="sn">1</span><div><h3>Check your details</h3><p>Already filled in from your registration. Tap Edit only if something is wrong.</p></div></div>
+      <div class="sh"><span class="sn">1</span><div><h3 id="detH">Check your details</h3><p id="detP">Already filled in from your registration. Tap Edit only if something is wrong.</p></div></div>
       <div class="dhead"><p class="prefill" id="prefillNote">Filled in from your registration</p><button type="button" class="edit" id="editBtn" aria-expanded="false" aria-controls="fields">Edit</button></div>
       <dl class="sum" id="summary">
         <div><dt>Student</dt><dd id="s-student"></dd></div>
@@ -509,8 +520,13 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       </dl>
       <div class="fieldset" id="fields">
       <div class="field"><label for="student">Student's name</label><input id="student" name="student" autocomplete="name" required></div>
-      <label class="pg-chk" for="isParent"><input type="checkbox" id="isParent"><span>I'm a parent or guardian filling this in for the student</span></label>
-      <div class="field" id="nameField" hidden><label for="name">Parent or guardian's name</label><input id="name" name="name" autocomplete="name"></div>
+      <fieldset class="field age-q" id="ageField"><legend>Is the student under 18?</legend>
+        <div class="age-seg"><label><input type="radio" name="age" value="under18"><span>Yes, under 18</span></label><label><input type="radio" name="age" value="adult"><span>No, 18 or over</span></label></div>
+      </fieldset>
+      <div id="parentWrap" hidden>
+        <label class="pg-chk" for="isParent"><input type="checkbox" id="isParent"><span>I'm a parent or guardian filling this in for the student</span></label>
+        <div class="field" id="nameField" hidden><label for="name">Parent or guardian's name</label><input id="name" name="name" autocomplete="name"></div>
+      </div>
       <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
       <div class="field"><label for="grade">Exam grade</label>
         <select id="grade" name="grade" required><option value="">Choose a grade</option><option>Grade 1</option><option>Grade 2</option><option>Grade 3</option><option>Grade 4</option><option>Grade 5</option><option>Grade 6</option><option>Grade 7</option><option>Grade 8</option><option>Diploma (ARSM, ATCL or similar)</option></select></div>
@@ -764,9 +780,12 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
   }
   ['name','email','student','grade','board'].forEach(function(k){ if(reg[k]) $(k).value=reg[k]; });
   /* parent / guardian: only asked for when the box is ticked; otherwise the student is the contact */
-  function isParent(){ return $('isParent').checked; }
-  function syncParent(){ var on=isParent(); $('nameField').hidden=!on; $('name').required=on; $('s-name-row').hidden=!on; }
-  if(reg.name && reg.name.trim().toLowerCase()!==(reg.student||'').trim().toLowerCase()) $('isParent').checked=true;
+  /* age first: the parent / guardian box only appears for students under 18 */
+  function ageVal(){ var r=document.querySelector('input[name="age"]:checked'); return r?r.value:''; }
+  function isParent(){ return ageVal()==='under18' && $('isParent').checked; }
+  function syncParent(){ var u=ageVal()==='under18'; $('parentWrap').hidden=!u; if(!u) $('isParent').checked=false; var on=isParent(); $('nameField').hidden=!on; $('name').required=on; $('s-name-row').hidden=!on; }
+  document.querySelectorAll('input[name="age"]').forEach(function(r){ r.addEventListener('change',syncParent); });
+  if(reg.name && reg.name.trim().toLowerCase()!==(reg.student||'').trim().toLowerCase()){ document.querySelector('input[name="age"][value="under18"]').checked=true; $('isParent').checked=true; }
   else $('name').value='';
   syncParent();
   $('isParent').addEventListener('change',function(){ syncParent(); if(isParent()) $('name').focus(); });
@@ -779,7 +798,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
   }
   syncSummary();
   if(reg.email&&reg.student){ openFields(false); }
-  else { $('prefillNote').hidden=true; $('editBtn').hidden=true; $('summary').hidden=true; }
+  else { $('prefillNote').hidden=true; $('editBtn').hidden=true; $('summary').hidden=true; $('detH').textContent='Your details'; $('detP').textContent='Who the feedback is for, and where to send it.'; }
   $('editBtn').addEventListener('click',function(){ var o=$('fields').hidden; openFields(o); if(o) $('student').focus(); });
 
   function fmtDue(iso){
@@ -1122,6 +1141,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     e.preventDefault(); showErr('');
     var miss=['student'].concat(isParent()?['name']:[]).concat(['email','grade','board']).filter(function(k){ return !$(k).value.trim(); });
     if(miss.length){ openFields(true); showErr('Please fill in your details first.'); return $(miss[0]).focus(); }
+    if(!ageVal() && !(reg.email&&reg.student)){ openFields(true); showErr('Please tell us whether the student is under 18.'); $('ageField').scrollIntoView({block:'center'}); return document.querySelector('input[name="age"]').focus(); }
     if(!/^\S+@\S+\.\S+$/.test($('email').value)){ openFields(true); showErr('Check the email address.'); return $('email').focus(); }
     if(!$('editBtn').hidden) openFields(false);
     if(!chosen().length){ showErr('Add at least one piece: its name and its video.'); pieces[0].el.scrollIntoView({block:'center'}); return $('title1').focus(); }
@@ -1159,7 +1179,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     busy=true; stickyShow(); send.disabled=true; send.textContent='Sending…';
     var fd=new URLSearchParams();
     fd.append('form-name','exam-course-pieces'); fd.append('bot-field','');
-    ['email','student','grade','board'].forEach(function(k){ fd.append(k,$(k).value.trim()); }); fd.append('name',contactName()); fd.append('is_parent',isParent()?'yes':'no');
+    ['email','student','grade','board'].forEach(function(k){ fd.append(k,$(k).value.trim()); }); fd.append('name',contactName()); fd.append('is_parent',isParent()?'yes':'no'); fd.append('age',ageVal()==='under18'?'under 18':ageVal()==='adult'?'18 or over':'');
     fd.append('upload_deadline',reg.due||''); fd.append('consent','yes');
     chosen().forEach(function(p){
       fd.append('piece'+p.n+'_title',$('title'+p.n).value.trim());
@@ -1179,7 +1199,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     if(LINK || !/netlify\.app$/.test(location.hostname)) return; // Netlify Forms copy: only on Netlify hosting
     var fd=new URLSearchParams();
     fd.append('form-name','exam-course-pieces'); fd.append('bot-field','');
-    ['email','student','grade','board'].forEach(function(k){ fd.append(k,$(k).value.trim()); }); fd.append('name',contactName()); fd.append('is_parent',isParent()?'yes':'no');
+    ['email','student','grade','board'].forEach(function(k){ fd.append(k,$(k).value.trim()); }); fd.append('name',contactName()); fd.append('is_parent',isParent()?'yes':'no'); fd.append('age',ageVal()==='under18'?'under 18':ageVal()==='adult'?'18 or over':'');
     fd.append('upload_deadline',reg.due||''); fd.append('consent','yes');
     pieces.forEach(function(p){
       fd.append('piece'+p.n+'_title',$('title'+p.n).value.trim());
