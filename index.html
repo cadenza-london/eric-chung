@@ -1512,7 +1512,7 @@
   .news-ticker-track {
     display: flex; align-items: center;
     white-space: nowrap;
-    animation: ticker-scroll 28s linear infinite;
+    animation: ticker-scroll 35s linear infinite;
     will-change: transform;
   }
   .news-ticker:hover .news-ticker-track { animation-play-state: paused; }
@@ -1771,6 +1771,15 @@
   #promo-popup.sp .sp-cta { justify-self:start; display:inline-flex; align-items:center; gap:8px; background:var(--sp-deep); color:#fff; text-decoration:none; font:500 .76rem 'Jost',sans-serif; letter-spacing:.12em; text-transform:uppercase; padding:.75rem 1.1rem; border-radius:10px; transition:background-color .2s ease, transform .16s ease-out; }
   #promo-popup.sp .sp-cta:active { transform:scale(.97); }
   #promo-popup.sp .sp-cta:focus-visible { outline:2px solid var(--sp-deep); outline-offset:2px; }
+  #promo-popup.sp .sp-news { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:12px; padding:10px 14px; border:1px dashed var(--sp-gold); border-radius:12px; text-decoration:none; color:inherit; background:#fffdf7; transition:background-color .2s ease, transform .16s ease-out; }
+  #promo-popup.sp .sp-news:active { transform:scale(.985); }
+  #promo-popup.sp .sp-news:focus-visible { outline:2px solid var(--sp-deep); outline-offset:2px; }
+  #promo-popup.sp .sp-news .sp-ic { width:36px; height:36px; }
+  #promo-popup.sp .sp-news .sp-ic svg { width:20px; height:20px; }
+  #promo-popup.sp .sp-nt { display:block; font:600 1.08rem/1.15 'Cormorant Garamond',serif; color:var(--sp-ink); }
+  #promo-popup.sp .sp-nd { display:block; font:300 .78rem/1.4 'Jost',sans-serif; color:var(--sp-mid); }
+  #promo-popup.sp .sp-nr { font:500 .7rem 'Jost',sans-serif; letter-spacing:.12em; text-transform:uppercase; color:var(--sp-deep); white-space:nowrap; }
+  @media (hover:hover) and (pointer:fine) { #promo-popup.sp .sp-news:hover { background:var(--sp-pale); } }
   #promo-popup.sp .sp-offer { border-top:1px solid var(--sp-hair); padding-top:16px; }
   #promo-popup.sp #promo-mailing-form { display:grid; gap:10px; }
   #promo-popup.sp .sp-offer-h { display:flex; align-items:center; gap:12px; margin:0; }
@@ -1802,7 +1811,10 @@
     #promo-popup.sp .promo-close:hover { background:var(--sp-pale); color:var(--sp-ink); }
   }
   @media (max-width:480px) {
-    #promo-popup.sp { padding:22px 16px 16px; gap:14px; width:94vw; }
+    #promo-popup.sp { padding:20px 16px 14px; gap:12px; width:94vw; }
+    #promo-popup.sp .sp-news { padding:8px 12px; gap:10px; }
+    #promo-popup.sp .sp-news .sp-ic { width:32px; height:32px; }
+    #promo-popup.sp .sp-offer { padding-top:12px; }
     #promo-popup.sp .sp-h { font-size:1.65rem; }
     #promo-popup.sp .sp-row { padding:11px 12px; gap:10px; }
     #promo-popup.sp .sp-ic { width:38px; height:38px; }
@@ -1839,6 +1851,11 @@
   <div class="news-ticker-track">
     <div class="ticker-item">
       <span class="ticker-sep">✦</span>
+      <span>Out Now · November Newsletter</span>
+      <a href="https://cadenza-london.com/newsletter-nov2026/">Read It →</a>
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-sep">✦</span>
       <span>New · Sight-Reading Club · Free until 31 Dec</span>
       <a href="https://cadenza-london.com/sight-reading-club/">Book a Free Place →</a>
     </div>
@@ -1856,6 +1873,11 @@
       <span class="ticker-sep">✦</span>
       <span>Piano &amp; Violin · London &amp; Online</span>
       <a href="#pricing">Explore Lessons →</a>
+    </div>
+    <div class="ticker-item">
+      <span class="ticker-sep">✦</span>
+      <span>Out Now · November Newsletter</span>
+      <a href="https://cadenza-london.com/newsletter-nov2026/">Read It →</a>
     </div>
     <div class="ticker-item">
       <span class="ticker-sep">✦</span>
@@ -2807,6 +2829,12 @@
         </div></div></div>
       </li>
     </ul>
+
+  <a class="sp-news" href="newsletter-nov2026/" onclick="closePromoPopup && closePromoPopup()">
+    <span class="sp-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M7 8.5h10M7 12h10M7 15.5h6"/></svg></span>
+    <span><span class="sp-nt">November Newsletter</span><span class="sp-nd">This month at Cadenza</span></span>
+    <span class="sp-nr">Read it <span aria-hidden="true">→</span></span>
+  </a>
 
   <div class="sp-offer">
     <form id="promo-mailing-form" novalidate>
