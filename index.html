@@ -2903,7 +2903,7 @@
 <!-- FOOTER -->
 <footer>
   <!-- Mailing list strip -->
-  <div class="footer-mailing">
+  <div class="footer-mailing" id="join">
     <div class="footer-mailing-text fade-up">
       <p class="footer-mailing-label">Exclusive Access</p>
       <h3 class="footer-mailing-title">Join the <em>Limited VIP List</em></h3>
@@ -3243,9 +3243,22 @@
   // Auto-show after 4 seconds if not already dismissed this session
   // Show popup unless dismissed within the last 24 hours
   // Show popup every new session (resets when window/tab is closed)
-  if (!sessionStorage.getItem('promoDismissed')) {
+  // Shareable sign-up link: cadenza-london.com/#join opens the popup at the email box, even if it was closed before
+  function openJoin() {
+    openPromoPopup();
+    setTimeout(function(){
+      const em = document.getElementById('promo-email');
+      const off = promoPopup.querySelector('.sp-offer');
+      if (off) promoPopup.scrollTo({ top: off.offsetTop - 12, behavior: 'smooth' });
+      if (em && !matchMedia('(pointer:coarse)').matches) em.focus({ preventScroll: true });
+    }, 500);
+  }
+  if (location.hash === '#join') {
+    setTimeout(openJoin, 600);
+  } else if (!sessionStorage.getItem('promoDismissed')) {
     setTimeout(openPromoPopup, 2000);
   }
+  window.addEventListener('hashchange', function(){ if (location.hash === '#join') openJoin(); });
 
   // Mailing list form submission
   // 10% welcome code: issued by the Cadenza upload server, one per email and one per connection
