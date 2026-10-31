@@ -1771,22 +1771,23 @@
   #promo-popup.sp .sp-cta { justify-self:start; display:inline-flex; align-items:center; gap:8px; background:var(--sp-deep); color:#fff; text-decoration:none; font:500 .76rem 'Jost',sans-serif; letter-spacing:.12em; text-transform:uppercase; padding:.75rem 1.1rem; border-radius:10px; transition:background-color .2s ease, transform .16s ease-out; }
   #promo-popup.sp .sp-cta:active { transform:scale(.97); }
   #promo-popup.sp .sp-cta:focus-visible { outline:2px solid var(--sp-deep); outline-offset:2px; }
-  #promo-popup.sp .sp-head { position:relative; padding-right:44px; }
-  #promo-popup.sp .sp-letter { position:absolute; right:-16px; bottom:-4px; width:44px; height:44px; border-radius:50%; display:grid; place-items:center; text-decoration:none; z-index:2;
+  #promo-popup.sp .sp-head { position:relative; padding-right:52px; min-height:84px; align-content:end; }
+  #promo-popup.sp .sp-letter { position:absolute; right:-16px; bottom:-2px; width:40px; height:40px; border-radius:50%; display:grid; place-items:center; text-decoration:none; z-index:2;
     background:radial-gradient(circle at 34% 28%, #FFF1C9 0%, #FFD27A 22%, #F6A63E 52%, #E7802A 78%, #C9A84C 100%);
     box-shadow:inset 0 3px 6px rgba(255,255,255,.75), inset 0 -5px 9px rgba(170,84,18,.38), 0 0 0 3px rgba(255,214,140,.55), 0 0 18px 4px rgba(247,166,62,.45), 0 6px 14px rgba(200,110,30,.35);
     animation:spPuff 2.6s ease-in-out infinite; transition:transform .16s ease-out; }
-  #promo-popup.sp .sp-letter::before { content:""; position:absolute; inset:-7px; border-radius:50%; pointer-events:none;
+  #promo-popup.sp .sp-letter::before { content:""; position:absolute; inset:-5px; border-radius:50%; pointer-events:none;
     background:radial-gradient(circle, rgba(255,205,120,.55) 0%, rgba(255,190,90,.25) 45%, rgba(255,190,90,0) 70%); filter:blur(2px); z-index:-1; }
   #promo-popup.sp .sp-letter svg { width:24px; height:24px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 1px 1px rgba(150,70,10,.45)); }
   #promo-popup.sp .sp-letter .hrt { fill:#fff; stroke:none; }
-  #promo-popup.sp .sp-bub { position:absolute; right:40px; bottom:38px; white-space:nowrap; font:600 .7rem/1 'Jost',sans-serif; letter-spacing:.02em; color:#7A3E0C;
+  #promo-popup.sp .sp-bub { position:absolute; right:48px; top:50%; margin-top:-14px; white-space:nowrap; font:600 .7rem/1 'Jost',sans-serif; letter-spacing:.02em; color:#7A3E0C;
     background:linear-gradient(180deg,#FFF6E0,#FFE3B0); border:1px solid #F2B55E; border-radius:999px; padding:.45rem .7rem; box-shadow:0 4px 12px rgba(214,120,30,.22);
-    transform-origin:100% 100%; animation:spBubIn .45s cubic-bezier(0.23,1,0.32,1) 1.2s both, spBob 2.6s ease-in-out 1.7s infinite; pointer-events:none; }
-  #promo-popup.sp .sp-bub::after { content:""; position:absolute; right:6px; bottom:-6px; width:10px; height:10px; background:#FFE3B0; border-right:1px solid #F2B55E; border-bottom:1px solid #F2B55E; transform:rotate(35deg) skewX(-10deg); border-bottom-right-radius:3px; }
-  #promo-popup.sp .sp-bub-s { display:none; }
-  @media (max-width:370px) { #promo-popup.sp .sp-bub-l { display:none; } #promo-popup.sp .sp-bub-s { display:inline; } }
-  @keyframes spPuff { 0%,100% { transform:scale(1); } 50% { transform:scale(1.07); } }
+    transform-origin:100% 50%; animation:spBubIn .45s cubic-bezier(0.23,1,0.32,1) 1.2s both, spBob 2.6s ease-in-out 1.7s infinite; }
+  #promo-popup.sp .sp-bub::after { content:""; position:absolute; right:-5px; top:50%; margin-top:-5px; width:10px; height:10px; background:#FFEDC8; border-right:1px solid #F2B55E; border-top:1px solid #F2B55E; transform:rotate(45deg); border-top-right-radius:2px; }
+  #promo-popup.sp .sp-bub-s, #promo-popup.sp .sp-bub-xs { display:none; }
+  @media (max-width:480px) { #promo-popup.sp .sp-bub-l { display:none; } #promo-popup.sp .sp-bub-s { display:inline; } #promo-popup.sp .sp-bub { font-size:.64rem; padding:.4rem .6rem; right:46px; } }
+  @media (max-width:360px) { #promo-popup.sp .sp-bub-s { display:none; } #promo-popup.sp .sp-bub-xs { display:inline; } }
+  @keyframes spPuff { 0%,100% { transform:scale(1); } 50% { transform:scale(1.05); } }
   @keyframes spBob { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-3px); } }
   @keyframes spBubIn { from { opacity:0; transform:scale(.6) translateY(4px); } to { opacity:1; transform:none; } }
   #promo-popup.sp .sp-letter:active { transform:scale(.92); animation:none; }
@@ -1826,6 +1827,7 @@
     #promo-popup.sp { padding:20px 16px 14px; gap:12px; width:94vw; }
         #promo-popup.sp .sp-offer { padding-top:12px; }
     #promo-popup.sp .sp-h { font-size:1.65rem; }
+    #promo-popup.sp .sp-head { min-height:90px; }
     #promo-popup.sp .sp-letter { right:-6px; }
     #promo-popup.sp .sp-row { padding:11px 12px; gap:10px; }
     #promo-popup.sp .sp-ic { width:38px; height:38px; }
@@ -2799,9 +2801,9 @@
   <button id="promo-close" class="promo-close sp-x" type="button" aria-label="Close">&times;</button>
   <div class="sp-head">
     <span class="sp-eye"><i aria-hidden="true">&#10022;</i>New at Cadenza London<i aria-hidden="true">&#10022;</i></span>
-    <h2 class="sp-h" id="sp-h">New ways to learn <em>with Eric</em></h2>
+    <h2 class="sp-h" id="sp-h">New ways to<br>learn <em>with Eric</em></h2>
     <a class="sp-letter" href="newsletter-nov2026/" onclick="closePromoPopup && closePromoPopup()" aria-label="Read our November newsletter">
-      <span class="sp-bub" aria-hidden="true"><span class="sp-bub-l">Read our newsletter!</span><span class="sp-bub-s">Newsletter!</span></span>
+      <span class="sp-bub" aria-hidden="true"><span class="sp-bub-l">Read our newsletter</span><span class="sp-bub-s">Our newsletter</span><span class="sp-bub-xs">News!</span></span>
       <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2.2"/><path d="M3.2 6.3l6.3 5M20.8 6.3l-6.3 5"/><path class="hrt" d="M12 18.2c-2.6-1.8-4.3-3.2-4.3-5 0-1.2 1-2.2 2.2-2.2.9 0 1.6.5 2.1 1.2.5-.7 1.2-1.2 2.1-1.2 1.2 0 2.2 1 2.2 2.2 0 1.8-1.7 3.2-4.3 5z"/></svg>
     </a>
   </div>
