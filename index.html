@@ -1772,27 +1772,30 @@
   #promo-popup.sp .sp-cta:active { transform:scale(.97); }
   #promo-popup.sp .sp-cta:focus-visible { outline:2px solid var(--sp-deep); outline-offset:2px; }
   #promo-popup.sp .sp-head { position:relative; padding-right:52px; min-height:84px; align-content:end; }
-  #promo-popup.sp .sp-letter { position:absolute; right:-16px; bottom:-2px; width:40px; height:40px; border-radius:50%; display:grid; place-items:center; text-decoration:none; z-index:2;
-    background:radial-gradient(circle at 34% 28%, #FFF1C9 0%, #FFD27A 22%, #F6A63E 52%, #E7802A 78%, #C9A84C 100%);
-    box-shadow:inset 0 3px 6px rgba(255,255,255,.75), inset 0 -5px 9px rgba(170,84,18,.38), 0 0 0 3px rgba(255,214,140,.55), 0 0 18px 4px rgba(247,166,62,.45), 0 6px 14px rgba(200,110,30,.35);
-    animation:spPuff 2.6s ease-in-out infinite; transition:transform .16s ease-out; }
-  #promo-popup.sp .sp-letter::before { content:""; position:absolute; inset:-5px; border-radius:50%; pointer-events:none;
-    background:radial-gradient(circle, rgba(255,205,120,.55) 0%, rgba(255,190,90,.25) 45%, rgba(255,190,90,0) 70%); filter:blur(2px); z-index:-1; }
-  #promo-popup.sp .sp-letter svg { width:24px; height:24px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 1px 1px rgba(150,70,10,.45)); }
-  #promo-popup.sp .sp-letter .hrt { fill:#fff; stroke:none; }
+  #promo-popup.sp .sp-letter { position:absolute; right:-16px; bottom:-6px; width:44px; height:42px; border-radius:16px; display:grid; place-items:center; text-decoration:none; z-index:2;
+    background:linear-gradient(180deg,#FFD27A 0%,#F7A93F 45%,#EC8A2C 100%); border:2px solid #FFE6B0;
+    box-shadow:0 5px 0 #B9631A, 0 9px 14px rgba(185,99,26,.35), inset 0 -3px 0 rgba(190,95,20,.35);
+    animation:spHop 2.4s cubic-bezier(.3,.7,.4,1) infinite; transition:transform .12s ease-out, box-shadow .12s ease-out; }
+  #promo-popup.sp .sp-letter::before { content:""; position:absolute; left:6px; right:6px; top:3px; height:40%; border-radius:12px 12px 10px 10px; pointer-events:none;
+    background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,0)); }
+  #promo-popup.sp .sp-letter::after { content:"✦"; position:absolute; top:-8px; left:-9px; font-size:.8rem; color:#F2B23A; text-shadow:0 1px 0 #fff; animation:spTwinkle 1.6s ease-in-out infinite; pointer-events:none; }
+  #promo-popup.sp .sp-letter svg { position:relative; width:24px; height:24px; fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 1.5px 0 rgba(160,75,10,.55)); }
+  #promo-popup.sp .sp-letter .hrt { fill:#E8453C; stroke:#fff; stroke-width:1.2; }
+  @keyframes spHop { 0%,70%,100% { transform:translateY(0); } 80% { transform:translateY(-5px); } 90% { transform:translateY(0); } 95% { transform:translateY(-2px); } }
+  @keyframes spTwinkle { 0%,100% { opacity:.3; transform:scale(.8); } 50% { opacity:1; transform:scale(1.15); } }
   #promo-popup.sp .sp-bub { position:absolute; right:48px; top:50%; margin-top:-14px; white-space:nowrap; font:600 .7rem/1 'Jost',sans-serif; letter-spacing:.02em; color:#7A3E0C;
-    background:linear-gradient(180deg,#FFF6E0,#FFE3B0); border:1px solid #F2B55E; border-radius:999px; padding:.45rem .7rem; box-shadow:0 4px 12px rgba(214,120,30,.22);
+    background:linear-gradient(180deg,#FFF6E0,#FFE3B0); border:2px solid #F2B55E; border-radius:999px; padding:.45rem .7rem; box-shadow:0 3px 0 #E39A45, 0 6px 10px rgba(214,120,30,.2);
     transform-origin:100% 50%; animation:spBubIn .45s cubic-bezier(0.23,1,0.32,1) 1.2s both, spBob 2.6s ease-in-out 1.7s infinite; }
-  #promo-popup.sp .sp-bub::after { content:""; position:absolute; right:-5px; top:50%; margin-top:-5px; width:10px; height:10px; background:#FFEDC8; border-right:1px solid #F2B55E; border-top:1px solid #F2B55E; transform:rotate(45deg); border-top-right-radius:2px; }
+  #promo-popup.sp .sp-bub::after { content:""; position:absolute; right:-5px; top:50%; margin-top:-5px; width:10px; height:10px; background:#FFEDC8; border-right:2px solid #F2B55E; border-top:2px solid #F2B55E; transform:rotate(45deg); border-top-right-radius:2px; }
   #promo-popup.sp .sp-bub-s, #promo-popup.sp .sp-bub-xs { display:none; }
   @media (max-width:480px) { #promo-popup.sp .sp-bub-l { display:none; } #promo-popup.sp .sp-bub-s { display:inline; } #promo-popup.sp .sp-bub { font-size:.64rem; padding:.4rem .6rem; right:46px; } }
   @media (max-width:360px) { #promo-popup.sp .sp-bub-s { display:none; } #promo-popup.sp .sp-bub-xs { display:inline; } }
   @keyframes spPuff { 0%,100% { transform:scale(1); } 50% { transform:scale(1.05); } }
   @keyframes spBob { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-3px); } }
   @keyframes spBubIn { from { opacity:0; transform:scale(.6) translateY(4px); } to { opacity:1; transform:none; } }
-  #promo-popup.sp .sp-letter:active { transform:scale(.92); animation:none; }
+  #promo-popup.sp .sp-letter:active { animation:none; transform:translateY(4px); box-shadow:0 1px 0 #B9631A, 0 3px 6px rgba(185,99,26,.3), inset 0 -2px 0 rgba(190,95,20,.35); }
   #promo-popup.sp .sp-letter:focus-visible { outline:2px solid #C9701E; outline-offset:3px; }
-  @media (hover:hover) and (pointer:fine) { #promo-popup.sp .sp-letter:hover { animation:none; transform:scale(1.08); } }
+  @media (hover:hover) and (pointer:fine) { #promo-popup.sp .sp-letter:hover { animation:none; transform:translateY(-2px); box-shadow:0 7px 0 #B9631A, 0 12px 16px rgba(185,99,26,.35), inset 0 -3px 0 rgba(190,95,20,.35); } }
   #promo-popup.sp .sp-offer { border-top:1px solid var(--sp-hair); padding-top:16px; }
   #promo-popup.sp #promo-mailing-form { display:grid; gap:10px; }
   #promo-popup.sp .sp-offer-h { display:flex; align-items:center; gap:12px; margin:0; }
@@ -1845,6 +1848,7 @@
   @media (prefers-reduced-motion:reduce) {
     #promo-popup.sp, #promo-popup.sp .sp-eye, #promo-popup.sp .sp-letter { animation:none; }
     #promo-popup.sp .sp-bub { animation:none; opacity:1; }
+    #promo-popup.sp .sp-letter::after { animation:none; }
     #promo-popup.sp .sp-row, #promo-popup.sp .sp-go, #promo-popup.sp .sp-btn, #promo-popup.sp .promo-close, #promo-popup.sp .sp-pn, #promo-popup.sp .sp-go svg, #promo-popup.sp .sp-cta { transition:none; }
   }
   </style>
