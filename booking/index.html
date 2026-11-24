@@ -224,6 +224,34 @@ select.sel:focus,.fld input:focus,.fld textarea:focus{outline:none;border-color:
 footer{max-width:680px;margin:0 auto;padding:0 20px 40px;text-align:center;font-size:12.5px;color:var(--ink-3);line-height:1.7}
 footer a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line)}
 @media (max-width:420px){.choices{grid-template-columns:1fr}.tgrid{grid-template-columns:repeat(3,1fr)}.two{grid-template-columns:1fr}}
+
+/* in person / online + payment */
+#modeBox{margin-bottom:6px}
+#modeBox .choice{padding:16px 16px 15px;cursor:pointer}
+#modeBox .choice .mt{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15.5px}
+#modeBox .choice .mt .rad{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);flex:none;display:grid;place-items:center;background:#fff;transition:all .2s}
+#modeBox .choice.on .mt .rad{border-color:#C08F1A;background:linear-gradient(135deg,#E9C25A 0%,#D4A62F 55%,#C08F1A 100%)}
+#modeBox .choice.on .mt .rad::after{content:"";width:7px;height:7px;border-radius:50%;background:#fff}
+#modeBox .choice .d{margin-top:6px;font-size:13px}
+#modeBox .choice .p{margin-top:10px;font-size:13px;color:var(--gold-deep)}
+.k.nudge{color:var(--bad)}
+.paid{margin:18px 0 0;padding:16px 18px;border-radius:16px;background:#E7F1EA;color:#24583E;text-align:left;font-size:14.5px;line-height:1.55}
+.paid b{color:#1d4a33}
+.paid.warn{background:#FBEDE9;color:#7d3328}
+.paid.warn b{color:#6a2a20}
+.paid .btn{margin-top:12px;width:100%;justify-content:center}
+@media (max-width:420px){#modeBox{grid-template-columns:1fr 1fr}#modeBox .choice{padding:14px 12px 13px}#modeBox .choice .d{font-size:12.5px}}
+.promo{margin-top:16px;padding:14px 16px;border:1px dashed var(--line);border-radius:16px;background:var(--paper)}
+.promo label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:8px}
+.promorow{display:flex;gap:8px}
+.promorow input{flex:1;min-width:0;height:46px;border:1px solid var(--line);border-radius:12px;padding:0 14px;font:600 16px var(--sans);letter-spacing:.06em;text-transform:uppercase;background:#fff;color:var(--ink)}
+.promorow input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+.promorow input:disabled{background:var(--gold-soft);color:var(--gold-deep)}
+.promorow button{height:46px;padding:0 18px;border-radius:12px;border:1px solid var(--gold);background:var(--gold-soft);color:var(--gold-deep);font-weight:600}
+.promorow button:disabled{opacity:.6}
+.promomsg{margin:8px 0 0;font-size:13px;min-height:0}
+.promomsg:empty{display:none}
+.promomsg.good{color:var(--ok);font-weight:600}.promomsg.bad{color:var(--bad)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -250,15 +278,15 @@ footer a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--l
 <section class="hero" id="hero">
   <div class="eyebrow">TRIAL LESSON · COLINDALE, NW9</div>
   <h1>Begin with a <em>single lesson.</em></h1>
-  <p>Choose a time that suits you and tell us a little about the student. We'll reply by email to confirm — nothing to pay today.</p>
+  <p>Choose in person or online, pick a time and tell us a little about the student. We'll reply by email to confirm.</p>
   <div class="rule"></div>
   <div class="why-trial"><b>Why a trial lesson?</b> A gentle first step: the student settles into the studio, meets the teacher, and we find the pace and approach that suits them. No commitment beyond this one lesson.</div>
   <div class="next3" aria-label="What happens next">
     <div class="nk">WHAT HAPPENS NEXT</div>
     <ol>
-      <li><b>Send a request</b><span>2 minutes, nothing to pay now</span></li>
+      <li><b>Request &amp; pay</b><span>£15 deposit in person, or the online fee</span></li>
       <li><b>We confirm</b><span>By email, usually within 24h</span></li>
-      <li><b>Have your lesson</b><span>Pay on the day, cash or transfer</span></li>
+      <li><b>Have your lesson</b><span>Online? Your link comes on the day</span></li>
     </ol>
   </div>
 </section>
@@ -268,6 +296,9 @@ footer a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--l
   <!-- STEP 1 · lesson -->
   <section class="step on" id="s1">
     <h2>Choose a lesson</h2>
+    <div class="k">IN PERSON OR ONLINE?</div>
+    <div class="choices" id="modeBox"></div>
+    <div class="k">LESSON</div>
     <p class="lead">Pick the instrument and level closest to the student. Every subject is priced the same — by length and level.</p>
     <div id="svcList"><div class="svcg" id="g-piano"><button class="gh" onclick="toggleGroup('piano')"><span class="ic">🎹</span><span class="gn">Piano lesson<small>All ages, classical and contemporary · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('piano',0)"><span class="rad"></span><span class="sn">Initial · Grade 1 to 3<small>30 or 45 or 60 min</small></span><span class="sp">£35–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('piano',1)"><span class="rad"></span><span class="sn">Grade 4<small>45 or 60 min</small></span><span class="sp">£46–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('piano',2)"><span class="rad"></span><span class="sn">Grade 5<small>45 or 60 min</small></span><span class="sp">£48–£60</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£48</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div><button class="svc" onclick="pickLevel('piano',3)"><span class="rad"></span><span class="sn">Grade 6 to 7<small>45 or 60 min</small></span><span class="sp">£50–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div><button class="svc" onclick="pickLevel('piano',4)"><span class="rad"></span><span class="sn">Grade 8<small>60 min</small></span><span class="sp">£70</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£70</b></button></div><button class="svc" onclick="pickLevel('piano',5)"><span class="rad"></span><span class="sn">Diploma<small>60 min</small></span><span class="sp">£80</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£80</b></button></div><button class="svc" onclick="pickLevel('piano',6)"><span class="rad"></span><span class="sn">Conservatoire<small>60 min</small></span><span class="sp">£90</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£90</b></button></div></div></div><div class="svcg" id="g-violin"><button class="gh" onclick="toggleGroup('violin')"><span class="ic">🎻</span><span class="gn">Violin lesson<small>Beginner to Grade 8 · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('violin',0)"><span class="rad"></span><span class="sn">Initial · Grade 1 to 3<small>30 or 45 or 60 min</small></span><span class="sp">£35–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('violin',1)"><span class="rad"></span><span class="sn">Grade 4<small>45 or 60 min</small></span><span class="sp">£46–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('violin',2)"><span class="rad"></span><span class="sn">Grade 5<small>45 or 60 min</small></span><span class="sp">£48–£60</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£48</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div><button class="svc" onclick="pickLevel('violin',3)"><span class="rad"></span><span class="sn">Grade 6 to 7<small>45 or 60 min</small></span><span class="sp">£50–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div><button class="svc" onclick="pickLevel('violin',4)"><span class="rad"></span><span class="sn">Grade 8<small>60 min</small></span><span class="sp">£70</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£70</b></button></div></div></div><div class="svcg" id="g-singing"><button class="gh" onclick="toggleGroup('singing')"><span class="ic">🎤</span><span class="gn">Classical vocal lesson<small>Technique, repertoire and exam preparation · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('singing',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div><div class="svcg" id="g-theory"><button class="gh" onclick="toggleGroup('theory')"><span class="ic">📘</span><span class="gn">Music theory class<small>Grades 1–8 · essential for ABRSM &amp; Trinity exams · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('theory',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div><div class="svcg" id="g-aural"><button class="gh" onclick="toggleGroup('aural')"><span class="ic">👂</span><span class="gn">Aural training class<small>Required for ABRSM &amp; Trinity instrumental exams · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('aural',0)"><span class="rad"></span><span class="sn">Initial · Grade 1 to 3<small>30 or 45 or 60 min</small></span><span class="sp">£35–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('aural',1)"><span class="rad"></span><span class="sn">Grade 4<small>45 or 60 min</small></span><span class="sp">£46–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('aural',2)"><span class="rad"></span><span class="sn">Grade 5<small>45 or 60 min</small></span><span class="sp">£48–£60</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£48</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div><button class="svc" onclick="pickLevel('aural',3)"><span class="rad"></span><span class="sn">Grade 6 to 7<small>45 or 60 min</small></span><span class="sp">£50–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div><button class="svc" onclick="pickLevel('aural',4)"><span class="rad"></span><span class="sn">Grade 8<small>60 min</small></span><span class="sp">£70</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£70</b></button></div></div></div><div class="svcg" id="g-pop"><button class="gh" onclick="toggleGroup('pop')"><span class="ic">🎛️</span><span class="gn">Pop music production class<small>Composition, arrangement and songwriting · with Jessica</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('pop',0)"><span class="rad"></span><span class="sn">Open level<small>60 min</small></span><span class="sp">£60</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div><button class="svc" onclick="pickLevel('pop',1)"><span class="rad"></span><span class="sn">Create your own song workshop<small>60 min · No teaching but making your own song for your wedding / engagement / special moments!</small></span><span class="sp">£60</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div></div></div><div class="svcg" id="g-accomp"><button class="gh" onclick="toggleGroup('accomp')"><span class="ic">🎼</span><span class="gn">Accompaniment<small>Exam, audition or performance accompaniment · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('accomp',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div><div class="svcg" id="g-aptitude"><button class="gh" onclick="toggleGroup('aptitude')"><span class="ic">🎯</span><span class="gn">Music aptitude test prep<small>Preparation for school music aptitude tests · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('aptitude',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div><div class="svcg" id="g-interview"><button class="gh" onclick="toggleGroup('interview')"><span class="ic">🎓</span><span class="gn">Music school interview coaching<small>Audition &amp; interview coaching · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('interview',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div></div>
   </section>
@@ -311,10 +342,16 @@ footer a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--l
   <!-- STEP 4 · review -->
   <section class="step" id="s4">
     <h2>Review your request</h2>
-    <p class="lead">Check the details, then send. We'll email you to confirm.</p>
+    <p class="lead">Check the details, then pay securely with Stripe. We'll email you to confirm.</p>
     <div class="review" id="review"></div>
-    <div class="note">📩 <b>This is a request, not a confirmed booking.</b> We check every request by hand and reply by email — usually within 24 hours. If the time has just been taken, we'll suggest the closest alternative.</div>
-    <p class="fine">Trial lesson fee is paid on the day by cash or bank transfer. Nothing is charged now.</p>
+    <div class="promo">
+      <label for="promoIn">Have a discount code?</label>
+      <div class="promorow"><input id="promoIn" placeholder="e.g. XMAS2026" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="30"
+        onkeydown="if(event.key==='Enter'){event.preventDefault();applyPromo();}"><button type="button" id="promoBtn" onclick="applyPromo()">Apply</button></div>
+      <p class="promomsg" id="promoMsg" aria-live="polite"></p>
+    </div>
+    <div class="note">📩 <b>We check every request by hand</b> and reply by email, usually within 24 hours. If the time has just been taken, we'll suggest the closest alternative. If we can't find a time that suits you, we refund your payment in full.</div>
+    <p class="fine" id="payFine"></p>
     <p class="err" id="err4"></p>
   </section>
 
@@ -328,8 +365,9 @@ footer a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--l
         <div class="when" id="doneWhen">—</div>
         <div class="what" id="doneWhat">—</div>
       </div>
-      <div class="note" style="text-align:left">⏳ <b>Not confirmed yet.</b> We'll email <b id="doneEmail"></b> to confirm, usually within 24 hours. Please check your junk folder if you don't hear from us.</div>
-      <p class="fine">You can close this page now.</p>
+      <div class="paid" id="donePaid" hidden></div>
+      <div class="note" style="text-align:left" id="doneNote">⏳ <b>Not confirmed yet.</b> We'll email <b id="doneEmail"></b> to confirm, usually within 24 hours. Please check your junk folder if you don't hear from us.</div>
+      <p class="fine" id="doneFine">You can close this page now.</p>
     </div>
   </section>
 </main>
@@ -378,7 +416,16 @@ var SERVICES = [
 SERVICES.forEach(function(g){ if(!g.teacher) g.teacher = 'Eric'; });
 function teacherOf(){ var g = SERVICES.find(function(x){ return x.id === svc; }); return g ? g.teacher : ''; }
 var avail = null, jess = null, dur = null, inst = null, svc = null, lvl = null, openGroup = null, pickDate = null, pickStart = null, db = null;
-var step = 1, calM = null, calY = null, sending = false, flex = false;
+var step = 1, calM = null, calY = null, sending = false, flex = false, mode = null;
+/* Payments (Stripe, through the Cloudflare Worker "cadenza-trial-pay"):
+   in person = £15 deposit now, the rest on the day · online = the full fee now, lesson link shared on the day */
+var PAY_API = 'https://cadenza-trial-pay.jessiemovement.workers.dev';
+var DEPOSIT = 15;
+var MODES = {
+  inperson: { name:'In person', where:'Colindale, NW9', d:'At the studio in Colindale, North London.', p:'£15 deposit to book' },
+  online:   { name:'Online', where:'Video call', d:'From home. We share the lesson link on the day.', p:'Online lesson fee, paid when you book' }
+};
+var PEND_KEY = 'cadenzaTrialPending';
 
 function $(id){ return document.getElementById(id); }
 function t2m(t){ var q = t.split(':'); return Number(q[0])*60 + Number(q[1]); }
@@ -391,6 +438,12 @@ function cutoff(){ var d = new Date(); d.setDate(d.getDate() + 28); return isoLo
 function parse(k){ var q = k.split('-'); return new Date(Number(q[0]), Number(q[1])-1, Number(q[2])); }
 function feeFor(l, d){ if(l && l.prices && l.prices[d] != null) return l.prices[d]; if(l && l.price) return l.price; return RATES[String(d)] || 0; }
 function fee(){ return feeFor(lvl, dur); }
+var promo = null;   /* discount code, checked by the payment service: { code, percent } */
+function gbp(v){ v = Math.round(v * 100) / 100; return '£' + (v % 1 ? v.toFixed(2) : v); }
+function lessonFee(){ return promo ? Math.round(fee() * (100 - promo.percent)) / 100 : fee(); }
+function payNow(){ return mode === 'online' ? lessonFee() : Math.min(DEPOSIT, lessonFee()); }
+function payLater(){ return Math.max(0, Math.round((lessonFee() - payNow()) * 100) / 100); }
+function modeText(m){ m = m || mode; return m ? MODES[m].name + ' · ' + MODES[m].where : ''; }
 function levelText(){ return lvl ? lvl.level : ''; }
 function whenText(){ if(flex) return 'Time to be arranged'; if(!pickDate || pickStart == null) return ''; var d = parse(pickDate);
   return DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()].slice(0,3) + ' · ' + ampm(pickStart) + '–' + ampm(pickStart + dur); }
@@ -435,6 +488,15 @@ function firstFreeMonth(){
 }
 
 /* step 1 */
+function drawMode(){
+  $('modeBox').innerHTML = ['inperson','online'].map(function(m){
+    var x = MODES[m];
+    return '<button type="button" class="choice' + (mode === m ? ' on' : '') + '" aria-pressed="' + (mode === m) + '" onclick="pickMode(\'' + m + '\')">' +
+      '<div class="mt"><span class="rad"></span>' + x.name + '</div>' +
+      '<div class="d">' + x.d + '</div><div class="p">' + x.p + '</div></button>';
+  }).join('');
+}
+function pickMode(m){ mode = m; drawMode(); drawDock(); var k = document.querySelector('#s1 .k'); if(k) k.classList.remove('nudge'); }
 function drawServices(){
   $('svcList').innerHTML = SERVICES.map(function(g){
     var open = openGroup === g.id;
@@ -546,15 +608,23 @@ function drawReview(){
   function row(l, v, s){ return '<div class="row"><div class="l">' + l + '</div><div class="v">' + v + (s != null ? '<button class="edit" onclick="jump(' + s + ')">Edit</button>' : '') + '</div></div>'; }
   $('review').innerHTML =
     row('WHEN', whenLong(), 2) +
+    row('WHERE', esc(modeText()) + '<small>' + (mode === 'online' ? 'We email the lesson link on the day' : 'Cadenza London studio, Colindale NW9') + '</small>', 1) +
     row('LESSON', INST[inst] + ' · ' + dur + ' min<small>' + esc(lv) + ' · with ' + esc(teacherOf()) + '</small>', 1) +
     row('STUDENT', esc($('fName').value.trim()) + '<small>' + [age && ('Age ' + esc(age)), parent && ('with ' + esc(parent))].filter(Boolean).join(' · ') + '</small>', 3) +
     row('CONTACT', esc($('fEmail').value.trim()) + '<small>' + esc($('fPhone').value.trim()) + '</small>', 3) +
-    row('FEE ON THE DAY', '£' + fee());
+    (promo ? row('DISCOUNT', esc(promo.code) + ' · ' + promo.percent + '% off<small>Lesson fee ' + gbp(lessonFee()) + ' (was ' + gbp(fee()) + ')</small>') : '') +
+    (mode === 'online'
+      ? row('PAY NOW', gbp(payNow()) + '<small>Full online lesson fee, by card</small>')
+      : row('PAY NOW', gbp(payNow()) + ' deposit<small>By card · lesson fee ' + gbp(lessonFee()) + '</small>') +
+        row('ON THE DAY', gbp(payLater()) + '<small>The rest of the lesson fee</small>'));
+  $('payFine').textContent = 'Secure card payment with Stripe (Apple Pay and Google Pay work too). ' +
+    (mode === 'online' ? 'The online lesson link is shared with you by email on the day of the lesson.' : 'The £' + DEPOSIT + ' deposit comes off your lesson fee, so you pay ' + gbp(payLater()) + ' on the day.');
+  drawPromo();
 }
 
 /* navigation */
 function canNext(){
-  if(step === 1) return !!(svc && dur);
+  if(step === 1) return !!(svc && dur && mode);
   if(step === 2) return flex || !!(pickDate && pickStart != null);
   if(step === 3) return validDetails(false);
   return true;
@@ -562,6 +632,7 @@ function canNext(){
 function jump(n){ var back = n < step; step = n; show(back); }
 function go(n){
   if(n > 0 && step === 3 && !validDetails(true)) return;
+  if(n > 0 && step === 1 && !mode){ var k = document.querySelector('#s1 .k'); k.classList.add('nudge'); k.scrollIntoView({ behavior:'smooth', block:'center' }); return; }
   if(n > 0 && step === 4){ submit(); return; }
   var to = step + n; if(to < 1) return;
   step = to; show(n < 0);
@@ -580,15 +651,39 @@ function show(back){
   drawDock();
   window.scrollTo({ top: step === 1 ? 0 : $('stage').offsetTop - 70, behavior:'smooth' });
 }
+/* discount code (step 4) */
+function drawPromo(){
+  var on = !!promo;
+  $('promoIn').value = on ? promo.code : $('promoIn').value;
+  $('promoIn').disabled = on;
+  $('promoBtn').textContent = on ? 'Remove' : 'Apply';
+  if(on) setPromoMsg('✓ ' + promo.percent + '% off your first lesson', true);
+}
+function setPromoMsg(s, good){ var m = $('promoMsg'); m.textContent = s || ''; m.className = 'promomsg' + (good ? ' good' : s ? ' bad' : ''); }
+function applyPromo(){
+  if(promo){ promo = null; $('promoIn').value = ''; setPromoMsg(''); drawReview(); drawDock(); return; }
+  var code = $('promoIn').value.trim().toUpperCase();
+  if(!code){ setPromoMsg('Type your code first.'); return; }
+  var b = $('promoBtn'); b.disabled = true; b.textContent = 'Checking…'; setPromoMsg('');
+  var p = window.SANDBOX
+    ? new Promise(function(r){ setTimeout(function(){ r(code === 'XMAS2026' ? { ok:true, code:code, percent:10 } : { message:'That code isn’t valid.' }); }, 400); })
+    : fetch(PAY_API + '/api/code', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ code:code, email:$('fEmail').value.trim() }) })
+        .then(function(r){ return r.json(); });
+  p.then(function(j){
+    b.disabled = false;
+    if(j && j.ok){ promo = { code:j.code, percent:j.percent }; drawReview(); drawDock(); }
+    else { b.textContent = 'Apply'; setPromoMsg((j && j.message) || 'That code isn’t valid.'); }
+  }).catch(function(){ b.disabled = false; b.textContent = 'Apply'; setPromoMsg('We couldn’t check the code. Please try again.'); });
+}
 function drawDock(){
   var nb = $('nextBtn'), sum = $('dockSum');
   nb.disabled = !canNext() || sending;
   var arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-  if(step === 4){ nb.innerHTML = sending ? '<span class="spin"></span> Sending' : 'Send request ' + arrow; }
+  if(step === 4){ nb.innerHTML = sending ? '<span class="spin"></span> Opening payment' : 'Send &amp; pay ' + gbp(payNow()) + ' ' + arrow; }
   else if(step === 3){ nb.innerHTML = 'Review ' + arrow; }
   else nb.innerHTML = 'Continue ' + arrow;
-  var line1 = svc ? INST[inst] + ' · ' + dur + ' min · £' + fee() : 'Trial lesson';
-  var line2 = svc ? (whenText() || (step === 2 ? 'Choose a date and time' : levelText())) : 'Choose a lesson to begin';
+  var line1 = svc ? INST[inst] + ' · ' + dur + ' min · £' + fee() : (mode ? 'Trial lesson · ' + MODES[mode].name : 'Trial lesson');
+  var line2 = svc ? (whenText() || (step === 2 ? 'Choose a date and time' : (mode ? levelText() : 'Choose in person or online'))) : 'Choose a lesson to begin';
   if(flex && step === 3) line2 = 'Time to be arranged';
   sum.innerHTML = '<b>' + esc(line1) + '</b>' + esc(line2);
 }
@@ -598,12 +693,20 @@ var FORM_HOST = 'https://booking-cadenzalondon.netlify.app/';   /* keep this Net
 function sendEmailForm(rec){
   var whenStr = 'FLEXIBLE — customer could not find a suitable slot. Preferred: ' + rec.pref;
   if(rec.date){ var d = parse(rec.date); whenStr = DAYS_L[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear() + ', ' + ampm(t2m(rec.start)) + '–' + ampm(t2m(rec.start) + rec.dur); }
+  var where = rec.mode === 'online' ? 'ONLINE' : 'IN PERSON';
+  var payLine = rec.payStatus === 'paid'
+    ? 'PAID ' + gbp(rec.payNow) + ' by card (Stripe' + (rec.stripe ? ' ' + rec.stripe : '') + ')'
+    : 'PAYMENT PENDING: ' + gbp(rec.payNow) + ' by card (Stripe)';
+  var lf = rec.lessonFee != null ? rec.lessonFee : rec.fee;
   var data = {
     'form-name':'trial-request', 'bot-field':'',
-    'Requested time': whenStr,
-    'Lesson length': rec.dur + ' min', 'Fee': '£' + rec.fee,
+    'Requested time': (rec.payStatus === 'paid' ? '✅ PAID · ' : '') + '[' + where + '] ' + whenStr,
+    'Lesson length': rec.dur + ' min',
+    'Fee': (rec.code ? gbp(lf) + ' with code ' + rec.code + ' (' + rec.percent + '% off ' + gbp(rec.fee) + ')' : gbp(rec.fee)) + ' · ' + where + ' · ' + payLine +
+      (rec.mode === 'online' ? ' · full fee, send the lesson link on the day' : ' · deposit, ' + gbp(Math.round((lf - rec.payNow) * 100) / 100) + ' due on the day'),
     'Student': rec.name, 'Age': rec.age, 'Instrument': INST[rec.instrument] || rec.instrument, 'Level': rec.level, 'Instructor': rec.teacher,
-    'Parent / guardian': rec.parent, 'Email': rec.email, 'Phone': rec.phone, 'Notes': rec.notes
+    'Parent / guardian': rec.parent, 'Email': rec.email, 'Phone': rec.phone,
+    'Notes': (rec.payStatus === 'paid' ? 'Payment confirmation for the request sent earlier. ' : '') + (rec.notes || '')
   };
   var body = Object.keys(data).map(function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k] == null ? '' : data[k]); }).join('&');
   if(/netlify\.app$/.test(location.hostname)){
@@ -624,26 +727,110 @@ function submit(){
     phone:$('fPhone').value.trim().slice(0,30), email:$('fEmail').value.trim().slice(0,120),
     notes:$('fNotes').value.trim().slice(0,500),
     date:flex ? '' : pickDate, start:flex ? '' : m2t(pickStart), dur:dur, fee:fee(),
-    pref:flex ? $('fPref').value.trim().slice(0,200) : ''
+    pref:flex ? $('fPref').value.trim().slice(0,200) : '',
+    mode:mode, payNow:payNow(), payStatus:'awaiting', lessonFee:lessonFee(), code:promo ? promo.code : '', percent:promo ? promo.percent : 0
   };
   sending = true; drawDock();
   var p;
-  if(window.SANDBOX){ p = new Promise(function(r){ setTimeout(r, 900); }); }
+  if(window.SANDBOX){ p = new Promise(function(r){ setTimeout(r, 700); }); }
   else{
     var viaEmail = sendEmailForm(rec).then(function(){ return 'email'; }, function(e){ console.warn('email form failed', e); return null; });
-    var viaDb = db ? db.collection('requests').add(rec).then(function(){ return 'db'; }, function(e){ console.warn('firestore failed', e); return null; }) : Promise.resolve(null);
+    var viaDb = db ? db.collection('requests').add(rec).then(function(ref){ rec.docId = ref.id; return 'db'; }, function(e){ console.warn('firestore failed', e); return null; }) : Promise.resolve(null);
     p = Promise.all([viaEmail, viaDb]).then(function(r){ if(!r[0] && !r[1]) throw new Error('both failed'); });
   }
   p.then(function(){
-    $('doneWhen').innerHTML = whenLong();
-    $('doneWhat').textContent = INST[inst] + ' · ' + dur + ' min · with ' + rec.teacher + ' · £' + rec.fee + ' on the day';
-    $('doneEmail').textContent = rec.email;
-    $('doneLead').textContent = 'Thank you' + (rec.parent ? ', ' + rec.parent : '') + ' — we have your request for ' + rec.name + '.';
-    sending = false; step = 5; show(false);
+    var keep = { rec:rec, svc:svc, whenHtml:whenLong(), what:INST[inst] + ' · ' + dur + ' min · with ' + rec.teacher, ref:'tr' + rec.createdAt.toString(36) };
+    try{ localStorage.setItem(PEND_KEY, JSON.stringify(keep)); }catch(e){}
+    return startPayment(keep);
   }).catch(function(e){
     console.error(e); sending = false; drawDock();
     $('err4').textContent = 'Sorry, that didn’t go through. Please try again, or email us directly.';
   });
+}
+
+/* payment: open Stripe Checkout (the request has already been sent to us) */
+function startPayment(keep){
+  var rec = keep.rec;
+  if(window.SANDBOX){
+    return new Promise(function(r){ setTimeout(r, 600); }).then(function(){ rec.payStatus = 'paid'; showDone(keep, 'paid', '(Preview: the real page opens Stripe here. Nothing was charged.)'); });
+  }
+  var whenPlain = String(keep.whenHtml || '').replace(/<br>/g, ', ').replace(/<[^>]+>/g, '').slice(0, 110);
+  return fetch(PAY_API + '/api/checkout', { method:'POST', headers:{ 'Content-Type':'application/json' },
+    body: JSON.stringify({ code:rec.code || '', mode:rec.mode, svc:keep.svc, level:rec.level, dur:rec.dur, email:rec.email, student:rec.name, parent:rec.parent, phone:rec.phone, when:whenPlain, ref:keep.ref }) })
+    .then(function(r){ return r.json().then(function(j){ if(!r.ok || !j.url) throw new Error(j.error || ('pay ' + r.status)); return j; }); })
+    .then(function(j){ location.href = j.url; })
+    .catch(function(e){
+      if(/^(used|bad_code|expired)$/.test(e.message) && step === 4){
+        promo = null; drawReview(); drawDock(); sending = false; drawDock();
+        $('promoIn').disabled = false; $('promoIn').value = '';
+        setPromoMsg(e.message === 'used' ? 'This code has already been used.' : 'That code can’t be used.');
+        $('err4').textContent = 'Your request is with us. The code couldn’t be used, so please check the price and pay again.';
+        return;
+      }
+      console.error('payment page failed', e);
+      showDone(keep, 'nolink');
+    });
+}
+
+function showDone(keep, state, extra){
+  var rec = keep.rec, online = rec.mode === 'online';
+  $('doneWhen').innerHTML = keep.whenHtml || 'Time to be arranged';
+  $('doneWhat').textContent = keep.what + ' · ' + modeText(rec.mode);
+  $('doneEmail').textContent = rec.email;
+  var box = $('donePaid'); box.hidden = false; box.className = 'paid';
+  if(state === 'paid'){
+    $('doneLead').textContent = 'Thank you' + (rec.parent ? ', ' + rec.parent : '') + '. We have your request and payment for ' + rec.name + '.';
+    var lf = rec.lessonFee != null ? rec.lessonFee : rec.fee;
+    box.innerHTML = '✅ <b>' + gbp(rec.payNow) + ' paid' + (online ? '' : ' (deposit)') + '.</b> ' + (rec.code ? rec.code + ' ' + rec.percent + '% off applied. ' : '') +
+      (online ? 'We’ll email you the lesson link on the day of the lesson.' : 'The remaining ' + gbp(Math.round((lf - rec.payNow) * 100) / 100) + ' is paid on the day.') +
+      ' Stripe emails you a receipt.' + (extra ? '<br><small>' + esc(extra) + '</small>' : '');
+  } else if(state === 'checking'){
+    $('doneLead').textContent = 'Checking your payment…';
+    box.innerHTML = '⏳ One moment while we confirm your payment with Stripe.';
+  } else if(state === 'nolink'){
+    $('doneLead').textContent = 'Thank you' + (rec.parent ? ', ' + rec.parent : '') + '. We have your request for ' + rec.name + '.';
+    box.className = 'paid warn';
+    box.innerHTML = '<b>The payment page didn’t open.</b> Your request is with us, and we’ll email you a secure link to pay the ' + gbp(rec.payNow) + (online ? ' online lesson fee.' : ' deposit.') +
+      '<button class="btn" type="button" onclick="retryPay()">Try paying again</button>';
+  } else { // unpaid: came back from Stripe without paying
+    $('doneLead').textContent = 'Your request for ' + rec.name + ' is with us, but the payment wasn’t finished.';
+    box.className = 'paid warn';
+    box.innerHTML = '<b>Your time isn’t held until it’s paid.</b> Pay the ' + gbp(rec.payNow) + (online ? ' online lesson fee' : ' deposit') + ' to hold it.' +
+      '<button class="btn" type="button" onclick="retryPay()">Pay ' + gbp(rec.payNow) + ' now</button>';
+  }
+  sending = false; step = 5; show(false);
+}
+function loadPending(){ try{ return JSON.parse(localStorage.getItem(PEND_KEY) || 'null'); }catch(e){ return null; } }
+function retryPay(){
+  var keep = loadPending(); if(!keep) return;
+  var b = document.querySelector('#donePaid .btn'); if(b){ b.disabled = true; b.textContent = 'Opening payment…'; }
+  startPayment(keep);
+}
+/* back from Stripe: ?paid=cs_… or ?unpaid=1 */
+function handleReturn(){
+  var q = new URLSearchParams(location.search), cs = q.get('paid'), unpaid = q.get('unpaid');
+  if(!cs && !unpaid) return false;
+  var keep = loadPending();
+  history.replaceState(null, '', location.pathname);
+  if(!keep){
+    if(cs){ $('s5').querySelector('h2').textContent = 'Payment received'; $('doneLead').textContent = 'Thank you. We’ll email you to confirm your lesson.';
+      $('doneWhen').textContent = 'Trial lesson'; $('doneWhat').textContent = 'Stripe has emailed you a receipt.'; step = 5; show(false); return true; }
+    return false;
+  }
+  if(unpaid){ showDone(keep, 'unpaid'); return true; }
+  showDone(keep, 'checking');
+  fetch(PAY_API + '/api/check?cs=' + encodeURIComponent(cs)).then(function(r){ return r.json(); }).then(function(j){
+    if(!j.paid){ showDone(keep, 'unpaid'); return; }
+    var rec = keep.rec, first = rec.payStatus !== 'paid';
+    rec.payStatus = 'paid'; rec.stripe = cs.slice(-10); rec.payNow = (j.amount || Math.round(rec.payNow * 100)) / 100;
+    try{ localStorage.setItem(PEND_KEY, JSON.stringify(keep)); }catch(e){}
+    showDone(keep, 'paid');
+    if(first){
+      sendEmailForm(rec).catch(function(){});
+      if(db && rec.docId) db.collection('requests').doc(rec.docId).update({ payStatus:'paid', paidAt:Date.now(), paid:rec.payNow }).catch(function(){});
+    }
+  }).catch(function(){ showDone(keep, 'paid', 'Stripe will email you a receipt.'); });
+  return true;
 }
 
 /* boot */
@@ -656,11 +843,14 @@ function applyAvail(d){
   calM = null; if(step === 2) drawCal(); drawDock();
 }
 function boot(){
-  drawServices(); drawDock();
+  drawMode(); drawServices(); drawDock();
   if(window.SANDBOX){ jess = window.SANDBOX_JESS || null; applyAvail(window.SANDBOX_AVAIL); return; }
   try{
     firebase.initializeApp(window.FIREBASE_CONFIG);
     db = firebase.firestore();
+  }catch(e){ db = null; }
+  if(handleReturn()) return;
+  try{
     db.collection('public').doc('jessica').get().then(function(snap){ jess = snap.exists ? snap.data() : null; if(step === 2) drawCal(); }).catch(function(){});
     db.collection('public').doc('availability').get()
       .then(function(snap){ applyAvail(snap.exists ? snap.data() : null); })
