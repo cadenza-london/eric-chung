@@ -496,7 +496,7 @@ function drawMode(){
       '<div class="d">' + x.d + '</div><div class="p">' + x.p + '</div></button>';
   }).join('');
 }
-function pickMode(m){ mode = m; drawMode(); drawDock(); var k = document.querySelector('#s1 .k'); if(k) k.classList.remove('nudge'); }
+function pickMode(m){ if(m !== mode && promo){ promo = null; $('promoIn').value = ''; $('promoIn').disabled = false; setPromoMsg(''); } mode = m; drawMode(); drawDock(); var k = document.querySelector('#s1 .k'); if(k) k.classList.remove('nudge'); }
 function drawServices(){
   $('svcList').innerHTML = SERVICES.map(function(g){
     var open = openGroup === g.id;
@@ -666,8 +666,10 @@ function applyPromo(){
   if(!code){ setPromoMsg('Type your code first.'); return; }
   var b = $('promoBtn'); b.disabled = true; b.textContent = 'Checking…'; setPromoMsg('');
   var p = window.SANDBOX
-    ? new Promise(function(r){ setTimeout(function(){ var sc = (window.SANDBOX_CODES || {})[code]; r(sc ? { ok:true, code:code, percent:sc } : { message:'That code isn’t valid.' }); }, 400); })
-    : fetch(PAY_API + '/api/code', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ code:code, email:$('fEmail').value.trim() }) })
+    ? new Promise(function(r){ setTimeout(function(){ var sc = (window.SANDBOX_CODES || {})[code];
+        if(sc && sc.only && sc.only !== mode) return r({ message: sc.only === 'online' ? 'This code is for online lessons only.' : 'This code is for in-person lessons only.' });
+        r(sc ? { ok:true, code:code, percent:sc.percent || sc } : { message:'That code isn’t valid.' }); }, 400); })
+    : fetch(PAY_API + '/api/code', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ code:code, email:$('fEmail').value.trim(), mode:mode }) })
         .then(function(r){ return r.json(); });
   p.then(function(j){
     b.disabled = false;
@@ -760,7 +762,7 @@ function startPayment(keep){
     .then(function(r){ return r.json().then(function(j){ if(!r.ok || !j.url) throw new Error(j.error || ('pay ' + r.status)); return j; }); })
     .then(function(j){ location.href = j.url; })
     .catch(function(e){
-      if(/^(used|bad_code|expired)$/.test(e.message) && step === 4){
+      if(/^(used|bad_code|expired|wrong_mode)$/.test(e.message) && step === 4){
         promo = null; drawReview(); drawDock(); sending = false; drawDock();
         $('promoIn').disabled = false; $('promoIn').value = '';
         setPromoMsg(e.message === 'used' ? 'This code has already been used.' : 'That code can’t be used.');
