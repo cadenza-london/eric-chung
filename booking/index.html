@@ -616,9 +616,9 @@ function drawReview(){
     (mode === 'online'
       ? row('PAY NOW', gbp(payNow()) + '<small>Full online lesson fee, by card</small>')
       : row('PAY NOW', gbp(payNow()) + ' deposit<small>By card · lesson fee ' + gbp(lessonFee()) + '</small>') +
-        row('ON THE DAY', gbp(payLater()) + '<small>The rest of the lesson fee</small>'));
+        row('ON THE DAY', gbp(payLater()) + ' in cash<small>The rest of the lesson fee, paid at the lesson</small>'));
   $('payFine').textContent = 'Secure card payment with Stripe (Apple Pay and Google Pay work too). ' +
-    (mode === 'online' ? 'The online lesson link is shared with you by email on the day of the lesson.' : 'The £' + DEPOSIT + ' deposit comes off your lesson fee, so you pay ' + gbp(payLater()) + ' on the day.');
+    (mode === 'online' ? 'The online lesson link is shared with you by email on the day of the lesson.' : 'The £' + DEPOSIT + ' deposit comes off your lesson fee, so you pay ' + gbp(payLater()) + ' in cash on the day.');
   drawPromo();
 }
 
@@ -703,7 +703,7 @@ function sendEmailForm(rec){
     'Requested time': (rec.payStatus === 'paid' ? '✅ PAID · ' : '') + '[' + where + '] ' + whenStr,
     'Lesson length': rec.dur + ' min',
     'Fee': (rec.code ? gbp(lf) + ' with code ' + rec.code + ' (' + rec.percent + '% off ' + gbp(rec.fee) + ')' : gbp(rec.fee)) + ' · ' + where + ' · ' + payLine +
-      (rec.mode === 'online' ? ' · full fee, send the lesson link on the day' : ' · deposit, ' + gbp(Math.round((lf - rec.payNow) * 100) / 100) + ' due on the day'),
+      (rec.mode === 'online' ? ' · full fee, send the lesson link on the day' : ' · deposit, ' + gbp(Math.round((lf - rec.payNow) * 100) / 100) + ' due in cash on the day'),
     'Student': rec.name, 'Age': rec.age, 'Instrument': INST[rec.instrument] || rec.instrument, 'Level': rec.level, 'Instructor': rec.teacher,
     'Parent / guardian': rec.parent, 'Email': rec.email, 'Phone': rec.phone,
     'Notes': (rec.payStatus === 'paid' ? 'Payment confirmation for the request sent earlier. ' : '') + (rec.notes || '')
@@ -782,7 +782,7 @@ function showDone(keep, state, extra){
     $('doneLead').textContent = 'Thank you' + (rec.parent ? ', ' + rec.parent : '') + '. We have your request and payment for ' + rec.name + '.';
     var lf = rec.lessonFee != null ? rec.lessonFee : rec.fee;
     box.innerHTML = '✅ <b>' + gbp(rec.payNow) + ' paid' + (online ? '' : ' (deposit)') + '.</b> ' + (rec.code ? rec.code + ' ' + rec.percent + '% off applied. ' : '') +
-      (online ? 'We’ll email you the lesson link on the day of the lesson.' : 'The remaining ' + gbp(Math.round((lf - rec.payNow) * 100) / 100) + ' is paid on the day.') +
+      (online ? 'We’ll email you the lesson link on the day of the lesson.' : 'Please bring the remaining ' + gbp(Math.round((lf - rec.payNow) * 100) / 100) + ' in cash on the day.') +
       ' Stripe emails you a receipt.' + (extra ? '<br><small>' + esc(extra) + '</small>' : '');
   } else if(state === 'checking'){
     $('doneLead').textContent = 'Checking your payment…';
