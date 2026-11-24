@@ -554,6 +554,7 @@ function drawCal(){
   drawTimes();
 }
 function pickDay(k){
+  if(promo && k !== pickDate){ promo = null; $('promoIn').value = ''; $('promoIn').disabled = false; setPromoMsg(''); }
   flex = false; pickDate = k; pickStart = null; drawCal(); drawDock();
   setTimeout(function(){ $('times').scrollIntoView({ behavior:'smooth', block:'nearest' }); }, 60);
 }
@@ -669,7 +670,7 @@ function applyPromo(){
     ? new Promise(function(r){ setTimeout(function(){ var sc = (window.SANDBOX_CODES || {})[code];
         if(sc && sc.only && sc.only !== mode) return r({ message: sc.only === 'online' ? 'This code is for online lessons only.' : 'This code is for in-person lessons only.' });
         r(sc ? { ok:true, code:code, percent:sc.percent || sc } : { message:'That code isn’t valid.' }); }, 400); })
-    : fetch(PAY_API + '/api/code', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ code:code, email:$('fEmail').value.trim(), mode:mode }) })
+    : fetch(PAY_API + '/api/code', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ code:code, email:$('fEmail').value.trim(), mode:mode, date:flex ? '' : (pickDate || '') }) })
         .then(function(r){ return r.json(); });
   p.then(function(j){
     b.disabled = false;
@@ -758,14 +759,14 @@ function startPayment(keep){
   }
   var whenPlain = String(keep.whenHtml || '').replace(/<br>/g, ', ').replace(/<[^>]+>/g, '').slice(0, 110);
   return fetch(PAY_API + '/api/checkout', { method:'POST', headers:{ 'Content-Type':'application/json' },
-    body: JSON.stringify({ code:rec.code || '', mode:rec.mode, svc:keep.svc, level:rec.level, dur:rec.dur, email:rec.email, student:rec.name, parent:rec.parent, phone:rec.phone, when:whenPlain, ref:keep.ref }) })
+    body: JSON.stringify({ code:rec.code || '', date:rec.date || '', mode:rec.mode, svc:keep.svc, level:rec.level, dur:rec.dur, email:rec.email, student:rec.name, parent:rec.parent, phone:rec.phone, when:whenPlain, ref:keep.ref }) })
     .then(function(r){ return r.json().then(function(j){ if(!r.ok || !j.url) throw new Error(j.error || ('pay ' + r.status)); return j; }); })
     .then(function(j){ location.href = j.url; })
     .catch(function(e){
-      if(/^(used|bad_code|expired|wrong_mode)$/.test(e.message) && step === 4){
+      if(/^(used|bad_code|expired|wrong_mode|not_yet|too_late)$/.test(e.message) && step === 4){
         promo = null; drawReview(); drawDock(); sending = false; drawDock();
         $('promoIn').disabled = false; $('promoIn').value = '';
-        setPromoMsg(e.message === 'used' ? 'This code has already been used.' : 'That code can’t be used.');
+        setPromoMsg(e.message === 'used' ? 'A discount code has already been used. Each family can use one code.' : 'That code can’t be used for this booking.');
         $('err4').textContent = 'Your request is with us. The code couldn’t be used, so please check the price and pay again.';
         return;
       }
