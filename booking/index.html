@@ -346,7 +346,7 @@ footer a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--l
     <div class="review" id="review"></div>
     <div class="promo">
       <label for="promoIn">Have a discount code?</label>
-      <div class="promorow"><input id="promoIn" placeholder="e.g. XMAS2026" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="30"
+      <div class="promorow"><input id="promoIn" placeholder="Enter your code" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="30"
         onkeydown="if(event.key==='Enter'){event.preventDefault();applyPromo();}"><button type="button" id="promoBtn" onclick="applyPromo()">Apply</button></div>
       <p class="promomsg" id="promoMsg" aria-live="polite"></p>
     </div>
@@ -666,7 +666,7 @@ function applyPromo(){
   if(!code){ setPromoMsg('Type your code first.'); return; }
   var b = $('promoBtn'); b.disabled = true; b.textContent = 'Checking…'; setPromoMsg('');
   var p = window.SANDBOX
-    ? new Promise(function(r){ setTimeout(function(){ r(code === 'XMAS2026' ? { ok:true, code:code, percent:10 } : { message:'That code isn’t valid.' }); }, 400); })
+    ? new Promise(function(r){ setTimeout(function(){ var sc = (window.SANDBOX_CODES || {})[code]; r(sc ? { ok:true, code:code, percent:sc } : { message:'That code isn’t valid.' }); }, 400); })
     : fetch(PAY_API + '/api/code', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ code:code, email:$('fEmail').value.trim() }) })
         .then(function(r){ return r.json(); });
   p.then(function(j){
