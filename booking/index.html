@@ -379,6 +379,18 @@ body{font-size:17px}
 .fld select.cc{flex:none;width:auto;max-width:44%;border:1px solid var(--line);background:var(--paper);border-radius:14px;padding:0 10px;font:inherit;font-size:16px;color:var(--ink);min-height:54px}
 .telrow input{flex:1;min-width:0}
 .terms.bad{border-color:var(--bad);box-shadow:0 0 0 1px var(--bad) inset}
+.svcg{transition:border-color .25s,box-shadow .25s}
+.svcg:has(.svc.on){border:2px solid rgba(201,138,30,.55);box-shadow:0 0 0 4px rgba(236,169,69,.08),0 8px 22px -14px rgba(201,138,30,.3)}
+.svcg:has(.svc.on) .gh{background:rgba(251,235,196,.35)}
+.svcg:has(.svc.on) .gh .ic{background:#fff}
+.svcg:has(.svc.on) .svc.on{background:rgba(246,219,156,.35)}
+.durs .dur.on{background:linear-gradient(135deg,rgba(246,205,120,.8) 0%,rgba(236,169,69,.8) 55%,rgba(214,140,40,.8) 100%);border-color:rgba(196,128,30,.8);color:var(--ink)}
+#s3{counter-reset:q}
+#s3 .fld > label:first-child{font-size:16.5px;letter-spacing:0;color:var(--ink);margin-bottom:9px;counter-increment:q;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+#s3 .fld > label:first-child::before{content:counter(q);flex:none;align-self:center;width:24px;height:24px;border-radius:50%;background:var(--pink-soft);color:var(--pink-deep);font-size:13px;font-weight:700;display:grid;place-items:center}
+#s3 .fld > label:first-child i{font-size:14px}
+.t.on,.cell button.on{background:linear-gradient(135deg,rgba(246,205,120,.8) 0%,rgba(236,169,69,.8) 55%,rgba(214,140,40,.8) 100%);border-color:rgba(196,128,30,.8);color:var(--ink)}
+#modeBox .choice.on{background:linear-gradient(135deg,rgba(246,205,120,.8) 0%,rgba(236,169,69,.8) 55%,rgba(214,140,40,.8) 100%);border-color:rgba(196,128,30,.8);box-shadow:0 0 0 1px rgba(196,128,30,.8) inset}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -788,13 +800,13 @@ function canNext(){
 }
 var termsOk = false;
 var TERMS = {
-  inperson: ['Please book at least 2 days before your lesson, so we can prepare properly for you.',
-             'You\u2019re welcome to cancel free of charge up to 72 hours before your lesson. After that, we\u2019re unable to refund the £15 deposit, as the time has been reserved just for you.',
-             'If a lesson is cancelled within 24 hours of the start time, we\u2019re unable to offer another trial lesson or any discount on future lessons.',
-             'The rest of the lesson fee is paid in cash on the day.'],
-  online:   ['You\u2019re welcome to cancel up to 48 hours before your lesson for a full refund. After that, or if the lesson is missed, we\u2019re unable to refund the fee.',
+  inperson: ['We know plans can change! Trial lessons can\u2019t be cancelled or refunded, but we\u2019re always happy to move yours to another time. Just let us know at least 72 hours before your lesson.',
+             'Your teacher sets this time aside just for you, so with less notice, or if the lesson is missed, the £15 deposit can\u2019t be returned.',
+             'Each family is offered one trial lesson. If it\u2019s missed or changed within 24 hours of the start time, we\u2019re unable to offer another trial lesson or any discount on future lessons.',
+             'The rest of the lesson fee is simply paid in cash on the day.'],
+  online:   ['Trial lessons can\u2019t be cancelled or refunded, but you\u2019re welcome to reschedule, as long as you let us know at least 48 hours before your lesson. With less notice, or if the lesson is missed, the fee is lost.',
              'To protect our teachers and students, please don\u2019t record, film or screenshot the lesson. Doing so breaches these terms, and we reserve the right to take legal action.'],
-  both:     'If we can\u2019t confirm your requested time, you\u2019ll receive a full refund.'
+  both:     'If we\u2019re unable to find a lesson time that suits you, we\u2019ll happily refund your payment in full.'
 };
 function drawTerms(){
   var list = (TERMS[mode] || []).concat([TERMS.both]);
