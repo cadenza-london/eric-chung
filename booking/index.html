@@ -10,27 +10,27 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/images/brand/icon-192.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<meta name="description" content="Request a trial piano, violin, theory or singing lesson with Cadenza London Music Academy, in person in Colindale (NW9) or online.">
+<meta name="description" content="Request a trial piano, violin, theory or singing lesson with Cadenza London Music Academy, in person in North London (NW9) or online.">
 <link rel="canonical" href="https://cadenza-london.com/booking/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cadenza-london.com/booking/">
 <meta property="og:title" content="Book a Trial Piano or Violin Lesson | Cadenza London Music Academy">
-<meta property="og:description" content="Request a trial piano, violin, theory or singing lesson with Cadenza London Music Academy, in person in Colindale (NW9) or online.">
+<meta property="og:description" content="Request a trial piano, violin, theory or singing lesson with Cadenza London Music Academy, in person in North London (NW9) or online.">
 <meta property="og:image" content="https://cadenza-london.com/IMG_2276.jpeg">
 <meta property="og:locale" content="en_GB">
 <meta name="theme-color" content="#FBF8F1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="firebase-config.js"></script>
 <style>
 :root{
-  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
-  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --bg:#FBF8F1;--paper:#FFFFFF;--ink:#1F1B14;--ink-2:#5C554A;--ink-3:#9A927F;
-  --line:#E9E2D3;--line-2:#F2EDE1;--gold:#B8902A;--gold-soft:#F4EAD2;--gold-deep:#8F6D14;
+  --serif:"Outfit",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --sans:"Outfit",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --bg:#FDF6E8;--paper:#FFFFFF;--ink:#231B12;--ink-2:#5C5040;--ink-3:#8A7C66;
+  --line:#EBDDC0;--line-2:#F3E8D2;--gold:#E39B2E;--gold-soft:#FCE6EC;--gold-deep:#A85E0C;--mari:#ECA945;--mari-soft:#F7DFA8;--pink:#F6BFCB;--pink-soft:#FCE6EC;--pink-deep:#B2456A;--sel:#FBEBC4;--sel-deep:#C98A1E;
   --ok:#3E7C5C;--bad:#B4483C;
   --ease:cubic-bezier(.22,.61,.36,1);
 }
@@ -41,12 +41,12 @@ button{font:inherit;color:inherit;cursor:pointer}
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
 /* ── top bar ── */
-.top{position:sticky;top:0;z-index:20;background:rgba(251,248,241,.86);backdrop-filter:saturate(140%) blur(14px);-webkit-backdrop-filter:saturate(140%) blur(14px);border-bottom:1px solid var(--line-2)}
+.top{position:sticky;top:0;z-index:20;background:rgba(253,246,232,.9);backdrop-filter:saturate(140%) blur(14px);-webkit-backdrop-filter:saturate(140%) blur(14px);border-bottom:1px solid var(--line-2)}
 .top .in{max-width:680px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:12px}
 .top img{width:36px;height:36px;border-radius:50%;object-fit:cover}
 
 .top .home{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none}
-.top .brand{font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:.01em;line-height:1}
+.top .brand{font-family:var(--serif);font-size:18px;font-weight:700;letter-spacing:0;line-height:1}
 .top .brand small{display:block;font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--ink-3);margin-top:3px}
 .top .steps{margin-left:auto;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--ink-3)}
 .top .steps b{color:var(--ink)}
@@ -56,19 +56,19 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 /* ── hero ── */
 .hero{max-width:680px;margin:0 auto;padding:30px 20px 4px;text-align:center}
 .hero .eyebrow{font-size:11px;font-weight:600;letter-spacing:.22em;color:var(--gold-deep);margin-bottom:14px}
-.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(38px,8vw,54px);line-height:1.05;letter-spacing:-.01em;margin:0 0 14px}
-.hero h1 em{font-style:italic;font-weight:400;color:var(--gold-deep)}
+.hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(32px,7vw,46px);line-height:1.1;letter-spacing:-.02em;margin:0 0 14px}
+.hero h1 em{font-style:italic;font-weight:600;color:var(--gold-deep)}
 .hero p{color:var(--ink-2);max-width:480px;margin:0 auto;font-size:16px}
 .hero .rule{width:44px;height:1px;background:var(--gold);margin:18px auto 0;opacity:.7}
 .why-trial{max-width:520px;margin:16px auto 0;padding:10px 14px;border:1px solid var(--line);border-radius:14px;background:var(--paper);font-size:12.5px;color:var(--ink-2);line-height:1.5;text-align:left}
-.why-trial b{color:var(--gold-deep);font-weight:600;display:block;margin-bottom:1px;font-family:var(--serif);font-size:17px}
+.why-trial b{color:var(--gold-deep);font-weight:600;display:block;margin-bottom:1px;font-family:var(--serif);font-size:16px}
 
 /* what happens next: three small boxes side by side at every width */
 .next3{max-width:520px;margin:12px auto 0;text-align:left}
 .next3 .nk{font-size:10.5px;font-weight:600;letter-spacing:.18em;color:var(--ink-3);margin:0 0 7px 2px}
 .next3 ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;counter-reset:n}
 .next3 li{counter-increment:n;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:8px 10px 9px;font-size:11.5px;color:var(--ink-2);line-height:1.35;min-width:0;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:6px;row-gap:3px;align-content:start;align-items:baseline}
-.next3 li::before{content:counter(n);font-family:var(--serif);font-size:20px;font-weight:600;line-height:1;color:var(--gold-deep)}
+.next3 li::before{content:counter(n);font-family:var(--serif);font-size:18px;font-weight:700;line-height:1;color:var(--gold-deep)}
 .next3 li b{color:var(--ink);font-weight:600;font-size:12.5px;line-height:1.2}
 .next3 li span{grid-column:1/-1}
 @media (max-width:420px){.next3 li{padding:7px 8px 8px;font-size:11px}.next3 li b{font-size:12px}}
@@ -80,7 +80,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .step.back{animation-name:inBack}
 @keyframes in{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
 @keyframes inBack{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
-h2{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.15;margin:8px 0 6px;letter-spacing:-.005em}
+h2{font-family:var(--serif);font-weight:700;font-size:26px;line-height:1.2;margin:8px 0 6px;letter-spacing:-.015em}
 .lead{color:var(--ink-2);margin:0 0 24px;font-size:15px}
 .k{font-size:11px;font-weight:600;letter-spacing:.18em;color:var(--ink-3);margin:26px 0 12px}
 .k:first-of-type{margin-top:0}
@@ -108,7 +108,7 @@ h2{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.15;marg
 .svcg .gh{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:16px 18px;border:0;background:transparent;transition:background .2s}
 .svcg.open .gh{background:#FCFAF5}
 .svcg .gh .ic{width:38px;height:38px;border-radius:50%;background:var(--gold-soft);display:grid;place-items:center;font-size:18px;flex:none}
-.svcg .gh .gn{font-family:var(--serif);font-size:22px;font-weight:600;flex:1;min-width:0;line-height:1.1}
+.svcg .gh .gn{font-family:var(--serif);font-size:18px;font-weight:600;flex:1;min-width:0;line-height:1.1}
 .svcg .gh .gn small{display:block;font-family:var(--sans);font-size:12.5px;color:var(--ink-3);font-weight:400;margin-top:3px}
 .svcg .gh .chev{width:18px;height:18px;color:var(--ink-3);transition:transform .3s var(--ease);flex:none}
 .svcg.open .gh .chev{transform:rotate(180deg)}
@@ -141,7 +141,7 @@ select.sel:focus,.fld input:focus,.fld textarea:focus{outline:none;border-color:
 /* calendar */
 .calwrap{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:18px 16px 14px}
 .calhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding:0 4px}
-.calhead .m{font-family:var(--serif);font-size:24px;font-weight:600}
+.calhead .m{font-family:var(--serif);font-size:20px;font-weight:600}
 .calhead button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--paper);display:grid;place-items:center;transition:all .2s}
 .calhead button:disabled{opacity:.3;cursor:default}
 .calhead button:not(:disabled):hover{background:var(--bg)}
@@ -158,7 +158,7 @@ select.sel:focus,.fld input:focus,.fld textarea:focus{outline:none;border-color:
 
 .times{margin-top:18px}
 .times .h{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
-.times .h b{font-family:var(--serif);font-size:20px;font-weight:600}
+.times .h b{font-family:var(--serif);font-size:17px;font-weight:600}
 .times .h span{font-size:12.5px;color:var(--ink-3)}
 .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px}
 .tg{font-size:11px;font-weight:600;letter-spacing:.16em;color:var(--ink-3);margin:6px 0 8px}
@@ -166,10 +166,10 @@ select.sel:focus,.fld input:focus,.fld textarea:focus{outline:none;border-color:
 .t:hover{border-color:var(--gold)}
 .t.on{background:linear-gradient(135deg,#E9C25A 0%,#D4A62F 55%,#C08F1A 100%);color:#3A2C05;border-color:#C08F1A;font-weight:600}
 @keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.quiet{color:var(--ink-3);font-family:var(--serif);font-style:italic;font-size:18px;text-align:center;padding:26px 10px}
+.quiet{color:var(--ink-3);font-family:var(--serif);font-style:normal;font-size:15px;text-align:center;padding:26px 10px}
 .alt{margin-top:22px;padding:20px 18px;border:1px dashed var(--line);border-radius:18px;text-align:center}
 .alt p{margin:0 0 12px;color:var(--ink-2);font-size:14.5px}
-.alt p b{color:var(--ink);font-family:var(--serif);font-size:20px;font-weight:500;display:block;margin-bottom:4px}
+.alt p b{color:var(--ink);font-family:var(--serif);font-size:17px;font-weight:600;display:block;margin-bottom:4px}
 .stale{background:#FFF6E8;border:1px solid #F1DDB4;color:#7A5A12;border-radius:14px;padding:12px 14px;font-size:13.5px;margin-bottom:14px}
 
 /* form */
@@ -214,7 +214,7 @@ select.sel:focus,.fld input:focus,.fld textarea:focus{outline:none;border-color:
 @keyframes draw{to{stroke-dashoffset:0}}
 .done h2{font-size:36px}
 .done .card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:22px;margin:22px 0 0;text-align:left}
-.done .card .when{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.15}
+.done .card .when{font-family:var(--serif);font-size:22px;font-weight:700;line-height:1.25}
 .done .card .what{color:var(--ink-2);margin-top:6px}
 
 /* skeleton */
@@ -241,6 +241,12 @@ footer a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--l
 .paid.warn b{color:#6a2a20}
 .paid .btn{margin-top:12px;width:100%;justify-content:center}
 @media (max-width:420px){#modeBox{grid-template-columns:1fr 1fr}#modeBox .choice{padding:14px 12px 13px}#modeBox .choice .d{font-size:12.5px}}
+.fld .wasame{display:flex;letter-spacing:0;align-items:center;gap:10px;font-size:14px;color:var(--ink-2);font-weight:500;margin:2px 0 8px;cursor:pointer}
+.fld .wasame input{-webkit-appearance:none;appearance:none;width:24px;height:24px;margin:0;padding:0;flex:none;border:2px solid #C9B58C;border-radius:7px;background:#fff;display:grid;place-items:center;cursor:pointer}
+.fld .wasame input:checked{background:var(--mari);border-color:#C4801E}
+.fld .wasame input:checked::after{content:"";width:6px;height:12px;border:solid var(--ink);border-width:0 3px 3px 0;transform:translateY(-1px) rotate(45deg)}
+.fld .wasame input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+#fWa[hidden]{display:none}
 .promo{margin-top:16px;padding:14px 16px;border:1px dashed var(--line);border-radius:16px;background:var(--paper)}
 .promo label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin-bottom:8px}
 .promorow{display:flex;gap:8px}
@@ -252,6 +258,127 @@ footer a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--l
 .promomsg{margin:8px 0 0;font-size:13px;min-height:0}
 .promomsg:empty{display:none}
 .promomsg.good{color:var(--ok);font-weight:600}.promomsg.bad{color:var(--bad)}
+
+/* ── Bold Stage look: Outfit, cream, marigold + pink ── */
+.hero{text-align:left;padding:44px 20px 6px}
+.hero .eyebrow{font-weight:700;letter-spacing:.14em;color:var(--pink-deep)}
+.hero h1{font-weight:600;font-size:clamp(30px,7.6vw,42px);line-height:1.12;letter-spacing:-.02em;margin:0 0 16px;text-wrap:balance}
+.hl-pink{background:#FBDDE5;padding:0 .14em;border-radius:.16em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hl-mari{background:#FCE7B8;padding:0 .14em;border-radius:.16em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hero p{margin:0;max-width:520px;font-size:17px;color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 4px}
+.chips span{background:var(--pink-soft);border:1px solid #F3CFD8;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;white-space:nowrap}
+.chips span:nth-child(2){background:var(--mari-soft);border-color:#EFD08F}
+.why-trial{margin:16px 0 0;max-width:none;background:var(--paper)}
+.why-trial b{color:var(--pink-deep);font-weight:700}
+.next3{margin:14px 0 0;max-width:none}
+.next3 li::before{color:var(--pink-deep);font-weight:800}
+h2{font-weight:800;letter-spacing:-.025em}
+.btn{background:var(--mari);color:var(--ink);font-weight:700;box-shadow:0 3px 0 #C4801E}
+.btn:hover{box-shadow:0 3px 0 #C4801E,0 10px 24px -14px rgba(168,94,12,.6)}
+.btn.ghost{box-shadow:none}
+.svc.on{background:var(--sel)}
+.svc.on .rad,#modeBox .choice.on .mt .rad{border-color:var(--sel-deep);background:var(--sel-deep)}
+.dur.on,.t.on,.cell button.on{background:var(--mari);color:var(--ink);border-color:#C4801E}
+.dur.on b{color:var(--ink)}
+.cell button.on::after{background:var(--ink)}
+.choice.on{background:var(--sel);border-color:var(--sel-deep);box-shadow:0 0 0 1px var(--sel-deep) inset}
+#modeBox .choice .p{color:var(--pink-deep);font-weight:600}
+.bar i{background:linear-gradient(90deg,var(--pink-deep),var(--mari))}
+.note{background:var(--pink-soft);color:#6A2A3F}.note b{color:var(--pink-deep)}
+.promo{border-color:#F3CFD8}
+.promorow button{border-color:var(--pink-deep);background:var(--pink-soft);color:var(--pink-deep)}
+.promorow input:focus{border-color:var(--pink-deep);box-shadow:0 0 0 3px var(--pink-soft)}
+.promorow input:disabled{background:var(--pink-soft);color:var(--pink-deep)}
+
+.done .ring{background:var(--pink-soft)}
+.top .steps{background:var(--pink-soft);border:1px solid #F3CFD8;color:var(--pink-deep);font-weight:700;letter-spacing:.06em;padding:6px 12px;border-radius:999px;font-size:12px;white-space:nowrap}
+.top .steps b{color:var(--pink-deep);font-size:13px}
+.next3 li span{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:14.5px;line-height:1.25;color:var(--pink-deep);margin-top:3px}
+@media (max-width:420px){.next3 li span{font-size:13.5px}}
+.hero .prep{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:15.5px;line-height:1.35;color:var(--pink-deep);max-width:560px;margin:12px 2px 4px}
+.helpscrim{position:fixed;inset:0;z-index:40;background:rgba(35,27,18,.28)}
+.helpbox{position:fixed;z-index:41;top:70px;right:12px;width:min(380px,calc(100vw - 24px));max-height:calc(100vh - 90px);overflow:auto;background:rgba(255,253,248,.7);-webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%);border:1px solid var(--line);border-radius:20px;box-shadow:0 24px 50px -20px rgba(35,27,18,.45);font-family:var(--sans)}
+.helpbox[hidden],.helpscrim[hidden]{display:none}
+.helpbox .hh{display:flex;align-items:center;justify-content:space-between;padding:14px 14px 10px 18px;border-bottom:1px solid var(--line-2)}
+.helpbox .hh b{font-size:17px;font-weight:700}
+.helpbox .hx{width:40px;height:40px;border:0;border-radius:50%;background:var(--pink-soft);color:var(--pink-deep);display:grid;place-items:center}
+.helpbox .hx svg{width:16px;height:16px}
+.helpbox .hb{padding:14px 18px 18px}
+.helpbox .hq{font-weight:600;font-size:15px;margin:0 0 10px}
+.helpbox .hstep{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--ink-3);margin-bottom:6px}
+.helpbox .hopts{display:grid;gap:8px}
+.helpbox .hopt{text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:14px;padding:12px 14px;font:500 14.5px var(--sans);color:var(--ink);min-height:44px;cursor:pointer}
+.helpbox .hopt:hover{border-color:var(--pink-deep);background:var(--pink-soft)}
+.helpbox .hrec{background:var(--pink-soft);border-radius:16px;padding:14px 16px;margin-bottom:10px}
+.helpbox .hrec b{display:block;font-size:16px;margin-bottom:4px}
+.helpbox .hrec p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.45}
+.helpbox .hrec .hgo{margin-top:12px}
+.helpbox .hgo{display:flex;justify-content:center;align-items:center;width:100%;margin-top:12px;border:0;border-radius:999px;background:var(--mari);color:var(--ink);font:700 15px var(--sans);padding:13px 16px;min-height:46px;text-decoration:none;box-shadow:0 3px 0 #C4801E;cursor:pointer}
+.helpbox .hlink{display:block;text-align:center;margin-top:10px;font-size:13.5px;color:var(--pink-deep);font-weight:600;background:none;border:0;width:100%;cursor:pointer;font-family:var(--sans)}
+/* larger, easier-to-read text and numbers */
+body{font-size:17px}
+.why-trial{font-size:14.5px}
+.lead{font-size:16.5px}
+.svcg .gh .gn small{font-size:14px;color:var(--ink-2)}
+.svc .sn{font-size:16.5px}
+.svc .sn small{font-size:14px;color:var(--ink-2)}
+.svc .sp{font-size:16px;font-weight:600;color:var(--ink)}
+.dur{font-size:16px}
+.dur b{font-size:15px;color:var(--ink-2)}
+.dow{font-size:12.5px}
+.cell button{font-size:17px}
+.t{font-size:17px}
+.review .row .l{font-size:14px}
+.review .row .v{font-size:16.5px}
+.review .row .v small{font-size:15px}
+.dock .sum{font-size:14.5px}
+.dock .sum b{font-size:15.5px}
+#modeBox .choice .d{font-size:14.5px}
+#modeBox .choice .p{font-size:14px}
+.chips span{font-size:14px}
+.note{font-size:15.5px}
+.fine{font-size:14px}
+.fld label{font-size:13.5px}
+@media (max-width:420px){#modeBox .choice .d{font-size:14px}.svc .sp{font-size:15.5px}}
+/* tidy: smaller description and badges; In person / Online boxes aligned */
+.hero p{font-size:15px;line-height:1.5}
+.chips{gap:6px;margin:12px 0 4px}
+.chips span{font-size:12px;padding:4px 10px;font-weight:600}
+#modeBox{align-items:stretch}
+#modeBox .choice{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;text-align:left}
+#modeBox .choice .p{margin-top:auto;padding-top:10px}
+.qk{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;letter-spacing:0;color:var(--ink);margin:22px 0 12px}
+.qk span{width:26px;height:26px;border-radius:50%;background:var(--pink-soft);color:var(--pink-deep);display:grid;place-items:center;font-size:13.5px;flex:none}
+.qk.nudge{color:var(--pink-deep)}
+#lessonQ[hidden],#svcList[hidden]{display:none}
+#lessonQ,#modeBox,.svcg{scroll-margin-top:84px}
+.helpfab{position:fixed;top:66px;right:8px;z-index:30;display:flex;align-items:flex-start;gap:8px;pointer-events:none}
+.helpfab[hidden]{display:none}
+.helptip{pointer-events:none;background:rgba(255,253,248,.7);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(178,69,106,.25);color:var(--pink-deep);font:700 13px var(--sans);padding:7px 12px;border-radius:14px 14px 4px 14px;box-shadow:0 6px 18px -10px rgba(120,40,70,.4);transition:opacity .3s,transform .3s}
+.helpfab.small .helptip{opacity:0;transform:translateX(8px)}
+.helpbtn{pointer-events:auto;width:48px;height:48px;border-radius:50%;border:0;padding:0;background:transparent;cursor:pointer;filter:drop-shadow(0 6px 10px rgba(120,60,20,.28))}
+.helpbtn svg{width:48px;height:48px;display:block;animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.helpbox .hopt{background:rgba(255,255,255,.75)}
+.helpbox .hrec{background:rgba(252,230,236,.8)}
+.btn.dim{opacity:.55}
+.qk.nudge span{background:var(--pink-deep);color:#fff}
+#err1{margin:-4px 0 10px}
+.terms{margin-top:16px;padding:16px 18px;border-radius:16px;background:var(--paper);border:1px solid var(--line)}
+.terms .th{font-weight:700;font-size:15px;margin-bottom:8px}
+.terms ul{margin:0 0 12px;padding-left:18px;display:grid;gap:6px;font-size:14.5px;color:var(--ink-2);line-height:1.45}
+.terms li::marker{color:var(--pink-deep)}
+.tagree{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;cursor:pointer}
+.tagree input{-webkit-appearance:none;appearance:none;width:24px;height:24px;margin:0;flex:none;border:2px solid #C9B58C;border-radius:7px;background:#fff;display:grid;place-items:center;cursor:pointer}
+.tagree input:checked{background:var(--mari);border-color:#C4801E}
+.tagree input:checked::after{content:"";width:6px;height:12px;border:solid var(--ink);border-width:0 3px 3px 0;transform:translateY(-1px) rotate(45deg)}
+.tagree input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.telrow{display:flex;gap:8px}
+.telrow[hidden]{display:none}
+.fld select.cc{flex:none;width:auto;max-width:44%;border:1px solid var(--line);background:var(--paper);border-radius:14px;padding:0 10px;font:inherit;font-size:16px;color:var(--ink);min-height:54px}
+.telrow input{flex:1;min-width:0}
+.terms.bad{border-color:var(--bad);box-shadow:0 0 0 1px var(--bad) inset}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -276,19 +403,12 @@ footer a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--l
 </div>
 
 <section class="hero" id="hero">
-  <div class="eyebrow">TRIAL LESSON · COLINDALE, NW9</div>
-  <h1>Begin with a <em>single lesson.</em></h1>
-  <p>Choose in person or online, pick a time and tell us a little about the student. We'll reply by email to confirm.</p>
-  <div class="rule"></div>
+  <div class="eyebrow">TRIAL LESSON · NW9 &amp; ONLINE</div>
+  <h1><span class="hl-pink">Fall in love</span> with one lesson, <span class="hl-mari">hear the difference</span></h1>
+  <p>Piano, violin, theory and more for children and adults, at our studio in North London, NW9 or online.</p>
+  <div class="chips"><span>30 min from £35</span><span>English · Cantonese · Mandarin</span><span>Beginners &amp; adults welcome</span></div>
   <div class="why-trial"><b>Why a trial lesson?</b> A gentle first step: the student settles into the studio, meets the teacher, and we find the pace and approach that suits them. No commitment beyond this one lesson.</div>
-  <div class="next3" aria-label="What happens next">
-    <div class="nk">WHAT HAPPENS NEXT</div>
-    <ol>
-      <li><b>Request &amp; pay</b><span>£15 deposit in person, or the online fee</span></li>
-      <li><b>We confirm</b><span>By email, usually within 24h</span></li>
-      <li><b>Have your lesson</b><span>Online? Your link comes on the day</span></li>
-    </ol>
-  </div>
+  <p class="prep">A confirmation email will be sent to you, and we will guide you on how to prepare for your trial class.</p>
 </section>
 
 <main class="stage" id="stage">
@@ -296,11 +416,11 @@ footer a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--l
   <!-- STEP 1 · lesson -->
   <section class="step on" id="s1">
     <h2>Choose a lesson</h2>
-    <div class="k">IN PERSON OR ONLINE?</div>
+    <div class="k qk"><span>1</span>Choose the format</div>
     <div class="choices" id="modeBox"></div>
-    <div class="k">LESSON</div>
-    <p class="lead">Pick the instrument and level closest to the student. Every subject is priced the same — by length and level.</p>
-    <div id="svcList"><div class="svcg" id="g-piano"><button class="gh" onclick="toggleGroup('piano')"><span class="ic">🎹</span><span class="gn">Piano lesson<small>All ages, classical and contemporary · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('piano',0)"><span class="rad"></span><span class="sn">Initial · Grade 1 to 3<small>30 or 45 or 60 min</small></span><span class="sp">£35–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('piano',1)"><span class="rad"></span><span class="sn">Grade 4<small>45 or 60 min</small></span><span class="sp">£46–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('piano',2)"><span class="rad"></span><span class="sn">Grade 5<small>45 or 60 min</small></span><span class="sp">£48–£60</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£48</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div><button class="svc" onclick="pickLevel('piano',3)"><span class="rad"></span><span class="sn">Grade 6 to 7<small>45 or 60 min</small></span><span class="sp">£50–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div><button class="svc" onclick="pickLevel('piano',4)"><span class="rad"></span><span class="sn">Grade 8<small>60 min</small></span><span class="sp">£70</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£70</b></button></div><button class="svc" onclick="pickLevel('piano',5)"><span class="rad"></span><span class="sn">Diploma<small>60 min</small></span><span class="sp">£80</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£80</b></button></div><button class="svc" onclick="pickLevel('piano',6)"><span class="rad"></span><span class="sn">Conservatoire<small>60 min</small></span><span class="sp">£90</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£90</b></button></div></div></div><div class="svcg" id="g-violin"><button class="gh" onclick="toggleGroup('violin')"><span class="ic">🎻</span><span class="gn">Violin lesson<small>Beginner to Grade 8 · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('violin',0)"><span class="rad"></span><span class="sn">Initial · Grade 1 to 3<small>30 or 45 or 60 min</small></span><span class="sp">£35–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('violin',1)"><span class="rad"></span><span class="sn">Grade 4<small>45 or 60 min</small></span><span class="sp">£46–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('violin',2)"><span class="rad"></span><span class="sn">Grade 5<small>45 or 60 min</small></span><span class="sp">£48–£60</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£48</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div><button class="svc" onclick="pickLevel('violin',3)"><span class="rad"></span><span class="sn">Grade 6 to 7<small>45 or 60 min</small></span><span class="sp">£50–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div><button class="svc" onclick="pickLevel('violin',4)"><span class="rad"></span><span class="sn">Grade 8<small>60 min</small></span><span class="sp">£70</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£70</b></button></div></div></div><div class="svcg" id="g-singing"><button class="gh" onclick="toggleGroup('singing')"><span class="ic">🎤</span><span class="gn">Classical vocal lesson<small>Technique, repertoire and exam preparation · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('singing',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div><div class="svcg" id="g-theory"><button class="gh" onclick="toggleGroup('theory')"><span class="ic">📘</span><span class="gn">Music theory class<small>Grades 1–8 · essential for ABRSM &amp; Trinity exams · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('theory',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div><div class="svcg" id="g-aural"><button class="gh" onclick="toggleGroup('aural')"><span class="ic">👂</span><span class="gn">Aural training class<small>Required for ABRSM &amp; Trinity instrumental exams · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('aural',0)"><span class="rad"></span><span class="sn">Initial · Grade 1 to 3<small>30 or 45 or 60 min</small></span><span class="sp">£35–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('aural',1)"><span class="rad"></span><span class="sn">Grade 4<small>45 or 60 min</small></span><span class="sp">£46–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('aural',2)"><span class="rad"></span><span class="sn">Grade 5<small>45 or 60 min</small></span><span class="sp">£48–£60</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£48</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div><button class="svc" onclick="pickLevel('aural',3)"><span class="rad"></span><span class="sn">Grade 6 to 7<small>45 or 60 min</small></span><span class="sp">£50–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div><button class="svc" onclick="pickLevel('aural',4)"><span class="rad"></span><span class="sn">Grade 8<small>60 min</small></span><span class="sp">£70</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£70</b></button></div></div></div><div class="svcg" id="g-pop"><button class="gh" onclick="toggleGroup('pop')"><span class="ic">🎛️</span><span class="gn">Pop music production class<small>Composition, arrangement and songwriting · with Jessica</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('pop',0)"><span class="rad"></span><span class="sn">Open level<small>60 min</small></span><span class="sp">£60</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div><button class="svc" onclick="pickLevel('pop',1)"><span class="rad"></span><span class="sn">Create your own song workshop<small>60 min · No teaching but making your own song for your wedding / engagement / special moments!</small></span><span class="sp">£60</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div></div></div><div class="svcg" id="g-accomp"><button class="gh" onclick="toggleGroup('accomp')"><span class="ic">🎼</span><span class="gn">Accompaniment<small>Exam, audition or performance accompaniment · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('accomp',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div><div class="svcg" id="g-aptitude"><button class="gh" onclick="toggleGroup('aptitude')"><span class="ic">🎯</span><span class="gn">Music aptitude test prep<small>Preparation for school music aptitude tests · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('aptitude',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div><div class="svcg" id="g-interview"><button class="gh" onclick="toggleGroup('interview')"><span class="ic">🎓</span><span class="gn">Music school interview coaching<small>Audition &amp; interview coaching · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('interview',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div></div>
+    <div class="k qk" id="lessonQ" hidden><span>2</span>Choose your type of lesson</div>
+    <p class="err" id="err1" role="alert" aria-live="polite"></p>
+    <div id="svcList" hidden><div class="svcg" id="g-piano"><button class="gh" onclick="toggleGroup('piano')"><span class="ic">🎹</span><span class="gn">Piano lesson<small>All ages, classical and contemporary · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('piano',0)"><span class="rad"></span><span class="sn">Initial · Grade 1 to 3<small>30 or 45 or 60 min</small></span><span class="sp">£35–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('piano',1)"><span class="rad"></span><span class="sn">Grade 4<small>45 or 60 min</small></span><span class="sp">£46–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('piano',2)"><span class="rad"></span><span class="sn">Grade 5<small>45 or 60 min</small></span><span class="sp">£48–£60</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£48</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div><button class="svc" onclick="pickLevel('piano',3)"><span class="rad"></span><span class="sn">Grade 6 to 7<small>45 or 60 min</small></span><span class="sp">£50–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div><button class="svc" onclick="pickLevel('piano',4)"><span class="rad"></span><span class="sn">Grade 8<small>60 min</small></span><span class="sp">£70</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£70</b></button></div><button class="svc" onclick="pickLevel('piano',5)"><span class="rad"></span><span class="sn">Diploma<small>60 min</small></span><span class="sp">£80</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£80</b></button></div><button class="svc" onclick="pickLevel('piano',6)"><span class="rad"></span><span class="sn">Conservatoire<small>60 min</small></span><span class="sp">£90</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£90</b></button></div></div></div><div class="svcg" id="g-violin"><button class="gh" onclick="toggleGroup('violin')"><span class="ic">🎻</span><span class="gn">Violin lesson<small>Beginner to Grade 8 · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('violin',0)"><span class="rad"></span><span class="sn">Initial · Grade 1 to 3<small>30 or 45 or 60 min</small></span><span class="sp">£35–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('violin',1)"><span class="rad"></span><span class="sn">Grade 4<small>45 or 60 min</small></span><span class="sp">£46–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('violin',2)"><span class="rad"></span><span class="sn">Grade 5<small>45 or 60 min</small></span><span class="sp">£48–£60</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£48</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div><button class="svc" onclick="pickLevel('violin',3)"><span class="rad"></span><span class="sn">Grade 6 to 7<small>45 or 60 min</small></span><span class="sp">£50–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div><button class="svc" onclick="pickLevel('violin',4)"><span class="rad"></span><span class="sn">Grade 8<small>60 min</small></span><span class="sp">£70</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£70</b></button></div></div></div><div class="svcg" id="g-singing"><button class="gh" onclick="toggleGroup('singing')"><span class="ic">🎤</span><span class="gn">Classical vocal lesson<small>Technique, repertoire and exam preparation · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('singing',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div><div class="svcg" id="g-theory"><button class="gh" onclick="toggleGroup('theory')"><span class="ic">📘</span><span class="gn">Music theory class<small>Grades 1–8 · essential for ABRSM &amp; Trinity exams · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('theory',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div><div class="svcg" id="g-aural"><button class="gh" onclick="toggleGroup('aural')"><span class="ic">👂</span><span class="gn">Aural training class<small>Required for ABRSM &amp; Trinity instrumental exams · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('aural',0)"><span class="rad"></span><span class="sn">Initial · Grade 1 to 3<small>30 or 45 or 60 min</small></span><span class="sp">£35–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('aural',1)"><span class="rad"></span><span class="sn">Grade 4<small>45 or 60 min</small></span><span class="sp">£46–£58</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£46</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£58</b></button></div><button class="svc" onclick="pickLevel('aural',2)"><span class="rad"></span><span class="sn">Grade 5<small>45 or 60 min</small></span><span class="sp">£48–£60</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£48</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div><button class="svc" onclick="pickLevel('aural',3)"><span class="rad"></span><span class="sn">Grade 6 to 7<small>45 or 60 min</small></span><span class="sp">£50–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div><button class="svc" onclick="pickLevel('aural',4)"><span class="rad"></span><span class="sn">Grade 8<small>60 min</small></span><span class="sp">£70</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£70</b></button></div></div></div><div class="svcg" id="g-pop"><button class="gh" onclick="toggleGroup('pop')"><span class="ic">🎛️</span><span class="gn">Pop music production class<small>Composition, arrangement and songwriting · with Jessica</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('pop',0)"><span class="rad"></span><span class="sn">Open level<small>60 min</small></span><span class="sp">£60</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div><button class="svc" onclick="pickLevel('pop',1)"><span class="rad"></span><span class="sn">Create your own song workshop<small>60 min · No teaching but making your own song for your wedding / engagement / special moments!</small></span><span class="sp">£60</span></button><div class="durs"><button class="dur" onclick="pickDur(60)">60 min<b>£60</b></button></div></div></div><div class="svcg" id="g-accomp"><button class="gh" onclick="toggleGroup('accomp')"><span class="ic">🎼</span><span class="gn">Accompaniment<small>Exam, audition or performance accompaniment · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('accomp',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div><div class="svcg" id="g-aptitude"><button class="gh" onclick="toggleGroup('aptitude')"><span class="ic">🎯</span><span class="gn">Music aptitude test prep<small>Preparation for school music aptitude tests · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('aptitude',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div><div class="svcg" id="g-interview"><button class="gh" onclick="toggleGroup('interview')"><span class="ic">🎓</span><span class="gn">Music school interview coaching<small>Audition &amp; interview coaching · with Eric</small></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg></button><div class="gb"><button class="svc" onclick="pickLevel('interview',0)"><span class="rad"></span><span class="sn">All levels<small>30 or 45 or 60 min</small></span><span class="sp">£35–£65</span></button><div class="durs"><button class="dur" onclick="pickDur(30)">30 min<b>£35</b></button><button class="dur" onclick="pickDur(45)">45 min<b>£50</b></button><button class="dur" onclick="pickDur(60)">60 min<b>£65</b></button></div></div></div></div>
   </section>
 
   <!-- STEP 2 · date & time -->
@@ -334,8 +454,12 @@ footer a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--l
     <div class="fld" id="wParent"><label>Parent / guardian's name</label><input id="fParent" placeholder="Your name — or the student's again if booking for yourself" autocomplete="name"></div>
     <div class="k">HOW WE'LL CONFIRM</div>
     <div class="fld" id="wEmail"><label>Email</label><input id="fEmail" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email"></div>
-    <div class="fld" id="wPhone"><label>Phone / WhatsApp</label><input id="fPhone" type="tel" placeholder="07xxx xxxxxx" autocomplete="tel" inputmode="tel"></div>
-    <div class="fld"><label>Anything we should know? <i>· optional</i></label><textarea id="fNotes" rows="3" placeholder="Exam goals, a previous teacher, access needs…"></textarea></div>
+    <div class="fld" id="wPhone"><label for="fPhone">Phone</label><div class="telrow"><select class="cc" id="fCc" aria-label="Country code"><option value="+44">🇬🇧 UK +44</option><option value="+852">🇭🇰 Hong Kong +852</option><option value="+86">🇨🇳 China +86</option><option value="+853">🇲🇴 Macau +853</option><option value="+886">🇹🇼 Taiwan +886</option><option value="+65">🇸🇬 Singapore +65</option><option value="+60">🇲🇾 Malaysia +60</option><option value="+353">🇮🇪 Ireland +353</option><option value="+33">🇫🇷 France +33</option><option value="+49">🇩🇪 Germany +49</option><option value="+1">🇺🇸 USA / Canada +1</option><option value="+61">🇦🇺 Australia +61</option><option value="+91">🇮🇳 India +91</option><option value="+81">🇯🇵 Japan +81</option><option value="+82">🇰🇷 Korea +82</option></select><input id="fPhone" type="tel" placeholder="7123 456789" autocomplete="tel-national" inputmode="tel"></div></div>
+    <div class="fld" id="wWa"><label for="fWa">WhatsApp number <i>· so we can get in touch</i></label>
+      <label class="wasame"><input type="checkbox" id="fWaSame" checked> Same as my phone number</label>
+      <div class="telrow" id="waRow" hidden><select class="cc" id="fWaCc" aria-label="Country code"><option value="+44">🇬🇧 UK +44</option><option value="+852">🇭🇰 Hong Kong +852</option><option value="+86">🇨🇳 China +86</option><option value="+853">🇲🇴 Macau +853</option><option value="+886">🇹🇼 Taiwan +886</option><option value="+65">🇸🇬 Singapore +65</option><option value="+60">🇲🇾 Malaysia +60</option><option value="+353">🇮🇪 Ireland +353</option><option value="+33">🇫🇷 France +33</option><option value="+49">🇩🇪 Germany +49</option><option value="+1">🇺🇸 USA / Canada +1</option><option value="+61">🇦🇺 Australia +61</option><option value="+91">🇮🇳 India +91</option><option value="+81">🇯🇵 Japan +81</option><option value="+82">🇰🇷 Korea +82</option></select><input id="fWa" type="tel" placeholder="7123 456789" autocomplete="off" inputmode="tel"></div></div>
+    <div class="fld" id="wNotes"><label for="fNotes">What are you looking for? Give us some background!</label><textarea id="fNotes" rows="3" placeholder="Exam goals, a previous teacher, pieces you are learning, access needs…"></textarea></div>
+    <div class="terms" id="terms"></div>
     <p class="err" id="err3"></p>
   </section>
 
@@ -372,8 +496,18 @@ footer a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--l
   </section>
 </main>
 
-<footer>Cadenza London Music Academy · Colindale, London NW9<br><a href="https://cadenza-london.com">cadenza-london.com</a></footer>
+<footer>Cadenza London Music Academy · North London, NW9<br><a href="https://cadenza-london.com">cadenza-london.com</a></footer>
 
+
+<div class="helpfab" id="helpFab">
+  <span class="helptip" id="helpTip" aria-hidden="true">How can I help?</span>
+  <button type="button" class="helpbtn" id="helpBtn" aria-label="How can I help? Get a lesson suggestion" aria-haspopup="dialog" aria-controls="helpBox" onclick="helpOpen()"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#ECA945"/><path d="M13 17a6 6 0 0 1 6-6h10a6 6 0 0 1 6 6v8a6 6 0 0 1-6 6h-6l-6 5v-5a6 6 0 0 1-4-5.7z" fill="#fff"/><path d="M26 15v9.2a2.6 2.6 0 1 1-1.6-2.4V17l4.6-1.2v2.4z" fill="#B2456A"/><circle cx="19.5" cy="21" r="1.2" fill="#231B12"/><path d="M18 24.5q1.6 1.4 3.2 0" stroke="#231B12" stroke-width="1.2" fill="none" stroke-linecap="round"/><circle cx="17" cy="23.6" r="1" fill="#F6BFCB"/></svg></button>
+</div>
+<div class="helpscrim" id="helpScrim" hidden onclick="helpClose()"></div>
+<div class="helpbox" id="helpBox" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
+  <div class="hh"><b id="helpTitle">How can I help?</b><button type="button" class="hx" onclick="helpClose()" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+  <div class="hb" id="helpBody"></div>
+</div>
 <div class="dock" id="dock">
   <div class="in">
     <button class="btn ghost" id="backBtn" onclick="go(-1)" style="display:none" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
@@ -387,7 +521,7 @@ var RATES = { '30':35, '45':50, '60':65, '60g8':70, '60dip':80 };
 var DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 var DAYS_L = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-var INST = { piano:'Piano', violin:'Violin', theory:'Music theory', singing:'Classical vocal', accomp:'Accompaniment', aptitude:'Music aptitude test', interview:'Music school interview', aural:'Aural training', pop:'Pop music production' };
+var INST = { piano:'Piano', violin:'Violin', theory:'Music theory', singing:'Classical vocal', accomp:'Accompaniment', aptitude:'Music aptitude test', interview:'Conservatoire interview coaching', aural:'Aural training', pop:'Pop music production' };
 /* Lesson menu — grouped like the old Picktime page. Price follows length + level: 45 min £50 · 60 min £65 · Grade 8 £70 · Diploma £80 */
 /* Price ladders (per level, per length). Missing length = not offered at that level. */
 var P_GRADED = [
@@ -408,10 +542,11 @@ var SERVICES = [
   { id:'singing', icon:'🎤', name:'Classical vocal lesson', sub:'Technique, repertoire and exam preparation', levels:P_FLAT },
   { id:'theory', icon:'📘', name:'Music theory class', sub:'Grades 1–8 · essential for ABRSM & Trinity exams', levels:P_FLAT },
   { id:'aural', icon:'👂', name:'Aural training class', sub:'Required for ABRSM & Trinity instrumental exams', levels:P_GRADED },
-  { id:'pop', icon:'🎛️', name:'Pop music production class', sub:'Composition, arrangement and songwriting', teacher:'Jessica', levels:[ { level:'Open level', durs:[60], prices:{60:60} }, { level:'Create your own song workshop', durs:[60], prices:{60:60}, note:'No teaching but making your own song for your wedding / engagement / special moments!' } ] },
-  { id:'accomp', icon:'🎼', name:'Accompaniment', sub:'Exam, audition or performance accompaniment', levels:P_FLAT },
+  { id:'accomp', icon:'🎼', name:'Accompaniment', sub:'Exam, audition or performance accompaniment · in person', modes:['inperson'], levels:P_FLAT },
   { id:'aptitude', icon:'🎯', name:'Music aptitude test prep', sub:'Preparation for school music aptitude tests', levels:P_FLAT },
-  { id:'interview', icon:'🎓', name:'Music school interview coaching', sub:'Audition & interview coaching', levels:P_FLAT }
+  { id:'interview', icon:'🎓', name:'Conservatoire interview coaching', sub:'Audition & interview coaching for Diploma level and above', levels:[ { level:'Diploma or above', durs:[45,60], prices:{45:58,60:69} } ] },
+  { id:'pop', icon:'🎛️', name:'Pop music production class', sub:'Composition, arrangement and songwriting · online', teacher:'Jessica', modes:['online'], levels:[ { level:'Open level', durs:[60], prices:{60:60} }, { level:'Create your own song workshop', durs:[60], prices:{60:60}, note:'No teaching but making your own song for your wedding / engagement / special moments!' } ] }
+
 ];
 SERVICES.forEach(function(g){ if(!g.teacher) g.teacher = 'Eric'; });
 function teacherOf(){ var g = SERVICES.find(function(x){ return x.id === svc; }); return g ? g.teacher : ''; }
@@ -422,10 +557,11 @@ var step = 1, calM = null, calY = null, sending = false, flex = false, mode = nu
 var PAY_API = 'https://cadenza-trial-pay.jessiemovement.workers.dev';
 var DEPOSIT = 15;
 var MODES = {
-  inperson: { name:'In person', where:'Colindale, NW9', d:'At the studio in Colindale, North London.', p:'£15 deposit to book' },
+  inperson: { name:'In person', where:'North London, NW9', d:'At our studio in North London, NW9.', p:'£15 deposit to book' },
   online:   { name:'Online', where:'Video call', d:'From home. We share the lesson link on the day.', p:'Online lesson fee, paid when you book' }
 };
 var PEND_KEY = 'cadenzaTrialPending';
+var pendingGroup = null;
 
 function $(id){ return document.getElementById(id); }
 function t2m(t){ var q = t.split(':'); return Number(q[0])*60 + Number(q[1]); }
@@ -480,7 +616,8 @@ function startsFor(k){
   });
   return out.sort(function(x,y){ return x - y; });
 }
-function hasFree(k){ return k > today() && k <= cutoff() && startsFor(k).length > 0; }
+function earliest(){ var d = new Date(); d.setDate(d.getDate() + (mode === 'inperson' ? 2 : 1)); return isoLocal(d); }
+function hasFree(k){ return k >= earliest() && k <= cutoff() && startsFor(k).length > 0; }
 function firstFreeMonth(){
   var keys = Object.keys(daysFor()).filter(hasFree).sort();
   var d = keys.length ? parse(keys[0]) : new Date();
@@ -496,9 +633,17 @@ function drawMode(){
       '<div class="d">' + x.d + '</div><div class="p">' + x.p + '</div></button>';
   }).join('');
 }
-function pickMode(m){ if(m !== mode && promo){ promo = null; $('promoIn').value = ''; $('promoIn').disabled = false; setPromoMsg(''); } mode = m; drawMode(); drawDock(); var k = document.querySelector('#s1 .k'); if(k) k.classList.remove('nudge'); }
+function pickMode(m){
+  var g = SERVICES.find(function(x){ return x.id === svc; });
+  if(g && !svcAllowed(g, m)){ svc = null; inst = null; lvl = null; dur = null; pickDate = null; pickStart = null; if(openGroup === g.id) openGroup = null; calM = null; }
+  if(pickDate && m === 'inperson' && pickDate < (function(){ var d = new Date(); d.setDate(d.getDate() + 2); return isoLocal(d); })()){ pickDate = null; pickStart = null; }
+  if(m !== mode && promo){ promo = null; $('promoIn').value = ''; $('promoIn').disabled = false; setPromoMsg(''); } mode = m; drawMode(); drawServices(); drawDock();
+  var first = $('svcList').hidden; $('lessonQ').hidden = false; $('svcList').hidden = false;
+  if(pendingGroup){ var pg = pendingGroup; pendingGroup = null; if(openGroup !== pg) toggleGroup(pg); }
+  else if(first) setTimeout(function(){ $('lessonQ').scrollIntoView({ behavior:'smooth', block:'start' }); }, 80); var k = document.querySelector('#s1 .k'); if(k) k.classList.remove('nudge'); }
+function svcAllowed(g, m){ m = m || mode; return !m || !g.modes || g.modes.indexOf(m) > -1; }
 function drawServices(){
-  $('svcList').innerHTML = SERVICES.map(function(g){
+  $('svcList').innerHTML = SERVICES.filter(function(g){ return svcAllowed(g); }).map(function(g){
     var open = openGroup === g.id;
     return '<div class="svcg' + (open ? ' open' : '') + '" id="g-' + g.id + '">' +
       '<button class="gh" onclick="toggleGroup(\'' + g.id + '\')">' +
@@ -590,17 +735,28 @@ function validDetails(show){
   var eOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   var pOk = !flex || $('fPref').value.trim().length > 0;
   var parent = $('fParent').value.trim(), phone = $('fPhone').value.trim();
-  var phOk = phone.replace(/\D/g,'').length >= 10;
+  var phOk = phone.replace(/\D/g,'').replace(/^0+/,'').length >= 7;
+  var nOk = $('fNotes').value.trim().length >= 3;
+  var waOk = $('fWaSame').checked || $('fWa').value.replace(/\D/g,'').replace(/^0+/,'').length >= 7;
   if(show){
     $('wPref').classList.toggle('bad', !pOk);
     $('wParent').classList.toggle('bad', !parent);
     $('wPhone').classList.toggle('bad', !phOk);
     $('wName').classList.toggle('bad', !name);
     $('wEmail').classList.toggle('bad', !eOk);
-    $('err3').textContent = !pOk ? 'Please tell us which days or times would suit you.' : !name ? 'Please tell us the student’s name.' : !parent ? 'Please tell us the parent or guardian’s name.' : !eOk ? 'Please enter a valid email so we can confirm.' : !phOk ? 'Please enter a phone number we can reach you on.' : '';
+    $('wWa').classList.toggle('bad', !waOk);
+    $('wNotes').classList.toggle('bad', !nOk);
+    if(nOk && name && parent && eOk && phOk && pOk && waOk) $('terms').classList.toggle('bad', !termsOk);
+    $('err3').textContent = !pOk ? 'Please tell us which days or times would suit you.' : !name ? 'Please tell us the student’s name.' : !parent ? 'Please tell us the parent or guardian’s name.' : !eOk ? 'Please enter a valid email so we can confirm.' : !phOk ? 'Please enter a phone number we can reach you on.' : !waOk ? 'Please enter your WhatsApp number, or tick “Same as my phone number”.' : !nOk ? 'Please tell us a little about what you’re looking for.' : !termsOk ? 'Please read and agree to the booking terms.' : '';
   }
-  return !!name && !!parent && eOk && phOk && pOk;
+  return !!name && !!parent && eOk && phOk && pOk && waOk && nOk && termsOk;
 }
+function fullPhone(cc, num){ var d = String(num || '').replace(/[^\d]/g, ''); if(!d) return ''; d = d.replace(/^0+/, ''); return $(cc).value + ' ' + d.replace(/^(\d{4})(\d+)$/, '$1 $2'); }
+function phoneNumber(){ return fullPhone('fCc', $('fPhone').value); }
+function waNumber(){ return $('fWaSame').checked ? phoneNumber() : fullPhone('fWaCc', $('fWa').value); }
+$('fWaSame').addEventListener('change', function(){ $('waRow').hidden = this.checked; $('wWa').classList.remove('bad'); $('err3').textContent = ''; if(!this.checked) $('fWa').focus(); drawDock(); });
+$('fNotes').addEventListener('input', function(){ $('wNotes').classList.remove('bad'); $('err3').textContent = ''; drawDock(); });
+$('fWa').addEventListener('input', function(){ $('wWa').classList.remove('bad'); $('err3').textContent = ''; drawDock(); });
 ['fName','fEmail','fPref','fParent','fPhone'].forEach(function(id){ $(id).addEventListener('input', function(){ $('w' + id.slice(1)).classList.remove('bad'); $('err3').textContent = ''; drawDock(); }); });
 
 /* step 4 */
@@ -609,10 +765,10 @@ function drawReview(){
   function row(l, v, s){ return '<div class="row"><div class="l">' + l + '</div><div class="v">' + v + (s != null ? '<button class="edit" onclick="jump(' + s + ')">Edit</button>' : '') + '</div></div>'; }
   $('review').innerHTML =
     row('WHEN', whenLong(), 2) +
-    row('WHERE', esc(modeText()) + '<small>' + (mode === 'online' ? 'We email the lesson link on the day' : 'Cadenza London studio, Colindale NW9') + '</small>', 1) +
+    row('WHERE', esc(modeText()) + '<small>' + (mode === 'online' ? 'We email the lesson link on the day' : 'Cadenza London studio, North London NW9') + '</small>', 1) +
     row('LESSON', INST[inst] + ' · ' + dur + ' min<small>' + esc(lv) + ' · with ' + esc(teacherOf()) + '</small>', 1) +
     row('STUDENT', esc($('fName').value.trim()) + '<small>' + [age && ('Age ' + esc(age)), parent && ('with ' + esc(parent))].filter(Boolean).join(' · ') + '</small>', 3) +
-    row('CONTACT', esc($('fEmail').value.trim()) + '<small>' + esc($('fPhone').value.trim()) + '</small>', 3) +
+    row('CONTACT', esc($('fEmail').value.trim()) + '<small>' + esc(phoneNumber()) + '<br>WhatsApp: ' + esc(waNumber()) + '</small>', 3) +
     (promo ? row('DISCOUNT', esc(promo.code) + ' · ' + promo.percent + '% off<small>Lesson fee ' + gbp(lessonFee()) + ' (was ' + gbp(fee()) + ')</small>') : '') +
     (mode === 'online'
       ? row('PAY NOW', gbp(payNow()) + '<small>Full online lesson fee, by card</small>')
@@ -630,10 +786,33 @@ function canNext(){
   if(step === 3) return validDetails(false);
   return true;
 }
+var termsOk = false;
+var TERMS = {
+  inperson: ['Please book at least 2 days before your lesson, so we can prepare properly for you.',
+             'You\u2019re welcome to cancel free of charge up to 72 hours before your lesson. After that, we\u2019re unable to refund the £15 deposit, as the time has been reserved just for you.',
+             'If a lesson is cancelled within 24 hours of the start time, we\u2019re unable to offer another trial lesson or any discount on future lessons.',
+             'The rest of the lesson fee is paid in cash on the day.'],
+  online:   ['You\u2019re welcome to cancel up to 48 hours before your lesson for a full refund. After that, or if the lesson is missed, we\u2019re unable to refund the fee.',
+             'To protect our teachers and students, please don\u2019t record, film or screenshot the lesson. Doing so breaches these terms, and we reserve the right to take legal action.'],
+  both:     'If we can\u2019t confirm your requested time, you\u2019ll receive a full refund.'
+};
+function drawTerms(){
+  var list = (TERMS[mode] || []).concat([TERMS.both]);
+  $('terms').innerHTML = '<div class="th">Booking terms · ' + (mode === 'online' ? 'online lesson' : 'in-person lesson') + '</div><ul>' +
+    list.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' +
+    '<label class="tagree"><input type="checkbox" id="fTerms"' + (termsOk ? ' checked' : '') + '> I have read and agree to the booking terms</label>';
+  $('fTerms').addEventListener('change', function(){ termsOk = this.checked; $('err3').textContent = ''; $('terms').classList.remove('bad'); drawDock(); });
+}
 function jump(n){ var back = n < step; step = n; show(back); }
 function go(n){
   if(n > 0 && step === 3 && !validDetails(true)) return;
-  if(n > 0 && step === 1 && !mode){ var k = document.querySelector('#s1 .k'); k.classList.add('nudge'); k.scrollIntoView({ behavior:'smooth', block:'center' }); return; }
+  if(n > 0 && step === 1 && !canNext()){
+    var miss = !mode ? $('modeBox').previousElementSibling : $('lessonQ');
+    document.querySelectorAll('#s1 .qk').forEach(function(x){ x.classList.remove('nudge'); });
+    miss.classList.add('nudge');
+    $('err1').textContent = !mode ? 'Please choose the format first: in person or online.' : !svc ? 'Please choose your type of lesson.' : 'Please choose a lesson length.';
+    miss.scrollIntoView({ behavior:'smooth', block:'start' }); return;
+  }
   if(n > 0 && step === 4){ submit(); return; }
   var to = step + n; if(to < 1) return;
   step = to; show(n < 0);
@@ -646,8 +825,9 @@ function show(back){
   $('hero').style.display = step === 1 ? '' : 'none';
   $('dock').classList.toggle('hide', step === 5);
   $('backBtn').style.display = step > 1 && step < 5 ? '' : 'none';
+  $('helpFab').hidden = step !== 1;
   if(step === 2){ drawCal(); $('stale').style.display = ($('stale').textContent && teacherOf() !== 'Jessica') ? 'block' : 'none'; }
-  if(step === 3) $('wPref').style.display = flex ? '' : 'none';
+  if(step === 3){ $('wPref').style.display = flex ? '' : 'none'; drawTerms(); }
   if(step === 4) drawReview();
   drawDock();
   window.scrollTo({ top: step === 1 ? 0 : $('stage').offsetTop - 70, behavior:'smooth' });
@@ -680,7 +860,9 @@ function applyPromo(){
 }
 function drawDock(){
   var nb = $('nextBtn'), sum = $('dockSum');
-  nb.disabled = !canNext() || sending;
+  nb.disabled = sending || (step !== 1 && !canNext());
+  nb.classList.toggle('dim', step === 1 && !canNext());
+  if(step === 1 && canNext()) $('err1').textContent = '';
   var arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
   if(step === 4){ nb.innerHTML = sending ? '<span class="spin"></span> Opening payment' : 'Send &amp; pay ' + gbp(payNow()) + ' ' + arrow; }
   else if(step === 3){ nb.innerHTML = 'Review ' + arrow; }
@@ -708,8 +890,9 @@ function sendEmailForm(rec){
     'Fee': (rec.code ? gbp(lf) + ' with code ' + rec.code + ' (' + rec.percent + '% off ' + gbp(rec.fee) + ')' : gbp(rec.fee)) + ' · ' + where + ' · ' + payLine +
       (rec.mode === 'online' ? ' · full fee, send the lesson link on the day' : ' · deposit, ' + gbp(Math.round((lf - rec.payNow) * 100) / 100) + ' due in cash on the day'),
     'Student': rec.name, 'Age': rec.age, 'Instrument': INST[rec.instrument] || rec.instrument, 'Level': rec.level, 'Instructor': rec.teacher,
-    'Parent / guardian': rec.parent, 'Email': rec.email, 'Phone': rec.phone,
-    'Notes': (rec.payStatus === 'paid' ? 'Payment confirmation for the request sent earlier. ' : '') + (rec.notes || '')
+    'Parent / guardian': rec.parent, 'Email': rec.email,
+    'Phone': rec.phone + (rec.whatsapp && rec.whatsapp !== rec.phone ? ' · WhatsApp: ' + rec.whatsapp : ' (also WhatsApp)'),
+    'Notes': (rec.payStatus === 'paid' ? 'Payment confirmation for the request sent earlier. ' : '') + (rec.notes || '') + (rec.termsAgreed ? ' [Booking terms agreed]' : '')
   };
   var body = Object.keys(data).map(function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k] == null ? '' : data[k]); }).join('&');
   if(/netlify\.app$/.test(location.hostname)){
@@ -727,11 +910,11 @@ function submit(){
     status:'pending', createdAt:Date.now(),
     name:$('fName').value.trim().slice(0,80), age:$('fAge').value.trim().slice(0,20),
     instrument:inst, level:levelText(), teacher:teacherOf(), parent:$('fParent').value.trim().slice(0,80),
-    phone:$('fPhone').value.trim().slice(0,30), email:$('fEmail').value.trim().slice(0,120),
+    phone:phoneNumber().slice(0,30), whatsapp:waNumber().slice(0,30), email:$('fEmail').value.trim().slice(0,120),
     notes:$('fNotes').value.trim().slice(0,500),
     date:flex ? '' : pickDate, start:flex ? '' : m2t(pickStart), dur:dur, fee:fee(),
     pref:flex ? $('fPref').value.trim().slice(0,200) : '',
-    mode:mode, payNow:payNow(), payStatus:'awaiting', lessonFee:lessonFee(), code:promo ? promo.code : '', percent:promo ? promo.percent : 0
+    mode:mode, payNow:payNow(), payStatus:'awaiting', termsAgreed:termsOk ? new Date().toISOString() : '', lessonFee:lessonFee(), code:promo ? promo.code : '', percent:promo ? promo.percent : 0
   };
   sending = true; drawDock();
   var p;
@@ -759,7 +942,7 @@ function startPayment(keep){
   }
   var whenPlain = String(keep.whenHtml || '').replace(/<br>/g, ', ').replace(/<[^>]+>/g, '').slice(0, 110);
   return fetch(PAY_API + '/api/checkout', { method:'POST', headers:{ 'Content-Type':'application/json' },
-    body: JSON.stringify({ code:rec.code || '', date:rec.date || '', mode:rec.mode, svc:keep.svc, level:rec.level, dur:rec.dur, email:rec.email, student:rec.name, parent:rec.parent, phone:rec.phone, when:whenPlain, ref:keep.ref }) })
+    body: JSON.stringify({ terms:!!rec.termsAgreed, code:rec.code || '', date:rec.date || '', mode:rec.mode, svc:keep.svc, level:rec.level, dur:rec.dur, email:rec.email, student:rec.name, parent:rec.parent, phone:rec.whatsapp && rec.whatsapp !== rec.phone ? rec.phone + ' / WhatsApp ' + rec.whatsapp : rec.phone, when:whenPlain, ref:keep.ref }) })
     .then(function(r){ return r.json().then(function(j){ if(!r.ok || !j.url) throw new Error(j.error || ('pay ' + r.status)); return j; }); })
     .then(function(j){ location.href = j.url; })
     .catch(function(e){
@@ -836,6 +1019,68 @@ function handleReturn(){
   return true;
 }
 
+
+/* "How can I help?" guide: a few tap questions, then a suggested lesson or course */
+var HELP = { who:null, goal:null };
+var HELP_SITE = 'https://cadenza-london.com/';
+function helpOpen(){ HELP = { who:null, goal:null }; $('helpBox').hidden = false; $('helpScrim').hidden = false; helpDraw(); setTimeout(function(){ var b = document.querySelector('#helpBody .hopt'); if(b) b.focus(); }, 30); }
+function helpClose(){ $('helpBox').hidden = true; $('helpScrim').hidden = true; $('helpBtn').focus(); }
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !$('helpBox').hidden) helpClose(); });
+function helpQ(n, q, opts){
+  return '<div class="hstep">QUESTION ' + n + ' OF ' + (HELP.goal === 'lessons' || !HELP.goal ? 3 : 2) + '</div><p class="hq">' + q + '</p><div class="hopts">' +
+    opts.map(function(o){ return '<button type="button" class="hopt" onclick="helpPick(\'' + o[0] + '\')">' + o[1] + '</button>'; }).join('') + '</div>';
+}
+function helpPick(v){
+  if(!HELP.who) HELP.who = v; else if(!HELP.goal) HELP.goal = v; else HELP.inst = v;
+  helpDraw();
+}
+function helpRec(title, text, btn, action){
+  return '<div class="hrec"><b>' + title + '</b><p>' + text + '</p></div>' + btn.replace('%A%', action) +
+    '<button type="button" class="hlink" onclick="helpOpen()">Start again</button>';
+}
+function helpDraw(){
+  var h = '', adult = HELP.who === 'adult';
+  if(!HELP.who) h = helpQ(1, 'Who are the lessons for?', [['child','A child (under 12)'],['teen','A teenager'],['adult','Me, an adult']]);
+  else if(!HELP.goal) h = helpQ(2, 'What would you like help with?', [
+    ['lessons','Start or continue regular lessons'],
+    ['exam','Digital exam coaching (ABRSM or Trinity)'],
+    ['diploma','A diploma, or a conservatoire audition or interview'],
+    ['sight','Sight-reading practice']]);
+  else if(HELP.goal === 'lessons' && !HELP.inst) h = helpQ(3, 'Which would you like to learn?', [
+    ['piano','Piano'],['violin','Violin'],['singing','Singing (classical)'],['theory','Music theory or aural'],['pop','Songwriting or pop music production']]);
+  else {
+    var g = HELP.goal, i = HELP.inst;
+    var book = '<button type="button" class="hgo" onclick="%A%">Book a trial lesson</button>';
+    var link = function(url, label){ return '<a class="hgo" href="' + url + '" target="_blank" rel="noopener">' + label + '</a>'; };
+    if(g === 'lessons' && i === 'pop') h = helpRec('Pop music production class (online)', 'Songwriting, composition and arrangement with Jessica, online from home. Open level, so complete beginners are welcome.', book, "helpBook('pop','online')");
+    else if(g === 'lessons'){
+      var nm = { piano:'Piano', violin:'Violin', singing:'Classical vocal', theory:'Music theory' }[i] || 'Piano';
+      var sid = { piano:'piano', violin:'violin', singing:'singing', theory:'theory' }[i] || 'piano';
+      h = helpRec(nm + ' trial lesson with Eric', (adult ? 'Eric teaches many adult learners, from complete beginners upwards, and is known for being very patient. ' : 'A relaxed first lesson where Eric gets to know the student and finds the right pace. ') + 'Choose in person in North London, NW9 or online. 30 minutes from £35.', book, "helpBook('" + sid + "')");
+    }
+    else if(g === 'exam') h = '<p class="hq">Two ways Eric can help with your digital exam:</p>' +
+      '<div class="hrec"><b>Video Feedback (online)</b><p>Send Eric a video of your exam piece from home. He marks it like the real exam and tells you exactly what to fix. From £15.</p>' + link(HELP_SITE + 'digital-exam-ready/upload.html?mode=coaching', 'Send a video') + '</div>' +
+      '<div class="hrec"><b>Digital Exam Ready Course (in person)</b><p>4 weeks in London for students with their pieces learnt: coaching, a mock exam with marks, and your exam video recorded on a grand piano.</p>' + link(HELP_SITE + 'digital-exam-ready/', 'See the exam course') + '</div>' +
+      '<button type="button" class="hlink" onclick="helpBook(\'piano\')">Still learning the pieces? Book a trial lesson</button>' +
+      '<button type="button" class="hlink" onclick="helpOpen()">Start again</button>';
+    else if(g === 'diploma') h = helpRec('Diploma &amp; conservatoire preparation', 'Eric prepares students for ABRSM ARSM, DipABRSM and LRSM, and Trinity ATCL, LTCL and FTCL. For auditions and interviews, book Conservatoire interview coaching (Diploma level and above).', book, "helpBook('interview')");
+    else if(g === 'sight') h = helpRec('Sight-Reading Club (online)', 'Weekly online piano sight-reading sessions on Tuesdays, in small groups by level. Play something new every week and read any score faster.', link(HELP_SITE + 'sight-reading-club/', 'See the Sight-Reading Club'), '');
+  }
+  $('helpBody').innerHTML = h;
+}
+function helpBook(id, m){
+  helpClose();
+  if(m && mode !== m) pickMode(m);
+  if(step !== 1){ step = 1; show(true); }
+  var g = SERVICES.find(function(x){ return x.id === id; });
+  if(g && !svcAllowed(g)) pickMode(g.modes[0]);
+  if(!mode){ pendingGroup = id; var k = document.querySelector('#s1 .qk'); k.classList.add('nudge'); setTimeout(function(){ $('modeBox').scrollIntoView({ behavior:'smooth', block:'center' }); }, 80); return; }
+  if(openGroup !== id) toggleGroup(id);
+  setTimeout(function(){ var el = $('g-' + id) || $('modeBox'); if(el) el.scrollIntoView({ behavior:'smooth', block:'start' }); }, 80);
+}
+
+window.addEventListener('scroll', function(){ var f = $('helpFab'); if(f && scrollY > 80) f.classList.add('small'); }, { passive:true });
+setTimeout(function(){ var f = $('helpFab'); if(f) f.classList.add('small'); }, 5000);
 /* boot */
 function applyAvail(d){
   avail = d || { days:{} };
