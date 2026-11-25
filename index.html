@@ -3366,9 +3366,9 @@
   });
 
 </script>
-<!-- ═══════════ BLACK FRIDAY POPUP (until 30 Nov 2026) ═══════════
+<!-- ═══════════ BLACK FRIDAY POPUP (until 30 Nov 2026, then "extended to 5 Dec") ═══════════
      Paste this block just before </body> on cadenza-london.com.
-     It switches itself off after 23:59 on Sun 30 Nov 2026 (London time),
+     From 1 Dec it says "Extended to 5 Dec!", then switches itself off after 23:59 on Fri 5 Dec 2026 (London time),
      and stops the usual welcome popup opening by itself while the offer is live. -->
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Jost:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -3410,7 +3410,7 @@
 <div id="bf-overlay"></div>
 <button id="bf-tab" type="button" aria-label="Show Black Friday offers"><b>&#9733;</b> BLACK FRIDAY &middot; UP TO 30% OFF</button>
 <div id="bf-pop" role="dialog" aria-modal="true" aria-label="Black Friday offer">
-  <div class="bf-band">UNTIL 30 NOV ONLY<button class="bf-x" type="button" aria-label="Close">&times;</button></div>
+  <div class="bf-band"><span id="bf-band">UNTIL 30 NOV ONLY</span><button class="bf-x" type="button" aria-label="Close">&times;</button></div>
 
   <div class="bf-in" id="bf-step1">
     <p class="bf-ey">BLACK FRIDAY</p>
@@ -3428,19 +3428,27 @@
     <div class="bf-r"><div><div class="bf-t">Trial in-person lesson</div><div class="bf-p">10% off · new customers only</div></div><button class="bf-c" type="button" data-code="BF2026">BF2026</button></div>
     <a class="bf-btn bf-go" href="https://cadenza-london.com/booking/?bf=1">BOOK A TRIAL LESSON &rarr;</a>
     <a class="bf-btn bf-btn2 bf-go" href="https://cadenza-london.com/digital-exam-ready/upload.html?mode=coaching&amp;bf=1">GET VIDEO FEEDBACK &rarr;</a>
-    <p class="bf-ft">Tap a code to copy it · Ends midnight 30 Nov</p>
+    <p class="bf-ft">Tap a code to copy it · <span id="bf-ends">Ends midnight 30 Nov</span></p>
   </div>
 
 </div>
 
 <script>
 (function(){
-  var END = Date.UTC(2026, 10, 30, 23, 59, 59); /* Sun 30 Nov 2026, 23:59:59 London (GMT) */
+  var FIRST_END = Date.UTC(2026, 10, 30, 23, 59, 59); /* Sun 30 Nov 2026, 23:59:59 London (GMT) */
+  var END = Date.UTC(2026, 11, 5, 23, 59, 59);        /* extended: Fri 5 Dec 2026, 23:59:59 London (GMT) */
   var pop = document.getElementById('bf-pop'), ov = document.getElementById('bf-overlay');
   if (!pop) return;
   var force = /[?&]bfpreview/.test(location.search);
   if (Date.now() > END && !force) { pop.remove(); ov.remove(); var t = document.getElementById('bf-tab'); if (t) t.remove(); document.querySelectorAll('.bf-tick').forEach(function(x){ x.remove(); }); return; }
   document.body.classList.add('bf-live');
+  var ext = Date.now() > FIRST_END || /[?&]bfext/.test(location.search);
+  var SEEN = ext ? 'bf2026ExtSeen' : 'bf2026Seen'; /* the extension shows the popup once more */
+  if (ext) {
+    document.getElementById('bf-band').textContent = 'EXTENDED TO 5 DEC!';
+    document.getElementById('bf-ends').textContent = 'Now ends midnight 5 Dec';
+    document.querySelectorAll('.bf-tick span:not(.ticker-sep)').forEach(function(x){ x.textContent = 'Black Friday extended to 5 Dec! · Up to 30% off'; });
+  }
   /* while the offer is live, the usual welcome popup doesn't open by itself (the #join sign-up link still works) */
   var oldPop = document.getElementById('promo-popup');
   if (oldPop && window.MutationObserver) {
@@ -3451,7 +3459,7 @@
 
   function pad(x){ return String(x).padStart(2,'0'); }
   function tick(){
-    var t = Math.max(0, END - Date.now()) / 1000;
+    var t = Math.max(0, (ext ? END : FIRST_END) - Date.now()) / 1000;
     var v = { d: Math.floor(t/86400), h: pad(Math.floor(t%86400/3600)), m: pad(Math.floor(t%3600/60)), s: pad(Math.floor(t%60)) };
     pop.querySelectorAll('[data-bf]').forEach(function(e){ e.textContent = v[e.getAttribute('data-bf')]; });
   }
@@ -3461,7 +3469,7 @@
   function open(){ pop.classList.add('on'); ov.classList.add('on'); document.body.style.overflow = 'hidden'; if (tab) tab.classList.remove('on'); }
   function close(){
     pop.classList.remove('on'); ov.classList.remove('on'); document.body.style.overflow = '';
-    try { sessionStorage.setItem('bf2026Seen','1'); } catch(e){}
+    try { sessionStorage.setItem(SEEN,'1'); } catch(e){}
     if (tab) tab.classList.add('on');
   }
   window.openBlackFriday = function(){ open(); };
@@ -3472,7 +3480,7 @@
   pop.querySelector('.bf-x').addEventListener('click', close);
   ov.addEventListener('click', close);
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && pop.classList.contains('on')) close(); });
-  pop.querySelectorAll('.bf-go').forEach(function(a){ a.addEventListener('click', function(){ try { sessionStorage.setItem('bf2026Seen','1'); } catch(e){} }); });
+  pop.querySelectorAll('.bf-go').forEach(function(a){ a.addEventListener('click', function(){ try { sessionStorage.setItem(SEEN,'1'); } catch(e){} }); });
 
   function copy(text){
     if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
@@ -3492,7 +3500,7 @@
     });
   });
 
-  var seen = false; try { seen = sessionStorage.getItem('bf2026Seen') === '1'; } catch(e){}
+  var seen = false; try { seen = sessionStorage.getItem(SEEN) === '1'; } catch(e){}
   if (force) open(); else if (!seen) setTimeout(open, 2500); else if (tab) setTimeout(function(){ tab.classList.add('on'); }, 1200);
 })();
 </script>

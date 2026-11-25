@@ -1271,12 +1271,12 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
 })();
 </script>
 
-<!-- ═══════════ BLACK FRIDAY CODE PROMPT (until 30 Nov 2026) ═══════════
+<!-- ═══════════ BLACK FRIDAY CODE PROMPT (until 30 Nov 2026, then "extended to 5 Dec") ═══════════
      Paste this same block just before </body> on BOTH pages:
        cadenza-london.com/booking/  (shows ONLINE20 and BF2026)
        digital-exam-ready/upload.html  (a slim BLACKFRIDAY reminder bar, only for Video Feedback)
      It only adds a prompt; it doesn't touch the booking form, payments or schedule links.
-     Shows once per visit, and switches itself off after 23:59 on Sun 30 Nov 2026 (London time). -->
+     Shows once per visit, and says "extended to 5 Dec" from 1 Dec and switches itself off after 23:59 on Fri 5 Dec 2026 (London time). -->
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Jost:wght@400;500&display=swap" rel="stylesheet">
 <style>
 #bfb-ov{position:fixed;inset:0;background:rgba(28,22,17,.55);z-index:1000;opacity:0;pointer-events:none;transition:opacity .3s ease}
@@ -1307,7 +1307,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
 
 <div id="bfb-ov"></div>
 <div id="bfb" role="dialog" aria-modal="true" aria-label="Black Friday discount codes">
-  <div class="bfb-band">BLACK FRIDAY · UNTIL 30 NOV<button class="bfb-x" type="button" aria-label="Close">&times;</button></div>
+  <div class="bfb-band"><span id="bfb-band">BLACK FRIDAY · UNTIL 30 NOV</span><button class="bfb-x" type="button" aria-label="Close">&times;</button></div>
   <div class="bfb-in">
     <h2 class="bfb-hl">Don't forget <em>your code.</em></h2>
     <p class="bfb-tip">Enter it under “Have a discount code?” before you pay, or the Black Friday price won't apply.</p>
@@ -1319,19 +1319,22 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
 
 <script>
 (function(){
-  var END = Date.UTC(2026, 10, 30, 23, 59, 59); /* Sun 30 Nov 2026, 23:59:59 London (GMT) */
+  var FIRST_END = Date.UTC(2026, 10, 30, 23, 59, 59); /* Sun 30 Nov 2026, 23:59:59 London (GMT) */
+  var END = Date.UTC(2026, 11, 5, 23, 59, 59);        /* extended: Fri 5 Dec 2026, 23:59:59 London (GMT) */
   var box = document.getElementById('bfb'), ov = document.getElementById('bfb-ov');
   if (!box) return;
   var force = /[?&]bfpreview/.test(location.search);
   if (Date.now() > END && !force) { box.remove(); ov.remove(); return; }
   var fromPopup = /[?&]bf=1/.test(location.search);
+  var ext = Date.now() > FIRST_END || /[?&]bfext/.test(location.search);
+  if (ext) document.getElementById('bfb-band').textContent = 'BLACK FRIDAY · EXTENDED TO 5 DEC!';
   var coaching = /upload\.html/i.test(location.pathname) || /[?&]bfpage=coaching/.test(location.search);
   if (coaching && !/[?&]mode=coaching/.test(location.search) && !/[?&]bfpage=coaching/.test(location.search)) { box.remove(); ov.remove(); return; } /* exam-course uploads: no prompt */
-  var KEY = coaching ? 'bfCoachingSeen' : 'bfBookingSeen';
+  var KEY = (coaching ? 'bfCoachingSeen' : 'bfBookingSeen') + (ext ? 'Ext' : '');
   if (coaching) { /* Video Feedback: a slim bar at the top, so it never blocks the upload */
     box.remove(); ov.remove();
     var bar = document.createElement('div'); bar.id = 'bfb-bar'; bar.setAttribute('role','status');
-    bar.innerHTML = '<span><b>BLACK FRIDAY</b> 30% off · enter this code at payment</span><button class="bfb-c" type="button" data-code="BLACKFRIDAY">BLACKFRIDAY</button><button class="bfb-x" type="button" aria-label="Close">&times;</button>';
+    bar.innerHTML = '<span><b>' + (ext ? 'BLACK FRIDAY · EXTENDED TO 5 DEC!' : 'BLACK FRIDAY') + '</b> 30% off · enter this code at payment</span><button class="bfb-c" type="button" data-code="BLACKFRIDAY">BLACKFRIDAY</button><button class="bfb-x" type="button" aria-label="Close">&times;</button>';
     document.body.appendChild(bar);
     box = bar;
     bar.querySelector('.bfb-x').addEventListener('click', function(){ bar.classList.remove('on'); try { sessionStorage.setItem(KEY,'1'); } catch(e){} });
