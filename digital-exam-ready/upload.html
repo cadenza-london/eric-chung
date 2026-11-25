@@ -456,7 +456,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
 #up .field > label:first-child,#up .field .rq > label,#up .age-q > legend,#up #want > legend{counter-increment:q}
 #up .field > label:first-child::before,#up .field .rq > label::before,#up .age-q > legend::before,#up #want > legend::before{content:"Q" counter(q);display:inline-grid;place-items:center;min-width:30px;height:22px;padding:0 6px;margin-right:8px;border-radius:999px;background:var(--butter);border:1.5px solid var(--navy);color:var(--navy);font-size:.72rem;font-weight:800;letter-spacing:.02em;vertical-align:1px}
 /* genie: top-right helper */
-.genie{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px));z-index:28;display:grid;justify-items:end;gap:8px;pointer-events:none}
+.genie{position:fixed;top:calc(var(--gtop,0px) + 10px + env(safe-area-inset-top,0px));transition:top .2s ease;right:max(12px,env(safe-area-inset-right,0px));z-index:28;display:grid;justify-items:end;gap:8px;pointer-events:none}
 .gbtn{pointer-events:auto;position:relative;display:flex;align-items:center;gap:8px;background:var(--yellow);color:var(--navy);border:2.5px solid var(--navy);border-radius:999px;padding:4px 14px 4px 4px;box-shadow:0 4px 0 var(--navy);font:800 .9rem var(--sans);cursor:pointer;transition:transform .14s cubic-bezier(.23,1,.32,1),box-shadow .14s}
 .gbtn{opacity:.6;transition:transform .14s cubic-bezier(.23,1,.32,1),box-shadow .14s,opacity .2s ease}
 .gbtn:hover,.gbtn:focus-visible,.gbtn[aria-expanded="true"],.genie:has(.gtip.show) .gbtn{opacity:1}
@@ -471,7 +471,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
 .gtip .x{position:absolute;top:4px;right:6px;width:28px;height:28px;border:0;background:none;color:var(--muted);font-size:1.15rem;cursor:pointer;border-radius:50%}
 .has-genie header .col{padding-right:120px}
 /* the step-by-step card now drops down from the top-right, under the genie */
-.tour{top:calc(68px + env(safe-area-inset-top,0px));bottom:auto;left:12px;right:max(12px,env(safe-area-inset-right,0px));max-width:380px;margin:0 0 0 auto;transform:translateY(-10px) scale(.97);transform-origin:top right}
+.tour{top:calc(var(--gtop,0px) + 68px + env(safe-area-inset-top,0px));bottom:auto;left:12px;right:max(12px,env(safe-area-inset-right,0px));max-width:380px;margin:0 0 0 auto;transform:translateY(-10px) scale(.97);transform-origin:top right}
 .tour.show{transform:none}
 @media (prefers-reduced-motion:reduce){.gbtn .spark{animation:none}.gtip{transition:opacity .2s ease;transform:none}}
 </style>
@@ -1234,7 +1234,13 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
   }); });
 
   /* ---------- genie (top right): starts or closes the step-by-step guide ---------- */
-  function showGenie(){ $('genie').hidden=false; document.body.classList.add('has-genie'); }
+  function showGenie(){ $('genie').hidden=false; document.body.classList.add('has-genie'); placeGenie(); }
+  // keep the genie (and the guide card) just below the Black Friday bar while that bar is showing
+  function placeGenie(){ var b=document.getElementById('bfb-bar'), h=(b&&b.classList.contains('on'))?Math.max(0,Math.round(b.getBoundingClientRect().bottom)):0; document.documentElement.style.setProperty('--gtop',h+'px'); }
+  var placeT=null; function placeSoon(){ placeGenie(); clearTimeout(placeT); placeT=setTimeout(placeGenie,450); }
+  if(window.MutationObserver) new MutationObserver(placeSoon).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
+  document.addEventListener('transitionend',function(e){ if(e.target&&e.target.id==='bfb-bar') placeGenie(); });
+  window.addEventListener('resize',placeGenie);
   var TIP0=$('gtip').innerHTML;
   function showTip(html){ var g=$('gtip'); g.innerHTML=html; g.querySelector('.x').addEventListener('click',hideTip); g.hidden=false; requestAnimationFrame(function(){ requestAnimationFrame(function(){ g.classList.add('show'); }); }); }
   function hideTip(){ var g=$('gtip'); g.classList.remove('show'); setTimeout(function(){ g.hidden=true; },220); }
