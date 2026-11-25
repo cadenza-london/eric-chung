@@ -936,7 +936,7 @@ footer h4{color:var(--pink-deep);font-family:var(--round);font-weight:600}
     },
     "courseSchedule": {
      "@type": "Schedule",
-     "startDate": "2026-11-03",
+     "startDate": "2026-12-01",
      "repeatFrequency": "P1W",
      "byDay": "https://schema.org/Tuesday",
      "startTime": "18:00",
@@ -1552,11 +1552,7 @@ var CLUB = {
   time: '18:00',              // usual start, 24-hour UK time
   minutes: 45,                // length of every session
   // Every session, one line each (A = Beginner, B = Intermediate).
-  // Cadenza is off 15–22 Nov, so there is no session on Tue 17 Nov.
   dates: [
-    {date:'2026-11-03', time:'18:00', level:'A'},
-    {date:'2026-11-10', time:'18:00', level:'B'},
-    {date:'2026-11-24', time:'18:00', level:'A'},
     {date:'2026-12-01', time:'18:00', level:'B'},
     {date:'2026-12-08', time:'18:00', level:'A'},
     {date:'2026-12-15', time:'18:00', level:'B'},
@@ -1594,7 +1590,7 @@ var CLUB = {
   function fmtTime(t){var h=+t.slice(0,2),m=t.slice(3,5);return ((h%12)||12)+(m==='00'?'':':'+m)+(h<12?'am':'pm');}
   function endTime(t,mins){var tot=+t.slice(0,2)*60+ +t.slice(3,5)+mins;return pad(Math.floor(tot/60)%24)+':'+pad(tot%60);}
   function fmtRange(a,b){var x=fmtTime(a),y=fmtTime(b);return (x.slice(-2)===y.slice(-2)?x.slice(0,-2):x)+'–'+y;}
-  // Sessions run Nov–Mar in GMT, so UK time = UTC here.
+  // Sessions run Dec–Mar in GMT, so UK time = UTC here.
   function levelById(id){return CLUB.levels.filter(function(l){return l.id===id;})[0];}
   function makeSession(start,band,time,mins){
     var d=new Date(start);
@@ -1638,7 +1634,7 @@ var CLUB = {
     tb.appendChild(tr);
   });
   document.getElementById('schedNote').textContent= sessions.length
-    ? 'Tuesdays 6–6:45pm (no session on 17 November). The Christmas session on Tuesday 22 December is in the morning, 11–11:45am. Grade 7–8 players are welcome to join the Intermediate sessions for free until 31 December, while the Advanced group gets ready. January dates will be added in December.'
+    ? 'Tuesdays 6–6:45pm. The Christmas session on Tuesday 22 December is in the morning, 11–11:45am. Grade 7–8 players are welcome to join the Intermediate sessions for free until 31 December, while the Advanced group gets ready. January dates will be added in December.'
     : 'New dates are coming soon. Email music@cadenza-london.com to be told first.';
 
   // session picker: only the sessions for the chosen level
