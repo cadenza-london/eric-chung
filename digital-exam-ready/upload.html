@@ -550,7 +550,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     <form class="card" id="up" novalidate>
       <h2 id="formH">Upload your pieces</h2>
       <p class="sub" id="formSub">Three short steps. Everything stays on this page.</p>
-      <div class="later" id="laterNote" hidden><span class="li" aria-hidden="true">📅</span><p id="laterText"><b>No need to upload now.</b> Book and pay first, then send your video straight away or any time within 5 days. We'll email you a private upload link.</p></div>
+      <div class="later" id="laterNote" hidden><span class="li" aria-hidden="true">📅</span><p id="laterText"><b>No need to upload now.</b> Book and pay first, then send your video straight away or any time within 5 days. We'll email you a private upload link and a daily reminder.</p></div>
 
       <div class="sh"><span class="sn">1</span><div><h3 id="detH">Check your details</h3><p id="detP">Already filled in from your registration. Tap Edit only if something is wrong.</p></div></div>
       <div class="dhead"><p class="prefill" id="prefillNote">Filled in from your registration</p><button type="button" class="edit" id="editBtn" aria-expanded="false" aria-controls="fields">Edit</button></div>
@@ -819,14 +819,15 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     var nt=$('needVid').previousElementSibling; if(nt){ nt.textContent='Later'; nt.className='tag opt'; }
     $('heroGo').innerHTML='Book your video feedback now <span aria-hidden="true">↓</span>'; $('heroLater').hidden=false;
     $('genie').hidden=false; document.body.classList.add('has-genie');
-    var how=document.querySelector('#whatSheet .how'); if(how) how.innerHTML='<li><b class="n">1</b><span><b>Book and pay</b> in two minutes: your details and piece names, then Stripe (card, Apple Pay or Google Pay).</span></li><li><b class="n">2</b><span><b>Film your piece</b> on your phone. One take, like the real exam.</span></li><li><b class="n">3</b><span><b>Upload it</b> straight after paying, or any time within 5 days with the link we email you.</span></li><li><b class="n">4</b><span><b>Get Eric\'s feedback</b> by email within 5 days of your upload: what\'s working, what to fix, and how to practise it.</span></li>';
+    var how=document.querySelector('#whatSheet .how'); if(how) how.innerHTML='<li><b class="n">1</b><span><b>Book and pay</b> in two minutes: your details and piece names, then Stripe (card, Apple Pay or Google Pay).</span></li><li><b class="n">2</b><span><b>Film your piece</b> on your phone. One take, like the real exam.</span></li><li><b class="n">3</b><span><b>Upload it</b> straight after paying, or any time within 5 days with the link we email you. (Not uploaded in time? Only 50% of the fee can be refunded.)</span></li><li><b class="n">4</b><span><b>Get Eric\'s feedback</b> by email within 5 days of your upload: what\'s working, what to fix, and how to practise it.</span></li>';
     if(BOOK){
       document.body.classList.add('book');
       $('laterNote').hidden=false;
+      $('consentText').insertAdjacentHTML('beforeend',' I understand that if the video isn\'t uploaded <b>within 5 days of booking</b>, only <b>50% of the payment</b> can be refunded.');
       $('formH').textContent='Book your Video Feedback'; $('formSub').textContent='Two minutes now. You upload your video after paying.';
       $('step2h').textContent='Name your pieces'; $('step2p').textContent='Type the name of each piece you\'d like feedback on (up to 4). No video needed yet: you upload after booking.';
       $('step3h').textContent='Your package, then book'; $('step3p').textContent='Your package is picked from your pieces. Tick the box, then tap the yellow button to book and pay.';
-      $('sendHint').textContent='Next: secure payment with Stripe (card, Apple Pay or Google Pay). Then upload now or within 5 days.';
+      $('sendHint').innerHTML='Next: secure payment with Stripe (card, Apple Pay or Google Pay). Then upload now or within 5 days.<br><b>Please note:</b> if we don\'t receive your video within 5 days, only 50% of your payment can be refunded.';
     }
     if(UPMODE){
       $('heroPill').textContent='Video Feedback · Upload'; $('heroH1').innerHTML='Upload your <em>video.</em>';
@@ -1427,7 +1428,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
           if(b&&b.status==='received') return;
           var day=b&&b.due?fmtDay(b.due):'';
           d.querySelector('h2').textContent='You\'re booked in!';
-          d.querySelector('p').innerHTML='Thank you! Payment received. <b>Last step: send Eric your video.</b> Do it now, or any time'+(day?' before <b>'+esc(day)+'</b>':' within 5 days')+'. We\'ve emailed you a private upload link too.';
+          d.querySelector('p').innerHTML='Thank you! Payment received. <b>Last step: send Eric your video.</b> Do it now, or any time'+(day?' before <b>'+esc(day)+', midnight</b>':' within 5 days')+'. We\'ve emailed you a private upload link too.<br><small style="opacity:.85">If we don\'t receive your video by then, only 50% of your payment can be refunded.</small>';
           if(ol) ol.innerHTML='<li><b>Upload your video</b> now, or later with the link in your email.</li><li><b>Eric watches and marks</b> it like the real exam.</li><li><b>Your feedback arrives by email</b> within 5 days of your upload.</li>';
           if(!$('upNow')){ var a=document.createElement('a'); a.id='upNow'; a.className='btn btn-go'; a.href=location.pathname+'?mode=coaching&sub='+encodeURIComponent(hsub); a.innerHTML='Upload my video now <span aria-hidden="true">→</span>';
             var later=document.createElement('p'); later.className='fine'; later.id='upLater'; later.style.cssText='text-align:center;margin-top:-4px'; later.textContent='Not ready? No worries. Use the link in your email'+(day?' before '+day:' within 5 days')+'.';
@@ -1456,7 +1457,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       p.refresh(); });
     $('laterNote').hidden=false;
     var open=pieces.filter(function(p){ return !p.el.hidden&&!p.done; }).length, day=b.due?fmtDay(b.due):'';
-    $('laterText').innerHTML=open?('<b>'+(day?'Upload by '+esc(day)+'.':'Upload within 5 days of booking.')+'</b> Not ready with every piece? Upload what you have now and come back with the link in your email.'):'<b>Eric already has every video.</b> Nothing more to upload.';
+    $('laterText').innerHTML=open?('<b>'+(day?'Upload by '+esc(day)+', midnight.':'Upload within 5 days of booking.')+'</b> Not ready with every piece? Upload what you have now and come back with the link in your email. After the deadline, only 50% of your payment can be refunded.'):'<b>Eric already has every video.</b> Nothing more to upload.';
     if(!open){ $('send').hidden=true; $('sendHint').hidden=true; }
     updateCount();
     if(b.status==='received'&&!open){ finishAllIn(); }
