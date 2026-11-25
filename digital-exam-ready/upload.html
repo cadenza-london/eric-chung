@@ -458,13 +458,16 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
 /* genie: top-right helper */
 .genie{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px));z-index:28;display:grid;justify-items:end;gap:8px;pointer-events:none}
 .gbtn{pointer-events:auto;position:relative;display:flex;align-items:center;gap:8px;background:var(--yellow);color:var(--navy);border:2.5px solid var(--navy);border-radius:999px;padding:4px 14px 4px 4px;box-shadow:0 4px 0 var(--navy);font:800 .9rem var(--sans);cursor:pointer;transition:transform .14s cubic-bezier(.23,1,.32,1),box-shadow .14s}
-.gbtn:active{transform:translateY(2px) scale(.98);box-shadow:0 2px 0 var(--navy)}
+.gbtn{opacity:.6;transition:transform .14s cubic-bezier(.23,1,.32,1),box-shadow .14s,opacity .2s ease}
+.gbtn:hover,.gbtn:focus-visible,.gbtn[aria-expanded="true"],.genie:has(.gtip.show) .gbtn{opacity:1}
+.gbtn:active{opacity:1;transform:translateY(2px) scale(.98);box-shadow:0 2px 0 var(--navy)}
 .gbtn img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid #fff;display:block}
 .gbtn .spark{position:absolute;left:28px;top:-6px;font-size:.95rem;animation:twinkle 2.4s ease-in-out infinite}
 @keyframes twinkle{0%,100%{transform:scale(1) rotate(0);opacity:1}50%{transform:scale(1.25) rotate(18deg);opacity:.75}}
 .gbtn[aria-expanded="true"]{background:var(--navy);color:var(--yellow)}
 .gtip{pointer-events:auto;position:relative;max-width:250px;background:#fff;color:var(--navy);border:2.5px solid var(--navy);border-radius:18px 6px 18px 18px;padding:12px 34px 12px 14px;font-size:.92rem;line-height:1.4;box-shadow:0 4px 0 var(--navy);opacity:0;transform:translateY(-6px) scale(.96);transform-origin:top right;transition:opacity .22s cubic-bezier(.23,1,.32,1),transform .22s cubic-bezier(.23,1,.32,1)}
 .gtip.show{opacity:1;transform:none}
+.gtip a{color:#b4500a;font-weight:800}
 .gtip .x{position:absolute;top:4px;right:6px;width:28px;height:28px;border:0;background:none;color:var(--muted);font-size:1.15rem;cursor:pointer;border-radius:50%}
 .has-genie header .col{padding-right:120px}
 /* the step-by-step card now drops down from the top-right, under the genie */
@@ -818,7 +821,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     $('needVid').innerHTML='<b>A video of each piece you book</b> (up to 4 pieces). Upload it after paying: straight away, or any time within 5 days.';
     var nt=$('needVid').previousElementSibling; if(nt){ nt.textContent='Later'; nt.className='tag opt'; }
     $('heroGo').innerHTML='Book your video feedback now <span aria-hidden="true">↓</span>'; $('heroLater').hidden=false;
-    $('genie').hidden=false; document.body.classList.add('has-genie');
+    showGenie();
     var how=document.querySelector('#whatSheet .how'); if(how) how.innerHTML='<li><b class="n">1</b><span><b>Book and pay</b> in two minutes: your details and piece names, then Stripe (card, Apple Pay or Google Pay).</span></li><li><b class="n">2</b><span><b>Film your piece</b> on your phone. One take, like the real exam.</span></li><li><b class="n">3</b><span><b>Upload it</b> straight after paying, or any time within 5 days with the link we email you. (Not uploaded in time? Only 50% of the fee can be refunded.)</span></li><li><b class="n">4</b><span><b>Get Eric\'s feedback</b> by email within 5 days of your upload: what\'s working, what to fix, and how to practise it.</span></li>';
     if(BOOK){
       document.body.classList.add('book');
@@ -1231,17 +1234,20 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
   }); });
 
   /* ---------- genie (top right): starts or closes the step-by-step guide ---------- */
+  function showGenie(){ $('genie').hidden=false; document.body.classList.add('has-genie'); }
+  var TIP0=$('gtip').innerHTML;
+  function showTip(html){ var g=$('gtip'); g.innerHTML=html; g.querySelector('.x').addEventListener('click',hideTip); g.hidden=false; requestAnimationFrame(function(){ requestAnimationFrame(function(){ g.classList.add('show'); }); }); }
   function hideTip(){ var g=$('gtip'); g.classList.remove('show'); setTimeout(function(){ g.hidden=true; },220); }
   $('genieBtn').addEventListener('click',function(){
     if(tourI>=0) return endTour();
-    if(form.hidden) return;
+    if(form.hidden){ var g=$('gtip'); if(!g.hidden&&g.classList.contains('show')) return hideTip(); return showTip('<button type="button" class="x" aria-label="Close">×</button><b>Need a hand?</b> Reply to any of our emails, or write to <a href="mailto:music@cadenza-london.com">music@cadenza-london.com</a> and we\'ll help.'); }
     var r=form.getBoundingClientRect();
     if(r.top>innerHeight*0.5||r.bottom<0){ form.scrollIntoView({behavior:reduce?'auto':'smooth'}); setTimeout(function(){ startTour(0); },reduce?0:450); } else startTour(0);
   });
   $('gtipX').addEventListener('click',hideTip);
   if(COACH_MODE){
     var GKEY='cadenzaGenieTip', gseen=false; try{ gseen=!sandbox&&sessionStorage.getItem(GKEY)==='1'; }catch(e){}
-    if(!gseen) setTimeout(function(){ if(tourI>=0||form.hidden) return; var g=$('gtip'); g.hidden=false; requestAnimationFrame(function(){ requestAnimationFrame(function(){ g.classList.add('show'); }); }); try{ sessionStorage.setItem(GKEY,'1'); }catch(e){} setTimeout(hideTip,9000); },1600);
+    if(!gseen) setTimeout(function(){ if(tourI>=0||form.hidden) return; showTip(TIP0); try{ sessionStorage.setItem(GKEY,'1'); }catch(e){} setTimeout(hideTip,9000); },1600);
   }
 
   /* ---------- "What is Online Coaching?" sheet ---------- */
@@ -1370,7 +1376,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
         : '<li><b>Eric watches and marks</b> your video'+(sentNow.length+pieces.filter(function(p){return p.done;}).length>1?'s':'')+' like the real exam.</li><li><b>Your feedback arrives by email</b> within 5 days.</li><li><b>Check your inbox</b> for the confirmation email.</li>';
       if(still.length){ var again2=document.createElement('a'); again2.className='btn btn-go'; again2.href=location.pathname+location.search; again2.innerHTML='Upload another video <span aria-hidden="true">→</span>'; d2.insertBefore(again2,$('payBox')); }
       if(booking&&!booking.paid){ $('payBox').hidden=false; $('payBtn').href='#pay='+SUB; $('payBtn').removeAttribute('target'); $('payBtn').firstChild.textContent='Pay securely with Stripe '; }
-      form.hidden=true; stickyShow(); $('before').hidden=true; $('done').hidden=false; $('demo').hidden=true; $('genie').hidden=true;
+      form.hidden=true; stickyShow(); $('before').hidden=true; $('done').hidden=false; $('demo').hidden=true;
       $('done').scrollIntoView({block:'start',behavior:'smooth'}); $('done').focus({preventScroll:true});
       return;
     }
@@ -1410,7 +1416,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
         .catch(function(){ d0.querySelector('p').textContent='We couldn\'t open the payment page. Please check your connection and try the link again.'; });
       stickyShow(); return; }
     var hsub=(h.match(/sub=([A-Za-z0-9]+)/)||[])[1]||'';
-    if(h.indexOf('pay-later')===0&&hsub){ $('hdrName').textContent='Video Feedback'; $('hero').hidden=true; form.hidden=true; $('before').hidden=true; $('gone').hidden=true; $('genie').hidden=true; var d3=$('done'); d3.hidden=false;
+    if(h.indexOf('pay-later')===0&&hsub){ showGenie(); $('hdrName').textContent='Video Feedback'; $('hero').hidden=true; form.hidden=true; $('before').hidden=true; $('gone').hidden=true; var d3=$('done'); d3.hidden=false;
       $('donePill').textContent='Video Feedback (Online Coaching)'; d3.querySelector('h2').textContent='Your booking is saved'; d3.querySelector('p').textContent='You haven\'t paid yet, so it isn\'t confirmed. Finish paying whenever you\'re ready.';
       var o3=d3.querySelector('ol'); if(o3) o3.hidden=true; $('payBox').hidden=false; $('payTitle').textContent='Finish your booking'; $('payBtn').href='#pay='+hsub; $('payBtn').removeAttribute('target'); $('payBtn').firstChild.textContent='Pay securely with Stripe ';
       $('payNote').textContent='Card, Apple Pay or Google Pay. Then upload your video straight away, or within 5 days.'; stickyShow(); window.scrollTo(0,0); return; }
@@ -1422,7 +1428,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       $('hdrName').innerHTML='Video Feedback <small class="oc-sub" style="font-size:.72em;font-weight:400;opacity:.8;letter-spacing:inherit;text-transform:inherit;white-space:nowrap">(Online Coaching)</small>'; document.title='Payment received | Cadenza Video Feedback (Online Coaching)';
       d.querySelector('p').textContent='Thank you! Eric now has everything he needs and will send your feedback by email.';
       var ol=d.querySelector('ol'); if(ol){ ol.hidden=false; ol.innerHTML='<li><b>Eric watches</b> your video(s) and marks them like the real exam.</li><li><b>You get his feedback by email</b> within 5 days.</li><li><b>Check your inbox</b> for your payment confirmation and Stripe receipt.</li>'; }
-      $('payBox').hidden=true; $('genie').hidden=true;
+      $('payBox').hidden=true; showGenie();
       if(hsub){
         var showUpload=function(b){
           if(b&&b.status==='received') return;
@@ -1462,13 +1468,13 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     updateCount();
     if(b.status==='received'&&!open){ finishAllIn(); }
   }
-  function finishAllIn(){ var d=$('done'); $('doneStudent').textContent=$('student').value; d.querySelector('h2').textContent='All videos received'; d.querySelector('p').textContent='Eric already has every video for this booking and will send his feedback by email.'; var o=d.querySelector('ol'); if(o) o.hidden=true; $('donePill').textContent='Video Feedback (Online Coaching)'; form.hidden=true; $('before').hidden=true; d.hidden=false; $('genie').hidden=true; stickyShow(); }
+  function finishAllIn(){ var d=$('done'); $('doneStudent').textContent=$('student').value; d.querySelector('h2').textContent='All videos received'; d.querySelector('p').textContent='Eric already has every video for this booking and will send his feedback by email.'; var o=d.querySelector('ol'); if(o) o.hidden=true; $('donePill').textContent='Video Feedback (Online Coaching)'; form.hidden=true; $('before').hidden=true; d.hidden=false; stickyShow(); }
   if(UPMODE){
     form.style.opacity='.4'; form.setAttribute('aria-busy','true');
     var ready=function(b){ form.style.opacity=''; form.removeAttribute('aria-busy'); applyBooking(b); };
     if(sandbox) ready({status:'booked',paid:true,due:new Date(Date.now()+4*864e5).toISOString(),name:'Jane Smith',email:'jane@example.com',student:'Amy Smith',grade:'Grade 5',board:'ABRSM Performance Grade',choice:'Full Exam Check',pieces:[{piece:1,title:'Minuet in G, Bach',done:false},{piece:2,title:'Sonatina in C, Clementi',done:false}]});
     else fetch(UPLOAD_API+'/api/uploads/resume?id='+encodeURIComponent(SUB)).then(function(r){ if(!r.ok) throw new Error('nf'); return r.json(); }).then(ready).catch(function(){
-      form.hidden=true; $('before').hidden=true; $('genie').hidden=true; var g=$('gone'); g.hidden=false; $('goneTag').textContent='Link not found'; $('goneTitle').textContent='We couldn\'t find this booking';
+      form.hidden=true; $('before').hidden=true; var g=$('gone'); g.hidden=false; $('goneTag').textContent='Link not found'; $('goneTitle').textContent='We couldn\'t find this booking';
       $('goneText').textContent='Check you opened the full link from your email. Still stuck? Email music@cadenza-london.com and we\'ll send you a new one.'; $('regAgain').href='mailto:music@cadenza-london.com'; $('regAgain').firstChild.textContent='Email us ';
     });
   }
