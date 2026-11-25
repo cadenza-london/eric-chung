@@ -441,6 +441,10 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
 .piece.done{border-color:#b9d3ad;background:#f4faf1}
 .piece.done .state{background:var(--ok-soft);color:var(--ok)}
 .piece input[readonly]{background:#fff;border-style:dashed;color:var(--muted)}
+/* upload page: piece names come from the booking, so they're shown as labels, not questions */
+.upmode #up .piece .field .rq > label[for^="title"]{counter-increment:none}
+.upmode #up .piece .field .rq > label[for^="title"]::before{content:none}
+.upmode #up .piece .field .rq > label[for^="title"] + .tag{display:none}
 /* compact "How it works" */
 .csteps.mini{padding:0;gap:0;box-shadow:4px 4px 0 var(--yellow)}
 .csteps.mini summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:12px 16px;font-size:.9rem}
@@ -839,6 +843,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       $('formH').textContent='Upload your video'; $('formSub').textContent='Your details and pieces are filled in from your booking.';
       $('step2h').textContent='Choose your videos'; $('step2p').textContent='Pick the video for each piece. Score photos are optional. Not ready? Come back with the link in your email.';
       $('step3h').textContent='Upload'; $('step3p').textContent='Tap the yellow button and keep this page open until it finishes.';
+      document.body.classList.add('upmode');
       $('want').hidden=true; $('consentBox').closest('label').hidden=true; $('consentBox').checked=true; document.querySelector('#up .acc').hidden=true;
     }
     var hc=document.querySelector('.hero .coach'); if(hc) hc.hidden=true;
