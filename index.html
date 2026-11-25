@@ -1872,6 +1872,11 @@
 <!-- NEWS TICKER -->
 <div class="news-ticker" id="newsTicker">
   <div class="news-ticker-track">
+    <div class="ticker-item bf-tick">
+      <span class="ticker-sep">✦</span>
+      <span>Black Friday · Up to 30% off · Until 30 Nov only</span>
+      <a href="#black-friday">See the codes →</a>
+    </div>
     <div class="ticker-item">
       <span class="ticker-sep">✦</span>
       <span>Out Now · November Newsletter</span>
@@ -1896,6 +1901,11 @@
       <span class="ticker-sep">✦</span>
       <span>Piano &amp; Violin · London &amp; Online</span>
       <a href="#pricing">Explore Lessons →</a>
+    </div>
+    <div class="ticker-item bf-tick">
+      <span class="ticker-sep">✦</span>
+      <span>Black Friday · Up to 30% off · Until 30 Nov only</span>
+      <a href="#black-friday">See the codes →</a>
     </div>
     <div class="ticker-item">
       <span class="ticker-sep">✦</span>
@@ -3390,9 +3400,15 @@
 .bf-btn2{background:none;color:#E8D5A3;border:1px solid #C9A84C;margin-top:8px!important}
 .bf-ft{font-size:11px;color:#8c7b6e;margin-top:10px!important}
 @media (hover:hover){.bf-c:hover{background:rgba(201,168,76,.15)}.bf-btn:hover{background:#d8b85c}.bf-btn2:hover{background:rgba(201,168,76,.15)}}
+#bf-tab{position:fixed;right:14px;bottom:max(16px,env(safe-area-inset-bottom));z-index:999;display:flex;align-items:center;gap:8px;border:1px solid #C9A84C;background:#221d18;color:#E8D5A3;font:500 12px 'Jost',sans-serif;letter-spacing:.14em;padding:11px 16px;border-radius:99px;box-shadow:0 8px 24px rgba(0,0,0,.25);cursor:pointer;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .3s ease,transform .4s cubic-bezier(.22,1,.36,1)}
+#bf-tab.on{opacity:1;pointer-events:auto;transform:none}
+#bf-tab b{color:#C9A84C;font-weight:500}
+#bf-tab:active{transform:scale(.97)}
+@media (hover:hover){#bf-tab:hover{background:#2f2721}}
 </style>
 
 <div id="bf-overlay"></div>
+<button id="bf-tab" type="button" aria-label="Show Black Friday offers"><b>&#9733;</b> BLACK FRIDAY &middot; UP TO 30% OFF</button>
 <div id="bf-pop" role="dialog" aria-modal="true" aria-label="Black Friday offer">
   <div class="bf-band">UNTIL 30 NOV ONLY<button class="bf-x" type="button" aria-label="Close">&times;</button></div>
 
@@ -3423,7 +3439,7 @@
   var pop = document.getElementById('bf-pop'), ov = document.getElementById('bf-overlay');
   if (!pop) return;
   var force = /[?&]bfpreview/.test(location.search);
-  if (Date.now() > END && !force) { pop.remove(); ov.remove(); return; }
+  if (Date.now() > END && !force) { pop.remove(); ov.remove(); var t = document.getElementById('bf-tab'); if (t) t.remove(); document.querySelectorAll('.bf-tick').forEach(function(x){ x.remove(); }); return; }
   document.body.classList.add('bf-live');
   /* while the offer is live, the usual welcome popup doesn't open by itself (the #join sign-up link still works) */
   var oldPop = document.getElementById('promo-popup');
@@ -3441,12 +3457,17 @@
   }
   tick(); var timer = setInterval(tick, 1000);
 
-  function open(){ pop.classList.add('on'); ov.classList.add('on'); document.body.style.overflow = 'hidden'; }
+  var tab = document.getElementById('bf-tab');
+  function open(){ pop.classList.add('on'); ov.classList.add('on'); document.body.style.overflow = 'hidden'; if (tab) tab.classList.remove('on'); }
   function close(){
     pop.classList.remove('on'); ov.classList.remove('on'); document.body.style.overflow = '';
     try { sessionStorage.setItem('bf2026Seen','1'); } catch(e){}
+    if (tab) tab.classList.add('on');
   }
   window.openBlackFriday = function(){ open(); };
+  if (tab) tab.addEventListener('click', function(){ open(); });
+  /* news ticker: the Black Friday item opens the popup */
+  document.querySelectorAll('.bf-tick a').forEach(function(a){ a.addEventListener('click', function(e){ e.preventDefault(); open(); }); });
 
   pop.querySelector('.bf-x').addEventListener('click', close);
   ov.addEventListener('click', close);
@@ -3472,7 +3493,7 @@
   });
 
   var seen = false; try { seen = sessionStorage.getItem('bf2026Seen') === '1'; } catch(e){}
-  if (force) open(); else if (!seen) setTimeout(open, 2500);
+  if (force) open(); else if (!seen) setTimeout(open, 2500); else if (tab) setTimeout(function(){ tab.classList.add('on'); }, 1200);
 })();
 </script>
 <!-- ═══════════ END BLACK FRIDAY POPUP ═══════════ -->
