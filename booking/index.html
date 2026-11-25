@@ -1119,5 +1119,104 @@ function boot(){
 }
 boot();
 </script>
+<!-- ═══════════ BLACK FRIDAY CODE PROMPT (until 30 Nov 2026) ═══════════
+     Paste this same block just before </body> on BOTH pages:
+       cadenza-london.com/booking/  (shows ONLINE20 and BF2026)
+       digital-exam-ready/upload.html  (a slim BLACKFRIDAY reminder bar, only for Video Feedback)
+     It only adds a prompt; it doesn't touch the booking form, payments or schedule links.
+     Shows once per visit, and switches itself off after 23:59 on Sun 30 Nov 2026 (London time). -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+#bfb-ov{position:fixed;inset:0;background:rgba(28,22,17,.55);z-index:1000;opacity:0;pointer-events:none;transition:opacity .3s ease}
+#bfb-ov.on{opacity:1;pointer-events:auto}
+#bfb{position:fixed;left:50%;bottom:max(16px,env(safe-area-inset-bottom));z-index:1001;width:min(380px,92vw);background:#221d18;border:1px solid rgba(201,168,76,.45);font-family:'Jost',sans-serif;color:#f4ede0;text-align:center;opacity:0;pointer-events:none;transform:translate(-50%,24px);transition:opacity .3s ease,transform .45s cubic-bezier(.22,1,.36,1)}
+#bfb.on{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+#bfb *{box-sizing:border-box;margin:0}
+.bfb-band{position:relative;background:#C9A84C;color:#221d18;font-size:12px;letter-spacing:.22em;font-weight:500;padding:9px 40px}
+.bfb-x{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;background:none;color:#221d18;font-size:22px;line-height:1;cursor:pointer}
+.bfb-in{padding:18px 20px 20px}
+.bfb-hl{font-family:'DM Serif Display',serif;font-weight:400;font-size:30px;line-height:1.05;margin-bottom:8px!important}
+.bfb-hl em{color:#E8D5A3}
+.bfb-tip{font-size:14px;line-height:1.55;color:#d8ccbb;margin-bottom:6px!important}
+.bfb-r{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid rgba(201,168,76,.2);text-align:left}
+.bfb-t{font-family:'DM Serif Display',serif;font-size:18px;line-height:1.15}
+.bfb-p{font-size:12px;color:#C9A84C}
+.bfb-c{flex:none;border:1px dashed #C9A84C;background:none;color:#E8D5A3;font:500 12px 'Jost',sans-serif;letter-spacing:.12em;padding:7px 9px;cursor:pointer;min-width:100px}
+.bfb-c.ok{background:#C9A84C;color:#221d18;border-style:solid}
+.bfb-btn{display:block;width:100%;border:0;background:#C9A84C;color:#221d18;font:500 13px 'Jost',sans-serif;letter-spacing:.2em;padding:14px;margin-top:14px!important;cursor:pointer}
+.bfb-btn:active{transform:scale(.98)}
+@media (hover:hover){.bfb-c:hover{background:rgba(201,168,76,.15)}.bfb-btn:hover{background:#d8b85c}}
+#bfb-bar{position:fixed;top:0;left:0;right:0;z-index:1001;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;background:#221d18;border-bottom:1px solid rgba(201,168,76,.45);color:#f4ede0;font:400 13px 'Jost',sans-serif;padding:8px 44px 8px 14px;padding-top:max(8px,env(safe-area-inset-top));transform:translateY(-110%);transition:transform .45s cubic-bezier(.22,1,.36,1)}
+#bfb-bar.on{transform:none}
+#bfb-bar b{color:#C9A84C;font-weight:500;letter-spacing:.08em}
+#bfb-bar .bfb-c{min-width:0;padding:5px 8px}
+#bfb-bar .bfb-x{color:#b3a593;right:4px}
+</style>
+
+<div id="bfb-ov"></div>
+<div id="bfb" role="dialog" aria-modal="true" aria-label="Black Friday discount codes">
+  <div class="bfb-band">BLACK FRIDAY · UNTIL 30 NOV<button class="bfb-x" type="button" aria-label="Close">&times;</button></div>
+  <div class="bfb-in">
+    <h2 class="bfb-hl">Don't forget <em>your code.</em></h2>
+    <p class="bfb-tip">Enter it under “Have a discount code?” before you pay, or the Black Friday price won't apply.</p>
+    <div class="bfb-r" data-for="booking"><div><div class="bfb-t">Trial online lesson</div><div class="bfb-p">20% off · new customers only</div></div><button class="bfb-c" type="button" data-code="ONLINE20">ONLINE20</button></div>
+    <div class="bfb-r" data-for="booking"><div><div class="bfb-t">Trial in-person lesson</div><div class="bfb-p">10% off · new customers only</div></div><button class="bfb-c" type="button" data-code="BF2026">BF2026</button></div>
+    <button class="bfb-btn" type="button" id="bfb-ok">GOT IT, BOOK MY LESSON</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var END = Date.UTC(2026, 10, 30, 23, 59, 59); /* Sun 30 Nov 2026, 23:59:59 London (GMT) */
+  var box = document.getElementById('bfb'), ov = document.getElementById('bfb-ov');
+  if (!box) return;
+  var force = /[?&]bfpreview/.test(location.search);
+  if (Date.now() > END && !force) { box.remove(); ov.remove(); return; }
+  var fromPopup = /[?&]bf=1/.test(location.search);
+  var coaching = /upload\.html/i.test(location.pathname) || /[?&]bfpage=coaching/.test(location.search);
+  if (coaching && !/[?&]mode=coaching/.test(location.search) && !/[?&]bfpage=coaching/.test(location.search)) { box.remove(); ov.remove(); return; } /* exam-course uploads: no prompt */
+  var KEY = coaching ? 'bfCoachingSeen' : 'bfBookingSeen';
+  if (coaching) { /* Video Feedback: a slim bar at the top, so it never blocks the upload */
+    box.remove(); ov.remove();
+    var bar = document.createElement('div'); bar.id = 'bfb-bar'; bar.setAttribute('role','status');
+    bar.innerHTML = '<span><b>BLACK FRIDAY</b> 30% off · enter this code at payment</span><button class="bfb-c" type="button" data-code="BLACKFRIDAY">BLACKFRIDAY</button><button class="bfb-x" type="button" aria-label="Close">&times;</button>';
+    document.body.appendChild(bar);
+    box = bar;
+    bar.querySelector('.bfb-x').addEventListener('click', function(){ bar.classList.remove('on'); try { sessionStorage.setItem(KEY,'1'); } catch(e){} });
+  }
+
+  function open(){ box.classList.add('on'); if (!coaching) ov.classList.add('on'); }
+  function close(){ box.classList.remove('on'); ov.classList.remove('on'); try { sessionStorage.setItem(KEY,'1'); } catch(e){} }
+  if (!coaching) {
+    box.querySelector('.bfb-x').addEventListener('click', close);
+    document.getElementById('bfb-ok').addEventListener('click', close);
+    ov.addEventListener('click', close);
+  }
+  document.addEventListener('keydown', function(e){ if (!coaching && e.key === 'Escape' && box.classList.contains('on')) close(); });
+
+  function copy(text){
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    return new Promise(function(res, rej){
+      var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly','');
+      ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy') ? res() : rej(); } catch(e){ rej(e); } ta.remove();
+    });
+  }
+  box.querySelectorAll('.bfb-c').forEach(function(b){
+    b.addEventListener('click', function(){
+      var code = b.getAttribute('data-code');
+      copy(code).then(function(){
+        b.textContent = 'COPIED ✓'; b.classList.add('ok');
+        setTimeout(function(){ b.textContent = code; b.classList.remove('ok'); }, 1600);
+      }).catch(function(){});
+    });
+  });
+
+  var seen = false; try { seen = sessionStorage.getItem(KEY) === '1'; } catch(e){}
+  if (force || fromPopup || !seen) setTimeout(open, coaching ? 4000 : (fromPopup || force ? 600 : 1500));
+})();
+</script>
+<!-- ═══════════ END BOOKING PAGE PROMPT ═══════════ -->
+
 </body>
 </html>
