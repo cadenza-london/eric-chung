@@ -121,8 +121,8 @@ main .col{display:grid;gap:22px}
 .age-q{border:0;padding:0;margin:0;min-width:0}
 .age-q legend{font-size:.92rem;font-weight:800;margin-bottom:8px;padding:0}
 .age-seg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.age-seg label{display:block;cursor:pointer}
-.age-seg input{position:absolute;opacity:0;pointer-events:none}
+.age-seg label{display:block;cursor:pointer;position:relative}
+.age-seg input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;pointer-events:none}
 .age-seg span{display:flex;align-items:center;justify-content:center;text-align:center;min-height:52px;padding:10px 12px;border:1.5px solid var(--line);border-radius:14px;background:var(--marigold-soft);font-weight:600;font-size:.95rem;line-height:1.3;transition:border-color .16s ease,background-color .16s ease,transform .12s ease-out}
 .age-seg label:active span{transform:scale(.97)}
 .age-seg input:checked+span{border-color:var(--ink);background:#fff;box-shadow:inset 0 0 0 1px var(--ink)}
@@ -431,6 +431,46 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
 .cwhat .cpk b,.cwhat .cpk em{color:#fff}
 .cwhat .cpk span{color:#dfe3f5}
 .cwhat .cmore{color:var(--yellow)}
+
+/* ===== Nov 2026: book first, upload later · numbered questions · genie guide ===== */
+.herolater{margin-top:10px;text-align:center;font-weight:800;font-size:.95rem;color:var(--navy)}
+.later{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;background:#fff4d6;border:2px dashed var(--orange);border-radius:16px;padding:12px 14px;color:var(--navy);font-size:.95rem;line-height:1.45}
+.later .li{font-size:1.4rem;line-height:1}
+.book .piece .media,.book #wifiNote{display:none}
+.piece.done .media{display:none}
+.piece.done{border-color:#b9d3ad;background:#f4faf1}
+.piece.done .state{background:var(--ok-soft);color:var(--ok)}
+.piece input[readonly]{background:#fff;border-style:dashed;color:var(--muted)}
+/* compact "How it works" */
+.csteps.mini{padding:0;gap:0;box-shadow:4px 4px 0 var(--yellow)}
+.csteps.mini summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:12px 16px;font-size:.9rem}
+.csteps.mini summary::-webkit-details-marker{display:none}
+.csteps.mini summary::after{content:"＋";margin-left:auto;font-weight:800;color:#b4500a}
+.csteps.mini[open] summary::after{content:"－"}
+.csteps.mini .mh{font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:.72rem;color:#b4500a}
+.csteps.mini .mflow{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;font-weight:700}
+.csteps.mini .mflow i{font-style:normal;width:20px;height:20px;border-radius:50%;background:var(--navy);color:var(--yellow);display:inline-grid;place-items:center;font-size:.72rem;font-weight:800}
+.csteps.mini ol{padding:0 16px 14px}
+/* numbered questions */
+#up{counter-reset:q}
+#up .field > label:first-child,#up .field .rq > label,#up .age-q > legend,#up #want > legend{counter-increment:q}
+#up .field > label:first-child::before,#up .field .rq > label::before,#up .age-q > legend::before,#up #want > legend::before{content:"Q" counter(q);display:inline-grid;place-items:center;min-width:30px;height:22px;padding:0 6px;margin-right:8px;border-radius:999px;background:var(--butter);border:1.5px solid var(--navy);color:var(--navy);font-size:.72rem;font-weight:800;letter-spacing:.02em;vertical-align:1px}
+/* genie: top-right helper */
+.genie{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px));z-index:28;display:grid;justify-items:end;gap:8px;pointer-events:none}
+.gbtn{pointer-events:auto;position:relative;display:flex;align-items:center;gap:8px;background:var(--yellow);color:var(--navy);border:2.5px solid var(--navy);border-radius:999px;padding:4px 14px 4px 4px;box-shadow:0 4px 0 var(--navy);font:800 .9rem var(--sans);cursor:pointer;transition:transform .14s cubic-bezier(.23,1,.32,1),box-shadow .14s}
+.gbtn:active{transform:translateY(2px) scale(.98);box-shadow:0 2px 0 var(--navy)}
+.gbtn img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid #fff;display:block}
+.gbtn .spark{position:absolute;left:28px;top:-6px;font-size:.95rem;animation:twinkle 2.4s ease-in-out infinite}
+@keyframes twinkle{0%,100%{transform:scale(1) rotate(0);opacity:1}50%{transform:scale(1.25) rotate(18deg);opacity:.75}}
+.gbtn[aria-expanded="true"]{background:var(--navy);color:var(--yellow)}
+.gtip{pointer-events:auto;position:relative;max-width:250px;background:#fff;color:var(--navy);border:2.5px solid var(--navy);border-radius:18px 6px 18px 18px;padding:12px 34px 12px 14px;font-size:.92rem;line-height:1.4;box-shadow:0 4px 0 var(--navy);opacity:0;transform:translateY(-6px) scale(.96);transform-origin:top right;transition:opacity .22s cubic-bezier(.23,1,.32,1),transform .22s cubic-bezier(.23,1,.32,1)}
+.gtip.show{opacity:1;transform:none}
+.gtip .x{position:absolute;top:4px;right:6px;width:28px;height:28px;border:0;background:none;color:var(--muted);font-size:1.15rem;cursor:pointer;border-radius:50%}
+.has-genie header .col{padding-right:120px}
+/* the step-by-step card now drops down from the top-right, under the genie */
+.tour{top:calc(68px + env(safe-area-inset-top,0px));bottom:auto;left:12px;right:max(12px,env(safe-area-inset-right,0px));max-width:380px;margin:0 0 0 auto;transform:translateY(-10px) scale(.97);transform-origin:top right}
+.tour.show{transform:none}
+@media (prefers-reduced-motion:reduce){.gbtn .spark{animation:none}.gtip{transition:opacity .2s ease;transform:none}}
 </style>
 
 <header class="gut">
@@ -489,18 +529,17 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       <div class="coachacts"><a href="#up" class="js-guide" data-at="0">Show me how to use Video Feedback <small class="oc-sub" style="font-size:.72em;font-weight:400;opacity:.8;letter-spacing:inherit;text-transform:inherit;white-space:nowrap">(Online Coaching)</small> <span aria-hidden="true">→</span></a><a class="more js-what" href="#what-coaching">What is Video Feedback <small class="oc-sub" style="font-size:.72em;font-weight:400;opacity:.8;letter-spacing:inherit;text-transform:inherit;white-space:nowrap">(Online Coaching)</small>?</a></div>
     </div>
 
-    <div class="csteps" id="coachSteps" hidden>
-      <h3>How to send Eric your video</h3>
+    <details class="csteps mini" id="coachSteps" hidden>
+      <summary><span class="mh">How it works</span><span class="mflow"><i>1</i>Book &amp; pay <i>2</i>Upload <i>3</i>Feedback</span></summary>
       <ol>
-        <li><b>1</b><span><b>Add your piece:</b> type its name, choose the video, add score photos if you have them.</span></li>
-        <li><b>2</b><span><b>Your package is picked for you:</b> 1 piece = Single Piece Check, 2 or more = Full Exam Check.</span></li>
-        <li><b>3</b><span><b>Tick, upload, then pay</b> securely with Stripe. Welcome code? Enter it there.</span></li>
-        <li><b>4</b><span><b>Get Eric's feedback</b> by email within 5 days.</span></li>
+        <li><b>1</b><span><b>Book and pay:</b> your details and piece names, then pay securely with Stripe. Welcome code? Enter it there.</span></li>
+        <li><b>2</b><span><b>Upload your video:</b> straight after paying, or any time within 5 days with the link we email you.</span></li>
+        <li><b>3</b><span><b>Get Eric's feedback</b> by email within 5 days of your upload.</span></li>
       </ol>
-      <a href="#up" class="js-guide cguide" data-at="0">Guide me step by step <span aria-hidden="true">→</span></a>
-    </div>
+    </details>
 
-    <a class="btn btn-go" href="#up">Start uploading <span aria-hidden="true">↓</span></a>
+    <a class="btn btn-go" id="heroGo" href="#up">Start uploading <span aria-hidden="true">↓</span></a>
+    <p class="herolater" id="heroLater" hidden>📅 No video yet? No worries. You can upload it within 5 days of booking.</p>
   </div>
 </section>
 <div class="keys" aria-hidden="true"></div>
@@ -509,8 +548,9 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
   <div class="col">
 
     <form class="card" id="up" novalidate>
-      <h2>Upload your pieces</h2>
-      <p class="sub">Three short steps. Everything stays on this page.</p>
+      <h2 id="formH">Upload your pieces</h2>
+      <p class="sub" id="formSub">Three short steps. Everything stays on this page.</p>
+      <div class="later" id="laterNote" hidden><span class="li" aria-hidden="true">📅</span><p id="laterText"><b>No need to upload now.</b> Book and pay first, then send your video straight away or any time within 5 days. We'll email you a private upload link.</p></div>
 
       <div class="sh"><span class="sn">1</span><div><h3 id="detH">Check your details</h3><p id="detP">Already filled in from your registration. Tap Edit only if something is wrong.</p></div></div>
       <div class="dhead"><p class="prefill" id="prefillNote">Filled in from your registration</p><button type="button" class="edit" id="editBtn" aria-expanded="false" aria-controls="fields">Edit</button></div>
@@ -538,8 +578,8 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       </div>
       <p class="example" id="exampleNote" hidden>Preview: example details. On the live page they come from the family's registration link.</p>
 
-      <div class="sh"><span class="sn">2</span><div><h3>Add your pieces</h3><p id="step2p">Add at least one piece: type its name and choose its video. Leave any piece that isn't ready empty. Score photos are optional.</p></div></div>
-      <div class="count" id="count"><b id="countN">0 of 4</b> pieces ready</div>
+      <div class="sh"><span class="sn">2</span><div><h3 id="step2h">Add your pieces</h3><p id="step2p">Add at least one piece: type its name and choose its video. Leave any piece that isn't ready empty. Score photos are optional.</p></div></div>
+      <div class="count" id="count"><b id="countN">0 of 4</b> <span id="countT">pieces ready</span></div>
       <div class="pieces" id="pieces"></div>
 
       <div class="coach" id="coachForm" hidden>
@@ -550,7 +590,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
 
       <p class="note" id="wifiNote">On a phone, use Wi-Fi if you can. Four videos can take 20–40 minutes, and you'll need to keep this page open.</p>
 
-      <div class="sh"><span class="sn">3</span><div><h3 id="step3h">Choose, agree and upload</h3><p>Pick what you'd like from Eric, tick the box, then tap the yellow button.</p></div></div>
+      <div class="sh"><span class="sn">3</span><div><h3 id="step3h">Choose, agree and upload</h3><p id="step3p">Pick what you'd like from Eric, tick the box, then tap the yellow button.</p></div></div>
 
       <fieldset class="want" id="want">
         <legend>What would you like from Eric?</legend>
@@ -653,6 +693,11 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     <p>Hi! 👋 Not sure your pieces are ready yet? Find out where you're at with my <b>Video Feedback <small class="oc-sub" style="font-size:.72em;font-weight:400;opacity:.8;letter-spacing:inherit;text-transform:inherit;white-space:nowrap">(Online Coaching)</small></b>: send me your video and I'll tell you exactly what to work on.</p>
     <div class="acts"><a href="#want" id="chatGo">Try Video Feedback <small class="oc-sub" style="font-size:.72em;font-weight:400;opacity:.8;letter-spacing:inherit;text-transform:inherit;white-space:nowrap">(Online Coaching)</small> →</a><button type="button" id="chatLater">Maybe later</button></div>
   </div>
+</div>
+
+<div class="genie" id="genie" hidden>
+  <button type="button" class="gbtn" id="genieBtn" aria-label="Step-by-step guide" aria-expanded="false"><img src="eric.jpg" alt=""><span class="spark" aria-hidden="true">✨</span><span class="glbl">Guide</span></button>
+  <div class="gtip" id="gtip" role="status" hidden><button type="button" class="x" id="gtipX" aria-label="Close">×</button><b>Need a hand?</b> Tap me and I'll show you what to do, step by step.</div>
 </div>
 
 <div class="tour" id="tour" role="dialog" aria-live="polite" aria-label="Video Feedback (Online Coaching) guide" hidden>
@@ -761,17 +806,41 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
   var reg={rid:q.get('rid')||'',token:q.get('t')||'',name:q.get('name')||'',email:q.get('email')||'',student:q.get('student')||'',grade:q.get('grade')||'',board:q.get('board')||'',due:q.get('due')||''};
   /* ---------- coaching mode: /digital-exam-ready/upload.html?mode=coaching&pkg=deep ---------- */
   var COACH_MODE=q.get('mode')==='coaching';
+  // Video Feedback: book + pay first (BOOK), then upload from the private link ?sub=<id> (UPMODE)
+  var SUB=(q.get('sub')||'').replace(/[^A-Za-z0-9]/g,'').slice(0,40);
+  var BOOK=COACH_MODE&&!SUB, UPMODE=COACH_MODE&&!!SUB, booking=null;
   if(COACH_MODE){
     document.title='Send Eric your video | Cadenza Video Feedback (Online Coaching)';
     $('hdrName').innerHTML='Video Feedback <small class="oc-sub" style="font-size:.72em;font-weight:400;opacity:.8;letter-spacing:inherit;text-transform:inherit;white-space:nowrap">(Online Coaching)</small>';
     $('heroPill').innerHTML='Video Feedback <small class="oc-sub" style="font-size:.72em;font-weight:400;opacity:.8;letter-spacing:inherit;text-transform:inherit;white-space:nowrap">(Online Coaching)</small>';
     $('heroH1').innerHTML='Send Eric your <em>video.</em>';
-    $('heroLead').textContent='Upload a video of your playing. Eric watches it and tells you exactly what to work on, then you pay securely with Stripe.';
-    $('needVid').innerHTML='<b>At least 1 video</b> for each piece you want feedback on (up to 4 pieces). You can upload more than one video of the same piece.';
+    $('heroLead').textContent='Book in two minutes and pay securely. Then send Eric your video straight away, or any time within 5 days. He tells you exactly what to work on.';
+    $('needVid').innerHTML='<b>A video of each piece you book</b> (up to 4 pieces). Upload it after paying: straight away, or any time within 5 days.';
+    var nt=$('needVid').previousElementSibling; if(nt){ nt.textContent='Later'; nt.className='tag opt'; }
+    $('heroGo').innerHTML='Book your video feedback now <span aria-hidden="true">↓</span>'; $('heroLater').hidden=false;
+    $('genie').hidden=false; document.body.classList.add('has-genie');
+    var how=document.querySelector('#whatSheet .how'); if(how) how.innerHTML='<li><b class="n">1</b><span><b>Book and pay</b> in two minutes: your details and piece names, then Stripe (card, Apple Pay or Google Pay).</span></li><li><b class="n">2</b><span><b>Film your piece</b> on your phone. One take, like the real exam.</span></li><li><b class="n">3</b><span><b>Upload it</b> straight after paying, or any time within 5 days with the link we email you.</span></li><li><b class="n">4</b><span><b>Get Eric\'s feedback</b> by email within 5 days of your upload: what\'s working, what to fix, and how to practise it.</span></li>';
+    if(BOOK){
+      document.body.classList.add('book');
+      $('laterNote').hidden=false;
+      $('formH').textContent='Book your Video Feedback'; $('formSub').textContent='Two minutes now. You upload your video after paying.';
+      $('step2h').textContent='Name your pieces'; $('step2p').textContent='Type the name of each piece you\'d like feedback on (up to 4). No video needed yet: you upload after booking.';
+      $('step3h').textContent='Your package, then book'; $('step3p').textContent='Your package is picked from your pieces. Tick the box, then tap the yellow button to book and pay.';
+      $('sendHint').textContent='Next: secure payment with Stripe (card, Apple Pay or Google Pay). Then upload now or within 5 days.';
+    }
+    if(UPMODE){
+      $('heroPill').textContent='Video Feedback · Upload'; $('heroH1').innerHTML='Upload your <em>video.</em>';
+      $('heroLead').textContent='Your booking is saved. Choose the video for each piece below, and Eric will send his feedback within 5 days.';
+      $('heroGo').innerHTML='Upload your video <span aria-hidden="true">↓</span>'; $('heroLater').hidden=true; $('coachWhat').hidden=true;
+      $('formH').textContent='Upload your video'; $('formSub').textContent='Your details and pieces are filled in from your booking.';
+      $('step2h').textContent='Choose your videos'; $('step2p').textContent='Pick the video for each piece. Score photos are optional. Not ready? Come back with the link in your email.';
+      $('step3h').textContent='Upload'; $('step3p').textContent='Tap the yellow button and keep this page open until it finishes.';
+      $('want').hidden=true; $('consentBox').closest('label').hidden=true; $('consentBox').checked=true; document.querySelector('#up .acc').hidden=true;
+    }
     var hc=document.querySelector('.hero .coach'); if(hc) hc.hidden=true;
     var cb=document.querySelector('#chat .bub p'); if(cb) cb.innerHTML='Hi! 👋 Not sure how it works? Let me show you with a <b>step-by-step guide</b>. I\'ll point to exactly what to tap!';
     var cg=$('chatGo'); if(cg) cg.innerHTML='Show me the steps →';
-    $('wantCourse').hidden=true; $('coachWhat').hidden=false; $('coachSteps').hidden=false; $('dueBox').hidden=true;
+    $('wantCourse').hidden=true; if(!UPMODE) $('coachWhat').hidden=false; $('coachSteps').hidden=false; $('dueBox').hidden=true;
     var wc=document.querySelector('input[name="want"][value="coaching"]'); if(wc) wc.checked=true;
     var PK={single:'Single Piece Check',full:'Full Exam Check',quick:'Single Piece Check',deep:'Full Exam Check',master:'Full Exam Check'}, want=PK[(q.get('pkg')||'').toLowerCase()];
     if(want){ var pr=document.querySelector('input[name="pkg"][value="'+want+'"]'); if(pr) pr.checked=true; }
@@ -857,20 +926,21 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       '<div class="field"><div class="rq"><label for="link'+n+'">Video link of piece '+n+'</label>'+TAG(n)+'</div><input id="link'+n+'" type="url" inputmode="url" autocomplete="off" placeholder="Paste a YouTube or Google Drive link"></div>'+
       '<div class="field"><div class="rq"><label for="slink'+n+'">Score photos link</label></div><input id="slink'+n+'" type="url" inputmode="url" autocomplete="off" placeholder="Google Drive or Google Photos link"></div>'
       :
-      '<div class="rq"><span class="lbl">Video of piece '+n+' <small class="vmulti">You can upload more than one video of this piece</small></span>'+TAG(n)+'</div>'+
+      '<div class="media"><div class="rq"><span class="lbl">Video of piece '+n+' <small class="vmulti">You can upload more than one video of this piece</small></span>'+TAG(n)+'</div>'+
       '<label class="pick" id="vp'+n+'" for="video'+n+'"><input id="video'+n+'" type="file" accept="video/*,.mov,.mp4,.m4v" multiple><span class="ic" aria-hidden="true">'+VID+'</span><span class="tx"><b id="vt'+n+'">No video yet</b><span id="vs'+n+'">MP4 or MOV, up to 4 GB each · up to 3 videos</span></span><span class="go" id="vg'+n+'">Choose</span></label>'+
       '<ul class="vlist" id="vl'+n+'" hidden></ul>'+
       '<div class="rq"><span class="lbl">Score photos</span></div>'+
-      '<label class="pick sc" id="sp'+n+'" for="score'+n+'"><input id="score'+n+'" type="file" accept="image/*,.pdf" multiple><span class="ic" aria-hidden="true">'+SCORE+'</span><span class="tx"><b id="ct'+n+'">No score added</b><span id="cs'+n+'">Photos or PDF, up to 10</span></span><span class="go" id="sg'+n+'">Add</span></label>')+
+      '<label class="pick sc" id="sp'+n+'" for="score'+n+'"><input id="score'+n+'" type="file" accept="image/*,.pdf" multiple><span class="ic" aria-hidden="true">'+SCORE+'</span><span class="tx"><b id="ct'+n+'">No score added</b><span id="cs'+n+'">Photos or PDF, up to 10</span></span><span class="go" id="sg'+n+'">Add</span></label></div>')+
       '<div class="thumbs" id="th'+n+'" hidden></div>'+
       '<div class="bar" id="pb'+n+'" hidden><i></i></div>';
     $('pieces').appendChild(el);
     var p={n:n,el:el,video:null,videos:[],scores:[]};
     function refresh(){
-      var t=$('title'+n).value.trim(), v=hasVideo(p), ok=v&&t;
+      var t=$('title'+n).value.trim(), v=hasVideo(p), ok=BOOK?!!t:(v&&t);
       el.classList.toggle('ready',!!ok);
-      $('st'+n).textContent=ok?'Ready':(v?'Add the name':(t?(LINK?'Add the link':'Add the video'):(n===1?'To do':'Optional')));
-      el.classList.toggle('skip', n>1 && !v && !t);
+      if(p.done){ $('st'+n).textContent='Uploaded ✓'; updateCount(); return; }
+      $('st'+n).textContent=BOOK?(t?'Ready':(n===1?'To do':'Optional')):UPMODE?(v?'Ready':'Add the video'):ok?'Ready':(v?'Add the name':(t?(LINK?'Add the link':'Add the video'):(n===1?'To do':'Optional')));
+      el.classList.toggle('skip', !UPMODE && n>1 && !v && !t);
       updateCount();
     }
     p.refresh=refresh;
@@ -935,8 +1005,8 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     (next?next.el:$('consentBox').closest('label')).scrollIntoView({behavior:'smooth',block:'center'});
     setTimeout(function(){ try{ target.focus({preventScroll:true}); }catch(e){} },400);
   });
-  function isReady(p){ return hasVideo(p)&&!!$('title'+p.n).value.trim(); }
-  function isStarted(p){ return hasVideo(p)||!!$('title'+p.n).value.trim()||(LINK&&!!$('slink'+p.n).value.trim())||(!LINK&&p.scores.length>0); }
+  function isReady(p){ if(p.done) return false; if(BOOK) return !!$('title'+p.n).value.trim(); return hasVideo(p)&&!!$('title'+p.n).value.trim(); }
+  function isStarted(p){ if(p.done||(UPMODE&&p.el.hidden)) return false; if(UPMODE) return hasVideo(p)||p.scores.length>0; return hasVideo(p)||!!$('title'+p.n).value.trim()||(LINK&&!!$('slink'+p.n).value.trim())||(!LINK&&p.scores.length>0); }
   function chosen(){ return pieces.filter(isStarted); }
   function readyCount(){ return pieces.filter(isReady).length; }
   function updateCount(){
@@ -949,9 +1019,25 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     $('stickyHint').textContent=go?'Tick the consent box, then upload':(half?'Finish the piece you started':'Add at least one piece');
     var miss=pieces.filter(function(p){ return !isReady(p); }).map(function(p){ return p.n; });
     $('coachForm').hidden=COACH_MODE||!(c>=1&&c<4);
+    if(UPMODE){ $('count').classList.toggle('all',false); }
     if(typeof syncPrice==='function'&&$('priceSingle')) syncPrice();
     if(miss.length) $('coachWhich').textContent=(miss.length===1?'piece ':'pieces ')+miss.join(miss.length===2?' and ':', ').replace(/, (\d)$/,' and $1');
     send.innerHTML=(c>=1&&c<4?'Upload '+c+(c===1?' piece':' pieces'):(c===4?'Upload all 4 pieces':'Upload my pieces'))+' <span aria-hidden="true">→</span>';
+    if(BOOK){
+      var pq=(typeof priceQuote==='function'&&$('grade').value&&c)?' · '+gbp(priceQuote().total):'';
+      $('countN').textContent=c; $('countT').textContent=(c===1?'piece':'pieces')+' named · no upload needed yet';
+      $('stickyN').textContent=c?c+(c===1?' piece':' pieces')+pq:'Name at least one piece';
+      $('stickyHint').textContent=c?'No upload needed yet':'Upload your video after booking';
+      $('stickyGo').firstChild.textContent=c?'Book now ':'Continue ';
+      send.innerHTML='Book your video feedback now'+pq+' <span aria-hidden="true">→</span>';
+    }
+    if(UPMODE){
+      var left=pieces.filter(function(p){ return !p.el.hidden&&!p.done; }).length;
+      $('countN').textContent=c+' of '+left; $('countT').textContent=left===1?'video chosen':'videos chosen';
+      $('stickyN').textContent=c+' of '+left+' videos chosen'; $('stickyHint').textContent=c?'Tap to upload':'Choose a video to upload';
+      $('stickyGo').firstChild.textContent=c?'Go to upload ':'Continue ';
+      send.innerHTML=(c?'Upload '+(c===1?'my video':c+' videos'):'Upload my video')+' <span aria-hidden="true">→</span>';
+    }
   }
   updateCount();
   function size(n){ return n>=1073741824?(n/1073741824).toFixed(2)+' GB':n>=1048576?Math.round(n/1048576)+' MB':Math.max(1,Math.round(n/1024))+' KB'; }
@@ -986,14 +1072,14 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     });
   }
   function liveUpload(meta){
-    return api('/api/uploads/start',meta).then(function(sub){ subId=sub.id||'';
+    return (UPMODE?Promise.resolve({id:SUB}):api('/api/uploads/start',meta)).then(function(sub){ subId=sub.id||'';
       var chain=Promise.resolve();
       chosen().forEach(function(p){
         var acc={done:0,total:p.videos.reduce(function(a,f){return a+f.size;},0)+p.scores.reduce(function(a,f){return a+f.size;},0)};
         p.videos.forEach(function(v){ chain=chain.then(function(){ return sendFile(sub,p,v,'video',acc); }); });
         p.scores.forEach(function(f){ chain=chain.then(function(){ return sendFile(sub,p,f,'score',acc); }); });
       });
-      return chain.then(function(){ return api('/api/uploads/finish',{id:sub.id}); });
+      return chain.then(function(){ return api('/api/uploads/finish',{id:sub.id}).catch(function(e){ if(UPMODE&&e.code==='missing_videos') return {partial:true}; throw e; }); });
     });
   }
   /* ---------- preview: simulated ---------- */
@@ -1048,6 +1134,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
 
   /* ---------- Eric's chat bubble: on first touch of piece 1, or after 2s of scrolling ---------- */
   (function(){
+    if(COACH_MODE) return;
     var chat=$('chat'), shown=false, timer=null, KEY='cadenzaChatSeen';
     if(COACH_MODE) KEY='cadenzaCoachChatSeen';
     function seen(){ if(sandbox) return false; try{ return sessionStorage.getItem(KEY)==='1'; }catch(e){ return false; } }
@@ -1081,6 +1168,20 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     {t:'Tick to agree', x:'Tick the box to say you\'re happy for Eric to watch your videos.', el:function(){ return $('consentBox').closest('label'); }, pt:function(){ return $('consentBox'); }},
     {t:'Upload, then pay', x:'Tap the yellow button. When the upload finishes, you\'ll get a Stripe button to pay. Got a welcome code? Enter it there.', el:function(){ return $('send'); }, pt:function(){ return $('send'); }}
   ];
+  if(BOOK) TOUR=[
+    {t:'Your details', x:'Who the feedback is for, and the email Eric replies to. Tap each box to fill it in.', el:function(){ return $('fields').hidden?$('summary'):$('fields'); }, pt:function(){ return $('fields').hidden?$('editBtn'):$('student'); }},
+    {t:'Name your piece', x:'Type the piece name and composer. No video needed yet: you upload after booking.', el:function(){ return $('pieces').children[0]; }, pt:function(){ return $('title1'); }},
+    {t:'More pieces? (optional)', x:'Want feedback on more pieces? Name them here. 1 piece = Single Piece Check, 2 or more = Full Exam Check.', el:function(){ return $('pieces').children[1]; }, pt:function(){ return $('title2'); }},
+    {t:'Your package', x:'Picked for you from your pieces. The price shows once your grade is chosen.', el:function(){ return $('pkgs'); }, pt:function(){ return document.querySelector('input[name="pkg"]:checked')||document.querySelector('input[name="pkg"]'); }},
+    {t:'Tick to agree', x:'Tick the box to say you\'re happy for Eric to watch your videos.', el:function(){ return $('consentBox').closest('label'); }, pt:function(){ return $('consentBox'); }},
+    {t:'Book and pay', x:'Tap here to book and pay securely with Stripe (welcome code goes there). Then upload your video straight away, or any time within 5 days.', el:function(){ return $('send'); }, pt:function(){ return $('send'); }}
+  ];
+  if(UPMODE) TOUR=[
+    {t:'Choose your video', x:'Tap Choose and pick the video from your phone. One take per piece, like the real exam.', el:function(){ var p=firstOpen(); return p?$('vp'+p.n):$('send'); }, pt:function(){ var p=firstOpen(); return p?($('vp'+p.n).querySelector('.go')||$('vp'+p.n)):$('send'); }},
+    {t:'Score photos (optional)', x:'Have photos of the music? Tap Add so Eric can follow along. If not, tap Next.', el:function(){ var p=firstOpen(); return p?$('sp'+p.n):$('send'); }, pt:function(){ var p=firstOpen(); return p?($('sp'+p.n).querySelector('.go')||$('sp'+p.n)):$('send'); }},
+    {t:'Upload', x:'Tap the yellow button and keep this page open until it finishes. Not ready with every piece? Upload the rest later with the link in your email.', el:function(){ return $('send'); }, pt:function(){ return $('send'); }}
+  ];
+  function firstOpen(){ return pieces.filter(function(p){ return !p.el.hidden&&!p.done; })[0]; }
   var tourI=-1, tourOn=null, tourPt=null, ptTimer=null;
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   function movePointer(){
@@ -1102,18 +1203,21 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     $('tourNext').textContent=i===TOUR.length-1?'Got it ✓':'Next →';
     if(tourOn){ tourOn.classList.add('tour-on');
       requestAnimationFrame(function(){
-        var r=(tourPt||tourOn).getBoundingClientRect(), y=r.top+window.scrollY-Math.max(90,innerHeight*0.28);
+        var cb=$('tour').getBoundingClientRect(), off=Math.max(110,(cb.height?cb.bottom:300)+24);
+        var r=(tourPt||tourOn).getBoundingClientRect(), y=r.top+window.scrollY-Math.min(off,innerHeight*0.6);
         window.scrollTo({top:Math.max(0,y),behavior:reduce?'auto':'smooth'});
         clearTimeout(ptTimer); ptTimer=setTimeout(function(){ keepClear(); movePointer(); setTimeout(tapPointer,560); },reduce?30:480); }); }
   }
   // if the card would sit on top of what to tap, nudge the page so the target sits above the card
   function keepClear(){
-    if(!tourPt) return; var c=$('tour').getBoundingClientRect(), r=tourPt.getBoundingClientRect();
-    if(r.bottom>c.top-16){ window.scrollBy({top:r.bottom-(c.top-16)+8,behavior:'auto'}); }
-    r=tourPt.getBoundingClientRect(); if(r.top<70){ window.scrollBy({top:r.top-70,behavior:'auto'}); }
+    if(!tourPt) return; var c=$('tour').getBoundingClientRect();
+    var big=tourOn?tourOn.getBoundingClientRect():null, tgt=(big&&big.height<innerHeight-c.bottom-48)?tourOn:tourPt, r=tgt.getBoundingClientRect();
+    var under=r.left<c.right&&r.right>c.left;
+    if(under&&r.top<c.bottom+16){ window.scrollBy({top:r.top-(c.bottom+20),behavior:'auto'}); r=tgt.getBoundingClientRect(); }
+    if(r.bottom>innerHeight-16){ window.scrollBy({top:r.bottom-innerHeight+24,behavior:'auto'}); }
   }
-  function startTour(at){ var t=$('tour'); t.hidden=false; document.body.classList.add('touring'); tourShow(at||0); requestAnimationFrame(function(){ requestAnimationFrame(function(){ t.classList.add('show'); }); }); }
-  function endTour(){ var t=$('tour'); t.classList.remove('show'); document.body.classList.remove('touring'); if(tourOn) tourOn.classList.remove('tour-on'); tourOn=null; tourPt=null; tourI=-1; $('tpoint').classList.remove('show'); setTimeout(function(){ t.hidden=true; },220); }
+  function startTour(at){ var t=$('tour'); t.hidden=false; $('genieBtn').setAttribute('aria-expanded','true'); hideTip(); document.body.classList.add('touring'); tourShow(at||0); requestAnimationFrame(function(){ requestAnimationFrame(function(){ t.classList.add('show'); }); }); }
+  function endTour(){ $('genieBtn').setAttribute('aria-expanded','false'); var t=$('tour'); t.classList.remove('show'); document.body.classList.remove('touring'); if(tourOn) tourOn.classList.remove('tour-on'); tourOn=null; tourPt=null; tourI=-1; $('tpoint').classList.remove('show'); setTimeout(function(){ t.hidden=true; },220); }
   $('tourNext').addEventListener('click',function(){ if(tourI>=TOUR.length-1) endTour(); else tourShow(tourI+1); });
   $('tourBack').addEventListener('click',function(){ if(tourI>0) tourShow(tourI-1); });
   $('tourSkip').addEventListener('click',endTour);
@@ -1124,6 +1228,20 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     e.preventDefault(); if(window.hideChat) window.hideChat(); var at=+(btn.getAttribute('data-at')||0);
     if(at===0){ $('up').scrollIntoView({behavior:reduce?'auto':'smooth'}); setTimeout(function(){ startTour(0); },reduce?0:450); } else startTour(at);
   }); });
+
+  /* ---------- genie (top right): starts or closes the step-by-step guide ---------- */
+  function hideTip(){ var g=$('gtip'); g.classList.remove('show'); setTimeout(function(){ g.hidden=true; },220); }
+  $('genieBtn').addEventListener('click',function(){
+    if(tourI>=0) return endTour();
+    if(form.hidden) return;
+    var r=form.getBoundingClientRect();
+    if(r.top>innerHeight*0.5||r.bottom<0){ form.scrollIntoView({behavior:reduce?'auto':'smooth'}); setTimeout(function(){ startTour(0); },reduce?0:450); } else startTour(0);
+  });
+  $('gtipX').addEventListener('click',hideTip);
+  if(COACH_MODE){
+    var GKEY='cadenzaGenieTip', gseen=false; try{ gseen=!sandbox&&sessionStorage.getItem(GKEY)==='1'; }catch(e){}
+    if(!gseen) setTimeout(function(){ if(tourI>=0||form.hidden) return; var g=$('gtip'); g.hidden=false; requestAnimationFrame(function(){ requestAnimationFrame(function(){ g.classList.add('show'); }); }); try{ sessionStorage.setItem(GKEY,'1'); }catch(e){} setTimeout(hideTip,9000); },1600);
+  }
 
   /* ---------- "What is Online Coaching?" sheet ---------- */
   (function(){
@@ -1147,6 +1265,8 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     if(!ageVal() && !(reg.email&&reg.student)){ openFields(true); showErr('Please tell us whether the student is under 18.'); $('ageField').scrollIntoView({block:'center'}); return document.querySelector('input[name="age"]').focus(); }
     if(!/^\S+@\S+\.\S+$/.test($('email').value)){ openFields(true); showErr('Check the email address.'); return $('email').focus(); }
     if(!$('editBtn').hidden) openFields(false);
+    if(BOOK) return bookNow();
+    if(UPMODE&&!chosen().length){ showErr('Choose a video for at least one piece.'); var fo=firstOpen(); if(fo){ fo.el.scrollIntoView({block:'center'}); } return; }
     if(!chosen().length){ showErr('Add at least one piece: its name and its video.'); pieces[0].el.scrollIntoView({block:'center'}); return $('title1').focus(); }
     var picked=chosen();
     for(var i=0;i<picked.length;i++){
@@ -1158,7 +1278,7 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
       }
       if(LINK && $('slink'+p.n).value.trim() && !okUrl($('slink'+p.n).value)){ showErr('Piece '+p.n+': the score photos link doesn\'t look right. Copy the full link starting with https://, or leave it empty.'); p.el.scrollIntoView({block:'center'}); return $('slink'+p.n).focus(); }
     }
-    if(wantVal()==='coaching'&&!document.querySelector('input[name="pkg"]:checked')){ showErr('Please choose a package: Single Piece Check or Full Exam Check.'); $('pkgs').scrollIntoView({block:'center'}); return document.querySelector('input[name="pkg"]').focus(); }
+    if(!UPMODE&&wantVal()==='coaching'&&!document.querySelector('input[name="pkg"]:checked')){ showErr('Please choose a package: Single Piece Check or Full Exam Check.'); $('pkgs').scrollIntoView({block:'center'}); return document.querySelector('input[name="pkg"]').focus(); }
     if(!$('consentBox').checked){ showErr('Please tick the consent box.'); return $('consentBox').focus(); }
 
     if(LINK) return sendLinks();
@@ -1178,6 +1298,28 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     });
   });
 
+  function bookNow(){
+    var named=pieces.filter(function(p){ return $('title'+p.n).value.trim(); });
+    if(!named.length){ showErr('Type the name of at least one piece.'); pieces[0].el.scrollIntoView({block:'center'}); return $('title1').focus(); }
+    lockPkg();
+    if(!document.querySelector('input[name="pkg"]:checked')){ showErr('Please choose a package.'); return $('pkgs').scrollIntoView({block:'center'}); }
+    if(!$('consentBox').checked){ showErr('Please tick the consent box.'); return $('consentBox').focus(); }
+    if(!isLive && !sandbox){ showErr('Booking isn\'t switched on yet. Please email music@cadenza-london.com.'); return; }
+    if(window.hideChat) window.hideChat(); if(tourI>=0) endTour();
+    busy=true; stickyShow(); send.disabled=true; send.textContent='Booking…';
+    var again=function(m){ busy=false; stickyShow(); send.disabled=false; updateCount(); showErr(m); };
+    if(sandbox){ setTimeout(function(){ location.hash='paid&cs=cs_demo&sub=demo'; },600); return; }
+    var meta={name:contactName(),email:$('email').value,student:$('student').value,grade:$('grade').value,board:$('board').value,consent:true,later:true,choice:choiceText(),
+      pieces:named.map(function(p){ return {piece:p.n,title:$('title'+p.n).value.trim()}; })};
+    api('/api/uploads/start',meta).then(function(sub){ subId=sub.id;
+      return api('/api/pay',{id:sub.id}).then(function(j){
+        if(j.url){ send.textContent='Opening secure payment…'; location.href=j.url; return; }
+        again('Your booking is saved, but the payment page didn\'t open. Please email music@cadenza-london.com and we\'ll send you a payment link.');
+      });
+    }).catch(function(x){
+      again(x&&x.code==='unknown_submission'?'Booking with payment first isn\'t switched on yet. Please try again shortly or email music@cadenza-london.com.':'Something went wrong on our side. Please try again, or email music@cadenza-london.com.');
+    });
+  }
   function sendLinks(){
     busy=true; stickyShow(); send.disabled=true; send.textContent='Sending…';
     var fd=new URLSearchParams();
@@ -1216,6 +1358,21 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     if(isLive) netlifyBackup();
     $('doneStudent').textContent=$('student').value; $('doneEmail').textContent=$('email').value;
     $('donePill').textContent=wantVal()==='coaching'?'Video Feedback (Online Coaching)':'In-Person 4-Week Digital Exam Ready Course';
+    if(UPMODE){
+      var d2=$('done'), ol2=d2.querySelector('ol'), sentNow=chosen().map(function(p){ return p.n; });
+      pieces.forEach(function(p){ if(sentNow.indexOf(p.n)>-1) p.done=true; });
+      var still=pieces.filter(function(p){ return !p.el.hidden&&!p.done; });
+      d2.querySelector('h2').textContent=still.length?'Video received':'All videos received';
+      d2.querySelector('p').innerHTML='Thank you! '+esc($('student').value)+(still.length?'\'s video is safely with Eric.':'\'s videos are safely with Eric. He\'ll send his feedback to '+esc($('email').value)+' within 5 days.');
+      if(ol2) ol2.innerHTML=still.length
+        ? '<li><b>Still to upload:</b> '+still.map(function(p){ return 'piece '+p.n+' ('+esc($('title'+p.n).value)+')'; }).join(', ')+'.</li><li><b>Use the same link</b> from your email'+(booking&&booking.due?' before '+esc(fmtDay(booking.due)):'')+'. Your other videos are saved.</li><li><b>Eric sends his feedback</b> once every piece is in.</li>'
+        : '<li><b>Eric watches and marks</b> your video'+(sentNow.length+pieces.filter(function(p){return p.done;}).length>1?'s':'')+' like the real exam.</li><li><b>Your feedback arrives by email</b> within 5 days.</li><li><b>Check your inbox</b> for the confirmation email.</li>';
+      if(still.length){ var again2=document.createElement('a'); again2.className='btn btn-go'; again2.href=location.pathname+location.search; again2.innerHTML='Upload another video <span aria-hidden="true">→</span>'; d2.insertBefore(again2,$('payBox')); }
+      if(booking&&!booking.paid){ $('payBox').hidden=false; $('payBtn').href='#pay='+SUB; $('payBtn').removeAttribute('target'); $('payBtn').firstChild.textContent='Pay securely with Stripe '; }
+      form.hidden=true; stickyShow(); $('before').hidden=true; $('done').hidden=false; $('demo').hidden=true; $('genie').hidden=true;
+      $('done').scrollIntoView({block:'start',behavior:'smooth'}); $('done').focus({preventScroll:true});
+      return;
+    }
     if(wantVal()==='coaching'){
       var d=$('done'), ol=d.querySelector('ol');
       d.querySelector('h2').textContent='Videos received';
@@ -1234,6 +1391,8 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
     form.hidden=true; stickyShow(); $('before').hidden=true; $('done').hidden=false; $('demo').hidden=true;
     $('done').scrollIntoView({block:'start',behavior:'smooth'}); $('done').focus({preventScroll:true});
   }
+  function esc(t){ return String(t==null?'':t).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function fmtDay(iso){ var d=new Date(iso); if(isNaN(d)) return ''; try{ return d.toLocaleDateString('en-GB',{timeZone:'Europe/London',weekday:'long',day:'numeric',month:'long'}); }catch(e){ return d.toDateString(); } }
   function showGone(kind){
     form.hidden=true; stickyShow(); $('done').hidden=true; $('before').hidden=true; $('hero').hidden=true; $('gone').hidden=false;
     $('regAgain').href=REGISTER_URL;
@@ -1249,17 +1408,69 @@ body.touring .sticky{transform:translateY(110%)!important;opacity:0!important;po
         .then(function(j){ if(j.url) location.href=j.url; else d0.querySelector('p').textContent='We couldn\'t open the payment page. Please email music@cadenza-london.com and we\'ll send you a link.'; })
         .catch(function(){ d0.querySelector('p').textContent='We couldn\'t open the payment page. Please check your connection and try the link again.'; });
       stickyShow(); return; }
+    var hsub=(h.match(/sub=([A-Za-z0-9]+)/)||[])[1]||'';
+    if(h.indexOf('pay-later')===0&&hsub){ $('hdrName').textContent='Video Feedback'; $('hero').hidden=true; form.hidden=true; $('before').hidden=true; $('gone').hidden=true; $('genie').hidden=true; var d3=$('done'); d3.hidden=false;
+      $('donePill').textContent='Video Feedback (Online Coaching)'; d3.querySelector('h2').textContent='Your booking is saved'; d3.querySelector('p').textContent='You haven\'t paid yet, so it isn\'t confirmed. Finish paying whenever you\'re ready.';
+      var o3=d3.querySelector('ol'); if(o3) o3.hidden=true; $('payBox').hidden=false; $('payTitle').textContent='Finish your booking'; $('payBtn').href='#pay='+hsub; $('payBtn').removeAttribute('target'); $('payBtn').firstChild.textContent='Pay securely with Stripe ';
+      $('payNote').textContent='Card, Apple Pay or Google Pay. Then upload your video straight away, or within 5 days.'; stickyShow(); window.scrollTo(0,0); return; }
     if(h==='pay-later'){ $('hero').hidden=true; form.hidden=true; $('before').hidden=true; $('gone').hidden=true; var d1=$('done'); d1.hidden=false;
       d1.querySelector('h2').textContent='No problem'; d1.querySelector('p').textContent='Your videos are safe with Eric. Use the payment link in your email whenever you\'re ready.'; var o1=d1.querySelector('ol'); if(o1) o1.hidden=true; stickyShow(); return; }
     if(h.indexOf('paid')===0){ var csm=h.match(/cs=(cs_[A-Za-z0-9_]+)/);
       if(csm&&isLive) fetch(UPLOAD_API+'/api/pay/check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({cs:csm[1]})}).catch(function(){}); form.hidden=true; $('before').hidden=true; $('gone').hidden=true; var d=$('done'); d.hidden=false;
       $('donePill').textContent='Video Feedback (Online Coaching)'; d.querySelector('h2').textContent='Payment received';
+      $('hdrName').innerHTML='Video Feedback <small class="oc-sub" style="font-size:.72em;font-weight:400;opacity:.8;letter-spacing:inherit;text-transform:inherit;white-space:nowrap">(Online Coaching)</small>'; document.title='Payment received | Cadenza Video Feedback (Online Coaching)';
       d.querySelector('p').textContent='Thank you! Eric now has everything he needs and will send your feedback by email.';
       var ol=d.querySelector('ol'); if(ol){ ol.hidden=false; ol.innerHTML='<li><b>Eric watches</b> your video(s) and marks them like the real exam.</li><li><b>You get his feedback by email</b> within 5 days.</li><li><b>Check your inbox</b> for your payment confirmation and Stripe receipt.</li>'; }
-      $('payBox').hidden=true; $('hero').hidden=true; [].forEach.call(document.querySelectorAll('.keys'),function(k){ k.hidden=true; }); stickyShow(); window.scrollTo(0,0); return; }
+      $('payBox').hidden=true; $('genie').hidden=true;
+      if(hsub){
+        var showUpload=function(b){
+          if(b&&b.status==='received') return;
+          var day=b&&b.due?fmtDay(b.due):'';
+          d.querySelector('h2').textContent='You\'re booked in!';
+          d.querySelector('p').innerHTML='Thank you! Payment received. <b>Last step: send Eric your video.</b> Do it now, or any time'+(day?' before <b>'+esc(day)+'</b>':' within 5 days')+'. We\'ve emailed you a private upload link too.';
+          if(ol) ol.innerHTML='<li><b>Upload your video</b> now, or later with the link in your email.</li><li><b>Eric watches and marks</b> it like the real exam.</li><li><b>Your feedback arrives by email</b> within 5 days of your upload.</li>';
+          if(!$('upNow')){ var a=document.createElement('a'); a.id='upNow'; a.className='btn btn-go'; a.href=location.pathname+'?mode=coaching&sub='+encodeURIComponent(hsub); a.innerHTML='Upload my video now <span aria-hidden="true">→</span>';
+            var later=document.createElement('p'); later.className='fine'; later.id='upLater'; later.style.cssText='text-align:center;margin-top:-4px'; later.textContent='Not ready? No worries. Use the link in your email'+(day?' before '+day:' within 5 days')+'.';
+            d.insertBefore(a,$('payBox')); d.insertBefore(later,$('payBox')); }
+        };
+        if(sandbox||!isLive) showUpload({status:'booked',due:new Date(Date.now()+5*864e5).toISOString()});
+        else fetch(UPLOAD_API+'/api/uploads/resume?id='+encodeURIComponent(hsub)).then(function(r){ return r.json(); }).then(showUpload).catch(function(){ showUpload(null); });
+      } $('hero').hidden=true; [].forEach.call(document.querySelectorAll('.keys'),function(k){ k.hidden=true; }); stickyShow(); window.scrollTo(0,0); return; }
     if(sandbox){ form.hidden=false; $('gone').hidden=true; $('hero').hidden=false; $('before').hidden=false; }
   }
   window.addEventListener('hashchange',route); route();
+
+  /* ---------- upload later: load the booking from the private link ---------- */
+  function applyBooking(b){
+    booking=b;
+    reg.email=b.email; reg.student=b.student;
+    ['name','email','student','grade','board'].forEach(function(k){ if(b[k]!=null) $(k).value=b[k]; });
+    if(b.name&&b.name.trim().toLowerCase()!==String(b.student||'').trim().toLowerCase()){ document.querySelector('input[name="age"][value="under18"]').checked=true; $('isParent').checked=true; } else { document.querySelector('input[name="age"][value="adult"]').checked=true; $('name').value=''; }
+    syncParent(); syncSummary(); openFields(false); $('editBtn').hidden=true; $('prefillNote').hidden=false; $('prefillNote').textContent='From your booking';
+    $('detH').textContent='Your booking'; $('detP').textContent=(b.choice?b.choice+' · ':'')+(b.paid?'Paid ✓':'Not paid yet');
+    var booked={}; (b.pieces||[]).forEach(function(x){ booked[x.piece]=x; });
+    pieces.forEach(function(p){ var x=booked[p.n];
+      p.el.hidden=!x; if(!x) return;
+      $('title'+p.n).value=x.title; $('title'+p.n).readOnly=true; p.done=!!x.done; p.el.classList.toggle('done',p.done);
+      var tg=p.el.querySelector('.media .tag'); if(tg){ tg.className='tag req'; tg.textContent='To upload'; }
+      p.refresh(); });
+    $('laterNote').hidden=false;
+    var open=pieces.filter(function(p){ return !p.el.hidden&&!p.done; }).length, day=b.due?fmtDay(b.due):'';
+    $('laterText').innerHTML=open?('<b>'+(day?'Upload by '+esc(day)+'.':'Upload within 5 days of booking.')+'</b> Not ready with every piece? Upload what you have now and come back with the link in your email.'):'<b>Eric already has every video.</b> Nothing more to upload.';
+    if(!open){ $('send').hidden=true; $('sendHint').hidden=true; }
+    updateCount();
+    if(b.status==='received'&&!open){ finishAllIn(); }
+  }
+  function finishAllIn(){ var d=$('done'); $('doneStudent').textContent=$('student').value; d.querySelector('h2').textContent='All videos received'; d.querySelector('p').textContent='Eric already has every video for this booking and will send his feedback by email.'; var o=d.querySelector('ol'); if(o) o.hidden=true; $('donePill').textContent='Video Feedback (Online Coaching)'; form.hidden=true; $('before').hidden=true; d.hidden=false; $('genie').hidden=true; stickyShow(); }
+  if(UPMODE){
+    form.style.opacity='.4'; form.setAttribute('aria-busy','true');
+    var ready=function(b){ form.style.opacity=''; form.removeAttribute('aria-busy'); applyBooking(b); };
+    if(sandbox) ready({status:'booked',paid:true,due:new Date(Date.now()+4*864e5).toISOString(),name:'Jane Smith',email:'jane@example.com',student:'Amy Smith',grade:'Grade 5',board:'ABRSM Performance Grade',choice:'Full Exam Check',pieces:[{piece:1,title:'Minuet in G, Bach',done:false},{piece:2,title:'Sonatina in C, Clementi',done:false}]});
+    else fetch(UPLOAD_API+'/api/uploads/resume?id='+encodeURIComponent(SUB)).then(function(r){ if(!r.ok) throw new Error('nf'); return r.json(); }).then(ready).catch(function(){
+      form.hidden=true; $('before').hidden=true; $('genie').hidden=true; var g=$('gone'); g.hidden=false; $('goneTag').textContent='Link not found'; $('goneTitle').textContent='We couldn\'t find this booking';
+      $('goneText').textContent='Check you opened the full link from your email. Still stuck? Email music@cadenza-london.com and we\'ll send you a new one.'; $('regAgain').href='mailto:music@cadenza-london.com'; $('regAgain').firstChild.textContent='Email us ';
+    });
+  }
 
   if(isLive&&reg.rid){
     fetch(UPLOAD_API+'/api/registrations/status?rid='+encodeURIComponent(reg.rid)+'&t='+encodeURIComponent(reg.token)).then(function(r){ return r.json(); }).then(function(j){
