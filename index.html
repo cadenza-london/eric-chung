@@ -3391,6 +3391,21 @@
 #bf-pop .bf-cimg{display:block;width:100%;height:auto!important;max-height:min(40vh,360px);max-width:none;aspect-ratio:1/1;object-fit:contain;background:#fbe8ee;border-bottom:1px solid rgba(201,168,76,.3)}
 .bf-cwhen{font-size:12px;letter-spacing:.14em;color:#C9A84C;margin:16px 0 8px!important}
 .bf-ctx{font-size:15px;line-height:1.55;color:#d8ccbb;margin:0 0 4px!important}
+/* concert slide: bright, matching the pink concert poster */
+.bf-bright{background:#fdf1f4;color:#5a2330}
+.bf-bright .bf-band{background:#8e1f35;color:#fff}
+.bf-bright .bf-cwhen{color:#b07d1a}
+.bf-bright .bf-hl b{color:#8e1f35}
+.bf-bright .bf-hl em{color:#c58a1c}
+.bf-bright .bf-ctx{color:#5a2330}
+.bf-bright .bf-intl{color:#8e1f35;border-color:rgba(142,31,53,.35);background:#fff}
+.bf-bright .bf-btn{background:#8e1f35;color:#fff}
+@media (hover:hover){.bf-bright .bf-btn:hover{background:#a8304a}}
+#bf-pop.lit{background:#fdf1f4;border-color:rgba(142,31,53,.3)}
+#bf-pop.lit .bf-arr{color:#8e1f35;border-color:rgba(142,31,53,.35)}
+#bf-pop.lit .bf-dot{background:rgba(142,31,53,.25)}
+#bf-pop.lit .bf-dot.on{background:#8e1f35}
+#bf-pop.lit>.bf-x{color:#fff}
 .bf-band{position:relative;background:#C9A84C;color:#221d18;font-size:12px;letter-spacing:.22em;font-weight:500;padding:10px 40px}
 .bf-x{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;background:none;color:#221d18;font-size:22px;line-height:1;cursor:pointer}
 .bf-in{padding:20px 22px 22px}
@@ -3449,12 +3464,12 @@
   </div>
   </section>
 
-  <section class="bf-slide" id="bf-s-concert" aria-label="New Year Debut Concert">
+  <section class="bf-slide bf-bright" id="bf-s-concert" aria-label="New Year Debut Concert">
   <div class="bf-band">NEW YEAR DEBUT CONCERT</div>
   <img class="bf-cimg" src="images/new-year-concert-2027.jpg" alt="Cadenza London students performing and receiving certificates at last year's concert" loading="lazy" width="760" height="760">
   <div class="bf-in">
     <p class="bf-cwhen">SAT 30 JAN 2027 · 1:30PM UK TIME</p>
-    <h2 class="bf-hl" style="font-size:34px"><b>Our concert is</b><em>back this year!</em></h2>
+    <h2 class="bf-hl" style="font-size:34px"><b>Our concert is</b><em>here this year!</em></h2>
     <p class="bf-ctx">Join from anywhere and everywhere online. Online tickets are available now.</p>
     <span class="bf-intl" style="margin-top:6px">Live from Rosslyn Hill Chapel, London</span>
     <a class="bf-btn" id="bf-concert-go" href="https://luma.com/ieb75s8k" target="_blank" rel="noopener">GET ONLINE TICKETS &rarr;</a>
@@ -3535,7 +3550,7 @@
   var track = document.getElementById('bf-track'), prev = document.getElementById('bf-prev'), next = document.getElementById('bf-next');
   var dots = pop.querySelectorAll('.bf-dot');
   function idx(){ return Math.round(track.scrollLeft / Math.max(1, track.clientWidth)); }
-  function sync(){ var i = idx(); dots.forEach(function(d,k){ d.classList.toggle('on', k === i); }); if (prev) prev.disabled = i === 0; if (next) next.disabled = i >= track.children.length - 1; }
+  function sync(){ var i = idx(); var cur = track.children[i]; pop.classList.toggle('lit', !!(cur && cur.classList.contains('bf-bright'))); dots.forEach(function(d,k){ d.classList.toggle('on', k === i); }); if (prev) prev.disabled = i === 0; if (next) next.disabled = i >= track.children.length - 1; }
   function go(i){ track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' }); pop.scrollTop = 0; }
   if (track) { track.addEventListener('scroll', function(){ window.requestAnimationFrame(sync); }, { passive: true }); sync(); }
   if (prev) prev.addEventListener('click', function(){ go(idx() - 1); });
