@@ -3610,7 +3610,7 @@
   });
 
   var seen = false; try { seen = sessionStorage.getItem(SEEN) === '1'; } catch(e){}
-  if (force) open(); else if (!seen) setTimeout(open, 2500); else if (tab) setTimeout(function(){ tab.classList.add('on'); }, 1200);
+  if (force) open(); else if (!seen) setTimeout(open, 1000); else if (tab) setTimeout(function(){ tab.classList.add('on'); }, 1200);
 })();
 </script>
 <!-- ═══════════ END BLACK FRIDAY POPUP ═══════════ -->
