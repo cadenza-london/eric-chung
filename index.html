@@ -3530,8 +3530,8 @@
   var autoT = null, touched = false;
   function open(){
     if (track) track.scrollLeft = 0; touched = false; clearTimeout(autoT);
-    /* 5 seconds after the Black Friday slide appears, slide over to the concert (unless they're already using the popup) */
-    if (track && track.children.length > 1) autoT = setTimeout(function(){ if (pop.classList.contains('on') && !touched && idx() === 0) go(1); }, 5000);
+    /* 3.5 seconds after the Black Friday slide appears, slide over to the concert (unless they're already using the popup) */
+    if (track && track.children.length > 1) autoT = setTimeout(function(){ if (pop.classList.contains('on') && !touched && idx() === 0) go(1); }, 3500);
     pop.classList.add('on'); ov.classList.add('on'); document.body.style.overflow = 'hidden'; if (tab) tab.classList.remove('on'); }
   function close(){
     clearTimeout(autoT);
@@ -3552,12 +3552,33 @@
   var dots = pop.querySelectorAll('.bf-dot');
   function idx(){ return Math.round(track.scrollLeft / Math.max(1, track.clientWidth)); }
   function sync(){ var i = idx(); var cur = track.children[i]; pop.classList.toggle('lit', !!(cur && cur.classList.contains('bf-bright'))); dots.forEach(function(d,k){ d.classList.toggle('on', k === i); }); if (prev) prev.disabled = i === 0; if (next) next.disabled = i >= track.children.length - 1; }
-  function go(i){ track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' }); pop.scrollTop = 0; }
+  /* slide by hand (snap switched off while moving): smooth scrollTo inside a snap container is unreliable on iPhone */
+  var anim = 0;
+  function go(i){
+    i = Math.max(0, Math.min(track.children.length - 1, i));
+    var start = track.scrollLeft, end = i * track.clientWidth, t0 = 0, id = ++anim;
+    pop.scrollTop = 0;
+    if (Math.abs(end - start) < 2) return;
+    track.style.scrollSnapType = 'none';
+    function step(ts){
+      if (id !== anim) return;
+      if (!t0) t0 = ts;
+      var p = Math.min(1, (ts - t0) / 480), e = 1 - Math.pow(1 - p, 3);
+      track.scrollLeft = start + (end - start) * e;
+      if (p < 1) window.requestAnimationFrame(step);
+      else { track.scrollLeft = end; track.style.scrollSnapType = ''; sync(); }
+    }
+    window.requestAnimationFrame(step);
+  }
   if (track) { track.addEventListener('scroll', function(){ window.requestAnimationFrame(sync); }, { passive: true }); sync(); }
   if (prev) prev.addEventListener('click', function(){ go(idx() - 1); });
   if (next) next.addEventListener('click', function(){ go(idx() + 1); });
   pop.addEventListener('keydown', function(e){ if (e.key === 'ArrowRight') go(idx() + 1); if (e.key === 'ArrowLeft') go(idx() - 1); });
-  ['pointerdown','touchstart','wheel','keydown'].forEach(function(ev){ pop.addEventListener(ev, function(){ touched = true; clearTimeout(autoT); }, { passive: true }); });
+  /* only a real swipe, a code tap or an arrow stops the automatic slide (a plain tap to read doesn't) */
+  function stopAuto(){ touched = true; clearTimeout(autoT); }
+  if (track) { track.addEventListener('touchmove', stopAuto, { passive: true }); track.addEventListener('wheel', stopAuto, { passive: true }); }
+  pop.querySelectorAll('.bf-c,.bf-arr').forEach(function(el){ el.addEventListener('click', stopAuto); });
+  pop.addEventListener('keydown', stopAuto);
   var cg = document.getElementById('bf-concert-go');
   if (cg) cg.addEventListener('click', function(){ try { sessionStorage.setItem(SEEN,'1'); } catch(e){} });
   pop.querySelectorAll('.bf-go').forEach(function(a){ a.addEventListener('click', function(){ try { sessionStorage.setItem(SEEN,'1'); } catch(e){} }); });
