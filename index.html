@@ -3364,6 +3364,8 @@
 
 </script>
 <!-- ═══════════ BLACK FRIDAY POPUP (until 30 Nov 2026, then "extended to 5 Dec") ═══════════
+     + swipe-right slide 2: New Year Debut Concert (online tickets). After 5 Dec only the concert slide shows,
+       until the concert starts on Sat 30 Jan 2027.
      Paste this block just before </body> on cadenza-london.com.
      From 1 Dec it says "Extended to 5 Dec!", then switches itself off after 23:59 on Fri 5 Dec 2026 (London time),
      and stops the usual welcome popup opening by itself while the offer is live. -->
@@ -3374,6 +3376,21 @@
 #bf-pop{position:fixed;top:50%;left:50%;z-index:1001;width:min(380px,92vw);max-height:92vh;overflow-y:auto;background:#221d18;border:1px solid rgba(201,168,76,.45);font-family:'Jost',sans-serif;color:#f4ede0;text-align:center;opacity:0;pointer-events:none;transform:translate(-50%,-47%) scale(.97);transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)}
 #bf-pop.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
 #bf-pop *{box-sizing:border-box;margin:0}
+#bf-pop>.bf-x{position:absolute;top:3px;right:4px;transform:none;z-index:3}
+.bf-track{display:flex;align-items:flex-start;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.bf-track::-webkit-scrollbar{display:none}
+.bf-slide{flex:0 0 100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always}
+.bf-nav{display:flex;align-items:center;justify-content:center;gap:12px;padding:0 16px 14px}
+.bf-arr{width:44px;height:44px;border:1px solid rgba(201,168,76,.45);border-radius:50%;background:none;color:#E8D5A3;font-size:18px;line-height:1;cursor:pointer}
+.bf-arr:disabled{opacity:.3;cursor:default}
+.bf-dots{display:flex;gap:8px;align-items:center}
+.bf-dot{width:8px;height:8px;border-radius:50%;background:rgba(201,168,76,.35);transition:width .25s ease,background .25s ease}
+.bf-dot.on{width:22px;border-radius:99px;background:#C9A84C}
+.bf-hint{font-size:11px;letter-spacing:.12em;color:#b3a593;min-width:88px}
+#bf-pop.one .bf-nav{display:none}
+#bf-pop .bf-cimg{display:block;width:100%;height:auto!important;max-height:min(40vh,360px);max-width:none;aspect-ratio:1/1;object-fit:contain;background:#fbe8ee;border-bottom:1px solid rgba(201,168,76,.3)}
+.bf-cwhen{font-size:12px;letter-spacing:.14em;color:#C9A84C;margin:16px 0 8px!important}
+.bf-ctx{font-size:15px;line-height:1.55;color:#d8ccbb;margin:0 0 4px!important}
 .bf-band{position:relative;background:#C9A84C;color:#221d18;font-size:12px;letter-spacing:.22em;font-weight:500;padding:10px 40px}
 .bf-x{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;background:none;color:#221d18;font-size:22px;line-height:1;cursor:pointer}
 .bf-in{padding:20px 22px 22px}
@@ -3406,8 +3423,11 @@
 
 <div id="bf-overlay"></div>
 <button id="bf-tab" type="button" aria-label="Show Black Friday offers"><b>&#9733;</b> BLACK FRIDAY &middot; UP TO 30% OFF</button>
-<div id="bf-pop" role="dialog" aria-modal="true" aria-label="Black Friday offer">
-  <div class="bf-band"><span id="bf-band">UNTIL 30 NOV ONLY</span><button class="bf-x" type="button" aria-label="Close">&times;</button></div>
+<div id="bf-pop" role="dialog" aria-modal="true" aria-label="Black Friday offer and New Year Debut Concert">
+  <button class="bf-x" type="button" aria-label="Close">&times;</button>
+  <div class="bf-track" id="bf-track">
+  <section class="bf-slide" id="bf-s-bf" aria-label="Black Friday offer">
+  <div class="bf-band"><span id="bf-band">UNTIL 30 NOV ONLY</span></div>
 
   <div class="bf-in" id="bf-step1">
     <p class="bf-ey">BLACK FRIDAY</p>
@@ -3427,6 +3447,25 @@
     <a class="bf-btn bf-btn2 bf-go" href="https://cadenza-london.com/digital-exam-ready/upload.html?mode=coaching&amp;bf=1">GET VIDEO FEEDBACK &rarr;</a>
     <p class="bf-ft">Tap a code to copy it · <span id="bf-ends">Ends midnight 30 Nov</span></p>
   </div>
+  </section>
+
+  <section class="bf-slide" id="bf-s-concert" aria-label="New Year Debut Concert">
+  <div class="bf-band">NEW YEAR DEBUT CONCERT</div>
+  <img class="bf-cimg" src="images/new-year-concert-2027.jpg" alt="Cadenza London students performing and receiving certificates at last year's concert" loading="lazy" width="760" height="760">
+  <div class="bf-in">
+    <p class="bf-cwhen">SAT 30 JAN 2027 · 1:30PM UK TIME</p>
+    <h2 class="bf-hl" style="font-size:34px"><b>Our concert is</b><em>back this year!</em></h2>
+    <p class="bf-ctx">Join from anywhere and everywhere online. Online tickets are available now.</p>
+    <span class="bf-intl" style="margin-top:6px">Live from Rosslyn Hill Chapel, London</span>
+    <a class="bf-btn" id="bf-concert-go" href="https://luma.com/ieb75s8k" target="_blank" rel="noopener">GET ONLINE TICKETS &rarr;</a>
+  </div>
+  </section>
+  </div>
+  <div class="bf-nav">
+    <button class="bf-arr" type="button" id="bf-prev" aria-label="Previous">&larr;</button>
+    <div class="bf-dots" aria-hidden="true"><span class="bf-dot on"></span><span class="bf-dot"></span></div>
+    <button class="bf-arr" type="button" id="bf-next" aria-label="Next: New Year Debut Concert">&rarr;</button>
+  </div>
 
 </div>
 
@@ -3434,14 +3473,23 @@
 (function(){
   var FIRST_END = Date.UTC(2026, 10, 30, 23, 59, 59); /* Sun 30 Nov 2026, 23:59:59 London (GMT) */
   var END = Date.UTC(2026, 11, 5, 23, 59, 59);        /* extended: Fri 5 Dec 2026, 23:59:59 London (GMT) */
+  var CONCERT_END = Date.UTC(2027, 0, 30, 13, 30, 0);  /* concert starts Sat 30 Jan 2027, 1:30pm London (GMT) */
   var pop = document.getElementById('bf-pop'), ov = document.getElementById('bf-overlay');
   if (!pop) return;
   var force = /[?&]bfpreview/.test(location.search);
-  if (Date.now() > END && !force) { pop.remove(); ov.remove(); var t = document.getElementById('bf-tab'); if (t) t.remove(); document.querySelectorAll('.bf-tick').forEach(function(x){ x.remove(); }); return; }
+  var bfOn = Date.now() <= END || force;
+  if (!bfOn && Date.now() > CONCERT_END) { pop.remove(); ov.remove(); var t = document.getElementById('bf-tab'); if (t) t.remove(); document.querySelectorAll('.bf-tick').forEach(function(x){ x.remove(); }); return; }
+  if (!bfOn) { /* after Black Friday: concert slide only */
+    var sb = document.getElementById('bf-s-bf'); if (sb) sb.remove();
+    document.querySelectorAll('.bf-tick').forEach(function(x){ x.remove(); });
+    pop.classList.add('one'); pop.setAttribute('aria-label','New Year Debut Concert');
+    var tb = document.getElementById('bf-tab');
+    if (tb) { tb.innerHTML = '<b>&#9733;</b> NEW YEAR CONCERT &middot; ONLINE TICKETS'; tb.setAttribute('aria-label','Show the New Year Debut Concert'); }
+  }
   document.body.classList.add('bf-live');
   var ext = Date.now() > FIRST_END || /[?&]bfext/.test(location.search);
-  var SEEN = ext ? 'bf2026ExtSeen' : 'bf2026Seen'; /* the extension shows the popup once more */
-  if (ext) {
+  var SEEN = !bfOn ? 'cadConcert2027Seen' : ext ? 'bf2026ExtSeen' : 'bf2026Seen'; /* each new phase shows the popup once more */
+  if (ext && bfOn) {
     document.getElementById('bf-band').textContent = 'EXTENDED TO 5 DEC!';
     document.getElementById('bf-ends').textContent = 'Now ends midnight 5 Dec';
     document.querySelectorAll('.bf-tick span:not(.ticker-sep)').forEach(function(x){ x.textContent = 'Black Friday extended to 5 Dec! · Up to 30% off'; });
@@ -3463,7 +3511,7 @@
   tick(); var timer = setInterval(tick, 1000);
 
   var tab = document.getElementById('bf-tab');
-  function open(){ pop.classList.add('on'); ov.classList.add('on'); document.body.style.overflow = 'hidden'; if (tab) tab.classList.remove('on'); }
+  function open(){ if (track) track.scrollLeft = 0; pop.classList.add('on'); ov.classList.add('on'); document.body.style.overflow = 'hidden'; if (tab) tab.classList.remove('on'); }
   function close(){
     pop.classList.remove('on'); ov.classList.remove('on'); document.body.style.overflow = '';
     try { sessionStorage.setItem(SEEN,'1'); } catch(e){}
@@ -3477,6 +3525,18 @@
   pop.querySelector('.bf-x').addEventListener('click', close);
   ov.addEventListener('click', close);
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && pop.classList.contains('on')) close(); });
+  /* swipe between slides (arrows and dots too) */
+  var track = document.getElementById('bf-track'), prev = document.getElementById('bf-prev'), next = document.getElementById('bf-next');
+  var dots = pop.querySelectorAll('.bf-dot');
+  function idx(){ return Math.round(track.scrollLeft / Math.max(1, track.clientWidth)); }
+  function sync(){ var i = idx(); dots.forEach(function(d,k){ d.classList.toggle('on', k === i); }); if (prev) prev.disabled = i === 0; if (next) next.disabled = i >= track.children.length - 1; }
+  function go(i){ track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' }); pop.scrollTop = 0; }
+  if (track) { track.addEventListener('scroll', function(){ window.requestAnimationFrame(sync); }, { passive: true }); sync(); }
+  if (prev) prev.addEventListener('click', function(){ go(idx() - 1); });
+  if (next) next.addEventListener('click', function(){ go(idx() + 1); });
+  pop.addEventListener('keydown', function(e){ if (e.key === 'ArrowRight') go(idx() + 1); if (e.key === 'ArrowLeft') go(idx() - 1); });
+  var cg = document.getElementById('bf-concert-go');
+  if (cg) cg.addEventListener('click', function(){ try { sessionStorage.setItem(SEEN,'1'); } catch(e){} });
   pop.querySelectorAll('.bf-go').forEach(function(a){ a.addEventListener('click', function(){ try { sessionStorage.setItem(SEEN,'1'); } catch(e){} }); });
 
   function copy(text){
