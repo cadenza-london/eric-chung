@@ -3511,8 +3511,14 @@
   tick(); var timer = setInterval(tick, 1000);
 
   var tab = document.getElementById('bf-tab');
-  function open(){ if (track) track.scrollLeft = 0; pop.classList.add('on'); ov.classList.add('on'); document.body.style.overflow = 'hidden'; if (tab) tab.classList.remove('on'); }
+  var autoT = null, touched = false;
+  function open(){
+    if (track) track.scrollLeft = 0; touched = false; clearTimeout(autoT);
+    /* 5 seconds after the Black Friday slide appears, slide over to the concert (unless they're already using the popup) */
+    if (track && track.children.length > 1) autoT = setTimeout(function(){ if (pop.classList.contains('on') && !touched && idx() === 0) go(1); }, 5000);
+    pop.classList.add('on'); ov.classList.add('on'); document.body.style.overflow = 'hidden'; if (tab) tab.classList.remove('on'); }
   function close(){
+    clearTimeout(autoT);
     pop.classList.remove('on'); ov.classList.remove('on'); document.body.style.overflow = '';
     try { sessionStorage.setItem(SEEN,'1'); } catch(e){}
     if (tab) tab.classList.add('on');
@@ -3535,6 +3541,7 @@
   if (prev) prev.addEventListener('click', function(){ go(idx() - 1); });
   if (next) next.addEventListener('click', function(){ go(idx() + 1); });
   pop.addEventListener('keydown', function(e){ if (e.key === 'ArrowRight') go(idx() + 1); if (e.key === 'ArrowLeft') go(idx() - 1); });
+  ['pointerdown','touchstart','wheel','keydown'].forEach(function(ev){ pop.addEventListener(ev, function(){ touched = true; clearTimeout(autoT); }, { passive: true }); });
   var cg = document.getElementById('bf-concert-go');
   if (cg) cg.addEventListener('click', function(){ try { sessionStorage.setItem(SEEN,'1'); } catch(e){} });
   pop.querySelectorAll('.bf-go').forEach(function(a){ a.addEventListener('click', function(){ try { sessionStorage.setItem(SEEN,'1'); } catch(e){} }); });
