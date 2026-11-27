@@ -3391,6 +3391,11 @@
 #bf-pop .bf-cimg{display:block;width:100%;height:auto!important;max-height:min(40vh,360px);max-width:none;aspect-ratio:1/1;object-fit:contain;background:#fbe8ee;border-bottom:1px solid rgba(201,168,76,.3)}
 .bf-cwhen{font-size:12px;letter-spacing:.14em;color:#C9A84C;margin:16px 0 8px!important}
 .bf-ctx{font-size:15px;line-height:1.55;color:#d8ccbb;margin:0 0 4px!important}
+.bf-more{display:inline-flex;align-items:center;gap:8px;margin-top:14px!important;padding:10px 16px;min-height:44px;border:1px solid rgba(201,168,76,.55);border-radius:99px;background:rgba(201,168,76,.12);color:#E8D5A3;font:500 13px 'Jost',sans-serif;letter-spacing:.01em;white-space:nowrap;max-width:100%;cursor:pointer}
+.bf-more span{display:inline-block;animation:bfNudge 1.2s ease-in-out infinite}
+@keyframes bfNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){.bf-more span{animation:none}}
+@media (hover:hover){.bf-more:hover{background:rgba(201,168,76,.22)}}
 /* concert slide: bright golden theme */
 .bf-bright{background:#fbf3df;color:#4a3a1a}
 .bf-bright .bf-band{background:#C9A84C;color:#2b2210}
@@ -3462,6 +3467,7 @@
     <a class="bf-btn bf-go" href="https://cadenza-london.com/booking/?bf=1">BOOK A TRIAL LESSON &rarr;</a>
     <a class="bf-btn bf-btn2 bf-go" href="https://cadenza-london.com/digital-exam-ready/upload.html?mode=coaching&amp;bf=1">GET VIDEO FEEDBACK &rarr;</a>
     <p class="bf-ft">Tap a code to copy it · <span id="bf-ends">Ends midnight 30 Nov</span></p>
+    <button class="bf-more" type="button" id="bf-more">Scroll right for this year's concert details <span aria-hidden="true">&rarr;</span></button>
   </div>
   </section>
 
@@ -3572,6 +3578,8 @@
   }
   if (track) { track.addEventListener('scroll', function(){ window.requestAnimationFrame(sync); }, { passive: true }); sync(); }
   if (prev) prev.addEventListener('click', function(){ go(idx() - 1); });
+  var more = document.getElementById('bf-more');
+  if (more) more.addEventListener('click', function(){ touched = true; clearTimeout(autoT); go(1); });
   if (next) next.addEventListener('click', function(){ go(idx() + 1); });
   pop.addEventListener('keydown', function(e){ if (e.key === 'ArrowRight') go(idx() + 1); if (e.key === 'ArrowLeft') go(idx() - 1); });
   /* only a real swipe, a code tap or an arrow stops the automatic slide (a plain tap to read doesn't) */
